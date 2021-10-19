@@ -38,6 +38,8 @@ services:
     networks:
       dms2122:
         ipv4_address: 172.10.1.30
+    ports:
+      - "8080:8080"
 
 networks:
   dms2122:
