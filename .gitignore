@@ -127,3 +127,15 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+.idea/.gitignore
+.idea/misc.xml
+.idea/modules.xml
+.idea/practica-dms-2021-2022.iml
+.idea/runConfigurations.xml
+.idea/vcs.xml
+components/dms2122frontend/dms2122frontend/.idea/.gitignore
+components/dms2122frontend/dms2122frontend/.idea/dms2122frontend.iml
+components/dms2122frontend/dms2122frontend/.idea/misc.xml
+components/dms2122frontend/dms2122frontend/.idea/modules.xml
+components/dms2122frontend/dms2122frontend/.idea/runConfigurations.xml
+components/dms2122frontend/dms2122frontend/.idea/vcs.xml
