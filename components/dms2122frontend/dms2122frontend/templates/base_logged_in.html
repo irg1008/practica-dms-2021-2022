@@ -2,8 +2,8 @@
 {% from 'macros/navbar.html' import navbar %}
 {% from "macros/flashedmessages.html" import flashedmessages %}
 {% block pagecontent %}
-    <div id="page-top">
-        <div id="nav">{{ navbar(roles) }}</div>
+    <header id="page-top">
+        <nav id="nav">{{ navbar(roles) }}</nav>
         <div id="session-info">
             {% if name %}
                 {{ name }}
@@ -12,7 +12,7 @@
             {% endif %}
             &nbsp;(<a href="/logout">Log out</a>)
         </div>
-    </div>
+    </header>
     {{ flashedmessages() }}
     <div id="contentheader">
         <h1>{% block contentheading %}{% endblock %}</h1>

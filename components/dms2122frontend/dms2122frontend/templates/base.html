@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-        <link rel="stylesheet" href="/static/style.css" />
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{% block title %}{% endblock %} - DMS 21/22</title>
-    </head>
-    <body>
-        <div id="page-content">{% block pagecontent %}{% endblock %}</div>
-        <footer id="footer" class="bottom-0 w-screen">
-            {% block footer %}{% endblock %}
-            <p>Authors: {{ authors }}</p>
-            <p>Universidad de Burgos - Dise&ntilde;o y Mantenimiento del Software, year 2021-2022.</p>
-        </footer>
-    </body>
+
+<head>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="/static/style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %} - DMS 21/22</title>
+</head>
+
+<body class="min-h-screen flex flex-col justify-between">
+    <div id="page-content" class="flex-1 flex flex-col">{% block pagecontent %}{% endblock %}</div>
+    <footer id="footer" class="w-screen">
+        {% block footer %}{% endblock %}
+        <p>Authors: {{ authors }}</p>
+        <p>Universidad de Burgos - Dise&ntilde;o y Mantenimiento del Software, year 2021-2022.</p>
+    </footer>
+</body>
+
 </html>

@@ -4,7 +4,7 @@
 {% block title %}Log in{% endblock %}
 {% block pagecontent %}
     {{ flashedmessages() }}
-    <div id="login-form" class="w-screen h-screen flex items-center justify-center flex-col">
+    <div id="login-form" class="flex-1 flex items-center justify-center flex-col">
         <h3 class="aligncenter">Log in</h3>
         <form action="login" method="post">
             <input type="text" name="user" placeholder="Username" class="input is-primary" autofocus />
