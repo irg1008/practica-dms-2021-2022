@@ -86,6 +86,11 @@ def get_admin_users_edit():
 def post_admin_users_edit():
     return AdminEndpoints.post_admin_users_edit(auth_service)
 
+@app.context_processor
+def inject_user():
+    return dict(authors="Jorge Ruiz Gómez, Pablo Simón Sainz, Iván Ruiz Gázquez")
+
+
 if __name__ == '__main__':
 
     os.environ['FLASK_ENV'] = 'development'

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
+        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
         <link rel="stylesheet" href="/static/style.css" />
         <meta charset="UTF-8" />
@@ -9,10 +10,10 @@
     </head>
     <body>
         <div id="page-content">{% block pagecontent %}{% endblock %}</div>
-        <div id="footer">
+        <footer id="footer" class="absolute bottom-0 w-screen">
             {% block footer %}{% endblock %}
             <p>Authors: {{ authors }}</p>
             <p>Universidad de Burgos - Dise&ntilde;o y Mantenimiento del Software, year 2021-2022.</p>
-        </div>
+        </footer>
     </body>
 </html>

@@ -4,13 +4,14 @@
 {% block title %}Log in{% endblock %}
 {% block pagecontent %}
     {{ flashedmessages() }}
-    <div id="login-form">
-        <h4 class="aligncenter">Log in</h4>
-        <p>A</p>
+    <div id="login-form" class="w-screen h-screen flex items-center justify-center flex-col">
+        <h3 class="aligncenter">Log in</h3>
         <form action="login" method="post">
-            <input type="text" name="user" placeholder="Username" autofocus />
-            <input type="password" name="pass" placeholder="Password" />
-            <p class="aligncenter">{{ submit_button('bluebg', 'Log in') }}</p>
+            <input type="text" name="user" placeholder="Username" class="input is-primary" autofocus />
+            <input type="password" name="pass" placeholder="Password" class="input is-primary" />
+            <p class="aligncenter">{{ submit_button('is-primary', 'Log in') }}</p>
         </form>
+
+
     </div>
 {% endblock %}
