@@ -34,7 +34,9 @@ class StudentEndpoints:
         name = session["user"]
 
         questions = []
-        file = open(os.path.dirname(inspect.getfile(dms2122frontend)) + "/static/questions.json")
+        file = open(
+            os.path.dirname(inspect.getfile(dms2122frontend)) + "/static/questions.json"
+        )
         q_json = json.load(file)
 
         for q in q_json:
@@ -53,8 +55,5 @@ class StudentEndpoints:
             )
 
         return render_template(
-            "student.html",
-            name=name,
-            roles=session["roles"],
-            questions=questions,
+            "student.html", name=name, roles=session["roles"], questions=questions,
         )

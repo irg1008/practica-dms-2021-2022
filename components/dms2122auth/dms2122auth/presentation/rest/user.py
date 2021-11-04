@@ -36,17 +36,22 @@ def create_user(body: Dict, token_info: Dict) -> Tuple[Union[Dict, str], Optiona
             - 409 CONFLICT if an existing user already has all or part of the unique user's data.
     """
     with current_app.app_context():
-        if not RoleServices.has_role(token_info['user_token']['user'], Role.Admin, current_app.db):
+        if not RoleServices.has_role(
+            token_info["user_token"]["user"], Role.Admin, current_app.db
+        ):
             return (
-                'Current user has not enough privileges to create a user',
-                HTTPStatus.FORBIDDEN.value
+                "Current user has not enough privileges to create a user",
+                HTTPStatus.FORBIDDEN.value,
             )
         try:
             user: Dict = UserServices.create_user(
-                body['username'], body['password'], current_app.db, current_app.cfg
+                body["username"], body["password"], current_app.db, current_app.cfg
             )
         except ValueError:
-            return ('A mandatory argument is missing', HTTPStatus.BAD_REQUEST.value)
+            return ("A mandatory argument is missing", HTTPStatus.BAD_REQUEST.value)
         except UserExistsError:
-            return ('A user with the given username already exists', HTTPStatus.CONFLICT.value)
+            return (
+                "A user with the given username already exists",
+                HTTPStatus.CONFLICT.value,
+            )
     return (user, HTTPStatus.OK.value)

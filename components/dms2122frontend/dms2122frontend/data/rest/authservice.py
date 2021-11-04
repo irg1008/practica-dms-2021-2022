@@ -7,16 +7,18 @@ from dms2122common.data import Role
 from dms2122common.data.rest import ResponseData
 
 
-class AuthService():
+class AuthService:
     """ REST client to connect to the authentication service.
     """
 
-    def __init__(self,
-                 host: str, port: int,
-                 api_base_path: str = '/api/v1',
-                 apikey_header: str = 'X-ApiKey-Auth',
-                 apikey_secret: str = ''
-                 ):
+    def __init__(
+        self,
+        host: str,
+        port: int,
+        api_base_path: str = "/api/v1",
+        apikey_header: str = "X-ApiKey-Auth",
+        apikey_secret: str = "",
+    ):
         """ Constructor method.
 
         Initializes the client.
@@ -40,7 +42,7 @@ class AuthService():
         Returns:
             - str: The base URL.
         """
-        return f'http://{self.__host}:{self.__port}{self.__api_base_path}'
+        return f"http://{self.__host}:{self.__port}{self.__api_base_path}"
 
     def login(self, username: str, password: str) -> ResponseData:
         """ Performs a login request to the authentication service.
@@ -53,18 +55,16 @@ class AuthService():
             - ResponseData: If successful, the contents hold a string with the user session token.
         """
         response: requests.Response = requests.post(
-            self.__base_url() + '/auth',
+            self.__base_url() + "/auth",
             auth=(username, password),
-            headers={
-                self.__apikey_header: self.__apikey_secret
-            }
+            headers={self.__apikey_header: self.__apikey_secret},
         )
         response_data: ResponseData = ResponseData()
         response_data.set_successful(response.ok)
         if response_data.is_successful():
-            response_data.set_content(response.content.decode('ascii'))
+            response_data.set_content(response.content.decode("ascii"))
         else:
-            response_data.add_message('Invalid credentials')
+            response_data.add_message("Invalid credentials")
         return response_data
 
     def auth(self, token: Optional[str]) -> ResponseData:
@@ -83,17 +83,17 @@ class AuthService():
             return response_data
 
         response: requests.Response = requests.post(
-            self.__base_url() + '/auth',
+            self.__base_url() + "/auth",
             headers={
-                'Authorization': f'Bearer {token}',
-                self.__apikey_header: self.__apikey_secret
-            }
+                "Authorization": f"Bearer {token}",
+                self.__apikey_header: self.__apikey_secret,
+            },
         )
         response_data.set_successful(response.ok)
         if response_data.is_successful():
-            response_data.set_content(response.content.decode('ascii'))
+            response_data.set_content(response.content.decode("ascii"))
         else:
-            response_data.add_message('Session expired')
+            response_data.add_message("Session expired")
         return response_data
 
     def list_users(self, token: Optional[str]) -> ResponseData:
@@ -108,21 +108,23 @@ class AuthService():
         """
         response_data: ResponseData = ResponseData()
         response: requests.Response = requests.get(
-            self.__base_url() + '/users',
+            self.__base_url() + "/users",
             headers={
-                'Authorization': f'Bearer {token}',
-                self.__apikey_header: self.__apikey_secret
-            }
+                "Authorization": f"Bearer {token}",
+                self.__apikey_header: self.__apikey_secret,
+            },
         )
         response_data.set_successful(response.ok)
         if response_data.is_successful():
             response_data.set_content(response.json())
         else:
-            response_data.add_message(response.content.decode('ascii'))
+            response_data.add_message(response.content.decode("ascii"))
             response_data.set_content([])
         return response_data
 
-    def create_user(self, token: Optional[str], username: str, password: str) -> ResponseData:
+    def create_user(
+        self, token: Optional[str], username: str, password: str
+    ) -> ResponseData:
         """ Requests a user creation.
 
         Args:
@@ -135,21 +137,18 @@ class AuthService():
         """
         response_data: ResponseData = ResponseData()
         response: requests.Response = requests.post(
-            self.__base_url() + '/user/new',
-            json={
-                'username': username,
-                'password': password
-            },
+            self.__base_url() + "/user/new",
+            json={"username": username, "password": password},
             headers={
-                'Authorization': f'Bearer {token}',
-                self.__apikey_header: self.__apikey_secret
-            }
+                "Authorization": f"Bearer {token}",
+                self.__apikey_header: self.__apikey_secret,
+            },
         )
         response_data.set_successful(response.ok)
         if response_data.is_successful():
             response_data.set_content(response.json())
         else:
-            response_data.add_message(response.content.decode('ascii'))
+            response_data.add_message(response.content.decode("ascii"))
         return response_data
 
     def get_user_roles(self, token: Optional[str], username: str) -> ResponseData:
@@ -165,23 +164,23 @@ class AuthService():
         """
         response_data: ResponseData = ResponseData()
         response: requests.Response = requests.get(
-            self.__base_url() + f'/user/{username}/roles',
+            self.__base_url() + f"/user/{username}/roles",
             headers={
-                'Authorization': f'Bearer {token}',
-                self.__apikey_header: self.__apikey_secret
-            }
+                "Authorization": f"Bearer {token}",
+                self.__apikey_header: self.__apikey_secret,
+            },
         )
         response_data.set_successful(response.ok)
         if response_data.is_successful():
             response_data.set_content(response.json())
         else:
-            response_data.add_message(response.content.decode('ascii'))
+            response_data.add_message(response.content.decode("ascii"))
             response_data.set_content([])
         return response_data
 
-    def grant_user_role(self,
-                        token: Optional[str], username: str, role: Union[Role, str]
-                        ) -> ResponseData:
+    def grant_user_role(
+        self, token: Optional[str], username: str, role: Union[Role, str]
+    ) -> ResponseData:
         """ Requests to grant a role to a user.
 
         Args:
@@ -196,20 +195,20 @@ class AuthService():
             role = role.name
         response_data: ResponseData = ResponseData()
         response: requests.Response = requests.post(
-            self.__base_url() + f'/user/{username}/role/{role}',
+            self.__base_url() + f"/user/{username}/role/{role}",
             headers={
-                'Authorization': f'Bearer {token}',
-                self.__apikey_header: self.__apikey_secret
-            }
+                "Authorization": f"Bearer {token}",
+                self.__apikey_header: self.__apikey_secret,
+            },
         )
         response_data.set_successful(response.ok)
         if not response_data.is_successful():
-            response_data.add_message(response.content.decode('ascii'))
+            response_data.add_message(response.content.decode("ascii"))
         return response_data
 
-    def revoke_user_role(self,
-                         token: Optional[str], username: str, role: Union[Role, str]
-                         ) -> ResponseData:
+    def revoke_user_role(
+        self, token: Optional[str], username: str, role: Union[Role, str]
+    ) -> ResponseData:
         """ Requests to revoke a role from a user.
 
         Args:
@@ -224,20 +223,20 @@ class AuthService():
             role = role.name
         response_data: ResponseData = ResponseData()
         response: requests.Response = requests.delete(
-            self.__base_url() + f'/user/{username}/role/{role}',
+            self.__base_url() + f"/user/{username}/role/{role}",
             headers={
-                'Authorization': f'Bearer {token}',
-                self.__apikey_header: self.__apikey_secret
-            }
+                "Authorization": f"Bearer {token}",
+                self.__apikey_header: self.__apikey_secret,
+            },
         )
         response_data.set_successful(response.ok)
         if not response_data.is_successful():
-            response_data.add_message(response.content.decode('ascii'))
+            response_data.add_message(response.content.decode("ascii"))
         return response_data
 
-    def update_user_roles(self,
-                          token: Optional[str], username: str, new_roles: List
-                          ) -> ResponseData:
+    def update_user_roles(
+        self, token: Optional[str], username: str, new_roles: List
+    ) -> ResponseData:
         """ Requests to update several roles on a user at once.
 
         This is an utility method. If at least one of them fails, all of them are considered failed,
@@ -263,5 +262,6 @@ class AuthService():
                 response = self.revoke_user_role(token, username, role)
             aggregated_response.add_messages(response.get_messages())
             aggregated_response.set_successful(
-                aggregated_response.is_successful() & response.is_successful())
+                aggregated_response.is_successful() & response.is_successful()
+            )
         return aggregated_response

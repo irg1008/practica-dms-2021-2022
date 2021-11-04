@@ -8,9 +8,10 @@ from dms2122frontend.data.rest.authservice import AuthService
 from .webutils import WebUtils
 
 
-class WebUser():
+class WebUser:
     """ Monostate class responsible of the user operation utilities.
     """
+
     @staticmethod
     def list_users(auth_service: AuthService) -> List:
         """ Gets the list of users from the authentication service.
@@ -21,14 +22,18 @@ class WebUser():
         Returns:
             - List: A list of user data dictionaries (the list may be empty)
         """
-        response: ResponseData = auth_service.list_users(session.get('token'))
+        response: ResponseData = auth_service.list_users(session.get("token"))
         WebUtils.flash_response_messages(response)
-        if response.get_content() is not None and isinstance(response.get_content(), list):
+        if response.get_content() is not None and isinstance(
+            response.get_content(), list
+        ):
             return list(response.get_content())
         return []
 
     @staticmethod
-    def create_user(auth_service: AuthService, username: str, password: str) -> Optional[Dict]:
+    def create_user(
+        auth_service: AuthService, username: str, password: str
+    ) -> Optional[Dict]:
         """ Creates a user in the authentication service.
 
         Args:
@@ -41,7 +46,8 @@ class WebUser():
             - None: Nothing on error.
         """
         response: ResponseData = auth_service.create_user(
-            session.get('token'), username, password)
+            session.get("token"), username, password
+        )
         WebUtils.flash_response_messages(response)
         return response.get_content()
 
@@ -57,14 +63,19 @@ class WebUser():
             - List: A list of role names on success. On error, the list will be empty.
         """
         response: ResponseData = auth_service.get_user_roles(
-            session.get('token'), username)
+            session.get("token"), username
+        )
         WebUtils.flash_response_messages(response)
-        if response.get_content() is not None and isinstance(response.get_content(), list):
+        if response.get_content() is not None and isinstance(
+            response.get_content(), list
+        ):
             return list(response.get_content())
         return []
 
     @staticmethod
-    def update_user_roles(auth_service: AuthService, username: str, roles: List) -> bool:
+    def update_user_roles(
+        auth_service: AuthService, username: str, roles: List
+    ) -> bool:
         """ Updates the user roles in the authentication service.
 
         Args:
@@ -77,6 +88,7 @@ class WebUser():
               errors (`False`)
         """
         response: ResponseData = auth_service.update_user_roles(
-            session.get('token'), username, roles)
+            session.get("token"), username, roles
+        )
         WebUtils.flash_response_messages(response)
         return response.is_successful()

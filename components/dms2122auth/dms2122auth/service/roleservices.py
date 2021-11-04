@@ -10,9 +10,10 @@ from dms2122auth.data.db.results import UserRole
 from dms2122auth.data.db.resultsets import UserRoles
 
 
-class RoleServices():
+class RoleServices:
     """ Monostate class that provides high-level services to handle role-related use cases.
     """
+
     @staticmethod
     def has_role(username: str, role: Union[Role, str], schema: Schema) -> bool:
         """Determines whether a user has a certain role or not.
@@ -30,8 +31,7 @@ class RoleServices():
         try:
             if isinstance(role, str):
                 role = Role[role]
-            has_role = bool(UserRoles.find_role(
-                session, username, role) is not None)
+            has_role = bool(UserRoles.find_role(session, username, role) is not None)
         except KeyError:
             has_role = False
         except UserNotFoundError:
@@ -56,8 +56,7 @@ class RoleServices():
         session: Session = schema.new_session()
         out: List[str] = []
         try:
-            roles: List[UserRole] = UserRoles.list_all_for_user(
-                session, username)
+            roles: List[UserRole] = UserRoles.list_all_for_user(session, username)
             for role in roles:
                 out.append(role.role.name)
         except:  # pylint: disable=try-except-raise

@@ -23,14 +23,14 @@ class ServiceConfiguration(Configuration):
         Args:
             - values (Dict): A dictionary of configuration values.
         """
-        if 'service_host' in values:
-            self.set_service_host(values['service_host'])
-        if 'service_port' in values:
-            self.set_service_port(values['service_port'])
-        if 'debug' in values:
-            self.set_debug_flag(values['debug'])
-        if 'authorized_api_keys' in values:
-            self.set_authorized_api_keys(values['authorized_api_keys'])
+        if "service_host" in values:
+            self.set_service_host(values["service_host"])
+        if "service_port" in values:
+            self.set_service_port(values["service_port"])
+        if "debug" in values:
+            self.set_debug_flag(values["debug"])
+        if "authorized_api_keys" in values:
+            self.set_authorized_api_keys(values["authorized_api_keys"])
 
     def set_service_host(self, service_host: str) -> None:
         """ Sets the service_host configuration value.
@@ -41,7 +41,7 @@ class ServiceConfiguration(Configuration):
         Raises:
             - ValueError: If validation is not passed.
         """
-        self._values['service_host'] = str(service_host)
+        self._values["service_host"] = str(service_host)
 
     def get_service_host(self) -> str:
         """ Gets the service_host configuration value.
@@ -50,7 +50,7 @@ class ServiceConfiguration(Configuration):
             - str: A string with the value of service_host.
         """
 
-        return str(self._values['service_host'])
+        return str(self._values["service_host"])
 
     def set_service_port(self, service_port: int) -> None:
         """ Sets the service_port configuration value.
@@ -61,7 +61,7 @@ class ServiceConfiguration(Configuration):
         Raises:
             - ValueError: If validation is not passed.
         """
-        self._values['service_port'] = int(service_port)
+        self._values["service_port"] = int(service_port)
 
     def get_service_port(self) -> int:
         """ Gets the service_port configuration value.
@@ -70,7 +70,7 @@ class ServiceConfiguration(Configuration):
             - int: An integer with the value of service_port.
         """
 
-        return int(self._values['service_port'])
+        return int(self._values["service_port"])
 
     def set_debug_flag(self, debug: bool) -> None:
         """ Sets whether the debug flag is set or not.
@@ -81,7 +81,7 @@ class ServiceConfiguration(Configuration):
         Raises:
             - ValueError: If validation is not passed.
         """
-        self._values['debug'] = bool(debug)
+        self._values["debug"] = bool(debug)
 
     def get_debug_flag(self) -> bool:
         """ Gets whether the debug flag is set or not.
@@ -90,7 +90,7 @@ class ServiceConfiguration(Configuration):
             - bool: A boolean with the value of debug.
         """
 
-        return bool(self._values['debug'])
+        return bool(self._values["debug"])
 
     def set_authorized_api_keys(self, keys: List[str]) -> None:
         """ Sets the authorized_api_keys configuration value.
@@ -101,7 +101,7 @@ class ServiceConfiguration(Configuration):
         Raises:
             - ValueError: If validation is not passed.
         """
-        self._values['authorized_api_keys'] = keys
+        self._values["authorized_api_keys"] = keys
 
     def get_authorized_api_keys(self) -> List[str]:
         """ Gets the authorized_api_keys configuration value.
@@ -110,4 +110,4 @@ class ServiceConfiguration(Configuration):
             - List[str]: A list of strings with the value of authorized_api_keys.
         """
 
-        return self._values['authorized_api_keys']
+        return self._values["authorized_api_keys"]

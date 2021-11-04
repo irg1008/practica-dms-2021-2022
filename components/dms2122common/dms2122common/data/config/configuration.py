@@ -20,7 +20,7 @@ class Configuration(ABC):
             - str: A string identifying the component which will categorize the configuration.
         """
 
-        return ''
+        return ""
 
     def default_config_file(self) -> str:
         """ Path of the default configuration file.
@@ -29,7 +29,7 @@ class Configuration(ABC):
             - str: A string with the path of the default configuration file.
         """
 
-        return os.path.join(user_config_dir(self._component_name()), 'config.yml')
+        return os.path.join(user_config_dir(self._component_name()), "config.yml")
 
     def __init__(self):
         """ Initialization/constructor method.
@@ -37,7 +37,7 @@ class Configuration(ABC):
 
         self._values: Dict = {}
 
-    def load_from_file(self, path: str = 'config.yml') -> None:
+    def load_from_file(self, path: str = "config.yml") -> None:
         """ Loads the configuration values from a given file.
 
         This operation will override any previously existing configuration parameters.
@@ -47,7 +47,7 @@ class Configuration(ABC):
         """
 
         if os.path.isfile(path):
-            with open(path, 'r') as stream:
+            with open(path, "r") as stream:
                 self._set_values(yaml.load(stream, Loader=yaml.SafeLoader))
 
     @abstractmethod

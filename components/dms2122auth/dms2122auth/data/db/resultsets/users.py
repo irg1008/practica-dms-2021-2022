@@ -10,9 +10,10 @@ from dms2122auth.data.db.results import User
 from dms2122auth.data.db.exc import UserExistsError
 
 
-class Users():
+class Users:
     """ Class responsible of table-level users operations.
     """
+
     @staticmethod
     def create(session: Session, username: str, password_hash: str) -> User:
         """ Creates a new user record.
@@ -33,7 +34,7 @@ class Users():
             - User: The created `User` result.
         """
         if not username or not password_hash:
-            raise ValueError('A username and a password hash are required.')
+            raise ValueError("A username and a password hash are required.")
         try:
             new_user = User(username, password_hash)
             session.add(new_user)
@@ -41,8 +42,8 @@ class Users():
             return new_user
         except IntegrityError as ex:
             raise UserExistsError(
-                'A user with name ' + username + ' already exists.'
-                ) from ex
+                "A user with name " + username + " already exists."
+            ) from ex
 
     @staticmethod
     def list_all(session: Session) -> List[User]:
@@ -70,14 +71,16 @@ class Users():
             - bool: `True` if a user with the given credentials exists; `False` otherwise.
         """
         try:
-            query = session.query(User).filter_by(username=username, password=password_hash)
+            query = session.query(User).filter_by(
+                username=username, password=password_hash
+            )
             query.one()
         except NoResultFound:
             return False
         return True
 
     @staticmethod
-    def hash_password(password: str, suffix: str = '', salt: str = '') -> str:
+    def hash_password(password: str, suffix: str = "", salt: str = "") -> str:
         """ A password hashing function compatible with the schema.
 
         Args:
@@ -88,4 +91,4 @@ class Users():
         Returns:
             - str: A string with the hashed password.
         """
-        return hashlib.sha256(bytes(password + suffix + salt, 'utf-8')).hexdigest()
+        return hashlib.sha256(bytes(password + suffix + salt, "utf-8")).hexdigest()

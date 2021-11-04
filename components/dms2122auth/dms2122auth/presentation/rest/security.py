@@ -24,7 +24,7 @@ def verify_api_key(token: str) -> Dict:
     with current_app.app_context():
         cfg: AuthConfiguration = current_app.cfg
         if not token in cfg.get_authorized_api_keys():
-            raise Unauthorized('Invalid API key')
+            raise Unauthorized("Invalid API key")
     return {}
 
 
@@ -44,10 +44,7 @@ def verify_credentials(username: str, password: str) -> Optional[Dict]:
             username, password, current_app.db, current_app.cfg
         )
         if user_exists:
-            return {
-                'sub': username,
-                'user': username
-            }
+            return {"sub": username, "user": username}
     return None
 
 
@@ -64,15 +61,12 @@ def verify_token(token: str) -> Dict:
         - Dict: A dictionary with the user name (key `user`) if the credentials are correct.
     """
     with current_app.app_context():
-        token_bytes: bytes = token.encode('ascii')
+        token_bytes: bytes = token.encode("ascii")
         jws: TimedJSONWebSignatureSerializer = current_app.jws
         try:
             data = jws.loads(token_bytes)
         except Exception as ex:
             raise Unauthorized from ex
-        if 'user' not in data:
-            return Unauthorized('Invalid token')
-        return {
-            'sub': data['sub'],
-            'user': data['user']
-        }
+        if "user" not in data:
+            return Unauthorized("Invalid token")
+        return {"sub": data["sub"], "user": data["user"]}

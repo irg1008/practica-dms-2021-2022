@@ -27,13 +27,10 @@ def login(token_info: Dict) -> Tuple[str, Optional[int]]:
     """
     with current_app.app_context():
         jws: TimedJSONWebSignatureSerializer = current_app.jws
-        user: str = ''
-        if 'user_token' in token_info:
-            user = token_info['user_token']['user']
-        elif 'user_credentials' in token_info:
-            user = token_info['user_credentials']['user']
-        token = jws.dumps({
-            'user': user,
-            'sub': user
-        })
-        return (token.decode('ascii'), HTTPStatus.OK.value)
+        user: str = ""
+        if "user_token" in token_info:
+            user = token_info["user_token"]["user"]
+        elif "user_credentials" in token_info:
+            user = token_info["user_credentials"]["user"]
+        token = jws.dumps({"user": user, "sub": user})
+        return (token.decode("ascii"), HTTPStatus.OK.value)

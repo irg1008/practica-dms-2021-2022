@@ -23,7 +23,7 @@ class ResultBase(ABC):
         mapper(
             cls,
             cls._table_definition(metadata),  # type: ignore
-            properties=cls._mapping_properties()  # type: ignore
+            properties=cls._mapping_properties(),  # type: ignore
         )
 
     @staticmethod

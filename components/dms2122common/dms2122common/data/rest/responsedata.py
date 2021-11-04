@@ -4,9 +4,10 @@
 from typing import List
 
 
-class ResponseData():
+class ResponseData:
     """ Entity class holding several data from REST requests.
     """
+
     def __init__(self):
         """ Constructor method.
 

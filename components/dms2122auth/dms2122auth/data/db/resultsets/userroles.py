@@ -10,9 +10,10 @@ from dms2122auth.data.db.results import UserRole
 from dms2122auth.data.db.exc import UserNotFoundError
 
 
-class UserRoles():
+class UserRoles:
     """ Class responsible of table-level user rights operations.
     """
+
     @staticmethod
     def grant(session: Session, username: str, role: Role) -> UserRole:
         """ Grants a role to a user.
@@ -33,7 +34,7 @@ class UserRoles():
             - UserRole: The created `UserRole` result.
         """
         if not username or not role:
-            raise ValueError('A username and a role name are required.')
+            raise ValueError("A username and a role name are required.")
         user_role: Optional[UserRole] = UserRoles.find_role(session, username, role)
         if user_role is not None:
             return user_role
@@ -65,7 +66,7 @@ class UserRoles():
             - ValueError: If either the username or the role name is missing.
         """
         if not username or not role:
-            raise ValueError('A username and a role name are required.')
+            raise ValueError("A username and a role name are required.")
         user_role: Optional[UserRole] = UserRoles.find_role(session, username, role)
         if user_role is None:
             return
@@ -93,12 +94,9 @@ class UserRoles():
               the given role.
         """
         if not username or not role:
-            raise ValueError('A username and a role name are required.')
+            raise ValueError("A username and a role name are required.")
         try:
-            query = session.query(UserRole).filter_by(
-                username=username,
-                role=role
-            )
+            query = session.query(UserRole).filter_by(username=username, role=role)
             return query.one()
         except NoResultFound:
             return None
@@ -118,8 +116,6 @@ class UserRoles():
             - List[UserRole]: A list of `UserRole` registers with the user roles.
         """
         if not username:
-            raise ValueError('A username is required.')
-        query = session.query(UserRole).filter_by(
-            username=username
-        )
+            raise ValueError("A username is required.")
+        query = session.query(UserRole).filter_by(username=username)
         return query.all()

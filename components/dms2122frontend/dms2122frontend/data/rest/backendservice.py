@@ -6,16 +6,18 @@ from dms2122common.data import Role
 from dms2122common.data.rest import ResponseData
 
 
-class BackendService():
+class BackendService:
     """ REST client to connect to the backend service.
     """
 
-    def __init__(self,
-        host: str, port: int,
-        api_base_path: str = '/api/v1',
-        apikey_header: str = 'X-ApiKey-Backend',
-        apikey_secret: str = ''
-        ):
+    def __init__(
+        self,
+        host: str,
+        port: int,
+        api_base_path: str = "/api/v1",
+        apikey_header: str = "X-ApiKey-Backend",
+        apikey_secret: str = "",
+    ):
         """ Constructor method.
 
         Initializes the client.
@@ -34,6 +36,6 @@ class BackendService():
         self.__apikey_secret: str = apikey_secret
 
     def __base_url(self) -> str:
-        return f'http://{self.__host}:{self.__port}{self.__api_base_path}'
+        return f"http://{self.__host}:{self.__port}{self.__api_base_path}"
 
     # TODO: Implement

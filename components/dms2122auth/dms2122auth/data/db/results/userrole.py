@@ -34,9 +34,10 @@ class UserRole(ResultBase):
             - Table: A `Table` object with the table definition.
         """
         return Table(
-            'user_roles',
+            "user_roles",
             metadata,
-            Column('username', String(32),
-                   ForeignKey('users.username'), primary_key=True),
-            Column('role', Enum(Role), primary_key=True)
+            Column(
+                "username", String(32), ForeignKey("users.username"), primary_key=True
+            ),
+            Column("role", Enum(Role), primary_key=True),
         )

@@ -11,19 +11,21 @@ from dms2122auth.data.db.results import User, UserRole
 
 
 # Required for SQLite to enforce FK integrity when supported
-@event.listens_for(Engine, 'connect')
-def set_sqlite_pragma(dbapi_connection, connection_record):  # pylint: disable=unused-argument
+@event.listens_for(Engine, "connect")
+def set_sqlite_pragma(
+    dbapi_connection, connection_record
+):  # pylint: disable=unused-argument
     """ Sets the SQLite foreign keys enforcement pragma on connection.
 
     Args:
         - dbapi_connection: The connection to the database API.
     """
     cursor = dbapi_connection.cursor()
-    cursor.execute('PRAGMA foreign_keys = ON;')
+    cursor.execute("PRAGMA foreign_keys = ON;")
     cursor.close()
 
 
-class Schema():
+class Schema:
     """ Class responsible of the schema initialization and session generation.
     """
 
@@ -41,9 +43,9 @@ class Schema():
         self.__declarative_base = declarative_base()
         if config.get_db_connection_string() is None:
             raise RuntimeError(
-                'A value for the configuration parameter `db_connection_string` is needed.'
+                "A value for the configuration parameter `db_connection_string` is needed."
             )
-        db_connection_string: str = config.get_db_connection_string() or ''
+        db_connection_string: str = config.get_db_connection_string() or ""
         self.__create_engine = create_engine(db_connection_string)
         self.__session_maker = scoped_session(sessionmaker(bind=self.__create_engine))
 

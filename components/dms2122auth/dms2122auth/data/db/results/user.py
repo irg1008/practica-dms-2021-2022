@@ -36,10 +36,10 @@ class User(ResultBase):
             - Table: A `Table` object with the table definition.
         """
         return Table(
-            'users',
+            "users",
             metadata,
-            Column('username', String(32), primary_key=True),
-            Column('password', String(64), nullable=False)
+            Column("username", String(32), primary_key=True),
+            Column("password", String(64), nullable=False),
         )
 
     @staticmethod
@@ -49,6 +49,4 @@ class User(ResultBase):
         Returns:
             - Dict: A dictionary with the mapping properties.
         """
-        return {
-            'rights': relationship(UserRole, backref='user')
-        }
+        return {"rights": relationship(UserRole, backref="user")}
