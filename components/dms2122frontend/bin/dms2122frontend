@@ -39,56 +39,65 @@ app.secret_key = bytes(cfg.get_app_secret_key(), 'ascii')
 def get_login():
     return SessionEndpoints.get_login(auth_service)
 
+
 @app.route("/login", methods=['POST'])
 def post_login():
     return SessionEndpoints.post_login(auth_service)
+
 
 @app.route("/logout", methods=['GET'])
 def get_logout():
     return SessionEndpoints.get_logout()
 
+
 @app.route("/home", methods=['GET'])
 def get_home():
     return CommonEndpoints.get_home(auth_service)
+
 
 @app.route("/student", methods=['GET'])
 def get_student():
     return StudentEndpoints.get_student(auth_service)
 
+
 @app.route("/teacher", methods=['GET'])
 def get_teacher():
     return TeacherEndpoints.get_teacher(auth_service)
 
+
 @app.route("/", methods=['GET'])
 def index():
-    return "hola"
+    return CommonEndpoints.get_home(auth_service)
+
+
 @app.route("/admin", methods=['GET'])
 def get_admin():
     return AdminEndpoints.get_admin(auth_service)
+
 
 @app.route("/admin/users", methods=['GET'])
 def get_admin_users():
     return AdminEndpoints.get_admin_users(auth_service)
 
+
 @app.route("/admin/users/new", methods=['GET'])
 def get_admin_users_new():
     return AdminEndpoints.get_admin_users_new(auth_service)
+
 
 @app.route("/admin/users/new", methods=['POST'])
 def post_admin_users_new():
     return AdminEndpoints.post_admin_users_new(auth_service)
 
+
 @app.route("/admin/users/edit", methods=['GET'])
 def get_admin_users_edit():
     return AdminEndpoints.get_admin_users_edit(auth_service)
 
+
 @app.route("/admin/users/edit", methods=['POST'])
 def post_admin_users_edit():
     return AdminEndpoints.post_admin_users_edit(auth_service)
-
-@app.context_processor
-def inject_user():
-    return dict(authors="Jorge Ruiz Gómez, Pablo Simón Sainz, Iván Ruiz Gázquez")
 
 
 if __name__ == '__main__':
