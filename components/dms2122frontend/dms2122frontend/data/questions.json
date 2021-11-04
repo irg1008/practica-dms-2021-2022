@@ -9,6 +9,7 @@
 			"LsL Mongrel",
 			"Gretsch Falcon"
 		],
+		"imageUrl": "",
 		"penalty": 0,
 		"isPublic": false,
 		"score": 1
@@ -19,6 +20,7 @@
 		"statment": "Irish musician Hozier released a music track in 2013 titled, &quot;Take Me to ______&quot;",
 		"correct_answer": "Church",
 		"incorrect_answers": ["Mosque", "Synagogue", "Temple"],
+		"imageUrl": "",
 		"penalty": 0,
 		"isPublic": false,
 		"score": 1
@@ -29,6 +31,7 @@
 		"statment": "Which song by Swedish electronic musician Avicii samples the song &quot;Something&#039;s Got A Hold On Me&quot; by Etta James?",
 		"correct_answer": "Levels",
 		"incorrect_answers": ["Fade Into Darkness", "Silhouettes", "Seek Bromance"],
+		"imageUrl": "",
 		"penalty": 0,
 		"isPublic": false,
 		"score": 1
@@ -39,6 +42,7 @@
 		"statment": "What was the title of Sakamoto Kyu&#039;s song &quot;Ue o Muite Arukou&quot; (I Look Up As I Walk) changed to in the United States?",
 		"correct_answer": "Sukiyaki",
 		"incorrect_answers": ["Takoyaki", "Sushi", "Oden"],
+		"imageUrl": "",
 		"penalty": 0,
 		"isPublic": false,
 		"score": 1
@@ -49,6 +53,7 @@
 		"statment": "Who is the frontman of Muse?",
 		"correct_answer": "Matt Bellamy",
 		"incorrect_answers": ["Dominic Howard", "Thom Yorke", "Jonny Greenwood"],
+		"imageUrl": "",
 		"penalty": 0,
 		"isPublic": false,
 		"score": 1
@@ -59,6 +64,7 @@
 		"statment": "When did The Beatles release the LP &quot;Please Please Me&quot;?",
 		"correct_answer": "1963",
 		"incorrect_answers": ["1970", "1960", "1969"],
+		"imageUrl": "",
 		"penalty": 0,
 		"isPublic": false,
 		"score": 1
@@ -73,6 +79,7 @@
 			"LsL Mongrel",
 			"Gretsch Falcon"
 		],
+		"imageUrl": "",
 		"penalty": 0,
 		"isPublic": false,
 		"score": 1
@@ -87,6 +94,7 @@
 			"&quot;So let them know they&#039;re on their own&quot;",
 			"&quot;So start a fire in their cold stone&quot;"
 		],
+		"imageUrl": "",
 		"penalty": 0,
 		"isPublic": false,
 		"score": 1
@@ -97,6 +105,7 @@
 		"statment": "When was the 3rd album &quot;Notes from the Underground&quot; of the band &quot;Hollywood Undead&quot; released?",
 		"correct_answer": "2013",
 		"incorrect_answers": ["2011", "2014", "2009"],
+		"imageUrl": "",
 		"penalty": 0,
 		"isPublic": false,
 		"score": 1
@@ -111,6 +120,7 @@
 			"23rd of September",
 			"24th of September"
 		],
+		"imageUrl": "",
 		"penalty": 0,
 		"isPublic": false,
 		"score": 1
