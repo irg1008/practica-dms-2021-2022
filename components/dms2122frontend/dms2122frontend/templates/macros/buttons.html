@@ -1,9 +1,13 @@
-{% macro button(color_class, href, content, onclick=None, type="button") %}
-<button class="button {{ color_class }}" href="{{ href }}" {% if onclick %}onclick="{{ onclick }}" type={{type}}
-  {%endif%}>{{ content
+{% macro link(color_class, href, content) %}
+<a class="button {{ color_class }}" href="{{ href }}">{{ content
+  }}</a>
+{% endmacro %}
+
+{% macro button(color_class, content, onclick=None, type="button") %}
+<button class="button {{ color_class }}" {% if onclick %}onclick="{{ onclick }}" type={{type}} {%endif%}>{{ content
   }}</button>
 {% endmacro %}
 
 {% macro submit_button(color_class, content) %}
-{{ button(color_class, '#', content, 'this.closest(\'form\').submit();return false;', "submit") }}
+{{ button(color_class, content, 'this.closest(\'form\').submit();return false;', "submit") }}
 {% endmacro %}
