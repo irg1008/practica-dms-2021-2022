@@ -1,0 +1,22 @@
+{% macro question(question, isTeacher=False, showAnswer=False, userAnswer=None) %}
+    <div>
+        <h2>{{ question.title }}</h2>
+        <h3>{{ question.statement }}</h3>
+        <ul>
+            {% for q in question.getQuestions() %}
+                <li><input type="radio" value="{{ q }}" name="{{ question.id }}"{% if showAnswer %} disabled{% endif %} {% if q == question.correctAnswer %} checked {% endif %}/><label for="{{ q }}">{{ q }}</label></li>
+            {% endfor %}
+        </ul>
+        <p></p>
+        <p>Score: {{ question.score }} | Penalty: {{ question.penalty }}</p>
+        {% if isTeacher %}
+            <p>Total Answers: {{ question.numberOfCorrectAnswers }}</p>
+        {% endif %}
+    </div>
+
+{% endmacro %}
+
+
+{% macro answeredQuestion(answeredQ) %}
+    {{ question(answeredQ.question) }}
+{% endmacro %}

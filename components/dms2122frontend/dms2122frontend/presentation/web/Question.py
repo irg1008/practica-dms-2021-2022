@@ -1,5 +1,7 @@
 # Import the datetime
 import datetime
+from typing import List
+import random
 
 # A class named Question with the next variables:
 # - id
@@ -19,7 +21,18 @@ import datetime
 
 
 class Question:
-    def __init__(self, id, title, statement, correctAnswer, incorrectAnswers, score, penalty, isPublic):
+    def __init__(
+        self,
+        id: int,
+        title: str,
+        statement: str,
+        correctAnswer: str,
+        incorrectAnswers: List[str],
+        image_url: str,
+        score: float,
+        penalty: float,
+        isPublic: bool,
+    ):
         self.id = id
         self.title = title
         self.statement = statement
@@ -28,13 +41,26 @@ class Question:
         self.score = score
         self.penalty = penalty
         self.isPublic = isPublic
+        self.image_url = image_url
         self.numberOfCorrectAnswers = 0
         self.numberOfQuestionsAnswered = 0
 
-    def getTotalScore(self):
-        return self.score * self.numberOfCorrectAnswers - self.penalty * self.numberOfQuestionsAnswered
+    def getQuestions(self) -> List[str]:
+        questions = list([self.correctAnswer]) + self.incorrectAnswers
+        return sorted(questions)
 
-    def receiveAnswer(self, answer):
+    def getShuffledQuestions(self) -> List[str]:
+        q = self.getQuestions()
+        random.shuffle(q)
+        return q
+
+    def getTotalScore(self):
+        return (
+            self.score * self.numberOfCorrectAnswers
+            - self.penalty * self.numberOfQuestionsAnswered
+        )
+
+    def receiveAnswer(self, answer: str):
         self.numberOfQuestionsAnswered += 1
 
         if answer == self.correctAnswer:
@@ -50,12 +76,12 @@ class Question:
 # - An score
 # - A date. This should be added automatically when an answer is provided.
 # This class has the next functions:
-# - Answer. This function recieves an answer and check if is correct with the question variable and recieveAnswer method.
+# - Answer. This function receives an answer and check if is correct with the question variable and recieveAnswer method.
 class AnsweredQuestion:
-    def __init__(self, question, answer):
+    def __init__(self, question: Question, answer: str):
         self.question = question
         self.answer = answer
-        self.score = self.question.recieveAnswer(answer)
+        self.score = self.question.receiveAnswer(answer)
         self.date = datetime.datetime.now()
 
         # A function that check answer is correct with the question variable and recieveAnswer method.

@@ -7,106 +7,113 @@ from typing import Dict
 import dms2122frontend
 from dms2122frontend.data.config import FrontendConfiguration
 from dms2122frontend.data.rest import AuthService, BackendService
-from dms2122frontend.presentation.web import \
-    AdminEndpoints, CommonEndpoints, SessionEndpoints, StudentEndpoints, TeacherEndpoints
+from dms2122frontend.data.questionMocks import getQuestionMocks
+from dms2122frontend.presentation.web import (
+    AdminEndpoints,
+    CommonEndpoints,
+    SessionEndpoints,
+    StudentEndpoints,
+    TeacherEndpoints,
+)
 
 cfg: FrontendConfiguration = FrontendConfiguration()
 cfg.load_from_file(cfg.default_config_file())
 auth_service_cfg: Dict = cfg.get_auth_service()
 auth_service: AuthService = AuthService(
-    auth_service_cfg['host'], auth_service_cfg['port'],
-    apikey_header='X-ApiKey-Auth',
-    apikey_secret=auth_service_cfg['apikey_secret']
+    auth_service_cfg["host"],
+    auth_service_cfg["port"],
+    apikey_header="X-ApiKey-Auth",
+    apikey_secret=auth_service_cfg["apikey_secret"],
 )
 backend_service_cfg: Dict = cfg.get_backend_service()
 backend_service: BackendService = BackendService(
-    backend_service_cfg['host'], backend_service_cfg['port'],
-    apikey_header='X-ApiKey-Backend',
-    apikey_secret=backend_service_cfg['apikey_secret']
+    backend_service_cfg["host"],
+    backend_service_cfg["port"],
+    apikey_header="X-ApiKey-Backend",
+    apikey_secret=backend_service_cfg["apikey_secret"],
 )
 
 app = Flask(
     __name__,
-    static_folder=os.path.dirname(
-        inspect.getfile(dms2122frontend)) + '/static',
-    template_folder=os.path.dirname(
-        inspect.getfile(dms2122frontend)) + '/templates'
+    static_folder=os.path.dirname(inspect.getfile(dms2122frontend)) + "/static",
+    template_folder=os.path.dirname(inspect.getfile(dms2122frontend)) + "/templates",
 )
-app.secret_key = bytes(cfg.get_app_secret_key(), 'ascii')
+app.secret_key = bytes(cfg.get_app_secret_key(), "ascii")
 
 
-@app.route("/login", methods=['GET'])
+@app.route("/login", methods=["GET"])
 def get_login():
     return SessionEndpoints.get_login(auth_service)
 
 
-@app.route("/login", methods=['POST'])
+@app.route("/login", methods=["POST"])
 def post_login():
     return SessionEndpoints.post_login(auth_service)
 
 
-@app.route("/logout", methods=['GET'])
+@app.route("/logout", methods=["GET"])
 def get_logout():
     return SessionEndpoints.get_logout()
 
 
-@app.route("/home", methods=['GET'])
+@app.route("/home", methods=["GET"])
 def get_home():
     return CommonEndpoints.get_home(auth_service)
 
 
-@app.route("/student", methods=['GET'])
+@app.route("/student", methods=["GET"])
 def get_student():
     return StudentEndpoints.get_student(auth_service)
 
 
-@app.route("/teacher", methods=['GET'])
+@app.route("/prueba", methods=["GET"])
+def get_prueba():
+    return getQuestionMocks()
+
+
+@app.route("/teacher", methods=["GET"])
 def get_teacher():
     return TeacherEndpoints.get_teacher(auth_service)
 
 
-@app.route("/", methods=['GET'])
+@app.route("/", methods=["GET"])
 def index():
     return CommonEndpoints.get_home(auth_service)
 
 
-@app.route("/admin", methods=['GET'])
+@app.route("/admin", methods=["GET"])
 def get_admin():
     return AdminEndpoints.get_admin(auth_service)
 
 
-@app.route("/admin/users", methods=['GET'])
+@app.route("/admin/users", methods=["GET"])
 def get_admin_users():
     return AdminEndpoints.get_admin_users(auth_service)
 
 
-@app.route("/admin/users/new", methods=['GET'])
+@app.route("/admin/users/new", methods=["GET"])
 def get_admin_users_new():
     return AdminEndpoints.get_admin_users_new(auth_service)
 
 
-@app.route("/admin/users/new", methods=['POST'])
+@app.route("/admin/users/new", methods=["POST"])
 def post_admin_users_new():
     return AdminEndpoints.post_admin_users_new(auth_service)
 
 
-@app.route("/admin/users/edit", methods=['GET'])
+@app.route("/admin/users/edit", methods=["GET"])
 def get_admin_users_edit():
     return AdminEndpoints.get_admin_users_edit(auth_service)
 
 
-@app.route("/admin/users/edit", methods=['POST'])
+@app.route("/admin/users/edit", methods=["POST"])
 def post_admin_users_edit():
     return AdminEndpoints.post_admin_users_edit(auth_service)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
-    os.environ['FLASK_ENV'] = 'development'
+    os.environ["FLASK_ENV"] = "development"
     app.jinja_env.auto_reload = True
-    app.config['TEMPLATES_AUTO_RELOAD'] = True
-    app.run(
-        host=cfg.get_service_host(),
-        port=cfg.get_service_port(),
-        debug=True
-    )
+    app.config["TEMPLATES_AUTO_RELOAD"] = True
+    app.run(host=cfg.get_service_host(), port=cfg.get_service_port(), debug=True)
