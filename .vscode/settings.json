@@ -1,0 +1,8 @@
+{
+    "python.autoComplete.extraPaths": [
+        "${workspaceFolder}/components/dms2122common"
+    ],
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}/components/dms2122common"
+    ]
+}

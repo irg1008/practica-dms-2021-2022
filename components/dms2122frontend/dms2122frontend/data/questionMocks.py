@@ -10,8 +10,7 @@ def getQuestionMocks():
 
     questions: List[Question] = []
     file = open("")
-    q_json = json.load()
-
+    q_json = []
     for q in q_json:
         questions.append(
             Question(
