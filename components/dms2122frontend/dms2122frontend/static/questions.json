@@ -2,7 +2,7 @@
 	{
 		"id": 0,
 		"title": "Pregunta 1",
-		"statment": "Saul Hudson (Slash) of the band Guns N&#039; Roses is known for playing what type of guitar?",
+		"statment": "Saul Hudson (Slash) of the band Guns N' Roses is known for playing what type of guitar?",
 		"correct_answer": "Les Paul Standard",
 		"incorrect_answers": [
 			"Fender Stratocaster",
@@ -17,7 +17,7 @@
 	{
 		"id": 1,
 		"title": "Pregunta 2",
-		"statment": "Irish musician Hozier released a music track in 2013 titled, &quot;Take Me to ______&quot;",
+		"statment": "Irish musician Hozier released a music track in 2013 titled, \"Take Me to ______\"",
 		"correct_answer": "Church",
 		"incorrect_answers": ["Mosque", "Synagogue", "Temple"],
 		"imageUrl": "",
@@ -28,7 +28,7 @@
 	{
 		"id": 2,
 		"title": "Pregunta 3",
-		"statment": "Which song by Swedish electronic musician Avicii samples the song &quot;Something&#039;s Got A Hold On Me&quot; by Etta James?",
+		"statment": "Which song by Swedish electronic musician Avicii samples the song \"Something Got A Hold On Me\" by Etta James?",
 		"correct_answer": "Levels",
 		"incorrect_answers": ["Fade Into Darkness", "Silhouettes", "Seek Bromance"],
 		"imageUrl": "",
@@ -39,7 +39,7 @@
 	{
 		"id": 3,
 		"title": "Pregunta 4",
-		"statment": "What was the title of Sakamoto Kyu&#039;s song &quot;Ue o Muite Arukou&quot; (I Look Up As I Walk) changed to in the United States?",
+		"statment": "What was the title of Sakamoto Kyu's song \"Ue o Muite Arukou\" (I Look Up As I Walk) changed to in the United States?",
 		"correct_answer": "Sukiyaki",
 		"incorrect_answers": ["Takoyaki", "Sushi", "Oden"],
 		"imageUrl": "",
@@ -61,7 +61,7 @@
 	{
 		"id": 5,
 		"title": "Pregunta 6",
-		"statment": "When did The Beatles release the LP &quot;Please Please Me&quot;?",
+		"statment": "When did The Beatles release the LP \"Please Please Me\"?",
 		"correct_answer": "1963",
 		"incorrect_answers": ["1970", "1960", "1969"],
 		"imageUrl": "",
@@ -72,7 +72,7 @@
 	{
 		"id": 6,
 		"title": "Pregunta 7",
-		"statment": "Saul Hudson (Slash) of the band Guns N&#039; Roses is known for playing what type of guitar?",
+		"statment": "Saul Hudson (Slash) of the band Guns N' Roses is known for playing what type of guitar?",
 		"correct_answer": "Les Paul Standard",
 		"incorrect_answers": [
 			"Fender Stratocaster",
@@ -87,12 +87,12 @@
 	{
 		"id": 7,
 		"title": "Pregunta 8",
-		"statment": "In the Panic! At the Disco&#039;s song &quot;Nothern Downpour&quot;, which lyric follows &#039;I know the world&#039;s a broken bone&#039;.",
-		"correct_answer": "&quot;So melt your headaches call it home&quot;",
+		"statment": "In the Panic! At the Disco's song \"Nothern Downpour\", which lyric follows\"I know the world's a broken bone\".",
+		"correct_answer": "So melt your headaches call it home",
 		"incorrect_answers": [
-			"&quot;So sing your song until you&#039;re home&quot;",
-			"&quot;So let them know they&#039;re on their own&quot;",
-			"&quot;So start a fire in their cold stone&quot;"
+			"So sing your song until you're home",
+			"So let them know they're on their own",
+			"So start a fire in their cold stone"
 		],
 		"imageUrl": "",
 		"penalty": 0,
@@ -102,7 +102,7 @@
 	{
 		"id": 8,
 		"title": "Pregunta 9",
-		"statment": "When was the 3rd album &quot;Notes from the Underground&quot; of the band &quot;Hollywood Undead&quot; released?",
+		"statment": "When was the 3rd album \"Notes from the Underground\" of the band \"Hollywood Undead\" released?",
 		"correct_answer": "2013",
 		"incorrect_answers": ["2011", "2014", "2009"],
 		"imageUrl": "",
@@ -113,7 +113,7 @@
 	{
 		"id": 9,
 		"title": "Pregunta 10",
-		"statment": "What date is referenced in the 1971 song &quot;September&quot; by Earth, Wind &amp; Fire?",
+		"statment": "What date is referenced in the 1971 song \"September\" by Earth, Wind & Fire?",
 		"correct_answer": "21st of September",
 		"incorrect_answers": [
 			"26th of September",

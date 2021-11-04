@@ -45,14 +45,15 @@ class Question:
         self.numberOfCorrectAnswers = 0
         self.numberOfQuestionsAnswered = 0
 
-    def getQuestions(self) -> List[str]:
+    def getAnswers(self, shuffle=False) -> List[str]:
         questions = list([self.correctAnswer]) + self.incorrectAnswers
-        return sorted(questions)
 
-    def getShuffledQuestions(self) -> List[str]:
-        q = self.getQuestions()
-        random.shuffle(q)
-        return q
+        if shuffle:
+            random.shuffle(questions)
+        else:
+            questions = sorted(questions)
+
+        return questions
 
     def getTotalScore(self):
         return (

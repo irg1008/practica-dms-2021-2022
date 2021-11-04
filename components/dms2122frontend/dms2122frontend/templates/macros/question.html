@@ -1,16 +1,29 @@
-{% macro question(question, isTeacher=False, showAnswer=False, userAnswer=None) %}
+{% macro question(question, isTeacher=True, showAnswer=True, userAnswer=None) %}
     <div>
-        <h2>{{ question.title }}</h2>
-        <h3>{{ question.statement }}</h3>
-        <ul>
-            {% for q in question.getQuestions() %}
-                <li><input type="radio" value="{{ q }}" name="{{ question.id }}"{% if showAnswer %} disabled{% endif %} {% if q == question.correctAnswer %} checked {% endif %}/><label for="{{ q }}">{{ q }}</label></li>
+        <h2 class="select-none">{{ question.title }}</h2>
+        <h3 class="select-none">{{ question.statement }}</h3>
+        <ul class="p-4">
+            {% for a in question.getAnswers() %}
+                <li class="relative">
+                    <span class="absolute -left-4 pr-1">{% if showAnswer and a == question.correctAnswer %}
+                            👌
+                           {% elif showAnswer and a == userAnswer %}
+                            ❌
+                           {% endif %}
+                    </span>
+                    <input type="radio" value="{{ a }}"
+                           name="{{ question.id }}"
+                           id="{{ a }}"
+                            {% if showAnswer %} disabled{% endif %}
+                            {% if showAnswer and a == userAnswer %} checked {% endif %}/>
+                    <label class="select-none" for="{{ a }}">{{ a }}</label>
+                </li>
             {% endfor %}
         </ul>
-        <p></p>
+
         <p>Score: {{ question.score }} | Penalty: {{ question.penalty }}</p>
         {% if isTeacher %}
-            <p>Total Answers: {{ question.numberOfCorrectAnswers }}</p>
+            <p>Total Answers: {{ question.numberOfCorrectAnswers }} | Total Score: {{ question.getTotalScore() }}</p>
         {% endif %}
     </div>
 
