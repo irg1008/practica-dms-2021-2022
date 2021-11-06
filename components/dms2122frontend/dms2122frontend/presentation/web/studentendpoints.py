@@ -3,10 +3,11 @@
 import inspect
 import json
 import os
+from dms2122frontend import g
 from typing import Text, Union
 from flask import redirect, url_for, session, render_template
 from werkzeug.wrappers import Response
-from dms2122frontend.presentation.web.User import User
+
 from dms2122frontend.data.questionMocks import getQuestionMocks
 from dms2122common.data import Role
 from dms2122frontend.data.rest.authservice import AuthService
@@ -36,9 +37,12 @@ class StudentEndpoints:
         name = session["user"]
 
         questions = getQuestionMocks()
-        user = User("", [])
+        db = g.get_db()
         return render_template(
-            "student/student.html", name=name, roles=session["roles"], questions=user.questions,
+            "student/student.html",
+            name=name,
+            roles=session["roles"],
+            questions=db.getUnasweredQuestions(name),
         )
 
     @staticmethod
@@ -56,7 +60,11 @@ class StudentEndpoints:
         if Role.Student.name not in session["roles"]:
             return redirect(url_for("get_home"))
         name = session["user"]
-        user = User("", [])
+
+        db = g.get_db()
         return render_template(
-            "student/answered/answered.html", name=name, roles=session["roles"], questions=user.answeredQ,
+            "student/answered/answered.html",
+            name=name,
+            roles=session["roles"],
+            questions=db.getAnsweredQuestions(name),
         )

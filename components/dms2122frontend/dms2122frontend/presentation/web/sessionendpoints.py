@@ -4,7 +4,7 @@
 from typing import Text, Union
 from flask import request, redirect, url_for, render_template, session, flash
 from werkzeug.wrappers import Response
-from dms2122frontend.presentation.web.User import User
+
 from dms2122common.data.rest import ResponseData
 from dms2122frontend.data.rest import AuthService
 from .webauth import WebAuth
@@ -46,7 +46,7 @@ class SessionEndpoints:
         WebUtils.flash_response_messages(response)
         if not response.is_successful():
             return redirect(url_for("get_login"))
-        user = User("Si", [])
+
         session["user"] = request.form["user"]
         session["token"] = response.get_content()
         session["roles"] = WebUser.get_roles(auth_service, session["user"])
