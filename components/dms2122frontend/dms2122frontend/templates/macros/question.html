@@ -1,34 +1,43 @@
-{% macro question(question, isTeacher=True, showAnswer=True, userAnswer="Fender Stratocaster") %}
-    <div>
-        <h2 class="select-none">{{ question.title }}</h2>
-        <h3 class="select-none">{{ question.statement }}</h3>
-        <ul class="p-4">
-            {% for a in question.getAnswers() %}
-                <li class="relative">
+{% macro question(question, isTeacher=False, showAnswer=False, userAnswer="Fender Stratocaster") %}
+    <div class="flex flex-row flex-wrap">
+
+        {% if question.image_url|length > 0 %}
+            <img src="{{ question.image_url }}" alt="Foto" style="min-width: 300px" class="w-1/4"/>
+        {% endif %}
+        <div class="w-3/4">
+            <h2 class="select-none">{{ question.title }}</h2>
+            <h3 class="select-none">{{ question.statement }}</h3>
+
+
+            <ul class="p-4">
+                {% for a in question.getAnswers() %}
+                    <li class="relative">
                     <span class="absolute -left-4">{% if showAnswer and a == question.correctAnswer %}
-                           👌
-                           {% elif showAnswer and a == userAnswer %}
-                            ❌
-                           {% endif %}
+                        👌
+                    {% elif showAnswer and a == userAnswer %}
+                        ❌
+                    {% endif %}
                     </span>
-                    <input type="radio"
-                           class="ml-1"
-                           value="{{ a }}"
-                           name="{{ question.id }}"
-                           id="{{ a }}"
-                            {% if showAnswer %} disabled{% endif %}
-                            {% if showAnswer and a == userAnswer %} checked {% endif %}/>
-                    <label  class="select-none {% if showAnswer and a == question.correctAnswer %} text-green-500 {% elif showAnswer and a == userAnswer%} text-red-500 {% endif %}" for="{{ a }}" >
-                        {{ a }}
-                    </label>
-                </li>
-            {% endfor %}
-        </ul>
+                        <input type="radio"
+                               class="ml-1"
+                               value="{{ a }}"
+                               name="{{ question.id }}"
+                               id="{{ a }}"
+                                {% if showAnswer %} disabled{% endif %}
+                                {% if showAnswer and a == userAnswer %} checked {% endif %}/>
+                        <label class="select-none {% if showAnswer and a == question.correctAnswer %} text-green-500 {% elif showAnswer and a == userAnswer %} text-red-500 {% endif %}"
+                               for="{{ a }}">
+                            {{ a }}
+                        </label>
+                    </li>
+                {% endfor %}
+            </ul>
 
         <p>Score: {{ question.score }} | Penalty: {{ question.penalty }}</p>
         {% if isTeacher %}
             <p>Total Answers: {{ question.numberOfCorrectAnswers }} | Total Score: {{ question.getTotalScore() }}</p>
         {% endif %}
+        </div>
     </div>
 
 {% endmacro %}
