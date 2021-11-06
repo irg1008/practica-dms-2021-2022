@@ -2,6 +2,10 @@ html {
 	overflow-y: auto !important;
 }
 
+.breadcrumb {
+	margin-bottom: 0 !important
+}
+
 body {
 	margin: 0;
 	padding: 0;

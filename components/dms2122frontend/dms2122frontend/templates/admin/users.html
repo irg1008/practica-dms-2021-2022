@@ -1,6 +1,7 @@
 {% extends "admin.html" %}
 {% from "macros/buttons.html" import link with context %}
 {% block contentsubheading %}User management{% endblock %}
+
 {% block administrationcontent %}
 <table class="fillwidth highlightrows">
     <tbody>
@@ -13,13 +14,13 @@
             <td class="alignleft"><a
                     href="/admin/users/edit?username={{ user['username'] }}&redirect_to=/admin/users">{{
                     user['username'] }}</td>
-            <td class="alignright">{{ link('bluebg', '/admin/users/edit?username=' + user['username'] +
+            <td class="alignright">{{ link('is-link', '/admin/users/edit?username=' + user['username'] +
                 '&redirect_to=/admin/users', 'Edit') }}</td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
 <div class="alignright">
-    {{ link('bluebg', '/admin/users/new', 'Create new user') }}
+    {{ link('is-success', '/admin/users/new', 'Create new user') }}
 </div>
 {% endblock %}

@@ -7,7 +7,7 @@ from typing import Dict
 import dms2122frontend
 from dms2122frontend.data.config import FrontendConfiguration
 from dms2122frontend.data.rest import AuthService, BackendService
-from dms2122frontend.data.questionMocks import getQuestionMocks
+
 from dms2122frontend.presentation.web import (
     AdminEndpoints,
     CommonEndpoints,
@@ -35,10 +35,8 @@ backend_service: BackendService = BackendService(
 
 app = Flask(
     __name__,
-    static_folder=os.path.dirname(
-        inspect.getfile(dms2122frontend)) + "/static",
-    template_folder=os.path.dirname(
-        inspect.getfile(dms2122frontend)) + "/templates",
+    static_folder=os.path.dirname(inspect.getfile(dms2122frontend)) + "/static",
+    template_folder=os.path.dirname(inspect.getfile(dms2122frontend)) + "/templates",
 )
 app.secret_key = bytes(cfg.get_app_secret_key(), "ascii")
 
@@ -68,9 +66,9 @@ def get_student():
     return StudentEndpoints.get_student(auth_service)
 
 
-@app.route("/prueba", methods=["GET"])
-def get_prueba():
-    return getQuestionMocks()
+@app.route("/student/answered", methods=["GET"])
+def get_student_answered():
+    return StudentEndpoints.get_student_answered(auth_service)
 
 
 @app.route("/teacher", methods=["GET"])
@@ -118,5 +116,9 @@ if __name__ == "__main__":
     os.environ["FLASK_ENV"] = "development"
     app.jinja_env.auto_reload = True
     app.config["TEMPLATES_AUTO_RELOAD"] = True
-    app.run(host=cfg.get_service_host(), port=cfg.get_service_port(),
-            debug=True, use_reloader=True)
+    app.run(
+        host=cfg.get_service_host(),
+        port=cfg.get_service_port(),
+        debug=True,
+        use_reloader=True,
+    )

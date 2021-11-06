@@ -1,10 +1,8 @@
 {% macro question(question, isTeacher=False, showAnswer=False, userAnswer="Fender Stratocaster") %}
-    <div class="flex flex-row flex-wrap">
+    <div class="flex md:flex-row flex-col flex-wrap">
 
-        {% if question.image_url|length > 0 %}
-            <img src="{{ question.image_url }}" alt="Foto" style="min-width: 300px" class="w-1/4"/>
-        {% endif %}
-        <div class="w-3/4">
+
+        <div class="{% if question.image_url|length > 0 %}md:w-1/2{% endif %}">
             <h2 class="select-none">{{ question.title }}</h2>
             <h3 class="select-none">{{ question.statement }}</h3>
 
@@ -33,16 +31,21 @@
                 {% endfor %}
             </ul>
 
-        <p>Score: {{ question.score }} | Penalty: {{ question.penalty }}</p>
-        {% if isTeacher %}
-            <p>Total Answers: {{ question.numberOfCorrectAnswers }} | Total Score: {{ question.getTotalScore() }}</p>
-        {% endif %}
+            <p>Score: {{ question.score }} | Penalty: {{ question.penalty }}</p>
+            {% if isTeacher %}
+                <p>Total Answers: {{ question.numberOfCorrectAnswers }} | Total
+                    Score: {{ question.getTotalScore() }}</p>
+            {% endif %}
         </div>
+
+        {% if question.image_url|length > 0 %}
+            <img src="{{ question.image_url }}" alt="Foto" style="max-width: 300px"/>
+        {% endif %}
     </div>
 
 {% endmacro %}
 
 
 {% macro answeredQuestion(answeredQ) %}
-    {{ question(answeredQ.question) }}
+    {{ question(answeredQ.question, showAnswer=True, userAnswer=answeredQ.answer) }}
 {% endmacro %}

@@ -1,6 +1,6 @@
 {% extends "base_logged_in.html" %}
 {% block title %}{% block subtitle %}{% endblock %}Student{% endblock %}
-{% from "macros/question.html" import question with context %}
+{% from "macros/question.html" import answeredQuestion with context %}
 {% from "macros/buttons.html" import link with context %}
 {% block contentsubheading %}Unanswered Questions{% endblock %}
 {% block contentheading %}
@@ -8,18 +8,17 @@
         <nav class="breadcrumb is-right" aria-label="breadcrumbs">
             <ul>
                 <li><a href="/">Home</a></li>
-                <li class="is-active"><a href="/student" aria-current="page">Unanswered Questions</a></li>
+                <li><a href="/student">Unanswered Questions </a></li>
+                <li class="is-active"><a href="/student/answered" aria-current="page">Answered Questions</a></li>
             </ul>
         </nav>
-        {{ link("is-link", "student/answered", "Previous Questions") }}
-
     </div>
-{% endblock %}
-{% block maincontent %}
+    {% endblock %}
+    {% block maincontent %}
 
     {% block studentcontent %}
         {% for q in questions %}
-            {{ question(q) }}
+            {{ answeredQuestion(q) }}
             <hr/>
         {% endfor %}
 

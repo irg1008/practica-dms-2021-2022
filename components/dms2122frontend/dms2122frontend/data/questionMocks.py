@@ -1,16 +1,19 @@
+import inspect
 import json
 from typing import List
 import os
+import dms2122frontend
 from dms2122frontend.presentation.web.Question import Question
 
 
-def getQuestionMocks():
+def getQuestionMocks() -> List[Question]:
 
-    path = os.path.dirname(__file__)
+    questions = []
+    file = open(
+        os.path.dirname(inspect.getfile(dms2122frontend)) + "/static/questions.json"
+    )
+    q_json = json.load(file)
 
-    questions: List[Question] = []
-    file = open("")
-    q_json = []
     for q in q_json:
         questions.append(
             Question(
