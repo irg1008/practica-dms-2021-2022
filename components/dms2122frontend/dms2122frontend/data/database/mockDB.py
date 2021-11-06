@@ -18,7 +18,6 @@ class mockDB(Database):
 
     def getAnsweredQuestions(self, username: str) -> List[AnsweredQuestion]:
         ans = []
-        print("HOLA")
         for q in self.questions[: self.slice]:
             if random.random() > 0.5:
                 ans.append(AnsweredQuestion(q, q.correctAnswer))
