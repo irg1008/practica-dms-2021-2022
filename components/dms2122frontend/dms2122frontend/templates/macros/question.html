@@ -1,4 +1,4 @@
-{% macro question(question, isTeacher=False, showAnswer=False, userAnswer="Fender Stratocaster") %}
+{% macro question(question, isTeacher=False, showAnswer=False, userAnswer=None, date=None) %}
     <div class="flex md:flex-row flex-col flex-wrap">
 
 
@@ -22,7 +22,7 @@
                                name="{{ question.id }}"
                                id="{{ a }}"
                                 {% if showAnswer %} disabled{% endif %}
-                                {% if showAnswer and a == userAnswer %} checked {% endif %}/>
+                                {% if a == userAnswer %} checked {% endif %}/>
                         <label class="select-none {% if showAnswer and a == question.correctAnswer %} text-green-500 {% elif showAnswer and a == userAnswer %} text-red-500 {% endif %}"
                                for="{{ a }}">
                             {{ a }}
@@ -30,7 +30,9 @@
                     </li>
                 {% endfor %}
             </ul>
-
+            {%if date%}
+                <p>Answered on: {{date}}</p>
+            {%endif%}
             <p>Score: {{ question.score }} | Penalty: {{ question.penalty }}</p>
             {% if isTeacher %}
                 <p>Total Answers: {{ question.numberOfCorrectAnswers }} | Total
@@ -47,5 +49,5 @@
 
 
 {% macro answeredQuestion(answeredQ) %}
-    {{ question(answeredQ.question, showAnswer=True, userAnswer=answeredQ.answer) }}
+    {{ question(answeredQ.question, showAnswer=True, userAnswer=answeredQ.answer, date= answeredQ.date) }}
 {% endmacro %}

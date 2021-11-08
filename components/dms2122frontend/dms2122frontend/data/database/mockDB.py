@@ -1,5 +1,5 @@
 import random
-from typing import List
+from typing import Dict, List, Union
 
 from dms2122frontend.data.database.database import Database
 from dms2122frontend.presentation.web.Question import AnsweredQuestion, Question
@@ -12,19 +12,44 @@ class mockDB(Database):
     """
 
     def __init__(self):
-        self.questions = getQuestionMocks()
-        random.shuffle(self.questions)
-        self.slice = random.randint(0, len(self.questions))
+        questions = getQuestionMocks()
+        slice_point = len(questions) // 2
+        self.answered = self._mock_answer_questions(
+            list(questions.values())[:slice_point]
+        )
+        self.not_answered = dict(list(questions.items())[slice_point:])
+        self.questions = questions
 
     def getAnsweredQuestions(self, username: str) -> List[AnsweredQuestion]:
-        ans = []
-        for q in self.questions[: self.slice]:
+        return list(self.answered.values())
+
+    def _mock_answer_questions(self, questions: List[Question]):
+        ans: Dict[int, AnsweredQuestion] = {}
+        for q in questions:
             if random.random() > 0.5:
-                ans.append(AnsweredQuestion(q, q.correctAnswer))
+                ans[q.id] = AnsweredQuestion(q, q.correctAnswer)
             else:
-                ans.append((AnsweredQuestion(q, random.choice(q.incorrectAnswers))))
+                ans[q.id] = AnsweredQuestion(q, random.choice(q.incorrectAnswers))
 
         return ans
 
     def getUnasweredQuestions(self, username: str) -> List[Question]:
-        return self.questions[self.slice :]
+        return list(self.not_answered.values())
+
+    def answerQuestion(self, username: str, question_id: int, answer: str) -> bool:
+        try:
+            del self.not_answered[question_id]
+            self.answered[question_id] = AnsweredQuestion(
+                self.questions[question_id], answer
+            )
+            return True
+        except:
+            return False
+
+    def getQuestion(self, question_id: int) -> Union[Question, None]:
+        return self.questions.get(question_id)
+
+    def getAnsweredQuestion(
+        self, username: str, question_id: int
+    ) -> Union[AnsweredQuestion, None]:
+        return self.answered.get(question_id)

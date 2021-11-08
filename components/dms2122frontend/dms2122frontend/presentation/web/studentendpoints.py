@@ -4,16 +4,17 @@ import inspect
 import json
 import os
 from dms2122frontend import g
-from typing import Text, Union
-from flask import redirect, url_for, session, render_template
+from typing import Dict, List, Text, Union
+from flask import redirect, request, url_for, session, render_template
 from werkzeug.wrappers import Response
 
 from dms2122frontend.data.questionMocks import getQuestionMocks
 from dms2122common.data import Role
 from dms2122frontend.data.rest.authservice import AuthService
 import dms2122frontend
-from .Question import Question
+from .Question import AnsweredQuestion, Question
 from .webauth import WebAuth
+from dms2122frontend.g import get_db
 
 
 class StudentEndpoints:
@@ -62,9 +63,132 @@ class StudentEndpoints:
         name = session["user"]
 
         db = g.get_db()
+        ans = db.getAnsweredQuestions(name)
+        ans.sort(key=lambda x: x.date, reverse=True)
         return render_template(
             "student/answered/answered.html",
             name=name,
             roles=session["roles"],
-            questions=db.getAnsweredQuestions(name),
+            questions=ans,
         )
+
+    @staticmethod
+    def post_student_answers(auth_service: AuthService) -> Union[Response, Text]:
+        """ Handles the POST requests to /student/answer
+
+        Args:
+            - auth_service (AuthService): The authentication service.
+
+        Returns:
+            - Union[Response,Text]: The generated response to the request.
+        """
+        if not WebAuth.test_token(auth_service):
+            return redirect(url_for("get_login"))
+        if Role.Student.name not in session["roles"]:
+            return redirect(url_for("get_home"))
+
+        username = session["user"]
+        db = g.get_db()
+
+        for q_id, ans in request.form.items():
+            res = db.answerQuestion(username, int(q_id), ans)
+
+        return redirect(url_for("get_student_answered"))
+
+    @staticmethod
+    def get_student_iterator(
+        auth_service: AuthService, q_pos: int
+    ) -> Union[Response, Text]:
+        """ Handles the POST requests to /student/iterator/<int>
+
+        Args:
+            - auth_service (AuthService): The authentication service.
+
+        Returns:
+            - Union[Response,Text]: The generated response to the request.
+        """
+        if not WebAuth.test_token(auth_service):
+            return redirect(url_for("get_login"))
+        if Role.Student.name not in session["roles"]:
+            return redirect(url_for("get_home"))
+
+        ans: Dict[str, str] = session["answered"]
+        questions: List[str] = session["toanswer"]
+
+        # Get and update the posted questions:
+        for q_id, user_ans in request.form.items():
+            ans[q_id] = user_ans
+
+        if q_pos < 0 or q_pos >= len(questions):
+            return "Bad Position"
+        db = get_db()
+        question = db.getQuestion(int(questions[q_pos]))
+
+        if not question:
+            return "No question"
+
+        selected_ans = ans.get(str(question.id))
+
+        return render_template(
+            "student/iterator/iterator.html",
+            quest=question,
+            prev=(None if q_pos - 1 < 0 else str(q_pos - 1)),
+            next=None if q_pos + 1 >= len(questions) else str(q_pos + 1),
+            isLast=q_pos == len(questions) - 1,
+            answer=selected_ans,
+        )
+
+    @staticmethod
+    def post_student_iterator(auth_service: AuthService) -> Union[Response, Text]:
+        """ Handles the POST requests to /student/iterator
+
+        Args:
+            - auth_service (AuthService): The authentication service.
+
+        Returns:
+            - Union[Response,Text]: The generated response to the request.
+        """
+        if not WebAuth.test_token(auth_service):
+            return redirect(url_for("get_login"))
+        if Role.Student.name not in session["roles"]:
+            return redirect(url_for("get_home"))
+        username = session["user"]
+        session["answered"] = request.form.to_dict()
+        session["toanswer"] = [q.id for q in get_db().getUnasweredQuestions(username)]
+        return redirect(url_for("post_student_iterator_value", it=0))
+
+    @staticmethod
+    def post_student_iterator_submit(
+        auth_service: AuthService,
+    ) -> Union[Response, Text]:
+        """ Handles the POST requests to /student/iterator
+
+        Args:
+            - auth_service (AuthService): The authentication service.
+
+        Returns:
+            - Union[Response,Text]: The generated response to the request.
+        """
+        if not WebAuth.test_token(auth_service):
+            return redirect(url_for("get_login"))
+        if Role.Student.name not in session["roles"]:
+            return redirect(url_for("get_home"))
+
+        ans: Dict[str, str] = session["answered"]
+
+        db = g.get_db()
+
+        username = session["user"]
+
+        for q_id, user_ans in ans.items():
+
+            try:
+                db.answerQuestion(username, int(q_id), user_ans)
+            except:
+                print(f"Error while casting to int {q_id}", flush=True)
+
+        session["answered"] = None
+        session["toanswer"] = None
+
+        return redirect(url_for("get_student_answered"))
+

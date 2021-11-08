@@ -85,6 +85,6 @@ class AnsweredQuestion:
         self.score = self.question.receiveAnswer(answer)
         self.date = datetime.datetime.now()
 
-        # A function that check answer is correct with the question variable and recieveAnswer method.
+        # A function that check answer is correct with the question variable and receiveAnswer method.
         def isCorrectAnswer(self):
             return self.answer == self.question.correctAnswer

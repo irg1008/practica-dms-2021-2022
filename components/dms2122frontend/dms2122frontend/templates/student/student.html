@@ -1,7 +1,7 @@
 {% extends "base_logged_in.html" %}
 {% block title %}{% block subtitle %}{% endblock %}Student{% endblock %}
 {% from "macros/question.html" import question with context %}
-{% from "macros/buttons.html" import link with context %}
+{% from "macros/buttons.html" import link, button with context %}
 {% block contentsubheading %}Unanswered Questions{% endblock %}
 {% block contentheading %}
     <div class="w-full flex flex-row justify-between items-center">
@@ -17,11 +17,24 @@
 {% endblock %}
 {% block maincontent %}
 
-    {% block studentcontent %}
-        {% for q in questions %}
-            {{ question(q) }}
-            <hr/>
-        {% endfor %}
+    <form action="/student/answer" method="post" >
+        <div class="flex justify-end w-full space-x-4">
+            <input formaction="/student/iterator" 
+               name="submit" class="button is-primary is-light"
+               type="submit"
+               value="Question Iterator"/>
+            {{ button("is-success", "Send Answers", type="submit")}}
 
-    {% endblock %}
+        </div>
+        {% block studentcontent %}
+            {% for q in questions %}
+                {{ question(q) }}
+                <hr/>
+            {% endfor %}
+
+        {% endblock %}
+        <div class="flex justify-end w-full space-x-4">
+            {{ button("is-success", "Send Answers", type="submit")}}
+        </div>
+    </form>
 {% endblock %}

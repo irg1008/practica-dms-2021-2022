@@ -1,0 +1,51 @@
+{% extends "base_logged_in.html" %}
+{% block title %}{% block subtitle %}{% endblock %}Student{% endblock %}
+{% from "macros/question.html" import answeredQuestion with context %}
+{% from "macros/buttons.html" import link with context %}
+{% from "macros/question.html" import question with context %}
+{% block contentsubheading %}Unanswered Questions{% endblock %}
+
+{% block contentheading %}
+    <div class="w-full flex flex-row justify-between">
+        <nav class="breadcrumb is-right" aria-label="breadcrumbs">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/student">Unanswered Questions </a></li>
+                <li class="is-active"><a href="/student/iterator" aria-current="page">Question Iterator</a></li>
+            </ul>
+        </nav>
+    </div>
+{% endblock %}
+{% block maincontent %}
+
+    {% block iteratorcontent %}
+        <form method="post" action>
+            {{ question(quest, userAnswer=answer) }}
+
+            {% if prev %}
+                <input formaction="{{ "/student/iterator/"+prev }}"
+                       name="submit"
+                       class="button is-link"
+                       type="submit"
+                       value="Previous Question"/>
+            {% endif %}
+
+            {% if next %}
+                <input formaction="{{ "/student/iterator/"+next }}"
+                       name="submit"
+                       class="button is-link"
+                       type="submit"
+                       value="Next Question"/>
+            {% endif %}
+            {% if isLast %}
+                <input formaction="/student/iterator/submit"
+                       name="submit"
+                       class="button is-link"
+                       type="submit"
+                       value="Submit Answers"/>
+            {% endif %}
+
+        </form>
+
+    {% endblock %}
+{% endblock %}

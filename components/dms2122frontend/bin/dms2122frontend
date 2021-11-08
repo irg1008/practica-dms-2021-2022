@@ -4,6 +4,9 @@ from flask import Flask, g
 import inspect
 import os
 from typing import Dict
+from flask.helpers import url_for
+
+from werkzeug.utils import redirect
 import dms2122frontend
 from dms2122frontend.data.config import FrontendConfiguration
 from dms2122frontend.data.rest import AuthService, BackendService
@@ -69,6 +72,30 @@ def get_student():
 @app.route("/student/answered", methods=["GET"])
 def get_student_answered():
     return StudentEndpoints.get_student_answered(auth_service)
+
+
+@app.route("/student/answer", methods=["POST"])
+def post_student_answers():
+    return StudentEndpoints.post_student_answers(auth_service)
+
+
+@app.route("/student/iterator", methods=["POST"])
+def post_student_iterator():
+    return StudentEndpoints.post_student_iterator(auth_service)
+
+
+@app.route("/student/iterator/<it>", methods=["GET", "POST"])
+def post_student_iterator_value(it: str):
+
+    try:
+        return StudentEndpoints.get_student_iterator(auth_service, int(it))
+    except:
+        return redirect(url_for("get_home"))
+
+
+@app.route("/student/iterator/submit", methods=["POST"])
+def post_student_iterator_submit():
+    return StudentEndpoints.post_student_iterator_submit(auth_service)
 
 
 @app.route("/teacher", methods=["GET"])
