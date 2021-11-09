@@ -10,11 +10,11 @@
     <title>{% block title %}{% endblock %} - DMS 21/22</title>
 </head>
 
-<body class="min-h-screen flex flex-col justify-between">
-    <div id="page-content" class="flex-1 flex flex-col">{% block pagecontent %}{% endblock %}</div>
+<body class="flex flex-col justify-between min-h-screen">
+    <div id="page-content" class="flex flex-col flex-1">{% block pagecontent %}{% endblock %}</div>
     <footer id="footer" class="w-screen">
         {% block footer %}{% endblock %}
-        
+
         <p>Authors: {{ authors }}</p>
         <p>Universidad de Burgos - Dise&ntilde;o y Mantenimiento del Software, year 2021-2022.</p>
     </footer>

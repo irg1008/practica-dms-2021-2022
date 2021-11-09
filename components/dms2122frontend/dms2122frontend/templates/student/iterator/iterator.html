@@ -6,7 +6,7 @@
 {% block contentsubheading %}Unanswered Questions{% endblock %}
 
 {% block contentheading %}
-    <div class="w-full flex flex-row justify-between">
+    <div class="flex flex-row justify-between w-full">
         <nav class="breadcrumb is-right" aria-label="breadcrumbs">
             <ul>
                 <li><a href="/">Home</a></li>
@@ -24,7 +24,6 @@
 
             {% if prev %}
                 <input formaction="{{ "/student/iterator/"+prev }}"
-                       name="submit"
                        class="button is-link"
                        type="submit"
                        value="Previous Question"/>
@@ -32,18 +31,18 @@
 
             {% if next %}
                 <input formaction="{{ "/student/iterator/"+next }}"
-                       name="submit"
                        class="button is-link"
                        type="submit"
                        value="Next Question"/>
             {% endif %}
             {% if isLast %}
                 <input formaction="/student/iterator/submit"
-                       name="submit"
                        class="button is-link"
                        type="submit"
                        value="Submit Answers"/>
             {% endif %}
+
+            <input name="questionId" type="hidden" value={{questionId}}>
 
         </form>
 

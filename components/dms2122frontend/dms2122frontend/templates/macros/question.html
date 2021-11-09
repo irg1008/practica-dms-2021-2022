@@ -26,7 +26,7 @@
             </li>
             {% endfor %}
         </ul>
-        <button onclick="clearRadio">Clear</button>
+        <button id="clear-radios-{{ question.id }}" class="button" type="button">Clear</button>
         {%if date%}
         <p>Answered on: {{date}}</p>
         {%endif%}
@@ -42,10 +42,15 @@
     {% endif %}
 </div>
 
-<script>
-    function clearRadio(id) {
-        document.getElementById(id).checked = false;
-    }
+<script type="text/javascript">
+    document.getElementById(`clear-radios-${"{{ question.id }}"}`).addEventListener("click", () => {
+        const question = document.getElementById("{{ question.id }}");
+        const radios = question.getElementsByTagName("input");
+
+        for (radio of radios) {
+            radio.checked = false;
+        }
+    });
 </script>
 
 {% endmacro %}

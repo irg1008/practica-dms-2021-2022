@@ -116,8 +116,16 @@ class StudentEndpoints:
         questions: List[str] = session["toanswer"]
 
         # Get and update the posted questions:
-        for q_id, user_ans in request.form.items():
+        items = list(request.form.items())
+
+        # To review:
+        if len(items) == 2:
+            q_id, user_ans = items[0]
             ans[q_id] = user_ans
+        elif len(items) == 1:
+            _, q_id = items[0]
+            if q_id in ans:
+                del ans[q_id]
 
         if q_pos < 0 or q_pos >= len(questions):
             return "Bad Position"
@@ -131,6 +139,7 @@ class StudentEndpoints:
 
         return render_template(
             "student/iterator/iterator.html",
+            questionId=question.id,
             quest=question,
             prev=(None if q_pos - 1 < 0 else str(q_pos - 1)),
             next=None if q_pos + 1 >= len(questions) else str(q_pos + 1),
@@ -154,7 +163,8 @@ class StudentEndpoints:
             return redirect(url_for("get_home"))
         username = session["user"]
         session["answered"] = request.form.to_dict()
-        session["toanswer"] = [q.id for q in get_db().getUnasweredQuestions(username)]
+        session["toanswer"] = [
+            q.id for q in get_db().getUnasweredQuestions(username)]
         return redirect(url_for("post_student_iterator_value", it=0))
 
     @staticmethod
@@ -191,4 +201,3 @@ class StudentEndpoints:
         session["toanswer"] = None
 
         return redirect(url_for("get_student_answered"))
-

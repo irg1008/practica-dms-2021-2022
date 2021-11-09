@@ -89,7 +89,8 @@ def post_student_iterator_value(it: str):
 
     try:
         return StudentEndpoints.get_student_iterator(auth_service, int(it))
-    except:
+    except ValueError:
+        print("Invalid iterator value: " + it)
         return redirect(url_for("get_home"))
 
 
