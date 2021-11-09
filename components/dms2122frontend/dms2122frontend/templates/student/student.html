@@ -4,37 +4,35 @@
 {% from "macros/buttons.html" import link, button with context %}
 {% block contentsubheading %}Unanswered Questions{% endblock %}
 {% block contentheading %}
-    <div class="w-full flex flex-row justify-between items-center">
-        <nav class="breadcrumb is-right" aria-label="breadcrumbs">
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li class="is-active"><a href="/student" aria-current="page">Unanswered Questions</a></li>
-            </ul>
-        </nav>
-        {{ link("is-link", "student/answered", "Previous Questions") }}
+<div class="flex flex-row items-center justify-between w-full">
+    <nav class="breadcrumb is-right" aria-label="breadcrumbs">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li class="is-active"><a href="/student" aria-current="page">Unanswered Questions</a></li>
+        </ul>
+    </nav>
+    {{ link("is-link", "student/answered", "Previous Questions") }}
 
-    </div>
+</div>
 {% endblock %}
 {% block maincontent %}
 
-    <form action="/student/answer" method="post" >
-        <div class="flex justify-end w-full space-x-4">
-            <input formaction="/student/iterator" 
-               name="submit" class="button is-primary is-light"
-               type="submit"
-               value="Question Iterator"/>
-            {{ button("is-success", "Send Answers", type="submit")}}
+<form action="/student/answer" method="post">
+    <div class="flex justify-end w-full space-x-4">
+        <input formaction="/student/iterator" name="submit" class="button is-primary is-light" type="submit"
+            value="Question Iterator" />
+        {{ button("is-success", "Send Answers", type="submit")}}
 
-        </div>
-        {% block studentcontent %}
-            {% for q in questions %}
-                {{ question(q) }}
-                <hr/>
-            {% endfor %}
+    </div>
+    {% block studentcontent %}
+    {% for q in questions %}
+    {{ question(q) }}
+    <hr />
+    {% endfor %}
 
-        {% endblock %}
-        <div class="flex justify-end w-full space-x-4">
-            {{ button("is-success", "Send Answers", type="submit")}}
-        </div>
-    </form>
+    {% endblock %}
+    <div class="flex justify-end w-full space-x-4">
+        {{ button("is-success", "Send Answers", type="submit")}}
+    </div>
+</form>
 {% endblock %}

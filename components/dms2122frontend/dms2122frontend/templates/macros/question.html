@@ -1,53 +1,56 @@
 {% macro question(question, isTeacher=False, showAnswer=False, userAnswer=None, date=None) %}
-    <div class="flex md:flex-row flex-col flex-wrap">
+<div class="flex flex-col flex-wrap md:flex-row" id="{{question.id}}">
 
 
-        <div class="{% if question.image_url|length > 0 %}md:w-1/2{% endif %}">
-            <h2 class="select-none">{{ question.title }}</h2>
-            <h3 class="select-none">{{ question.statement }}</h3>
+    <div class="{% if question.image_url|length > 0 %}md:w-1/2{% endif %}">
+        <h2 class="select-none">{{ question.title }}</h2>
+        <h3 class="select-none">{{ question.statement }}</h3>
 
 
-            <ul class="p-4">
-                {% for a in question.getAnswers() %}
-                    <li class="relative">
-                    <span class="absolute -left-4">{% if showAnswer and a == question.correctAnswer %}
-                        👌
+        <ul class="p-4">
+            {% for a in question.getAnswers() %}
+            <li class="relative">
+                <span class="absolute -left-4">{% if showAnswer and a == question.correctAnswer %}
+                    👌
                     {% elif showAnswer and a == userAnswer %}
-                        ❌
+                    ❌
                     {% endif %}
-                    </span>
-                        <input type="radio"
-                               class="ml-1"
-                               value="{{ a }}"
-                               name="{{ question.id }}"
-                               id="{{ a }}"
-                                {% if showAnswer %} disabled{% endif %}
-                                {% if a == userAnswer %} checked {% endif %}/>
-                        <label class="select-none {% if showAnswer and a == question.correctAnswer %} text-green-500 {% elif showAnswer and a == userAnswer %} text-red-500 {% endif %}"
-                               for="{{ a }}">
-                            {{ a }}
-                        </label>
-                    </li>
-                {% endfor %}
-            </ul>
-            {%if date%}
-                <p>Answered on: {{date}}</p>
-            {%endif%}
-            <p>Score: {{ question.score }} | Penalty: {{ question.penalty }}</p>
-            {% if isTeacher %}
-                <p>Total Answers: {{ question.numberOfCorrectAnswers }} | Total
-                    Score: {{ question.getTotalScore() }}</p>
-            {% endif %}
-        </div>
-
-        {% if question.image_url|length > 0 %}
-            <img src="{{ question.image_url }}" alt="Foto" style="max-width: 300px"/>
+                </span>
+                <input type="radio" class="ml-1" value="{{ a }}" name="{{ question.id }}" id="{{ a }}" {% if showAnswer
+                    %} disabled{% endif %} {% if a==userAnswer %} checked {% endif %} />
+                <label
+                    class="select-none {% if showAnswer and a == question.correctAnswer %} text-green-500 {% elif showAnswer and a == userAnswer %} text-red-500 {% endif %}"
+                    for="{{ a }}">
+                    {{ a }}
+                </label>
+            </li>
+            {% endfor %}
+        </ul>
+        <button onclick="clearRadio">Clear</button>
+        {%if date%}
+        <p>Answered on: {{date}}</p>
+        {%endif%}
+        <p>Score: {{ question.score }} | Penalty: {{ question.penalty }}</p>
+        {% if isTeacher %}
+        <p>Total Answers: {{ question.numberOfCorrectAnswers }} | Total
+            Score: {{ question.getTotalScore() }}</p>
         {% endif %}
     </div>
+
+    {% if question.image_url|length > 0 %}
+    <img src="{{ question.image_url }}" alt="Foto" style="max-width: 300px" />
+    {% endif %}
+</div>
+
+<script>
+    function clearRadio(id) {
+        document.getElementById(id).checked = false;
+    }
+</script>
 
 {% endmacro %}
 
 
 {% macro answeredQuestion(answeredQ) %}
-    {{ question(answeredQ.question, showAnswer=True, userAnswer=answeredQ.answer, date= answeredQ.date) }}
+{{ question(answeredQ.question, showAnswer=True, userAnswer=answeredQ.answer, date= answeredQ.date) }}
 {% endmacro %}
