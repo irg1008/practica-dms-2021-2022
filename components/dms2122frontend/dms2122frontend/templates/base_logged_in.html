@@ -1,24 +1,27 @@
 {% extends "base.html" %}
 {% from 'macros/navbar.html' import navbar %}
 {% from "macros/flashedmessages.html" import flashedmessages %}
+
 {% block pagecontent %}
-    <header id="page-top">
-        <nav id="nav">{{ navbar(roles) }}</nav>
-        <div id="session-info">
-            {% if name %}
-                {{ name }}
-            {% else %}
-                Annonymous
-            {% endif %}
-            &nbsp;(<a href="/logout">Log out</a>)
-        </div>
-    </header>
-    {{ flashedmessages() }}
-    <div id="contentheader">
-        <div style="min-height: 50px" >{% block contentheading %}{% endblock %}</div>
-        <h2>{% block contentsubheading %}&nbsp;{% endblock %}</h2>
+<header class="fixed top-0 left-0 w-full h-20 z-10 shadow-lg">
+    {{ navbar(roles, name) }}
+
+</header>
+
+{{ flashedmessages() }}
+
+<section id="content" class="mt-24 p-2">
+    <div id="#hero">
+        <div>{% block contentheading %}{% endblock %}</div>
+        <h2>{% block contentsubheading %}{% endblock %}</h2>
     </div>
-    <div id="main-content">
+
+    <hr />
+
+    <div>
         {% block maincontent %}{% endblock %}
     </div>
+</section>
+
+
 {% endblock %}

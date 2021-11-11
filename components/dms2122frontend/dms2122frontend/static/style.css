@@ -1,92 +1,91 @@
-html {
-	overflow-y: auto !important;
-}
-
-.breadcrumb {
-	margin-bottom: 0 !important
+:root {
+	--main-white: #f5f5f5;
 }
 
 body {
 	margin: 0;
 	padding: 0;
-	font-family: Arial, Helvetica, sans-serif;
-}
-
-div {
-	margin: 0;
+	box-sizing: border-box;
+	font-family: Montserrat, sans-serif;
+	background-color: var(--main-white);
 }
 
 a {
 	text-decoration: none;
 }
 
-#flex {
-	display: flex;
-}
-
-#flex-col {
-	flex-direction: column;
-}
-
-#flex-row {
-	flex-direction: row;
-}
-
-#flex-wrap {
-	flex-wrap: wrap;
-}
-
-#flex-nowrap {
-	flex-wrap: nowrap;
-}
-
-#page-top {
-	padding: 0.5em;
-	font-size: 90%;
-	background-color: #333;
-	color: #eee;
-}
-
-#page-top a {
-	color: #aaa;
-}
-
-#page-top a:hover {
+#links a {
 	color: #fff;
+	text-decoration: none;
+	border-bottom: 1px solid transparent;
 }
 
-#session-info {
-	position: absolute;
-	right: 0.5em;
+#links a:hover {
+	border-bottom: 1px solid #ddd;
+	transition: all 0.2s ease-in-out;
+}
+
+.button {
 	display: inline-block;
-}
-
-#nav {
-	display: inline-block;
-}
-
-#nav #navlinks {
-	margin: 0;
-	padding-inline-start: 0;
-}
-
-#navlinks li {
-	display: inline-block;
-	margin: 0 0.5em;
-}
-
-#footer {
-	padding: 1em;
+	padding: 0.5em 1em;
+	border: 1px solid #ddd;
+	border-radius: 2em;
 	background-color: #eee;
-	border-top: 2px solid #ddd;
-	margin-top: 1em;
-	font-size: smaller;
-	color: #777;
+	color: #333;
+	text-decoration: none;
+	transition: all 0.2s ease-in-out;
 }
 
-#footer p {
-	margin: 0;
+.button:hover {
+	transform: scale(1.05);
 }
+
+.button:active {
+	transform: scale(0.95);
+}
+
+/* Styles generated with Github Copilot */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: #333;
+	text-align: center;
+}
+
+h1,
+h2,
+h3 {
+	font-weight: 600;
+}
+
+h1 {
+	font-size: 2.5em;
+}
+
+h2 {
+	font-size: 2em;
+}
+
+h3 {
+	font-size: 1.5em;
+}
+
+h4 {
+	font-size: 1.2em;
+}
+
+h5 {
+	font-size: 1em;
+}
+
+h6 {
+	font-size: 0.8em;
+}
+
+/**/
 
 #flashedmessages {
 	padding: 0.2em 0;
@@ -104,25 +103,6 @@ a {
 
 #main-content {
 	padding: 1em;
-}
-
-#contentheader {
-	padding: 1em;
-	margin: 0;
-	box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
-}
-
-#contentheader h1,
-h2 {
-	margin: 0.2em 0;
-}
-
-#contentheader h2 {
-	color: #9b0015;
-}
-
-a {
-	color: #253aa7;
 }
 
 dd {
@@ -152,71 +132,8 @@ table th {
 	margin: 0.5em 0;
 }
 
-.alignleft {
-	text-align: left;
-}
-
-.aligncenter {
-	text-align: center;
-}
-
-.alignright {
-	text-align: right;
-}
-
-.fillwidth {
-	width: 100%;
-}
-
 .highlightrows tr.highlightable:hover {
 	background-color: #eee;
-}
-
-.button- {
-	padding: 0.3em 0.5em;
-	border-radius: 0.3em;
-	border: 0.1em solid transparent;
-	margin: 0.2em;
-	box-shadow: 0 1px inset rgb(255 255 255 / 50%);
-	text-shadow: 0 -1pt black;
-	display: inline-block;
-}
-
-.button:hover,
-.button:active,
-.button:focus {
-	border-color: black;
-}
-
-.button:active {
-	box-shadow: 0 0.3em 0.1em inset rgb(0 0 0 / 20%);
-}
-
-.bluebg {
-	background-color: #253aa7;
-	color: #fff;
-}
-
-.bluebg a {
-	color: #fff;
-}
-
-.redbg {
-	background-color: #9b0015;
-	color: #fff;
-}
-
-.redbg a {
-	color: #fff;
-}
-
-.yellowbg {
-	background-color: #ffc930;
-	color: #000;
-}
-
-.yellowbg a {
-	color: #000;
 }
 
 .questiondiv {

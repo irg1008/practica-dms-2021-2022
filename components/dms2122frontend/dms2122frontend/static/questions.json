@@ -132,7 +132,7 @@
 		"correct_answer": "159cm",
 		"incorrect_answers": ["180cm", "190cm", "200cm", "170cm"],
 		"imageUrl": "https://i.redd.it/6dfphxxis1q71.gif",
-		"penalty": "0.5",
+		"penalty": 0.5,
 		"isPublic": false,
 		"score": 1
 	},
@@ -141,11 +141,7 @@
 		"title": "F1 Quiz",
 		"statment": "Seleccione el apodo correcto sobre el siguiente piloto",
 		"correct_answer": "Padre",
-		"incorrect_answers": [
-			"Fernando Malonso",
-			"Poleman",
-			"Polero"
-		],
+		"incorrect_answers": ["Fernando Malonso", "Poleman", "Polero"],
 		"imageUrl": "https://www.larazon.es/resizer/KdLnugN5E_TDZi7vtKR6AckOilI=/600x400/smart/filters:format(webp):quality(65)/cloudfront-eu-central-1.images.arcpublishing.com/larazon/M5HARXCHXVBY5IFZZQQXSDVE5Q.jpg",
 		"penalty": 0,
 		"isPublic": false,

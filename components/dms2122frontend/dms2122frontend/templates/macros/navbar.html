@@ -1,14 +1,31 @@
-{% macro navbar(roles) %}
-<ul id="navlinks">
-    <li><a href="/">UBUQuestions</a></li>
-    {%- if 'Student' in roles -%}
-        <li><a href="/student">Student</a></li>
-    {%- endif -%}
-    {%- if 'Teacher' in roles -%}
-        <li><a href="/teacher">Teacher</a></li>
-    {%- endif -%}
-    {%- if 'Admin' in roles -%}
-        <li><a href="/admin">Admin</a></li>
-    {%- endif -%}
-</ul>
+{% macro navbar(roles, name) %}
+{% from "macros/buttons.html" import link with context%}
+
+
+<nav id="nav" class="h-full w-full px-2 flex justify-between items-center bg-blue-400 text-white" role="navigation">
+    <div id="links" class="flex gap-4">
+        <a href="/">UBUQuestions</a>
+
+        {%- if 'Student' in roles -%}
+        <a href="/student">Student</a>
+        {%- endif -%}
+
+        {%- if 'Teacher' in roles -%}
+        <a href="/teacher">Teacher</a>
+        {%- endif -%}
+
+        {%- if 'Admin' in roles -%}
+        <a href="/admin">Admin</a>
+        {%- endif -%}
+    </div>
+    <div class="flex gap-4 items-center">
+        {% if name %}
+        {{ name }}
+        {% else %}
+        Annonymous
+        {% endif %}
+
+        {{ link("bg-red-400 text-black", "/logout", "Log Out")}}
+    </div>
+</nav>
 {% endmacro %}

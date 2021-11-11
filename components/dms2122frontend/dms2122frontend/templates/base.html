@@ -4,6 +4,7 @@
 <head>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/style.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,8 +12,8 @@
 </head>
 
 <body class="flex flex-col justify-between min-h-screen">
-    <div id="page-content" class="flex flex-col flex-1">{% block pagecontent %}{% endblock %}</div>
-    <footer id="footer" class="w-screen">
+    <div class="flex flex-col flex-1">{% block pagecontent %}{% endblock %}</div>
+    <footer class="w-screen p-2 bg-gray-800 text-white shadow-md text-sm">
         {% block footer %}{% endblock %}
 
         <p>Authors: {{ authors }}</p>
