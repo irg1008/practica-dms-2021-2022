@@ -7,13 +7,13 @@
         <ul class="w-full p-4 flex flex-col gap-2 bg-red-100 rounded-lg border-2 border-red-300">
             {% for a in question.getAnswers() %}
             <li class="relative">
-                <span class="absolute -left-4">{% if showAnswer and a == question.correctAnswer %}
+                <span class="absolute -left-3">{% if showAnswer and a == question.correctAnswer %}
                     👌
                     {% elif showAnswer and a == userAnswer %}
                     ❌
                     {% endif %}
                 </span>
-                <input type="radio" class="ml-1" value="{{ a }}" name="{{ question.id }}" id="{{ a }}" {% if showAnswer
+                <input type="radio" class="ml-3" value="{{ a }}" name="{{ question.id }}" id="{{ a }}" {% if showAnswer
                     %} disabled{% endif %} {% if a==userAnswer %} checked {% endif %} />
                 <label
                     class="select-none {% if showAnswer and a == question.correctAnswer %} text-green-500 {% elif showAnswer and a == userAnswer %} text-red-500 {% endif %}"
@@ -24,9 +24,11 @@
             {% endfor %}
         </ul>
 
+        {% if not showAnswer %}
         <button id="clear-radios-{{ question.id }}" class="button is-danger" type="button">
             Clear
         </button>
+        {% endif %}
 
         {%if date%}
         <p>Answered on: {{date}}</p>
