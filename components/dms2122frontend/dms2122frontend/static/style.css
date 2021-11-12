@@ -142,3 +142,22 @@ h3 {
 	width: 300px;
 	object-fit: cover;
 }
+
+/* Cannot totally hide after fade out */
+.hide {
+	animation: hide 0.5s ease-in-out 4s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes hide {
+	0% {
+		opacity: 1;
+	}
+	95% {
+		opacity: 0;
+	}
+	100% {
+		visibility: hidden;
+		pointer-events: none;
+	}
+}

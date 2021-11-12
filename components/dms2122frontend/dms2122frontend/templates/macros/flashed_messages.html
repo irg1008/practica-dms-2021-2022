@@ -2,12 +2,19 @@
 {% with messages = get_flashed_messages() %}
 
 {% for message in messages %}
-<article class="fixed bottom-0 right-0 z-20 w-full p-4">
-    <ul class="rounded-full is-info message">
-        <li class="message-header">New Message</li>
+<div class="fixed bottom-0 right-0 z-20 p-4">
+    <ul class="rounded-full shadow-md hide is-info message w-96">
+        <li class="flex justify-between message-header">
+            <p>New Message</p>
+            <!--Hidden button. Logic to be implemented-->
+            <button type="button"
+                class="hidden px-2 py-1 text-black bg-white rounded-full cursor-pointer text-md hover:bg-gray-100">
+                x
+            </button>
+        </li>
         <li class="message-body">{{ message }}</li>
     </ul>
-</article>
+</div>
 {% endfor %}
 
 {% endwith %}
