@@ -155,16 +155,6 @@ table th {
 	border-bottom: 1px solid #eee;
 }
 
-#login-form {
-	margin: auto;
-	width: fit-content;
-}
-
-#login-form input {
-	display: block;
-	margin: 0.5em 0;
-}
-
 .highlightrows tr.highlightable:hover {
 	background-color: #eee;
 }

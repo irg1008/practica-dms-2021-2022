@@ -5,11 +5,11 @@
 {% block pagecontent %}
     {{ flashedmessages() }}
     <div id="login-form" class="flex-1 flex items-center justify-center flex-col">
-        <h3 class="aligncenter">Log in</h3>
-        <form action="login" method="post">
-            <input type="text" name="user" placeholder="Username" class="input is-primary" autofocus />
-            <input type="password" name="pass" placeholder="Password" class="input is-primary" />
-            <p class="aligncenter">{{ submit_button('is-primary', 'Log in') }}</p>
+        <h3>Log in</h3>
+        <form action="login" method="post" class="mt-4 flex flex-col gap-2">
+            <input type="text" name="user" placeholder="Username" class="input is-info" autofocus />
+            <input type="password" name="pass" placeholder="Password" class="input is-info" />
+            <p>{{ submit_button('is-info', 'Log in') }}</p>
         </form>
     </div>
 {% endblock %}
