@@ -17,12 +17,12 @@
 {% endblock %}
 
 {% block main_content %}
-{% block answered_content %}
-<form>
-    {% for q in questions %}
-    {{ answeredQuestion(q) }}
-    <hr />
-    {% endfor %}
-</form>
-{% endblock %}
+    {% block answered_content %}
+        <form>
+            {% for q in questions %}
+            {{ answeredQuestion(q) }}
+            <hr />
+            {% endfor %}
+        </form>
+    {% endblock %}
 {% endblock %}

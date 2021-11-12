@@ -1,0 +1,55 @@
+{% extends "base_logged_in.html" %}
+{% from "macros/buttons.html" import link, submit_button, button with context %}
+{% block title %}{% block subtitle %}{% endblock %}Teacher{% endblock %}
+
+{% block content_heading %}
+    <div class="flex flex-row items-center justify-between w-full">
+        <nav class="breadcrumb" aria-label="breadcrumbs">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li>
+                    <a href="/teacher">
+                        Teacher Panel
+                    </a>
+                </li>
+                <li class="is-active">
+                    <a href="/teacher/newQuestion" aria-current="page">
+                        New Question
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+{% endblock %}
+{% block content_subheading %}Create a new question{% endblock %}
+{% block main_content %}
+    {% block teacher_content %}
+        <section class="flex flex-col">
+            <form class="field space-y-2 w-1/2 justify-center" action="/teacher/new/create" method="post">
+                <h5>
+                    Create a new question.
+                </h5>
+                <section class="field">
+                    <label class="label">Title</label>
+                    <div class="control">
+                        <input class="input is-info" name="title" type="text" placeholder="Question Title" required
+                               minlength="3" value="{{ title }}"/>
+                    </div>
+                </section>
+
+                <section class="field">
+                    <label class="label">Statement</label>
+                    <div class="control">
+                    <textarea class="textarea is-info" placeholder="Type your question statement here!"
+                              name="statement" required> </textarea>
+                    </div>
+                </section>
+
+                <div class="flex flex-row justify-end">
+                    {{ submit_button("is-primary", "Next") }}
+                </div>
+            </form>
+        </section>
+    {% endblock %}
+{% endblock %}

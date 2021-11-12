@@ -1,11 +1,41 @@
 {% extends "base_logged_in.html" %}
-
+{% from "macros/buttons.html" import submit_button with context %}
 {% block title %}{% block subtitle %}{% endblock %}Teacher{% endblock %}
 
-{% block content_heading %}Teachers panel{% endblock %}
+{% block content_heading %}
+    <div class="flex flex-row items-center justify-between w-full">
+        <nav class="breadcrumb" aria-label="breadcrumbs">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li class="is-active">
+                    <a href="/teacher">
+                        Teacher Panel
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+{% endblock %}
+{% block content_subheading %}Teacher Pannel{% endblock %}
 
 {% block main_content %}
     {% block teacher_content %}
-    <p class="yellowbg">Under construction</p>
+        <section class="flex flex-col justify-center w-full">
+            <form class="field space-y-2 w-1/2" action="/teacher/new" method="post">
+                <h5>
+                    Create a new question.
+                </h5>
+                <label class="label">Title</label>
+
+                <input class="input is-info" name="title" type="text" placeholder="Question Title" required
+                       minlength="3"/>
+
+                <div class="flex flex-row justify-end">
+                    <input type="submit" class="button is-info" value="Next"/>
+                </div>
+            </form>
+        </section>
+
     {% endblock %}
 {% endblock %}
