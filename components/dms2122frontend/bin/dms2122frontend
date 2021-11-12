@@ -104,13 +104,16 @@ def post_student_iterator_submit():
 def get_teacher():
     return TeacherEndpoints.get_teacher(auth_service)
 
+
 @app.route("/teacher/new", methods=["GET", "POST"])
 def get_post_new_question():
     return TeacherEndpoints.get_post_new_question(auth_service)
 
+
 @app.route("/teacher/new/create", methods=["POST"])
 def post_new_question_create():
     return TeacherEndpoints.get_teacher(auth_service)
+
 
 @app.route("/", methods=["GET"])
 def index():
@@ -153,9 +156,9 @@ def inject_stage_and_region():
     name = session.get("user")
     roles = session.get("roles")
     return {
-        "authors": "Jorge Ruiz Gómez, Iván Ruiz Gómez & Pablo Simón Sainz",
+        "authors": "Jorge Ruiz Gómez, Iván Ruiz Gazquez & Pablo Simón Sainz",
         "name": name or "Anon",
-        "roles": roles,
+        "roles": roles or [],
     }
 
 
