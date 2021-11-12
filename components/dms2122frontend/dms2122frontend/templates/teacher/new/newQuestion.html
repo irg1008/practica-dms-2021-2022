@@ -25,7 +25,7 @@
 {% block content_subheading %}Create a new question{% endblock %}
 {% block main_content %}
     {% block teacher_content %}
-        <section class="flex flex-col">
+        <section class="flex flex-col items-center w-full">
             <form class="field space-y-2 w-1/2 justify-center" action="/teacher/new/create" method="post">
                 <h5>
                     Create a new question.
@@ -47,7 +47,7 @@
                 </section>
 
                 <div class="flex flex-row justify-end">
-                    {{ submit_button("is-primary", "Next") }}
+                    <input type="submit" class="button is-info" value="Add Answers"/>
                 </div>
             </form>
         </section>

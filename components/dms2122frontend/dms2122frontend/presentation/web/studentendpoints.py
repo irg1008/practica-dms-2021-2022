@@ -184,6 +184,10 @@ class StudentEndpoints:
 
         username = session["user"]
 
+        q_id, user_ans = list(request.form.items())[0]
+        
+        ans[q_id] = user_ans
+
         for q_id, user_ans in ans.items():
 
             try:

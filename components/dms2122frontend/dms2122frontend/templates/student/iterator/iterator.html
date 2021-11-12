@@ -24,10 +24,10 @@
 
     <div class="flex gap-4">
         <div class="buttons has-addons is-centered">
-            {% if prev %}
-            <input formaction="{{ " /student/iterator/"+prev }}" class="button is-info is-outlined" type="submit"
+            
+            <input {% if prev %} formaction="{{ " /student/iterator/"+prev }}" {% else %} disabled {% endif %} class="button is-info is-outlined" type="submit"
                 value="Previous Question" />
-            {% endif %}
+            
 
 
             {% if next %}
