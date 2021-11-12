@@ -1,10 +1,10 @@
 {% macro question(question, isTeacher=False, showAnswer=False, userAnswer=None, date=None) %}
 <div class="flex question justify-between items-center  my-4" id="{{question.id}}">
-    <div class="flex flex-col items-start gap-4">
+    <div class="flex-1 flex flex-col items-start gap-4">
         <h2 class="select-none">{{ question.title }}:</h2>
         <h3 class="select-none">{{ question.statement }}</h3>
 
-        <ul class="p-4 flex flex-col gap-2">
+        <ul class="w-full p-4 flex flex-col gap-2 bg-red-100 rounded-lg border-2 border-red-300">
             {% for a in question.getAnswers() %}
             <li class="relative">
                 <span class="absolute -left-4">{% if showAnswer and a == question.correctAnswer %}
@@ -24,7 +24,7 @@
             {% endfor %}
         </ul>
 
-        <button id="clear-radios-{{ question.id }}" class="button is-light is-danger" type="button">
+        <button id="clear-radios-{{ question.id }}" class="button is-danger" type="button">
             Clear
         </button>
 
@@ -42,7 +42,9 @@
     </div>
 
     {% if question.image_url | length > 0 %}
-    <img src="{{ question.image_url }}" alt="Foto" />
+    <div class="overflow-hidden rounded-lg shadow-md mx-10">
+        <img src="{{ question.image_url }}" alt="Foto" />
+    </div>
     {% endif %}
 </div>
 

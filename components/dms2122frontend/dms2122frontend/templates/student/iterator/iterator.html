@@ -19,7 +19,7 @@
 {% block maincontent %}
 
     {% block iteratorcontent %}
-        <form method="post" action>
+        <form method="post" class="bg-blue-50 border-2 border-blue-500 shadow-md rounded-lg p-4">
             {{ question(quest, userAnswer=answer) }}
 
             {% if prev %}
@@ -43,8 +43,6 @@
             {% endif %}
 
             <input name="questionId" type="hidden" value={{questionId}}>
-
         </form>
-
     {% endblock %}
 {% endblock %}
