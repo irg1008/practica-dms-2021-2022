@@ -143,7 +143,7 @@ h3 {
 	object-fit: cover;
 }
 
-/* Cannot totally hide after fade out */
+/* Clean this rubbish animation. Maybe JS? */
 .hide {
 	animation: hide 0.5s ease-in-out 4s;
 	animation-fill-mode: forwards;
@@ -153,11 +153,19 @@ h3 {
 	0% {
 		opacity: 1;
 	}
-	95% {
+	70% {
+		transform: translateX(-10%);
+	}
+	99% {
 		opacity: 0;
+		transform: translateX(120%);
+		height: auto;
+		width: auto;
 	}
 	100% {
-		visibility: hidden;
-		pointer-events: none;
+		opacity: 0;
+		transform: translateX(120%);
+		height: 0;
+		width: 0;
 	}
 }
