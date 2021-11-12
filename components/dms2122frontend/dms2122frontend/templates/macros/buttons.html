@@ -1,11 +1,13 @@
 {% macro link(color_class, href, content) %}
-<a class="button {{ color_class }}" href="{{ href }}">{{ content
-  }}</a>
+<a class="button {{ color_class }}" href="{{ href }}">
+  {{ content}}
+</a>
 {% endmacro %}
 
 {% macro button(color_class, content, onclick=None, type="button") %}
-<button class="button {{ color_class }}" {% if onclick %}onclick="{{ onclick }}" type={{type}} {%endif%}>{{ content
-  }}</button>
+<button class="button {{ color_class }}" {% if onclick %}onclick="{{ onclick }}" type={{type}} {%endif%}>
+  {{ content}}
+</button>
 {% endmacro %}
 
 {% macro submit_button(color_class, content) %}

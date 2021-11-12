@@ -1,14 +1,14 @@
 {% macro flashed_messages() %}
 {% with messages = get_flashed_messages() %}
 
-{% if messages %}
-<div class="fixed bottom-0 left-0 z-20 w-full p-4 rounded-t-lg">
-    <ul class="flashes">
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
+{% for message in messages %}
+<article class="fixed bottom-0 right-0 z-20 w-full p-4">
+    <ul class="rounded-full is-info message">
+        <li class="message-header">New Message</li>
+        <li class="message-body">{{ message }}</li>
     </ul>
-</div>
-{% endif %}
+</article>
+{% endfor %}
+
 {% endwith %}
 {% endmacro %}

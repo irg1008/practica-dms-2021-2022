@@ -16,7 +16,6 @@ from .Question import AnsweredQuestion, Question
 from .webauth import WebAuth
 from dms2122frontend.g import get_db
 
-
 class StudentEndpoints:
     """ Monostate class responsible of handling the student web endpoint requests.
     """

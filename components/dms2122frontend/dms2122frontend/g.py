@@ -4,7 +4,6 @@ from dms2122frontend.data.database.database import Database
 
 db = mockDB()
 
-
 def get_db() -> Database:
     """Returns an aplication context database instance
 
@@ -17,7 +16,7 @@ def get_db() -> Database:
 
 def teardow_db():
     """
-    Destroys the current DB  object
+    Destroys the current DB object
     """
     db = g.pop("db", None)
 
