@@ -21,6 +21,7 @@ def getQuestionMocks() -> Dict[int, Question]:
             q["statment"],
             q["correct_answer"],
             q["incorrect_answers"],
+            q["user_answers"],
             q["imageUrl"],
             float(q["score"]),
             float(q["penalty"]),

@@ -28,6 +28,7 @@ class Question:
         statement: str,
         correct_answer: str,
         incorrect_answers: List[str],
+        user_answers: List[str],
         image_url: str,
         score: float,
         penalty: float,
@@ -41,6 +42,7 @@ class Question:
         self.score = score
         self.penalty = penalty
         self.is_public = is_public
+        self.user_answers = user_answers
         self.image_url = image_url
         self.number_of_correct_answers = 0
         self.number_of_questions_answered = 0
@@ -63,6 +65,9 @@ class Question:
 
     def receive_answer(self, answer: str):
         self.number_of_questions_answered += 1
+
+        # Add user answer to question log.
+        self.user_answers.append(answer)
 
         if answer == self.correct_answer:
             self.number_of_correct_answers += 1

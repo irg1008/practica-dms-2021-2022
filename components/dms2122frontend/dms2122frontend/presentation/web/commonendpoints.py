@@ -24,5 +24,15 @@ class CommonEndpoints:
         """
         if not WebAuth.test_token(auth_service):
             return redirect(url_for("get_login"))
+
         name = session["user"]
-        return render_template("home.html", name=name, roles=session["roles"])
+        roles = session["roles"]
+
+        if "Admin" in roles:
+            return redirect(url_for("get_admin"))
+        elif "Teacher" in roles:
+            return redirect(url_for("get_teacher"))
+        elif "Student" in roles:
+            return redirect(url_for("get_student"))
+
+        return "Error. User has no role. Contact an admin"
