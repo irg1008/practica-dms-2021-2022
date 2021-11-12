@@ -2,25 +2,21 @@
 {% from "macros/buttons.html" import link, submit_button %}
 {% block contentsubheading %}Create new user{% endblock %}
 {% block administrationcontent %}
-<form action="/admin/users/new" method="post">
+<form action="/admin/users/new" method="post" class="flex flex-col gap-4">
     <input type="hidden" name="redirect_to" value="{{ redirect_to }}" />
-    <dl>
-        <dt>Username</dt>
-        <dd>
-            <input type="text" name="username" placeholder="Username" autofocus class="input is-info"/>
-        </dd>
-        <dt>Password</dt>
-        <dd>
-            <input type="password" name="password" placeholder="Password" class="input is-info"/>
-        </dd>
-        <dt>Password confirmation</dt>
-        <dd>
-            <input type="password" name="confirmpassword" placeholder="Confirm password" class="input is-info"/>
-        </dd>
-    </dl>
-    <div class="alignright">
+    <label>Username
+        <input type="text" name="username" placeholder="CoolStudent77" autofocus class="input is-info" />
+    </label>
+    <label>Password
+        <input type="password" name="password" placeholder="4VeryD1ff1cultP@ssword" class="input is-info" />
+    </label>
+    <label>Confirm Password
+        <input type="password" name="confirm-password" placeholder="4VeryD1ff1cultP@ssword" class="input is-info" />
+    </label>
+
+    <div class="flex gap-4 mt-4">
         {{ submit_button('is-success', 'Save changes') }}
         {{ link('is-danger', redirect_to, 'Cancel') }}
-    </d>
+    </div>
 </form>
 {% endblock %}

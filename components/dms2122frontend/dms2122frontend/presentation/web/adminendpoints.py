@@ -90,7 +90,7 @@ class AdminEndpoints:
             return redirect(url_for("get_login"))
         if Role.Admin.name not in session["roles"]:
             return redirect(url_for("get_home"))
-        if request.form["password"] != request.form["confirmpassword"]:
+        if request.form["password"] != request.form["confirm-password"]:
             flash("Password confirmation mismatch", "error")
             return redirect(url_for("get_admin_users_new"))
         created_user = WebUser.create_user(
