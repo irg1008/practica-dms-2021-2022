@@ -3,7 +3,7 @@ from typing import List, Union
 from dms2122frontend.presentation.web.Question import Question, AnsweredQuestion
 
 
-class Database:
+class DatabaseClient:
     """
     Databse Adapter Interface
     """

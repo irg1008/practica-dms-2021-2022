@@ -1,10 +1,11 @@
 from flask import g
-from dms2122frontend.data.database.mockDB import mockDB
-from dms2122frontend.data.database.database import Database
+from dms2122frontend.data.rest.database_client.mockDB import mockDB
+from dms2122frontend.data.rest.database_client.database_client import DatabaseClient
 
 db = mockDB()
 
-def get_db() -> Database:
+
+def get_db() -> DatabaseClient:
     """Returns an aplication context database instance
 
     Returns:

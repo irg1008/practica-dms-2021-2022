@@ -1,12 +1,12 @@
 import random
 from typing import Dict, List, Union
 
-from dms2122frontend.data.database.database import Database
+from dms2122frontend.data.rest.database_client.database_client import DatabaseClient
 from dms2122frontend.presentation.web.Question import AnsweredQuestion, Question
 from dms2122frontend.data.questionMocks import getQuestionMocks
 
 
-class mockDB(Database):
+class mockDB(DatabaseClient):
     """
         Mock Database for the mock frontend
     """
