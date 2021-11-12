@@ -42,6 +42,8 @@
     {% endblock %}
 
     <div class="flex justify-end w-full space-x-4">
+        <input formaction="/student/iterator" name="submit" class="button is-light is-info" type="submit"
+               value="Question Iterator" />
         {{ button("is-info", "Send Answers", type="submit")}}
     </div>
     {% endif %}
