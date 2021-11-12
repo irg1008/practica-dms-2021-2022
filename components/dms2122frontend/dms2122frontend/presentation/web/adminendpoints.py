@@ -47,10 +47,7 @@ class AdminEndpoints:
             return redirect(url_for("get_home"))
         name = session["user"]
         return render_template(
-            "admin/users.html",
-            name=name,
-            roles=session["roles"],
-            users=WebUser.list_users(auth_service),
+            "admin/users.html", users=WebUser.list_users(auth_service),
         )
 
     @staticmethod
@@ -69,12 +66,7 @@ class AdminEndpoints:
             return redirect(url_for("get_home"))
         name = session["user"]
         redirect_to = request.args.get("redirect_to", default="/admin/users")
-        return render_template(
-            "admin/users/new.html",
-            name=name,
-            roles=session["roles"],
-            redirect_to=redirect_to,
-        )
+        return render_template("admin/users/new.html", redirect_to=redirect_to,)
 
     @staticmethod
     def post_admin_users_new(auth_service: AuthService) -> Union[Response, Text]:
@@ -122,8 +114,6 @@ class AdminEndpoints:
         redirect_to: str = str(request.args.get("redirect_to", default="/admin/users"))
         return render_template(
             "admin/users/edit.html",
-            name=name,
-            roles=session["roles"],
             username=username,
             current_roles=WebUser.get_roles(auth_service, username),
             all_roles=[name for name, member in Role.__members__.items()],

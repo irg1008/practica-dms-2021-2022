@@ -4,6 +4,7 @@ from flask import Flask, g
 import inspect
 import os
 from typing import Dict
+from flask.globals import session
 from flask.helpers import url_for
 
 from werkzeug.utils import redirect
@@ -38,10 +39,8 @@ backend_service: BackendService = BackendService(
 
 app = Flask(
     __name__,
-    static_folder=os.path.dirname(
-        inspect.getfile(dms2122frontend)) + "/static",
-    template_folder=os.path.dirname(
-        inspect.getfile(dms2122frontend)) + "/templates",
+    static_folder=os.path.dirname(inspect.getfile(dms2122frontend)) + "/static",
+    template_folder=os.path.dirname(inspect.getfile(dms2122frontend)) + "/templates",
 )
 app.secret_key = bytes(cfg.get_app_secret_key(), "ascii")
 
@@ -139,6 +138,18 @@ def get_admin_users_edit():
 @app.route("/admin/users/edit", methods=["POST"])
 def post_admin_users_edit():
     return AdminEndpoints.post_admin_users_edit(auth_service)
+
+
+@app.context_processor
+def inject_stage_and_region():
+
+    name = session.get("user")
+    roles = session.get("roles")
+    return {
+        "authors": "Jorge Ruiz Gómez, Iván Ruiz Gómez & Pablo Simón Sainz",
+        "name": name or "Anon",
+        "roles": roles,
+    }
 
 
 if __name__ == "__main__":

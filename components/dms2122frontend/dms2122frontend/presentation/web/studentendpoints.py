@@ -16,6 +16,7 @@ from .Question import AnsweredQuestion, Question
 from .webauth import WebAuth
 from dms2122frontend.g import get_db
 
+
 class StudentEndpoints:
     """ Monostate class responsible of handling the student web endpoint requests.
     """
@@ -40,9 +41,7 @@ class StudentEndpoints:
         db = g.get_db()
         return render_template(
             "student/student.html",
-            name=name,
-            roles=session["roles"],
-            questions=db.getUnasweredQuestions(name),
+                        questions=db.getUnasweredQuestions(name),
         )
 
     @staticmethod
@@ -65,10 +64,7 @@ class StudentEndpoints:
         ans = db.getAnsweredQuestions(name)
         ans.sort(key=lambda x: x.date, reverse=True)
         return render_template(
-            "student/answered/answered.html",
-            name=name,
-            roles=session["roles"],
-            questions=ans,
+            "student/answered/answered.html", roles=session["roles"], questions=ans,
         )
 
     @staticmethod
@@ -162,8 +158,7 @@ class StudentEndpoints:
             return redirect(url_for("get_home"))
         username = session["user"]
         session["answered"] = request.form.to_dict()
-        session["toanswer"] = [
-            q.id for q in get_db().getUnasweredQuestions(username)]
+        session["toanswer"] = [q.id for q in get_db().getUnasweredQuestions(username)]
         return redirect(url_for("post_student_iterator_value", it=0))
 
     @staticmethod
