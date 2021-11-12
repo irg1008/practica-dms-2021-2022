@@ -5,12 +5,11 @@
 {% block page_content %}
 <header class="fixed top-0 left-0 z-10 w-full h-20 shadow-md">
     {{ navbar(roles, name) }}
-
 </header>
 
 {{ flashed_messages() }}
 
-<section id="content" class="p-2 mt-24">
+<section id="content" class="p-4 mt-24">
     <div id="#hero">
         <div>{% block content_heading %}{% endblock %}</div>
         <h2>{% block content_subheading %}{% endblock %}</h2>

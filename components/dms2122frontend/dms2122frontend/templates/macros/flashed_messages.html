@@ -1,5 +1,6 @@
 {% macro flashed_messages() %}
 {% with messages = get_flashed_messages() %}
+
 {% if messages %}
 <div class="fixed bottom-0 left-0 z-20 w-full p-4 rounded-t-lg">
     <ul class="flashes">

@@ -2,7 +2,7 @@
 {% from "macros/buttons.html" import link with context%}
 
 
-<nav id="nav" class="h-full w-full px-2 flex justify-between items-center bg-blue-400 text-white" role="navigation">
+<nav id="nav" class="flex items-center justify-between w-full h-full px-4 text-white bg-blue-400" role="navigation">
     <div id="links" class="flex gap-4">
         <a href="/">UBUQuestions</a>
 
@@ -18,7 +18,7 @@
         <a href="/admin">Admin</a>
         {%- endif -%}
     </div>
-    <div class="flex gap-4 items-center">
+    <div class="flex items-center gap-4">
         {% if name %}
         {{ name }}
         {% else %}

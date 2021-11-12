@@ -23,6 +23,9 @@
 
 {% block main_content %}
 <form action="/student/answer" method="post">
+    {% if not questions %}
+    <p>There are no questions left to answer</p>
+    {%else %}
     <div class="flex justify-end w-full space-x-4">
         <input formaction="/student/iterator" name="submit" class="button is-light is-info" type="submit"
             value="Question Iterator" />
@@ -41,5 +44,7 @@
     <div class="flex justify-end w-full space-x-4">
         {{ button("is-info", "Send Answers", type="submit")}}
     </div>
+    {% endif %}
+
 </form>
 {% endblock %}

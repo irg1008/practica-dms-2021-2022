@@ -7,11 +7,11 @@
 {% block page_content %}
     {{ flashed_messages() }}
     <div id="login-form" class="flex flex-col items-center justify-center flex-1">
-        <h3>Log in</h3>
+        <h3>Log In</h3>
         <form action="login" method="post" class="flex flex-col gap-2 mt-4">
             <input type="text" name="user" placeholder="Username" class="input is-info" autofocus />
             <input type="password" name="pass" placeholder="Password" class="input is-info" />
-            <p>{{ submit_button('is-info', 'Log in') }}</p>
+            <p>{{ submit_button('is-info', 'Log In') }}</p>
         </form>
     </div>
 {% endblock %}
