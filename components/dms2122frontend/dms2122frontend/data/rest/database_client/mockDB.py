@@ -53,3 +53,9 @@ class mockDB(DatabaseClient):
         self, username: str, question_id: int
     ) -> Union[AnsweredQuestion, None]:
         return self.answered.get(question_id)
+
+    def getAllQuestions(self) -> List[Question]:
+        questions = list(self.questions.values())
+        questions.sort(key=lambda q: q.number_of_questions_answered)
+
+        return questions

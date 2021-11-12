@@ -29,3 +29,6 @@ class DatabaseClient:
     ) -> Union[AnsweredQuestion, None]:
         raise Exception("Not Implemented")
         pass
+
+    def getAllQuestions(self) -> List[Question]:
+        raise Exception("Not Implemented")

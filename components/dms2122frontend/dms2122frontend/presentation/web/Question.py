@@ -1,6 +1,6 @@
 # Import the datetime
 import datetime
-from typing import List
+from typing import Dict, List
 import random
 
 # A class named Question with the next variables:
@@ -24,11 +24,11 @@ class Question:
     def __init__(
         self,
         id: int,
-        title: str, 
+        title: str,
         statement: str,
         correct_answer: str,
         incorrect_answers: List[str],
-        user_answers: List[str],
+        user_answers: Dict[str, int],
         image_url: str,
         score: float,
         penalty: float,
@@ -42,10 +42,33 @@ class Question:
         self.score = score
         self.penalty = penalty
         self.is_public = is_public
-        self.user_answers = user_answers
         self.image_url = image_url
         self.number_of_correct_answers = 0
         self.number_of_questions_answered = 0
+
+        self.user_answers = user_answers
+
+        self.user_answers = self.__mock_answers()
+
+        for answer, times in self.user_answers.items():
+            if answer == correct_answer:
+                self.number_of_correct_answers += times
+
+            self.number_of_questions_answered += times
+
+    def __mock_answers(self):
+        ans = {}
+
+        if random.random() > 0.8:
+            ans[self.correct_answer] = random.randint(0, 11)
+
+            for incorrect_ans in self.incorrect_answers:
+                ans[incorrect_ans] = random.randint(0, 10)
+
+        return ans
+
+    def is_editable(self):
+        return self.number_of_questions_answered == 0
 
     def get_answers(self, shuffle=False) -> List[str]:
         questions = list([self.correct_answer]) + self.incorrect_answers
@@ -57,7 +80,10 @@ class Question:
 
         return questions
 
-    def get_total_score(self):
+    def get_times_answered(self, answer: str) -> int:
+        return self.user_answers.get(answer) or -1
+
+    def get_total_score(self) -> float:
         return (
             self.score * self.number_of_correct_answers
             - self.penalty * self.number_of_questions_answered
@@ -67,8 +93,8 @@ class Question:
         self.number_of_questions_answered += 1
 
         # Add user answer to question log.
-        self.user_answers.append(answer)
-
+        old = self.user_answers.get(answer) or 0
+        self.user_answers[answer] = old + 1
         if answer == self.correct_answer:
             self.number_of_correct_answers += 1
             return self.score
