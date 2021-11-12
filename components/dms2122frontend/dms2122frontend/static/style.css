@@ -3,6 +3,8 @@
 	--main-black: #1d1d1d;
 	--main-gray: #e5e5e5;
 	--main-radius: 0.8em;
+	--light-blue: #eff6ff;
+	--medium-blue: #3b82f6;
 }
 
 body {
@@ -11,6 +13,15 @@ body {
 	box-sizing: border-box;
 	font-family: Montserrat, sans-serif;
 	background-color: var(--main-white);
+}
+
+form {
+	background-color: var(--light-blue);
+	border: 2px solid var(--medium-blue);
+	box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1),
+		0 0 0 1px rgba(10, 10, 10, 0.02);
+	border-radius: var(--main-radius);
+	padding: 1em;
 }
 
 a {
@@ -90,7 +101,8 @@ h6 {
 	transform: scale(0.95);
 }
 
-.question h2, h3 {
+.question h2,
+h3 {
 	text-align: left;
 }
 

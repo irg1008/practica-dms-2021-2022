@@ -2,25 +2,27 @@
 {% block title %}{% block subtitle %}{% endblock %}Student{% endblock %}
 {% from "macros/question.html" import answeredQuestion with context %}
 {% from "macros/buttons.html" import link with context %}
+
 {% block contentsubheading %}Unanswered Questions{% endblock %}
 {% block contentheading %}
-    <div class="w-full flex flex-row justify-between">
-        <nav class="breadcrumb is-right" aria-label="breadcrumbs">
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/student">Unanswered Questions </a></li>
-                <li class="is-active"><a href="/student/answered" aria-current="page">Answered Questions</a></li>
-            </ul>
-        </nav>
-    </div>
-    {% endblock %}
-    {% block maincontent %}
+<div class="w-full flex flex-row justify-between">
+    <nav class="breadcrumb is-right" aria-label="breadcrumbs">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/student">Unanswered Questions </a></li>
+            <li class="is-active"><a href="/student/answered" aria-current="page">Answered Questions</a></li>
+        </ul>
+    </nav>
+</div>
+{% endblock %}
 
-    {% block answeredcontent %}
-        {% for q in questions %}
-            {{ answeredQuestion(q) }}
-            <hr/>
-        {% endfor %}
-
-    {% endblock %}
+{% block maincontent %}
+{% block answeredcontent %}
+<form>
+    {% for q in questions %}
+    {{ answeredQuestion(q) }}
+    <hr />
+    {% endfor %}
+</form>
+{% endblock %}
 {% endblock %}
