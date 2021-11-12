@@ -3,7 +3,7 @@
 {% from "macros/question.html" import question with context %}
 {% from "macros/buttons.html" import link, button with context %}
 
-{% block contentheading %}
+{% block content_heading %}
 <div class="flex flex-row items-center justify-between w-full">
     <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
@@ -19,9 +19,9 @@
 </div>
 {% endblock %}
 
-{% block contentsubheading %}Unanswered Questions{% endblock %}
+{% block content_subheading %}Unanswered Questions{% endblock %}
 
-{% block maincontent %}
+{% block main_content %}
 <form action="/student/answer" method="post">
     <div class="flex justify-end w-full space-x-4">
         <input formaction="/student/iterator" name="submit" class="button is-light is-info" type="submit"
@@ -29,7 +29,7 @@
         {{ button("is-info", "Send Answers", type="submit")}}
     </div>
 
-    {% block studentcontent %}
+    {% block student_content %}
     <div>
         {% for q in questions %}
         {{ question(q) }}

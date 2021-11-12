@@ -3,9 +3,9 @@
 {% from "macros/question.html" import answeredQuestion with context %}
 {% from "macros/buttons.html" import link with context %}
 
-{% block contentsubheading %}Unanswered Questions{% endblock %}
-{% block contentheading %}
-<div class="w-full flex flex-row justify-between">
+{% block content_subheading %}Unanswered Questions{% endblock %}
+{% block content_heading %}
+<div class="flex flex-row justify-between w-full">
     <nav class="breadcrumb is-right" aria-label="breadcrumbs">
         <ul>
             <li><a href="/">Home</a></li>
@@ -16,8 +16,8 @@
 </div>
 {% endblock %}
 
-{% block maincontent %}
-{% block answeredcontent %}
+{% block main_content %}
+{% block answered_content %}
 <form>
     {% for q in questions %}
     {{ answeredQuestion(q) }}

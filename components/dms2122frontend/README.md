@@ -50,16 +50,16 @@ If the frontend is kept idle for a long period of time, the session is closed (v
 
 The UI has the following templates hierarchy and structure:
 
-- `base.html`: Base page. Blocks defined: `title`, `pagecontent`, `footer`.
-  - `login.html`: Login form page. Macros used: `flashedmessages`, `submit_button`.
-  - `base_logged_in.html`: Base page when a user is logged in. Blocks used: `pagecontent`. Blocks defined: `contentheading`, `contentsubheading`, `maincontent`. Macros used: `flashedmessages`, `navbar`.
-    - `home.html`: Home page/dashboard. Blocks used: `title`, `contentheading`, `maincontent`.
-    - `student.html`: Main student panel. Blocks used: `title`, `contentheading`, `maincontent`. Blocks defined: `subtitle`, `studentcontent`.
-    - `teacher.html`: Main teacher panel. Blocks used: `title`, `contentheading`, `maincontent`. Blocks defined: `subtitle`, `teachercontent`.
-    - `admin.html`: Main administration panel. Blocks used: `title`, `contentheading`, `maincontent`. Blocks defined: `subtitle`, `administrationcontent`.
-    - `admin/users.html`: Users administration listing. Blocks used: `contentsubheading`, `administrationcontent`. Macros used: `button`.
-    - `admin/users/new.html`: User creation form page. Blocks used: `contentsubheading`, `administrationcontent`. Macros used: `button`, `submit_button`.
-    - `admin/users/edit.html`: User editing form page. Blocks used: `contentsubheading`, `administrationcontent`. Macros used: `button`, `submit_button`.
+- `base.html`: Base page. Blocks defined: `title`, `page_content`, `footer`.
+  - `login.html`: Login form page. Macros used: `flashed_messages`, `submit_button`.
+  - `base_logged_in.html`: Base page when a user is logged in. Blocks used: `page_content`. Blocks defined: `content_heading`, `content_subheading`, `main_content`. Macros used: `flashed_messages`, `navbar`.
+    - `home.html`: Home page/dashboard. Blocks used: `title`, `content_heading`, `main_content`.
+    - `student.html`: Main student panel. Blocks used: `title`, `content_heading`, `main_content`. Blocks defined: `subtitle`, `student_content`.
+    - `teacher.html`: Main teacher panel. Blocks used: `title`, `content_heading`, `main_content`. Blocks defined: `subtitle`, `teachercontent`.
+    - `admin.html`: Main administration panel. Blocks used: `title`, `content_heading`, `main_content`. Blocks defined: `subtitle`, `admin_content`.
+    - `admin/users.html`: Users administration listing. Blocks used: `content_subheading`, `admin_content`. Macros used: `button`.
+    - `admin/users/new.html`: User creation form page. Blocks used: `content_subheading`, `admin_content`. Macros used: `button`, `submit_button`.
+    - `admin/users/edit.html`: User editing form page. Blocks used: `content_subheading`, `admin_content`. Macros used: `button`, `submit_button`.
 
 The following macros/components are provided:
 
@@ -67,8 +67,8 @@ The following macros/components are provided:
   - `navbar(roles)`: The top navigation bar.
     - Parameters:
       - `roles`: A list of role names.
-- `macros/flashedmessages.html`
-  - `flashedmessages()`: The bottom panel with the flashed messages.
+- `macros/flashed_messages.html`
+  - `flashed_messages()`: The bottom panel with the flashed messages.
 - `macros/buttons.html`
   - `button(color_class, href, content, onclick=None)`: A link with the appearance of a button.
     - Parameters:

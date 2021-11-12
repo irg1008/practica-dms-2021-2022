@@ -1,24 +1,24 @@
 {% extends "base.html" %}
 {% from 'macros/navbar.html' import navbar %}
-{% from "macros/flashedmessages.html" import flashedmessages %}
+{% from "macros/flashed_messages.html" import flashed_messages %}
 
-{% block pagecontent %}
-<header class="fixed top-0 left-0 w-full h-20 z-10 shadow-md">
+{% block page_content %}
+<header class="fixed top-0 left-0 z-10 w-full h-20 shadow-md">
     {{ navbar(roles, name) }}
 
 </header>
 
-{{ flashedmessages() }}
+{{ flashed_messages() }}
 
-<section id="content" class="mt-24 p-2">
+<section id="content" class="p-2 mt-24">
     <div id="#hero">
-        <div>{% block contentheading %}{% endblock %}</div>
-        <h2>{% block contentsubheading %}{% endblock %}</h2>
+        <div>{% block content_heading %}{% endblock %}</div>
+        <h2>{% block content_subheading %}{% endblock %}</h2>
     </div>
 
     <hr />
 
-    {% block maincontent %}{% endblock %}
+    {% block main_content %}{% endblock %}
 </section>
 
 

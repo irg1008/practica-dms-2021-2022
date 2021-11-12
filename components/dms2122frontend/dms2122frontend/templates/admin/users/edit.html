@@ -1,9 +1,9 @@
 {% extends "admin.html" %}
 {% from "macros/buttons.html" import link, submit_button %}
 
-{% block contentsubheading %}Edit user {{ username }}{% endblock %}
+{% block content_subheading %}Edit user {{ username }}{% endblock %}
 
-{% block administrationcontent %}
+{% block admin_content %}
 <form action="/admin/users/edit" method="post" class="flex flex-col gap-4">
     <input type="hidden" name="username" value="{{ username }}" />
     <input type="hidden" name="redirect_to" value="{{ redirect_to }}" />
