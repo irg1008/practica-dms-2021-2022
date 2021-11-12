@@ -83,14 +83,14 @@ tr {
 }
 
 tr.hoverable:hover {
-	background-color: var(--main-gray);
+	background-color: var(--light-blue);
 	transition: background-color 0.2s ease-in-out;
 }
 
 th,
 td {
-	text-align: left;
-	vertical-align: middle;
+	text-align: left !important;
+	vertical-align: middle !important;
 	padding: 10px;
 }
 
