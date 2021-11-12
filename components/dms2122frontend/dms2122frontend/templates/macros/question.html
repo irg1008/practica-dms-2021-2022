@@ -6,9 +6,9 @@
         <h3 class="select-none">{{ question.statement }}</h3>
 
         <ul class="flex flex-col w-full gap-2 p-4 bg-red-100 border-2 border-red-300 rounded-lg">
-            {% for a in question.getAnswers() %}
+            {% for a in question.get_answers() %}
             <li class="relative">
-                <span class="absolute -left-3">{% if showAnswer and a == question.correctAnswer %}
+                <span class="absolute -left-3">{% if showAnswer and a == question.correct_answer %}
                     👌
                     {% elif showAnswer and a == userAnswer %}
                     ❌
@@ -17,7 +17,7 @@
                 <input type="radio" class="ml-3" value="{{ a }}" name="{{ question.id }}" id="{{ a }}" {% if showAnswer
                     %} disabled{% endif %} {% if a==userAnswer %} checked {% endif %} />
                 <label
-                    class="select-none {% if showAnswer and a == question.correctAnswer %} text-green-500 {% elif showAnswer and a == userAnswer %} text-red-500 {% endif %}"
+                    class="select-none {% if showAnswer and a == question.correct_answer %} text-green-500 {% elif showAnswer and a == userAnswer %} text-red-500 {% endif %}"
                     for="{{ a }}">
                     {{ a }}
                 </label>
@@ -39,7 +39,7 @@
 
         {% if isTeacher %}
         <p>
-            Total Answers: {{ question.numberOfCorrectAnswers }} | Total Score: {{ question.getTotalScore() }}
+            Total Answers: {{ question.number_of_correct_answers }} | Total Score: {{ question.get_total_score() }}
         </p>
         {% endif %}
     </div>

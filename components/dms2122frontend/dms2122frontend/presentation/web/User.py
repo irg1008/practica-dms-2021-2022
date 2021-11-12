@@ -25,9 +25,9 @@ class User:
         ans = []
         for q in questions:
             if (random.random() > 0.5):
-                ans.append(AnsweredQuestion(q, q.correctAnswer))
+                ans.append(AnsweredQuestion(q, q.correct_answer))
             else:
-                ans.append((AnsweredQuestion(q, random.choice(q.incorrectAnswers))))
+                ans.append((AnsweredQuestion(q, random.choice(q.incorrect_answers))))
 
         return ans
 

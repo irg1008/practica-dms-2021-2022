@@ -11,7 +11,7 @@
 		],
 		"imageUrl": "",
 		"penalty": 0,
-		"isPublic": false,
+		"is_public": false,
 		"score": 1
 	},
 	{
@@ -22,7 +22,7 @@
 		"incorrect_answers": ["Mosque", "Synagogue", "Temple"],
 		"imageUrl": "",
 		"penalty": 0,
-		"isPublic": false,
+		"is_public": false,
 		"score": 1
 	},
 	{
@@ -33,7 +33,7 @@
 		"incorrect_answers": ["Fade Into Darkness", "Silhouettes", "Seek Bromance"],
 		"imageUrl": "",
 		"penalty": 0,
-		"isPublic": false,
+		"is_public": false,
 		"score": 1
 	},
 	{
@@ -44,7 +44,7 @@
 		"incorrect_answers": ["Takoyaki", "Sushi", "Oden"],
 		"imageUrl": "",
 		"penalty": 0,
-		"isPublic": false,
+		"is_public": false,
 		"score": 1
 	},
 	{
@@ -55,7 +55,7 @@
 		"incorrect_answers": ["Dominic Howard", "Thom Yorke", "Jonny Greenwood"],
 		"imageUrl": "",
 		"penalty": 0,
-		"isPublic": false,
+		"is_public": false,
 		"score": 1
 	},
 	{
@@ -66,7 +66,7 @@
 		"incorrect_answers": ["1970", "1960", "1969"],
 		"imageUrl": "",
 		"penalty": 0,
-		"isPublic": false,
+		"is_public": false,
 		"score": 1
 	},
 	{
@@ -81,7 +81,7 @@
 		],
 		"imageUrl": "",
 		"penalty": 0,
-		"isPublic": false,
+		"is_public": false,
 		"score": 1
 	},
 	{
@@ -96,7 +96,7 @@
 		],
 		"imageUrl": "",
 		"penalty": 0,
-		"isPublic": false,
+		"is_public": false,
 		"score": 1
 	},
 	{
@@ -107,7 +107,7 @@
 		"incorrect_answers": ["2011", "2014", "2009"],
 		"imageUrl": "",
 		"penalty": 0,
-		"isPublic": false,
+		"is_public": false,
 		"score": 1
 	},
 	{
@@ -122,7 +122,7 @@
 		],
 		"imageUrl": "",
 		"penalty": 0,
-		"isPublic": false,
+		"is_public": false,
 		"score": 1
 	},
 	{
@@ -133,7 +133,7 @@
 		"incorrect_answers": ["180cm", "190cm", "200cm", "170cm"],
 		"imageUrl": "https://i.redd.it/6dfphxxis1q71.gif",
 		"penalty": 0.5,
-		"isPublic": false,
+		"is_public": false,
 		"score": 1
 	},
 	{
@@ -144,7 +144,7 @@
 		"incorrect_answers": ["Fernando Malonso", "Poleman", "Polero"],
 		"imageUrl": "https://www.larazon.es/resizer/KdLnugN5E_TDZi7vtKR6AckOilI=/600x400/smart/filters:format(webp):quality(65)/cloudfront-eu-central-1.images.arcpublishing.com/larazon/M5HARXCHXVBY5IFZZQQXSDVE5Q.jpg",
 		"penalty": 0,
-		"isPublic": false,
+		"is_public": false,
 		"score": 1
 	}
 ]

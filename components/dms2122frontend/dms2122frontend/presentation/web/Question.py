@@ -11,7 +11,7 @@ import random
 # - incorrect answers
 # - score
 # - penalty
-# - isPublic
+# - is_public
 # - number of correct answers
 # - number of questions answered
 # All variables should be typed using typing library
@@ -26,27 +26,27 @@ class Question:
         id: int,
         title: str,
         statement: str,
-        correctAnswer: str,
-        incorrectAnswers: List[str],
+        correct_answer: str,
+        incorrect_answers: List[str],
         image_url: str,
         score: float,
         penalty: float,
-        isPublic: bool,
+        is_public: bool,
     ):
         self.id = id
         self.title = title
         self.statement = statement
-        self.correctAnswer = correctAnswer
-        self.incorrectAnswers = incorrectAnswers
+        self.correct_answer = correct_answer
+        self.incorrect_answers = incorrect_answers
         self.score = score
         self.penalty = penalty
-        self.isPublic = isPublic
+        self.is_public = is_public
         self.image_url = image_url
-        self.numberOfCorrectAnswers = 0
-        self.numberOfQuestionsAnswered = 0
+        self.number_of_correct_answers = 0
+        self.number_of_questions_answered = 0
 
-    def getAnswers(self, shuffle=False) -> List[str]:
-        questions = list([self.correctAnswer]) + self.incorrectAnswers
+    def get_answers(self, shuffle=False) -> List[str]:
+        questions = list([self.correct_answer]) + self.incorrect_answers
 
         if shuffle:
             random.shuffle(questions)
@@ -55,17 +55,17 @@ class Question:
 
         return questions
 
-    def getTotalScore(self):
+    def get_total_score(self):
         return (
-            self.score * self.numberOfCorrectAnswers
-            - self.penalty * self.numberOfQuestionsAnswered
+            self.score * self.number_of_correct_answers
+            - self.penalty * self.number_of_questions_answered
         )
 
-    def receiveAnswer(self, answer: str):
-        self.numberOfQuestionsAnswered += 1
+    def receive_answer(self, answer: str):
+        self.number_of_questions_answered += 1
 
-        if answer == self.correctAnswer:
-            self.numberOfCorrectAnswers += 1
+        if answer == self.correct_answer:
+            self.number_of_correct_answers += 1
             return self.score
         else:
             return -self.penalty
@@ -82,9 +82,9 @@ class AnsweredQuestion:
     def __init__(self, question: Question, answer: str):
         self.question = question
         self.answer = answer
-        self.score = self.question.receiveAnswer(answer)
+        self.score = self.question.receive_answer(answer)
         self.date = datetime.datetime.now()
 
-        # A function that check answer is correct with the question variable and receiveAnswer method.
-        def isCorrectAnswer(self):
-            return self.answer == self.question.correctAnswer
+        # A function that check answer is correct with the question variable and receive_answer method.
+        def is_correct_answer(self):
+            return self.answer == self.question.correct_answer

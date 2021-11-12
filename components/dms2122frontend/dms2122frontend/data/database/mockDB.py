@@ -27,9 +27,9 @@ class mockDB(Database):
         ans: Dict[int, AnsweredQuestion] = {}
         for q in questions:
             if random.random() > 0.5:
-                ans[q.id] = AnsweredQuestion(q, q.correctAnswer)
+                ans[q.id] = AnsweredQuestion(q, q.correct_answer)
             else:
-                ans[q.id] = AnsweredQuestion(q, random.choice(q.incorrectAnswers))
+                ans[q.id] = AnsweredQuestion(q, random.choice(q.incorrect_answers))
 
         return ans
 
