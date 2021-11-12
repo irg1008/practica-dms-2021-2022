@@ -3,22 +3,23 @@
 {% block contentsubheading %}User management{% endblock %}
 
 {% block administrationcontent %}
-<table class="w-full highlightrows">
-    <tbody>
-        <tr>
-            <th class="text-left">Username</th>
-            <th></th>
-        </tr>
-        {% for user in users %}
-        <tr class="highlightable">
-            <td class="text-left"><a
-                    href="/admin/users/edit?username={{ user['username'] }}&redirect_to=/admin/users">{{
-                    user['username'] }}</td>
-            <td class="text-right">{{ link('is-link', '/admin/users/edit?username=' + user['username'] +
-                '&redirect_to=/admin/users', 'Edit') }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
+<table class="w-full">
+    <tr>
+        <th>Username</th>
+        <th></th>
+    </tr>
+    {% for user in users %}
+    <tr class="hoverable">
+        <td>
+            <a href="/admin/users/edit?username={{ user['username'] }}&redirect_to=/admin/users">
+                {{user['username'] }}
+        </td>
+        <td class="flex items-center justify-end">
+            {{ link("is-info", "/admin/users/edit?username=" + user["username"] + "&redirect_to=/admin/users", "Edit")
+            }}
+        </td>
+    </tr>
+    {% endfor %}
 </table>
 <div class="text-right">
     {{ link('is-success', '/admin/users/new', 'Create new user') }}

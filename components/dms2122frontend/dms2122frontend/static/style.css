@@ -73,6 +73,27 @@ h6 {
 	font-size: 0.8em;
 }
 
+table {
+	border-collapse: collapse;
+	margin: 10px 0;
+}
+
+tr {
+	border: 1px solid var(--main-gray);
+}
+
+tr.hoverable:hover {
+	background-color: var(--main-gray);
+	transition: background-color 0.2s ease-in-out;
+}
+
+th,
+td {
+	text-align: left;
+	vertical-align: middle;
+	padding: 10px;
+}
+
 #links a {
 	color: var(--main-white);
 	text-decoration: none;
@@ -136,20 +157,4 @@ h3 {
 
 #flashedmessages ul {
 	margin: 0;
-}
-
-table {
-	border-collapse: collapse;
-}
-
-table tr:last-child {
-	border-bottom: 1px solid #eee;
-}
-
-table th {
-	border-bottom: 1px solid #eee;
-}
-
-.highlightrows tr.highlightable:hover {
-	background-color: #eee;
 }
