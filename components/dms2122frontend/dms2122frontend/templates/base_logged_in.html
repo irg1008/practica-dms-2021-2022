@@ -3,7 +3,7 @@
 {% from "macros/flashedmessages.html" import flashedmessages %}
 
 {% block pagecontent %}
-<header class="fixed top-0 left-0 w-full h-20 z-10 shadow-lg">
+<header class="fixed top-0 left-0 w-full h-20 z-10 shadow-md">
     {{ navbar(roles, name) }}
 
 </header>
@@ -18,9 +18,7 @@
 
     <hr />
 
-    <div>
-        {% block maincontent %}{% endblock %}
-    </div>
+    {% block maincontent %}{% endblock %}
 </section>
 
 

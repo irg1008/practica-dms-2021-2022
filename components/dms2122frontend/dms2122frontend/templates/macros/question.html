@@ -1,13 +1,10 @@
 {% macro question(question, isTeacher=False, showAnswer=False, userAnswer=None, date=None) %}
-<div class="flex flex-col flex-wrap md:flex-row" id="{{question.id}}">
-
-
-    <div class="{% if question.image_url|length > 0 %}md:w-1/2{% endif %}">
-        <h2 class="select-none">{{ question.title }}</h2>
+<div class="flex question justify-between items-center  my-4" id="{{question.id}}">
+    <div class="flex flex-col items-start gap-4">
+        <h2 class="select-none">{{ question.title }}:</h2>
         <h3 class="select-none">{{ question.statement }}</h3>
 
-
-        <ul class="p-4">
+        <ul class="p-4 flex flex-col gap-2">
             {% for a in question.getAnswers() %}
             <li class="relative">
                 <span class="absolute -left-4">{% if showAnswer and a == question.correctAnswer %}
@@ -26,19 +23,26 @@
             </li>
             {% endfor %}
         </ul>
-        <button id="clear-radios-{{ question.id }}" class="button" type="button">Clear</button>
+
+        <button id="clear-radios-{{ question.id }}" class="button is-light is-danger" type="button">
+            Clear
+        </button>
+
         {%if date%}
         <p>Answered on: {{date}}</p>
         {%endif%}
+
         <p>Score: {{ question.score }} | Penalty: {{ question.penalty }}</p>
+
         {% if isTeacher %}
-        <p>Total Answers: {{ question.numberOfCorrectAnswers }} | Total
-            Score: {{ question.getTotalScore() }}</p>
+        <p>
+            Total Answers: {{ question.numberOfCorrectAnswers }} | Total Score: {{ question.getTotalScore() }}
+        </p>
         {% endif %}
     </div>
 
-    {% if question.image_url|length > 0 %}
-    <img src="{{ question.image_url }}" alt="Foto" style="max-width: 300px" />
+    {% if question.image_url | length > 0 %}
+    <img src="{{ question.image_url }}" alt="Foto" />
     {% endif %}
 </div>
 

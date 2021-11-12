@@ -1,5 +1,8 @@
 :root {
 	--main-white: #f5f5f5;
+	--main-black: #1d1d1d;
+	--main-gray: #e5e5e5;
+	--main-radius: 0.8em;
 }
 
 body {
@@ -14,34 +17,8 @@ a {
 	text-decoration: none;
 }
 
-#links a {
-	color: #fff;
-	text-decoration: none;
-	border-bottom: 1px solid transparent;
-}
-
-#links a:hover {
-	border-bottom: 1px solid #ddd;
-	transition: all 0.2s ease-in-out;
-}
-
-.button {
-	display: inline-block;
-	padding: 0.5em 1em;
-	border: 1px solid #ddd;
-	border-radius: 2em;
-	background-color: #eee;
-	color: #333;
-	text-decoration: none;
-	transition: all 0.2s ease-in-out;
-}
-
-.button:hover {
-	transform: scale(1.05);
-}
-
-.button:active {
-	transform: scale(0.95);
+hr {
+	border: 0.5px solid var(--main-gray);
 }
 
 /* Styles generated with Github Copilot */
@@ -51,7 +28,7 @@ h3,
 h4,
 h5,
 h6 {
-	color: #333;
+	color: var(--main-black);
 	text-align: center;
 }
 
@@ -85,6 +62,55 @@ h6 {
 	font-size: 0.8em;
 }
 
+#links a {
+	color: var(--main-white);
+	text-decoration: none;
+	border-bottom: 1px solid transparent;
+}
+
+#links a:hover {
+	border-bottom: 1px solid var(--main-white);
+	transition: all 0.2s ease-in-out;
+}
+
+.button {
+	padding: 0.5em 1em;
+	border-radius: var(--main-radius);
+	background-color: var(--main-white);
+	color: var(--main-black);
+	text-decoration: none;
+	transition: all 0.2s ease-in-out;
+}
+
+.button:hover {
+	transform: scale(1.05);
+}
+
+.button:active {
+	transform: scale(0.95);
+}
+
+.question h2, h3 {
+	text-align: left;
+}
+
+.question h2 {
+	font-size: 1.2em;
+	text-transform: uppercase;
+	opacity: 0.7;
+}
+
+.question h3 {
+	font-size: 1em;
+}
+
+.question img {
+	height: 100%;
+	max-width: 500px;
+	object-fit: cover;
+	border-radius: var(--main-radius);
+}
+
 /**/
 
 #flashedmessages {
@@ -99,10 +125,6 @@ h6 {
 
 #flashedmessages ul {
 	margin: 0;
-}
-
-#main-content {
-	padding: 1em;
 }
 
 dd {
@@ -134,20 +156,4 @@ table th {
 
 .highlightrows tr.highlightable:hover {
 	background-color: #eee;
-}
-
-.questiondiv {
-	margin: 10px;
-	padding: 5px;
-	border: #ddd 1px solid;
-	border-left: #ddd 5px solid;
-}
-
-.questiontext {
-	margin-top: 0;
-}
-
-.questionscore {
-	font-size: smaller;
-	color: #777;
 }
