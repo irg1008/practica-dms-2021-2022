@@ -29,7 +29,7 @@ class AdminEndpoints:
         if Role.Admin.name not in session["roles"]:
             return redirect(url_for("get_home"))
         name = session["user"]
-        return render_template("admin.html", name=name, roles=session["roles"])
+        return render_template("admin/admin.html", name=name, roles=session["roles"])
 
     @staticmethod
     def get_admin_users(auth_service: AuthService) -> Union[Response, Text]:

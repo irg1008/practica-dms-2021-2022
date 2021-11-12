@@ -28,4 +28,4 @@ class TeacherEndpoints:
         if Role.Teacher.name not in session["roles"]:
             return redirect(url_for("get_home"))
         name = session["user"]
-        return render_template("teacher.html", name=name, roles=session["roles"])
+        return render_template("teacher/teacher.html", name=name, roles=session["roles"])

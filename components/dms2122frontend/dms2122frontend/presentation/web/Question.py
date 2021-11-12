@@ -24,7 +24,7 @@ class Question:
     def __init__(
         self,
         id: int,
-        title: str,
+        title: str, 
         statement: str,
         correct_answer: str,
         incorrect_answers: List[str],
