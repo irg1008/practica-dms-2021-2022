@@ -5,6 +5,11 @@
 
 The goal of this project is to implement a basic online evaluation appliance deployed across several interconnected services.
 
+## Documentation
+### Spanish
+[Deployment](docs/ES_es/Deployment.md)
+
+
 ## Components
 
 The source code of the components is available under the `components` direcotry.
