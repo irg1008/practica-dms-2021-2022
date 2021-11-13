@@ -81,7 +81,7 @@ class Question:
         return questions
 
     def get_times_answered(self, answer: str) -> int:
-        return self.user_answers.get(answer) or -1
+        return self.user_answers.get(answer) or 0
 
     def get_total_score(self) -> float:
         return (
@@ -117,5 +117,5 @@ class AnsweredQuestion:
         self.date = datetime.datetime.now()
 
         # A function that check answer is correct with the question variable and receive_answer method.
-        def is_correct_answer(self):
-            return self.answer == self.question.correct_answer
+    def is_correct_answer(self):
+        return self.answer == self.question.correct_answer

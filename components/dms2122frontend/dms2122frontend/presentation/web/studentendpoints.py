@@ -40,8 +40,7 @@ class StudentEndpoints:
         questions = getQuestionMocks()
         db = g.get_db()
         return render_template(
-            "student/student.html",
-                        questions=db.getUnasweredQuestions(name),
+            "student/student.html", questions=db.getUnasweredQuestions(name),
         )
 
     @staticmethod
@@ -63,8 +62,18 @@ class StudentEndpoints:
         db = g.get_db()
         ans = db.getAnsweredQuestions(name)
         ans.sort(key=lambda x: x.date, reverse=True)
+
+        total_questions = len(ans)
+        total_correct = len(list(filter(lambda a: a.is_correct_answer(), ans)))
+        total_score = sum([a.score for a in ans])
+
         return render_template(
-            "student/answered/answered.html", roles=session["roles"], questions=ans,
+            "student/answered/answered.html",
+            roles=session["roles"],
+            questions=ans,
+            total_score=total_score,
+            total_correct=total_correct,
+            total_questions=total_questions,
         )
 
     @staticmethod
@@ -185,7 +194,7 @@ class StudentEndpoints:
         username = session["user"]
 
         q_id, user_ans = list(request.form.items())[0]
-        
+
         ans[q_id] = user_ans
 
         for q_id, user_ans in ans.items():

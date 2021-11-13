@@ -8,6 +8,7 @@ from werkzeug.wrappers import Response
 from dms2122common.data import Role
 from dms2122frontend.data.rest.authservice import AuthService
 from .webauth import WebAuth
+from dms2122frontend.g import get_db
 
 
 class TeacherEndpoints:
@@ -29,7 +30,9 @@ class TeacherEndpoints:
         if Role.Teacher.name not in session["roles"]:
             return redirect(url_for("get_home"))
 
-        return render_template("teacher/teacher.html")
+        questions = get_db().getAllQuestions()
+
+        return render_template("teacher/teacher.html", questions=questions)
 
     @staticmethod
     def get_post_new_question(auth_service: AuthService) -> Union[Response, Text]:

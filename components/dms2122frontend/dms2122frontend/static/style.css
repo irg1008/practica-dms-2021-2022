@@ -144,6 +144,10 @@ h3 {
 	object-fit: cover;
 }
 
+.min-50ch{
+	min-width: 50ch
+}
+
 /* Clean this rubbish animation. Maybe JS? */
 .hide {
 	animation: hide 0.5s ease-in-out 4s;

@@ -18,6 +18,13 @@
 
 {% block main_content %}
     {% block answered_content %}
+        <div class="bg-green-300 border-2 border-green-600 rounded">
+            <h3>Your Results</h3>
+            <p>Your Score: <b>{{ total_score }}</b></p>
+            <p>You have answered correctly <b>{{ total_correct }} out of {{ total_questions }}</b> questions
+                (<b>{{ "%.2f"|format(total_correct / total_questions * 100 if  total_questions else 50.00) }}%</b>)</p>
+        </div>
+
         <form>
             {% for q in questions %}
             {{ answeredQuestion(q) }}
