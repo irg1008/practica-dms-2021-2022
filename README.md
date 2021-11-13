@@ -9,7 +9,11 @@ The goal of this project is to implement a basic online evaluation appliance dep
 ### Spanish
 [Deployment](docs/ES_es/Deployment.md)
 
-
+## Developers:
+- [Jorge Ruiz Gómez](https://github.com/JorgeRuizDev)
+- [Iván Ruiz Gázquez](https://github.com/irg1008)
+- [Pablo Simón Sainz](https://github.com/ChocoAlmendrado)
+- [Jesús Alonso Abad](https://github.com/Kencho)
 ## Components
 
 The source code of the components is available under the `components` direcotry.
