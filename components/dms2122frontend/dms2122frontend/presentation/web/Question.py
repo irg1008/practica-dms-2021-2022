@@ -113,6 +113,19 @@ class Question:
             "penalty": str(self.penalty),
             "is_public": str(self.is_public),
         }
+        
+    def From_JSON(json_question: Dict[str, str]):
+        return Question(
+            int(json_question["id"]),
+            json_question["title"],
+            json_question["statment"],
+            json_question["correct_answer"],
+            json_question["incorrect_answers"],
+            json_question["image_url"],
+            float(json_question["score"]),
+            float(json_question["penalty"]),
+            bool(json_question["is_public"]),
+        )
 
     def to_JSON_string(self) -> str:
         return json.dumps(self.to_JSON())
