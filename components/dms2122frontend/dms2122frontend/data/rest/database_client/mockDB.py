@@ -57,7 +57,7 @@ class mockDB(DatabaseClient):
     ) -> Union[AnsweredQuestion, None]:
         return self.answered.get(question_id)
 
-    def getCurrentQuestionId(self):
+    def getCurrentQuestionId(self) -> int:
         return self.id
 
     def createQuestion(self, question: Question) -> Tuple[Question, int]:

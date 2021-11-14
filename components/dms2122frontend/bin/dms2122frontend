@@ -114,6 +114,10 @@ def get_post_new_question():
 def post_new_question_create():
     return TeacherEndpoints.get_post_confirm_question(auth_service)
 
+@app.route("/teacher/new/preview", methods=["POST"])
+def post_new_question_preview():
+    return TeacherEndpoints.get_post_preview_question(auth_service)
+
 
 @app.route("/", methods=["GET"])
 def index():

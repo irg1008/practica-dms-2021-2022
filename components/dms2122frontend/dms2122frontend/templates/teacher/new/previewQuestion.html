@@ -1,5 +1,6 @@
 {% extends "base_logged_in.html" %}
 {% from "macros/buttons.html" import link, submit_button, button with context %}
+{% from "macros/question.html" import question with context %}
 
 {% block title %}{% block subtitle%}{%endblock %}Teacher{% endblock %}
 
@@ -18,9 +19,14 @@
 					New Question
 				</a>
 			</li>
-			<li class="is-active">
+			<li>
 				<a href="/teacher/new/confirm" aria-current="page">
 					Confirm Question
+				</a>
+			</li>
+			<li class="is-active">
+				<a href="/teacher/new/preview" aria-current="page">
+					Preview Question
 				</a>
 			</li>
 		</ul>
@@ -35,42 +41,15 @@
 <div class="flex flex-col items-center w-full">
 	<form
 		class="w-full max-w-xl bg-yellow-50 border-yellow-400"
-		action="/teacher/new/preview"
+		action="/teacher/new/confirm"
 		method="post"
 	>	
-			{%if n_answers > 0 %}
-      <div class="field-group flex flex-col gap-2">
-				<label class="label"
-				>Correct answer
-					<input
-						class="input is-success"
-						name="correctAnswer"
-						type="text"
-						placeholder="This is the correct answer"
-						required
-						minlength="3"
-					/>
-				</label>
-				
-				{% for i in range(1, n_answers) %}
-				<label class="label"
-					>Answer {{ i + 1 }}
-					<input
-						class="input is-dark"
-						name="answer{{ i + 1 }}"
-						type="text"
-						placeholder="Answer {{ i + 1 }}"
-						required
-						minlength="3"
-					/>
-				</label>
-				{% endfor %}
 
-				<div class="flex flex-row justify-end">
-					<input type="submit" class="button is-warning" value="Create Question" />
-				</div>
-      </div>
-			{% endif %}
+			<h2>Preview</h2>
+
+			<div class="flex flex-row justify-end">
+				<input type="submit" class="button is-success" value="Create Question" />
+			</div>
 	</form>
 </div>
 {% endblock %}
