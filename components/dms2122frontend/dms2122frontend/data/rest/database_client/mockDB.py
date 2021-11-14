@@ -1,5 +1,5 @@
 import random
-from typing import Dict, List, Union
+from typing import Dict, List, Tuple, Union
 
 from dms2122frontend.data.rest.database_client.database_client import DatabaseClient
 from dms2122frontend.presentation.web.Question import AnsweredQuestion, Question
@@ -60,10 +60,10 @@ class mockDB(DatabaseClient):
     def getCurrentQuestionId(self):
         return self.id
 
-    def createQuestion(self, question: Question) -> Question:
+    def createQuestion(self, question: Question) -> Tuple[Question, int]:
         self.questions[self.id] = question
         self.id += 1
-        return question, id
+        return question, self.id
 
     def getAllQuestions(self) -> List[Question]:
         questions = list(self.questions.values())

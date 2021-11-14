@@ -99,7 +99,11 @@ class Question:
             return -self.penalty
 
     def make_private(self):
-        self.is_public = False
+        if len(self.user_answers) == 0:
+            self.is_public = False
+
+    def make_public(self):
+        self.is_public = True
 
     def to_JSON(self) -> str:
         d = {
@@ -111,7 +115,6 @@ class Question:
             "image_url": self.image_url,
             "score": str(self.score),
             "penalty": str(self.penalty),
-            "is_public": str(self.is_public),
         }
         return json.dumps(d)
 
@@ -127,7 +130,6 @@ class Question:
             image_url=d["image_url"],
             score=float(d["score"]),
             penalty=float(d["penalty"]),
-            is_public=bool(d["is_public"]),
         )
 
 
