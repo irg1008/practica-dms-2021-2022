@@ -101,8 +101,8 @@ class Question:
     def make_private(self):
         self.is_public = False
 
-    def to_JSON(self) -> Dict[str, Union[str, List[str]]]:
-        return {
+    def to_JSON(self) -> str:
+        d = {
             "id": str(self.id),
             "title": self.title,
             "statement": self.statement,
@@ -113,26 +113,22 @@ class Question:
             "penalty": str(self.penalty),
             "is_public": str(self.is_public),
         }
-
-    def From_JSON(json_question: Dict[str, str]):
-        return Question(
-            int(json_question["id"]),
-            json_question["title"],
-            json_question["statment"],
-            json_question["correct_answer"],
-            json_question["incorrect_answers"],
-            json_question["image_url"],
-            float(json_question["score"]),
-            float(json_question["penalty"]),
-            bool(json_question["is_public"]),
-        )
-
-    def to_JSON_string(self) -> str:
-        return json.dumps(self.to_JSON())
+        return json.dumps(d)
 
     @staticmethod
-    def From_JSON_string(json_string: str) -> "Question":
-        return Question.From_JSON(json.loads(json_string))
+    def From_Json(json_str: str) -> "Question":
+        d = json.loads(json_str)
+        return Question(
+            id=int(d["id"]),
+            title=d["title"],
+            statement=d["statement"],
+            correct_answer=d["correct_answer"],
+            incorrect_answers=d["incorrect_answers"],
+            image_url=d["image_url"],
+            score=float(d["score"]),
+            penalty=float(d["penalty"]),
+            is_public=bool(d["is_public"]),
+        )
 
 
 # A class named AnsweredQuestion that contains the next variables:
