@@ -1,7 +1,7 @@
 """ TeacherEndpoints class module.
 """
 
-from typing import Text, Union
+from typing import List, Text, Union
 from flask import redirect, url_for, session, render_template
 from flask.globals import request
 from werkzeug.wrappers import Response
@@ -13,9 +13,14 @@ from dms2122frontend.g import get_db
 from dms2122common.data.rest import ResponseData
 
 
-def create_question_from_form() -> Question:
+def get_id_from_params() -> int:
+    str_id = request.args.get("q")
+    return int(str(str_id)) if str_id is not None else -1
+
+
+def create_question_from_form(id_from_param: bool = False) -> Question:
     # Create quesiton.
-    id = get_db().getCurrentQuestionId()
+    id = get_id_from_params() if id_from_param else get_db().getCurrentQuestionId()
     title = request.form.get("title") or ""
     statement = request.form.get("statement") or ""
 
@@ -33,6 +38,12 @@ def create_question_from_form() -> Question:
                  incorrect_answers, image_url, score, penalty)
 
     return q
+
+
+def add_answers_to_question(q: Question) -> None:
+    answers: List[str] = list(request.form.values())
+    q.correct_answer = answers[0]
+    q.incorrect_answers = answers[1:]
 
 
 def update_session(q) -> None:
@@ -131,9 +142,7 @@ class TeacherEndpoints:
             return redirect(url_for("get_home"))
 
         q = get_session_question()
-        answers = list(request.form.values())
-        q.correct_answer = answers[0]
-        q.incorrect_answers = answers[1:]
+        add_answers_to_question(q)
         update_session(q)
 
         return render_template("teacher/new/previewQuestion.html", q=q)
@@ -158,5 +167,53 @@ class TeacherEndpoints:
         remove_session_question()
 
         ResponseData().add_message("Question created successfully")
+
+        return redirect(url_for("get_teacher"))
+
+    @staticmethod
+    def get_edit_question(auth_service: AuthService) -> Union[Response, Text]:
+        """ Handles the GET requests to the teacher root endpoint.
+
+        Args:
+            - auth_service (AuthService): The authentication service.
+
+        Returns:
+            - Union[Response,Text]: The generated response to the request.
+        """
+
+        q_id: int = get_id_from_params()
+        q = get_db().getQuestion(int(q_id))
+
+        # Make sure questions has no answers.
+        if (q is None or len(q.user_answers) > 0):
+            return redirect(url_for("get_teacher"))
+
+        return render_template("teacher/edit/editQuestion.html", q=q)
+
+    @staticmethod
+    def post_edit_question(auth_service: AuthService) -> Union[Response, Text]:
+        """ Handles the GET requests to the teacher root endpoint.
+
+        Args:
+            - auth_service (AuthService): The authentication service.
+
+        Returns:
+            - Union[Response,Text]: The generated response to the request.
+        """
+        q = create_question_from_form(id_from_param=True)
+        ori_q = get_db().getQuestion(q.id)
+
+        if ori_q is None:
+            return redirect(url_for("get_edit_question"))
+
+        # TODO: Clean this up and delete duplicate code.
+        # Adding answers.
+        # +1 for correct answer.
+        number_of_answers = len(ori_q.incorrect_answers) + 1
+        answers: List[str] = list(request.form.values())[-number_of_answers:]
+        q.correct_answer = answers[0]
+        q.incorrect_answers = answers[1:]
+
+        get_db().updateQuestion(q)
 
         return redirect(url_for("get_teacher"))

@@ -66,6 +66,9 @@ class mockDB(DatabaseClient):
         self.id += 1
         return question, self.id
 
+    def updateQuestion(self, question: Question) -> None:
+        self.questions[question.id] = question
+
     def getAllQuestions(self) -> List[Question]:
         questions = list(self.questions.values())
         questions.sort(key=lambda q: q.number_of_questions_answered)

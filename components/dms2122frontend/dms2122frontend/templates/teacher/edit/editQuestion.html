@@ -1,11 +1,11 @@
 {% extends "base_logged_in.html" %}
-{% block title %}{% block subtitle%}{%endblock %}New Question{% endblock %}
+{% block title %}{% block subtitle%}{%endblock %}Edit Question{% endblock %}
 {% from "macros/buttons.html" import link, submit_button, button with context %}
 {% from "macros/breadcrumb.html" import breadcrumb with context %}
 
 {% block content_heading %}
 {{breadcrumb([["Teacher Panel", "/teacher"], 
-              ["New Question", "/teacher/new"]] )}}
+              ["Edit Question", "/teacher/edit"]] )}}
 {% endblock %}
 
 {% block content_subheading %}Create a new question{% endblock %}
@@ -15,7 +15,7 @@
 <div class="flex flex-col items-center w-full">
 	<form
 		class="w-full max-w-xl bg-yellow-50 border-yellow-400"
-		action="/teacher/answers"
+		action="/teacher/edit?q={{ q.id }}"
 		method="post"
 	>
 		<div class="field-group flex flex-col gap-2">
@@ -40,8 +40,8 @@
 					placeholder="Type your question statement here!"
 					name="statement"
 					required
-					value="{{ q.statement }}"
-				></textarea>
+				>{{ q.statement }}
+        </textarea>
 			</label>
 
 			<label class="label"
@@ -79,27 +79,42 @@
 					name="imageUrl"
 					type="text"
 					placeholder="Image URL"
-					value="{{ q.imageUrl }}"
+					value="{{ q.image_url }}"
 				/>
 			</label>
 
-			<label class="label"
-				>Number of Answers
-				<input
-					class="input is-dark"
-					name="numberOfAnswers"
-					type="number"
-					placeholder="Number of Answers"
-					required
-					min="1"
-					max="10"
-				/>
-			</label>
-
+				<label class="label"
+				>Correct answer
+					<input
+						class="input is-success"
+						name="correctAnswer"
+						type="text"
+						placeholder="This is the correct answer"
+						required
+						autofocus="autofocus"
+						minlength="2"
+            value="{{ q.correct_answer }}"
+					/>
+				</label>
+				
+				{% for a in q.incorrect_answers %}
+				<label class="label"
+					>Incorrect Answer {{ loop.index }}
+					<input
+						class="input is-danger"
+						name="answer{{ loop.index }}"
+						type="text"
+						placeholder="Answer {{ loop.index }}"
+						required
+            value="{{ a }}"
+					/>
+				</label>
+				{% endfor %}
+      
 			<hr />
 
 			<div class="flex flex-row justify-end">
-				<input type="submit" class="button is-warning" value="Add Answers" />
+				<input type="submit" class="button is-warning" value="Update" />
 			</div>
 		</div>
 	</form>

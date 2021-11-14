@@ -126,6 +126,13 @@ def post_new_question_preview():
 def post_new_question_confirm():
     return TeacherEndpoints.get_post_confirm_question(auth_service)
 
+@app.route("/teacher/edit", methods=["GET"])
+def get_edit_question():
+    return TeacherEndpoints.get_edit_question(auth_service)
+
+@app.route("/teacher/edit", methods=["POST"])
+def post_edit_question():
+    return TeacherEndpoints.post_edit_question(auth_service)
 
 @app.route("/", methods=["GET"])
 def index():

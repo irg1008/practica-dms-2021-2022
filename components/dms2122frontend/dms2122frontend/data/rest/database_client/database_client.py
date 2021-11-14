@@ -31,6 +31,10 @@ class DatabaseClient:
     def createQuestion(self, question: Question) -> Tuple[Question, int]:
         raise Exception("Not Implemented")
         return None
+    
+    def updateQuestion(self, Question: Question) -> bool:
+        raise Exception("Not Implemented")
+        return False
 
     def getAnsweredQuestion(
         self, username: str, question_id: int

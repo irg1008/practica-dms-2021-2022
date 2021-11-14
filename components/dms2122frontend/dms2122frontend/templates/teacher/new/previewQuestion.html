@@ -1,11 +1,17 @@
-{% extends "base_logged_in.html" %} {% block title %}{% block
-subtitle%}{%endblock %}Teacher{% endblock %} {% from "macros/buttons.html"
-import link, submit_button, button with context %} {% from
-"macros/question.html" import question with context %} {% from
-"macros/breadcrumb.html" import breadcrumb with context %} {% block
-content_heading %} {{breadcrumb([["Teacher Panel", "/teacher"], ["Preview
-Question", "/teacher/preview"]] )}} {% endblock %} {% block content_subheading
-%}Preview and confirm{% endblock %} {% block main_content %} {% block
+{% extends "base_logged_in.html" %}
+{% block title %}{% block subtitle%}{%endblock %}Preview Question{% endblock %}
+{% from "macros/buttons.html" import link, submit_button, button with context %}
+{% from "macros/question.html" import question with context %}
+{% from "macros/breadcrumb.html" import breadcrumb with context %}
+
+{% block content_heading %}
+{{ breadcrumb([["Teacher Panel", "/teacher"], ["Preview
+Question", "/teacher/preview"]] )}}
+{% endblock %}
+
+{% block content_subheading %}Preview and confirm{% endblock %}
+
+{% block main_content %} {% block
 teacher_content %}
 <div class="flex flex-col items-center w-full">
 	<form action="/teacher/confirm" method="post" class="w-full max-w-4xl">
@@ -29,4 +35,5 @@ teacher_content %}
 		</div>
 	</form>
 </div>
-{% endblock %} {% endblock %}
+{% endblock %}
+{% endblock %}

@@ -53,6 +53,7 @@ class Question:
 
             self.number_of_questions_answered += times
 
+    # Adds random user data for display only.
     def __mock_answers(self):
         ans = {}
 

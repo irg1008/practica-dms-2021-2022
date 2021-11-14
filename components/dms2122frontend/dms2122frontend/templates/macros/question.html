@@ -1,3 +1,4 @@
+{% from "macros/buttons.html" import link %}
 {% macro question(question, isTeacher=False, showAnswer=False, userAnswer=None,
 date=None, showTimesAnswered=False, userScore=None) %}
 
@@ -54,17 +55,9 @@ date=None, showTimesAnswered=False, userScore=None) %}
 		{% endif %}
 					
 		{%if isTeacher %}
-		<form action="/teacher/edit" method="post" class="border-0 bg-none p-0">
-			<button
-				type="submit"
-				formaction
-				class="button is-warning"
-				{% if not question.is_editable() %}
-				disabled
-				{% endif %}>
-				Edit
-			</button>
-		</form>
+		{{ link("is-warning {% if not question.is_editable() %}disabled{% endif %}",
+					 "/teacher/edit?q=" + question.id|string,
+					 "Edit") }}
 		{% endif %}
 
 		{% if date %}
@@ -72,7 +65,11 @@ date=None, showTimesAnswered=False, userScore=None) %}
 		{% endif %}
 
 		<p>Score: {{ question.score }} | Penalty: {{ question.penalty }}%</p>
-		{% if userScore is not none %}<p>Your Score is <b>{{userScore}}</b></p>{% endif %}
+
+		{% if userScore is not none %}
+		<p>Your Score is <b>{{userScore}}</b></p>
+		{% endif %}
+
 		{% if isTeacher %}
 		<p>
 			Correct Answers: {{ question.number_of_correct_answers }} out of {{
