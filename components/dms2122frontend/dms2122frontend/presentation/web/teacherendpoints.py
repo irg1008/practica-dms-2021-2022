@@ -32,7 +32,7 @@ def create_question_from_form(id_from_param: bool = False) -> Question:
 
     image_url = request.form.get("imageUrl") or ""
     correct_answer = ""
-    incorrect_answers = []
+    incorrect_answers: List[str] = []
 
     q = Question(id, title, statement, correct_answer,
                  incorrect_answers, image_url, score, penalty)

@@ -32,9 +32,9 @@ class DatabaseClient:
         raise Exception("Not Implemented")
         return None
     
-    def updateQuestion(self, Question: Question) -> bool:
+    def updateQuestion(self, Question: Question) -> None:
         raise Exception("Not Implemented")
-        return False
+        pass
 
     def getAnsweredQuestion(
         self, username: str, question_id: int
