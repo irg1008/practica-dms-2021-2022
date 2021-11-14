@@ -1,5 +1,5 @@
 {% macro question(question, isTeacher=False, showAnswer=False, userAnswer=None,
-date=None, showTimesAnswered=False) %}
+date=None, showTimesAnswered=False, userScore=None) %}
 
 <div
 	class="flex items-center justify-between my-4 question"
@@ -74,7 +74,7 @@ date=None, showTimesAnswered=False) %}
 		{% endif %}
 
 		<p>Score: {{ question.score }} | Penalty: {{ question.penalty }}%</p>
-
+		{% if userScore is not none %}<p>Your Score is <b>{{userScore}}</b></p>{% endif %}
 		{% if isTeacher %}
 		<p>
 			Correct Answers: {{ question.number_of_correct_answers }} out of {{
@@ -113,4 +113,4 @@ date=None, showTimesAnswered=False) %}
 
 {% endmacro %} {% macro answeredQuestion(answeredQ) %} {{
 question(answeredQ.question, showAnswer=True, userAnswer=answeredQ.answer, date=
-answeredQ.date) }} {% endmacro %}
+answeredQ.date, userScore=answeredQ.score) }} {% endmacro %}
