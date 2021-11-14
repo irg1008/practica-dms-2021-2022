@@ -10,7 +10,8 @@ def getQuestionMocks() -> Dict[int, Question]:
 
     questions = {}
     file = open(
-        os.path.dirname(inspect.getfile(dms2122frontend)) + "/static/questions.json"
+        os.path.dirname(inspect.getfile(dms2122frontend)) +
+        "/static/questions.json"
     )
     q_json = json.load(file)
 
@@ -21,11 +22,9 @@ def getQuestionMocks() -> Dict[int, Question]:
             q["statment"],
             q["correct_answer"],
             q["incorrect_answers"],
-            {},
             q["image_url"],
             float(q["score"]),
             float(q["penalty"]),
-            bool(q["is_public"]),
         )
 
     return questions

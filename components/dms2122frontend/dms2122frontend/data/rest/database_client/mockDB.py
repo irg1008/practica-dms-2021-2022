@@ -20,6 +20,8 @@ class mockDB(DatabaseClient):
         self.not_answered = dict(list(questions.items())[slice_point:])
         self.questions = questions
 
+        self.id = len(self.questions)
+
     def getAnsweredQuestions(self, username: str) -> List[AnsweredQuestion]:
         return list(self.answered.values())
 
@@ -29,7 +31,8 @@ class mockDB(DatabaseClient):
             if random.random() > 0.5:
                 ans[q.id] = AnsweredQuestion(q, q.correct_answer)
             else:
-                ans[q.id] = AnsweredQuestion(q, random.choice(q.incorrect_answers))
+                ans[q.id] = AnsweredQuestion(
+                    q, random.choice(q.incorrect_answers))
 
         return ans
 
@@ -53,6 +56,13 @@ class mockDB(DatabaseClient):
         self, username: str, question_id: int
     ) -> Union[AnsweredQuestion, None]:
         return self.answered.get(question_id)
+
+    def getCurrentQuestionId(self):
+        return self.id
+
+    def createQuestion(self, question: Question) -> Question:
+        self.questions[self.id] = question
+        self.id += 1
 
     def getAllQuestions(self) -> List[Question]:
         questions = list(self.questions.values())

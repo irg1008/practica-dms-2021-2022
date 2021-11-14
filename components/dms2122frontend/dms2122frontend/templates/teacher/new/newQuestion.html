@@ -42,7 +42,7 @@
 					placeholder="Question Title"
 					required
 					minlength="3"
-					value="{{ title }}"
+					value="{{ question.title }}"
 				/>
 			</label>
 
@@ -53,7 +53,7 @@
 					placeholder="Type your question statement here!"
 					name="statement"
 					required
-					value="{{ statement }}"
+					value="{{ question.statement }}"
 				></textarea>
 			</label>
 
@@ -66,7 +66,7 @@
 					placeholder="Score"
 					required
 					min="0"
-					value="{{ score }}"
+					value="{{ question.score }}"
 				/>
 			</label>
 
@@ -80,7 +80,7 @@
 					required
 					min="0"
 					max="100"
-					value="{{ penalty }}"
+					value="{{ question.penalty }}"
 				/>
 			</label>
 
@@ -91,7 +91,7 @@
 					name="imageUrl"
 					type="text"
 					placeholder="Image URL"
-					value="{{ imageUrl }}"
+					value="{{ question.imageUrl }}"
 				/>
 			</label>
 
@@ -104,6 +104,7 @@
 					placeholder="Number of Answers"
 					required
 					min="1"
+					max="10"
 				/>
 			</label>
 

@@ -28,11 +28,9 @@ class Question:
         statement: str,
         correct_answer: str,
         incorrect_answers: List[str],
-        user_answers: Dict[str, int],
         image_url: str,
         score: float,
         penalty: float,
-        is_public: bool,
     ):
         self.id = id
         self.title = title
@@ -41,13 +39,11 @@ class Question:
         self.incorrect_answers = incorrect_answers
         self.score = score
         self.penalty = penalty
-        self.is_public = is_public
         self.image_url = image_url
+        
         self.number_of_correct_answers = 0
         self.number_of_questions_answered = 0
-
-        self.user_answers = user_answers
-
+        self.is_public = True
         self.user_answers = self.__mock_answers()
 
         for answer, times in self.user_answers.items():
@@ -100,6 +96,9 @@ class Question:
             return self.score
         else:
             return -self.penalty
+
+    def make_private(self):
+        self.is_public = False
 
     def to_JSON(self) -> Dict[str, str]:
         return {
