@@ -7,7 +7,7 @@ Para empezar nos encontraremos con un login en el que nos solicitarán el nombre
 Una vez registrados, estaremos desde la vista del administrador, si queremos ver desde otros puntos de vista, tendremos que hacer ciertas modificaciones en la herramienta de administración 'User Management'.
 ![image](https://user-images.githubusercontent.com/64038800/141701383-011a6f83-f616-44a3-9c60-abf3b40b351d.png)
 
-Aqui editaremos nuestro rol temporalmente para añadirnos las vistas.
+Aqui podremos crear nuevos usuarios y editar nuestro rol temporalmente para añadirnos las vistas.
 ![image](https://user-images.githubusercontent.com/64038800/141701530-7bbdf7ef-00c3-4c8d-ad21-2877b299238b.png)
 
 ## Profesor
@@ -68,3 +68,19 @@ En la vista del alumno podemos ver:
 ### Respuestas respondidas
 Como podemos observar aqui tenemos un listado de las respuestas respondidas junto con la puntuación del alumno.
 ![image](https://user-images.githubusercontent.com/64038800/141702782-d65ea59d-36e0-49ae-aeb7-7e2e0760660f.png)
+
+### Iterador de preguntas
+Si no queremos responder de golpe varias preguntas podemos utilizar el iterador para ir respondiendolas individualmente.
+![image](https://user-images.githubusercontent.com/64038800/141702919-a1ae7b4b-ca6b-44bc-a240-52a31e195c98.png)
+
+## Creación de nuevos usuarios
+A continuación veremos como crear nuevos usuarios.
+![image](https://user-images.githubusercontent.com/64038800/141703106-f626d943-f353-4c69-9325-146cda3ee8c0.png)
+
+Tendremos que dar el nombre y dos veces la contraseña.
+![image](https://user-images.githubusercontent.com/64038800/141703124-0b36774f-20f7-49c2-98e7-929f85f94f2e.png)
+
+Y aqui editaremos sus permisos y tendríamos finalmente un nuevo usuario operativo.
+![image](https://user-images.githubusercontent.com/64038800/141703188-74e1ae07-5e63-41b0-9acb-ac2d30d4a48d.png)
+
+
