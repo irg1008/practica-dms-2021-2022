@@ -22,7 +22,7 @@ def getQuestionMocks() -> Dict[int, Question]:
             q["correct_answer"],
             q["incorrect_answers"],
             {},
-            q["imageUrl"],
+            q["image_url"],
             float(q["score"]),
             float(q["penalty"]),
             bool(q["is_public"]),

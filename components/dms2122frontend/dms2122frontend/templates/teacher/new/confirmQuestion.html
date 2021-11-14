@@ -1,0 +1,76 @@
+{% extends "base_logged_in.html" %}
+{% from "macros/buttons.html" import link, submit_button, button with context %}
+{% block title %}{% block subtitle%}{%endblock %}Teacher{% endblock %}
+
+{% block content_heading %}
+<div class="flex flex-row items-center justify-between w-full">
+	<nav class="breadcrumb" aria-label="breadcrumbs">
+		<ul>
+			<li><a href="/">Home</a></li>
+			<li>
+				<a href="/teacher">
+					Teacher Panel
+				</a>
+			</li>
+      <li>
+				<a href="/teacher/new" aria-current="page">
+					New Question
+				</a>
+			</li>
+			<li class="is-active">
+				<a href="/teacher/new/confirm" aria-current="page">
+					Confirm Question
+				</a>
+			</li>
+		</ul>
+	</nav>
+</div>
+{% endblock %}
+
+{% block content_subheading %}Create a new question{% endblock %}
+
+{% block main_content %}
+{% block teacher_content %}
+<div class="flex flex-col items-center w-full">
+	<form
+		class="w-full max-w-xl bg-yellow-50 border-yellow-400"
+		action="/teacher/new/confirm"
+		method="post"
+	>	
+			{%if n_answers > 0 %}
+      <div class="field-group flex flex-col gap-2">
+				<label class="label"
+				>Correct answer
+					<input
+						class="input is-success"
+						name="correctAnswer"
+						type="text"
+						placeholder="This is the correct answer"
+						required
+						minlength="3"
+					/>
+				</label>
+				
+				{% for i in range(1, n_answers) %}
+				<label class="label"
+					>Answer {{ i + 1 }}
+					<input
+						class="input is-dark"
+						name="answer{{ i + 1 }}"
+						type="text"
+						placeholder="Answer {{ i + 1 }}"
+						required
+						minlength="3"
+					/>
+				</label>
+				{% endfor %}
+
+				<div class="flex flex-row justify-end">
+					<input type="submit" class="button is-warning" value="Create Question" />
+				</div>
+      </div>
+			{% endif %}
+	</form>
+</div>
+{% endblock %}
+{% endblock %}

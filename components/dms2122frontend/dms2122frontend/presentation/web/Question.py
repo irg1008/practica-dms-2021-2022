@@ -101,6 +101,32 @@ class Question:
         else:
             return -self.penalty
 
+    def to_JSON(self) -> Dict[str, str]:
+        return {
+            "id": str(self.id),
+            "title": self.title,
+            "statment": self.statement,
+            "correct_answer": self.correct_answer,
+            "incorrect_answers": self.incorrect_answers,
+            "image_url": self.image_url,
+            "score": str(self.score),
+            "penalty": str(self.penalty),
+            "is_public": str(self.is_public),
+        }
+
+    def From_JSON(json_question: Dict[str, str]):
+        return Question(
+            int(json_question["id"]),
+            json_question["title"],
+            json_question["statment"],
+            json_question["correct_answer"],
+            json_question["incorrect_answers"],
+            json_question["image_url"],
+            float(json_question["score"]),
+            float(json_question["penalty"]),
+            bool(json_question["is_public"]),
+        )
+
 
 # A class named AnsweredQuestion that contains the next variables:
 # - A question. This is a Question object.
@@ -111,10 +137,10 @@ class Question:
 # - Answer. This function receives an answer and check if is correct with the question variable and recieveAnswer method.
 class AnsweredQuestion:
     def __init__(self, question: Question, answer: str):
-        self.question = question
-        self.answer = answer
-        self.score = self.question.receive_answer(answer)
-        self.date = datetime.datetime.now()
+        self.question=question
+        self.answer=answer
+        self.score=self.question.receive_answer(answer)
+        self.date=datetime.datetime.now()
 
         # A function that check answer is correct with the question variable and receive_answer method.
     def is_correct_answer(self):
