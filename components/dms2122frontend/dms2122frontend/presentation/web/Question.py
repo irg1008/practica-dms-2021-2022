@@ -105,7 +105,7 @@ class Question:
         return {
             "id": str(self.id),
             "title": self.title,
-            "statment": self.statement,
+            "statement": self.statement,
             "correct_answer": self.correct_answer,
             "incorrect_answers": self.incorrect_answers,
             "image_url": self.image_url,
