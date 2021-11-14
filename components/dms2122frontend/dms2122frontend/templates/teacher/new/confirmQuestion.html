@@ -1,31 +1,12 @@
 {% extends "base_logged_in.html" %}
-{% from "macros/buttons.html" import link, submit_button, button with context %}
-
 {% block title %}{% block subtitle%}{%endblock %}Teacher{% endblock %}
+{% from "macros/buttons.html" import link, submit_button, button with context %}
+{% from "macros/breadcrumb.html" import breadcrumb with context %}
 
 {% block content_heading %}
-<div class="flex flex-row items-center justify-between w-full">
-	<nav class="breadcrumb" aria-label="breadcrumbs">
-		<ul>
-			<li><a href="/">Home</a></li>
-			<li>
-				<a href="/teacher">
-					Teacher Panel
-				</a>
-			</li>
-      <li>
-				<a href="/teacher/new" aria-current="page">
-					New Question
-				</a>
-			</li>
-			<li class="is-active">
-				<a href="/teacher/new/confirm" aria-current="page">
-					Confirm Question
-				</a>
-			</li>
-		</ul>
-	</nav>
-</div>
+{{breadcrumb([["Teacher Panel", "/teacher"], 
+              ["New Question", "/teacher/new"],
+							["Confirm Question", "/teacher/confirm"]] )}}
 {% endblock %}
 
 {% block content_subheading %}Set the answers{% endblock %}

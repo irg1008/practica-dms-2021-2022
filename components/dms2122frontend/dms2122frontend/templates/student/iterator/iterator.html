@@ -3,21 +3,16 @@
 {% from "macros/question.html" import answeredQuestion with context %}
 {% from "macros/buttons.html" import link with context %}
 {% from "macros/question.html" import question with context %}
-{% block content_subheading %}Unanswered Questions{% endblock %}
+{% from "macros/breadcrumb.html" import breadcrumb with context %}
 
 {% block content_heading %}
-<div class="flex flex-row justify-between w-full">
-    <nav class="breadcrumb is-right" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/student">Unanswered Questions </a></li>
-            <li class="is-active"><a href="/student/iterator" aria-current="page">Question Iterator</a></li>
-        </ul>
-    </nav>
-</div>
+{{ breadcrumb([["Unanswered Questions", "/student"], 
+               ["Question Iterator", "/student/iterator"]]) }}
 {% endblock %}
-{% block main_content %}
 
+{% block content_subheading %}Unanswered Questions{% endblock %}
+
+{% block main_content %}
 {% block iterator_content %}
 <form method="post">
     {{ question(quest, userAnswer=answer) }}

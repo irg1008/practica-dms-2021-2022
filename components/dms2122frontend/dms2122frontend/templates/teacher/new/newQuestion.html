@@ -1,25 +1,11 @@
 {% extends "base_logged_in.html" %}
-{% from "macros/buttons.html" import link, submit_button, button with context %}
 {% block title %}{% block subtitle%}{%endblock %}Teacher{% endblock %}
+{% from "macros/buttons.html" import link, submit_button, button with context %}
+{% from "macros/breadcrumb.html" import breadcrumb with context %}
 
 {% block content_heading %}
-<div class="flex flex-row items-center justify-between w-full">
-	<nav class="breadcrumb" aria-label="breadcrumbs">
-		<ul>
-			<li><a href="/">Home</a></li>
-			<li>
-				<a href="/teacher">
-					Teacher Panel
-				</a>
-			</li>
-			<li class="is-active">
-				<a href="/teacher/new" aria-current="page">
-					New Question
-				</a>
-			</li>
-		</ul>
-	</nav>
-</div>
+{{breadcrumb([["Teacher Panel", "/teacher"], 
+              ["New Question", "/teacher/new"]] )}}
 {% endblock %}
 
 {% block content_subheading %}Create a new question{% endblock %}
@@ -109,7 +95,7 @@
 			</label>
 
 			<div class="flex flex-row justify-end">
-				<input type="submit" class="button is-dark" value="Add Answers" />
+				<input type="submit" class="button is-warning" value="Add Answers" />
 			</div>
 		</div>
 	</form>

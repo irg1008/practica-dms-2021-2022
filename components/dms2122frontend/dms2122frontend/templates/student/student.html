@@ -2,21 +2,12 @@
 {% block title %}{% block subtitle %}{% endblock %}Student{% endblock %}
 {% from "macros/question.html" import question with context %}
 {% from "macros/buttons.html" import link, button with context %}
+{% from "macros/breadcrumb.html" import breadcrumb with context %}
 
 {% block content_heading %}
-<div class="flex flex-row items-center justify-between w-full">
-    <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li class="is-active">
-                <a href="/student" aria-current="page">
-                    Unanswered Questions
-                </a>
-            </li>
-        </ul>
-    </nav>
-    {{ link("is-info", "student/answered", "Already Answered") }}
-</div>
+{{ breadcrumb(
+    paths=[["Unanswered Questions", "/student"]],
+    extra=link("is-info", "student/answered", "Already Answered") )}}
 {% endblock %}
 
 {% block content_subheading %}Unanswered Questions{% endblock %}

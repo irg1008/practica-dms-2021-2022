@@ -2,20 +2,10 @@
 {% block title %}{% block subtitle %}{% endblock %}Teacher{% endblock %}
 {% from "macros/question.html" import question with context %}
 {% from "macros/buttons.html" import link, button with context %}
+{% from "macros/breadcrumb.html" import breadcrumb with context %}
 
 {% block content_heading %}
-<div class="flex flex-row items-center justify-between w-full">
-	<nav class="breadcrumb" aria-label="breadcrumbs">
-		<ul>
-			<li><a href="/">Home</a></li>
-			<li class="is-active">
-				<a href="/teacher" aria-current="page">
-					Teacher Panel
-				</a>
-			</li>
-		</ul>
-	</nav>
-</div>
+{{ breadcrumb([["Teacher Panel", "/teacher"]]) }}
 {% endblock %}
 
 {% block content_subheading %}Teacher Panel{% endblock %}

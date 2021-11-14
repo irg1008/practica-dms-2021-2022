@@ -1,0 +1,27 @@
+{% macro breadcrumb(paths, extra=None) %}
+<div class="flex flex-row items-center justify-between w-full">
+	<nav class="breadcrumb" aria-label="breadcrumbs">
+		<ul>
+			<li>
+				<a href="/">Home</a>
+			</li>
+
+			{% if paths|length > 1 %} {% for text, url in paths[:-1] %}
+			<li>
+				<a href="{{url}}" class="text-blue-400">
+					{{text}}
+				</a>
+			</li>
+			{% endfor %} {% endif %}
+
+			<li class="is-active">
+				<a href="{{paths[-1][1]}}" aria-current="page" class="text-black">
+					{{paths[-1][0]}}
+				</a>
+			</li>
+		</ul>
+	</nav>
+
+	{% if extra %} {{extra}} {% endif %}
+</div>
+{% endmacro %}

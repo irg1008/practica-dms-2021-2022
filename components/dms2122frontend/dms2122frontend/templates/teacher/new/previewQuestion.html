@@ -1,37 +1,14 @@
 {% extends "base_logged_in.html" %}
+{% block title %}{% block subtitle%}{%endblock %}Teacher{% endblock %}
 {% from "macros/buttons.html" import link, submit_button, button with context %}
 {% from "macros/question.html" import question with context %}
-
-{% block title %}{% block subtitle%}{%endblock %}Teacher{% endblock %}
+{% from "macros/breadcrumb.html" import breadcrumb with context %}
 
 {% block content_heading %}
-<div class="flex flex-row items-center justify-between w-full">
-	<nav class="breadcrumb" aria-label="breadcrumbs">
-		<ul>
-			<li><a href="/">Home</a></li>
-			<li>
-				<a href="/teacher">
-					Teacher Panel
-				</a>
-			</li>
-      <li>
-				<a href="/teacher/new" aria-current="page">
-					New Question
-				</a>
-			</li>
-			<li>
-				<a href="/teacher/new/confirm" aria-current="page">
-					Confirm Question
-				</a>
-			</li>
-			<li class="is-active">
-				<a href="/teacher/new/preview" aria-current="page">
-					Preview Question
-				</a>
-			</li>
-		</ul>
-	</nav>
-</div>
+{{breadcrumb([["Teacher Panel", "/teacher"], 
+              ["New Question", "/teacher/new"],
+							["Confirm Question", "/teacher/confirm"],
+							["Preview Question", "/teacher/preview"]] )}}
 {% endblock %}
 
 {% block content_subheading %}Preview and confirm{% endblock %}
@@ -40,7 +17,7 @@
 {% block teacher_content %}
 <div class="flex flex-col items-center w-full">
 	<form
-		class="w-full max-w-3xl bg-yellow-50 border-yellow-400"
+		class="w-full max-w-3xl"
 		action="/teacher/new/confirm"
 		method="post"
 	>	
@@ -49,7 +26,7 @@
 					<h3>Student</h3>
 					{{question(q)}}
 				</div>
-				<hr />
+
 				<div>
 					<h3>Teacher</h3>
 					{{question(q, showAnswer=True)}}
