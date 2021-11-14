@@ -12,6 +12,8 @@ from .webauth import WebAuth
 from dms2122frontend.g import get_db
 
 
+# TODO: Use session question in all pages to not be forwarding to the same question.
+
 def create_question_from_form():
     # Create quesiton.
     id = get_db().getCurrentQuestionId()
@@ -77,7 +79,7 @@ class TeacherEndpoints:
         return render_template("teacher/new/newQuestion.html", q=q)
 
     @staticmethod
-    def get_post_confirm_question(auth_service: AuthService) -> Union[Response, Text]:
+    def get_post_answers_question(auth_service: AuthService) -> Union[Response, Text]:
         """ Handles the GET requests to the teacher root endpoint.
 
         Args:
@@ -91,10 +93,13 @@ class TeacherEndpoints:
         if Role.Teacher.name not in session["roles"]:
             return redirect(url_for("get_home"))
 
-        q = create_question_from_form()
         n_answers = request.form.get("numberOfAnswers") or 0
 
-        return render_template("teacher/new/confirmQuestion.html", n_answers=int(n_answers), q=q)
+        # Save question to session on json format.
+        q = create_question_from_form()
+        session["question"] = q.to_JSON()
+
+        return render_template("teacher/new/answersQuestion.html", n_answers=int(n_answers))
 
     @staticmethod
     def get_post_preview_question(auth_service: AuthService) -> Union[Response, Text]:
@@ -111,6 +116,15 @@ class TeacherEndpoints:
         if Role.Teacher.name not in session["roles"]:
             return redirect(url_for("get_home"))
 
-        q = get_db().getAllQuestions()[0]
+        # Recover question from session.
+        question_str = session["question"]
+        q = Question.From_Json(question_str)
+
+        answers = list(request.form.values())
+        q.correct_answer = answers[0]
+        q.incorrect_answers = answers[1:]
+
+        # Update session with answers.
+        session["question"] = q.to_JSON()
 
         return render_template("teacher/new/previewQuestion.html", q=q)

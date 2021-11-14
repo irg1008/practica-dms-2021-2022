@@ -110,9 +110,9 @@ def get_post_new_question():
     return TeacherEndpoints.get_post_new_question(auth_service)
 
 
-@app.route("/teacher/new/confirm", methods=["GET", "POST"])
+@app.route("/teacher/new/answers", methods=["GET", "POST"])
 def post_new_question_create():
-    return TeacherEndpoints.get_post_confirm_question(auth_service)
+    return TeacherEndpoints.get_post_answers_question(auth_service)
 
 @app.route("/teacher/new/preview", methods=["GET", "POST"])
 def post_new_question_preview():

@@ -7,7 +7,7 @@
 {% block content_heading %}
 {{breadcrumb([["Teacher Panel", "/teacher"], 
               ["New Question", "/teacher/new"],
-							["Confirm Question", "/teacher/new/confirm"],
+							["Set Answers", "/teacher/new/answers"],
 							["Preview Question", "/teacher/new/preview"]] )}}
 {% endblock %}
 
@@ -18,10 +18,10 @@
 <div class="flex flex-col items-center w-full">
 	<form
 		class="w-full max-w-3xl"
-		action="/teacher/new/confirm"
+		action="/teacher/new/preview"
 		method="post"
 	>	
-			<div class="flex justify-between gap-6">
+			<div class="flex justify-even gap-6">
 				<div>
 					<h3>Student</h3>
 					{{question(q)}}
@@ -34,7 +34,7 @@
 			</div>
 			
 			<div class="flex flex-row justify-end">
-				<input type="submit" class="button is-success" value="Create Question" />
+				<input type="submit" class="button is-success" value="Confirm" />
 			</div>
 	</form>
 </div>
