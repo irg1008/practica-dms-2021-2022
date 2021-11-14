@@ -3,6 +3,8 @@ import datetime
 from typing import Dict, List
 import random
 
+from flask.wrappers import JSONMixin
+
 # A class named Question with the next variables:
 # - id
 # - title
@@ -40,7 +42,7 @@ class Question:
         self.score = score
         self.penalty = penalty
         self.image_url = image_url
-        
+
         self.number_of_correct_answers = 0
         self.number_of_questions_answered = 0
         self.is_public = True
@@ -113,18 +115,12 @@ class Question:
             "is_public": str(self.is_public),
         }
 
-    def From_JSON(json_question: Dict[str, str]):
-        return Question(
-            int(json_question["id"]),
-            json_question["title"],
-            json_question["statment"],
-            json_question["correct_answer"],
-            json_question["incorrect_answers"],
-            json_question["image_url"],
-            float(json_question["score"]),
-            float(json_question["penalty"]),
-            bool(json_question["is_public"]),
-        )
+    def to_JSON_string(self) -> str:
+        return JSONMixin.dumps(self.to_JSON())
+
+    @staticmethod
+    def From_JSON_string(json_string: str) -> "Question":
+        return Question.From_JSON(JSONMixin.loads(json_string))
 
 
 # A class named AnsweredQuestion that contains the next variables:
@@ -136,10 +132,10 @@ class Question:
 # - Answer. This function receives an answer and check if is correct with the question variable and recieveAnswer method.
 class AnsweredQuestion:
     def __init__(self, question: Question, answer: str):
-        self.question=question
-        self.answer=answer
-        self.score=self.question.receive_answer(answer)
-        self.date=datetime.datetime.now()
+        self.question = question
+        self.answer = answer
+        self.score = self.question.receive_answer(answer)
+        self.date = datetime.datetime.now()
 
         # A function that check answer is correct with the question variable and receive_answer method.
     def is_correct_answer(self):
