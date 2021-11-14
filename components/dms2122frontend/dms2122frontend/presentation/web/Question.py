@@ -1,6 +1,6 @@
 # Import the datetime
 import datetime
-from typing import Dict, List
+from typing import Dict, List, Union
 import random
 import json
 
@@ -101,7 +101,7 @@ class Question:
     def make_private(self):
         self.is_public = False
 
-    def to_JSON(self) -> Dict[str, str]:
+    def to_JSON(self) -> Dict[str, Union[str, List[str]]]:
         return {
             "id": str(self.id),
             "title": self.title,
@@ -113,7 +113,7 @@ class Question:
             "penalty": str(self.penalty),
             "is_public": str(self.is_public),
         }
-        
+
     def From_JSON(json_question: Dict[str, str]):
         return Question(
             int(json_question["id"]),
