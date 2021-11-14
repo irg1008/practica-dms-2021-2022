@@ -111,5 +111,6 @@ class TeacherEndpoints:
         if Role.Teacher.name not in session["roles"]:
             return redirect(url_for("get_home"))
 
+        q = get_db().getAllQuestions()[0]
 
-        return render_template("teacher/new/previewQuestion.html", q=None)
+        return render_template("teacher/new/previewQuestion.html", q=q)

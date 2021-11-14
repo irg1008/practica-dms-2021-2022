@@ -83,7 +83,10 @@ class Question:
     def get_total_score(self) -> float:
         return (
             self.score * self.number_of_correct_answers
-            - self.penalty * self.number_of_questions_answered
+            - self.penalty
+            / 100
+            * self.score
+            * (self.number_of_questions_answered - self.number_of_correct_answers)
         )
 
     def receive_answer(self, answer: str):
@@ -96,7 +99,7 @@ class Question:
             self.number_of_correct_answers += 1
             return self.score
         else:
-            return -self.penalty
+            return -self.penalty / 100 * self.score
 
     def make_private(self):
         if len(self.user_answers) == 0:
@@ -148,5 +151,6 @@ class AnsweredQuestion:
         self.date = datetime.datetime.now()
 
         # A function that check answer is correct with the question variable and receive_answer method.
+
     def is_correct_answer(self):
         return self.answer == self.question.correct_answer

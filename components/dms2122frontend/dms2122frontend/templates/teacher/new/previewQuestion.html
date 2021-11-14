@@ -46,7 +46,12 @@
 	>	
 
 			<h2>Preview</h2>
-
+			{% if q%}
+				<div class="flex flex-row flex-warap items-baseline justify-center space-x-6">
+					{{question(q)}}
+					{{question(q, showAnswer=True)}}
+				</div>
+			{% endif%}
 			<div class="flex flex-row justify-end">
 				<input type="submit" class="button is-success" value="Create Question" />
 			</div>
