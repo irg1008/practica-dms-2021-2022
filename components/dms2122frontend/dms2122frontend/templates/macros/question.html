@@ -55,9 +55,9 @@ date=None, showTimesAnswered=False, userScore=None) %}
 		{% endif %}
 					
 		{%if isTeacher %}
-		{{ link("is-warning {% if not question.is_editable() %}disabled{% endif %}",
+		{{ link("is-warning",
 					 "/teacher/edit?q=" + question.id|string,
-					 "Edit") }}
+					 "Edit", disabled=not question.is_editable()) }}
 		{% endif %}
 
 		{% if date %}
