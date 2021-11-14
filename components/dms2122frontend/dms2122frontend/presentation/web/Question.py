@@ -2,8 +2,7 @@
 import datetime
 from typing import Dict, List
 import random
-
-from flask.wrappers import JSONMixin
+import json
 
 # A class named Question with the next variables:
 # - id
@@ -116,11 +115,11 @@ class Question:
         }
 
     def to_JSON_string(self) -> str:
-        return JSONMixin.dumps(self.to_JSON())
+        return json.dumps(self.to_JSON())
 
     @staticmethod
     def From_JSON_string(json_string: str) -> "Question":
-        return Question.From_JSON(JSONMixin.loads(json_string))
+        return Question.From_JSON(json.loads(json_string))
 
 
 # A class named AnsweredQuestion that contains the next variables:
