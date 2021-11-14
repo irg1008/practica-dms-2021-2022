@@ -63,6 +63,7 @@ class mockDB(DatabaseClient):
     def createQuestion(self, question: Question) -> Question:
         self.questions[self.id] = question
         self.id += 1
+        return question, id
 
     def getAllQuestions(self) -> List[Question]:
         questions = list(self.questions.values())
