@@ -1,5 +1,5 @@
 {% macro link(color_class, href, content, disabled=False) %}
-<a class="button {{ color_class }} {% if disabled %}pointer-none opacity-50 cursor-not-allowed{% endif %}" href="{{ href }}">
+<a class="{{ color_class }} {% if disabled %}pointer-events-none opacity-50 cursor-not-allowed{% endif %} button" href="{{ href }}">
   {{ content}}
 </a>
 {% endmacro %}
