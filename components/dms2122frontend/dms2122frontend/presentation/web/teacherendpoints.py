@@ -12,21 +12,19 @@ from .webauth import WebAuth
 from dms2122frontend.g import get_db
 
 
-# TODO: Use session question in all pages to not be forwarding to the same question.
-
-def create_question_from_form():
+def create_question_from_form() -> Question:
     # Create quesiton.
     id = get_db().getCurrentQuestionId()
     title = request.form.get("title") or ""
     statement = request.form.get("statement") or ""
 
     score = request.form.get("score")
-    score = int(score) if score is not None else 1
+    score = float(score) if score is not None else 1
 
     penalty = request.form.get("penalty")
-    penalty = int(penalty) if penalty is not None else 0
+    penalty = float(penalty) if penalty is not None else 0
 
-    image_url = request.form.get("image_url") or ""
+    image_url = request.form.get("imageUrl") or ""
     correct_answer = ""
     incorrect_answers = []
 
@@ -36,12 +34,29 @@ def create_question_from_form():
     return q
 
 
+def update_session(q) -> None:
+    session["question"] = q.to_JSON()
+
+
+def check_session_question() -> bool:
+    return "question" in session
+
+
+def get_session_question() -> Question:
+    question_str = session["question"]
+    return Question.From_Json(question_str)
+
+
+def remove_session_question() -> None:
+    session["question"] = None
+
+
 class TeacherEndpoints:
     """ Monostate class responsible of handing the teacher web endpoint requests.
     """
 
     @staticmethod
-    def get_teacher(auth_service: AuthService) -> Union[Response, Text]:
+    def get_post_teacher(auth_service: AuthService) -> Union[Response, Text]:
         """ Handles the GET requests to the teacher root endpoint.
 
         Args:
@@ -93,11 +108,9 @@ class TeacherEndpoints:
         if Role.Teacher.name not in session["roles"]:
             return redirect(url_for("get_home"))
 
-        n_answers = request.form.get("numberOfAnswers") or 0
-
-        # Save question to session on json format.
         q = create_question_from_form()
-        session["question"] = q.to_JSON()
+        update_session(q)
+        n_answers = request.form.get("numberOfAnswers") or 0
 
         return render_template("teacher/new/answersQuestion.html", n_answers=int(n_answers))
 
@@ -116,15 +129,32 @@ class TeacherEndpoints:
         if Role.Teacher.name not in session["roles"]:
             return redirect(url_for("get_home"))
 
-        # Recover question from session.
-        question_str = session["question"]
-        q = Question.From_Json(question_str)
-
+        q = get_session_question()
         answers = list(request.form.values())
         q.correct_answer = answers[0]
         q.incorrect_answers = answers[1:]
-
-        # Update session with answers.
-        session["question"] = q.to_JSON()
+        update_session(q)
 
         return render_template("teacher/new/previewQuestion.html", q=q)
+
+    @staticmethod
+    def get_post_confirm_question(auth_service: AuthService) -> Union[Response, Text]:
+        """ Handles the GET requests to the teacher root endpoint.
+
+        Args:
+            - auth_service (AuthService): The authentication service.
+
+        Returns:
+            - Union[Response,Text]: The generated response to the request.
+        """
+        if not WebAuth.test_token(auth_service):
+            return redirect(url_for("get_login"))
+        if Role.Teacher.name not in session["roles"]:
+            return redirect(url_for("get_home"))
+
+        q = get_session_question()
+        get_db().createQuestion(q)
+        remove_session_question()
+
+        return redirect(url_for("get_teacher"))
+

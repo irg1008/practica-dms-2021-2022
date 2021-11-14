@@ -12,19 +12,30 @@
 
 {% block main_content %}
 <section class="flex flex-col items-center-w-full mb-10">
-	<form action="/teacher/new" method="post" class="bg-yellow-50 border-yellow-400">
+	<form
+		action="/teacher/new"
+		method="post"
+		class="bg-yellow-50 border-yellow-400"
+	>
 		<h3 class="mb-2">
 			Create a new question
 		</h3>
 		<label class="label">
-			<input type="text"
-			class="input is-dark"
-			name="title"
-			placeholder="Question Title">
+			<input
+				type="text"
+				class="input is-dark"
+				name="title"
+				autofocus="autofocus"
+				placeholder="Question Title"
+			/>
 		</label>
 
 		<div class="flex justify-end">
-			<input type="submit" class="button is-warning" value="Next" />
+			<input
+				type="submit"
+				class="button is-warning"
+				value="Next"
+			/>
 		</div>
 	</form>
 </section>

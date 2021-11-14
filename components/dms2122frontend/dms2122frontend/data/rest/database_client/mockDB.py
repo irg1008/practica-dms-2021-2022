@@ -62,6 +62,7 @@ class mockDB(DatabaseClient):
 
     def createQuestion(self, question: Question) -> Tuple[Question, int]:
         self.questions[self.id] = question
+        self.not_answered[self.id] = question
         self.id += 1
         return question, self.id
 

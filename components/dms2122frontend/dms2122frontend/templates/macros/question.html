@@ -43,31 +43,29 @@ date=None, showTimesAnswered=False, userScore=None) %}
 			{% endfor %}
 		</ul>
 
-		<div class="flex flex-row space-x-2">
-			{% if not showAnswer %}
+		{% if not showAnswer %}
+		<button
+			id="clear-radios-{{ question.id }}"
+			class="button is-danger"
+			type="button"
+		>
+			Clear
+		</button>
+		{% endif %}
+					
+		{%if isTeacher %}
+		<form action="/teacher/edit" method="post" class="border-0 bg-none p-0">
 			<button
-				id="clear-radios-{{ question.id }}"
-				class="button is-danger"
-				type="button"
-			>
-				Clear
+				type="submit"
+				formaction
+				class="button is-warning"
+				{% if not question.is_editable() %}
+				disabled
+				{% endif %}>
+				Edit
 			</button>
-			{% endif %}
-            
-            {%if isTeacher %}
-			<form action="/teacher/edit" method="post" class="border-0 bg-none p-0">
-				<button
-					type="submit"
-					formaction
-					class="button is-warning"
-					{% if not question.is_editable() %}
-					disabled
-					{% endif %}>
-					Edit
-				</button>
-			</form>
-			{% endif %}
-		</div>
+		</form>
+		{% endif %}
 
 		{% if date %}
 		<p>Answered on: {{ date }}</p>

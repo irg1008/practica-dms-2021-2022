@@ -15,7 +15,7 @@
 <div class="flex flex-col items-center w-full">
 	<form
 		class="w-full max-w-xl bg-yellow-50 border-yellow-400"
-		action="/teacher/new/answers"
+		action="/teacher/answers"
 		method="post"
 	>
 		<div class="field-group flex flex-col gap-2">
@@ -28,6 +28,7 @@
 					placeholder="Question Title"
 					required
 					minlength="3"
+					autofocus="autofocus"
 					value="{{ q.title }}"
 				/>
 			</label>
@@ -52,6 +53,7 @@
 					placeholder="Score"
 					required
 					min="0"
+					step="0.1"
 					value="{{ q.score }}"
 				/>
 			</label>
@@ -71,7 +73,7 @@
 			</label>
 
 			<label class="label"
-				>Image URL
+				>Image URL (Optional)
 				<input
 					class="input is-dark"
 					name="imageUrl"

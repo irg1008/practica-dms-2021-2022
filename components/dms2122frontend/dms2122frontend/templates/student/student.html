@@ -13,7 +13,7 @@
 {% block content_subheading %}Unanswered Questions{% endblock %}
 
 {% block main_content %}
-<form action="/student/answer" method="post">
+<form action="/student/answered" method="post">
     {% if not questions %}
     <p>There are no questions left to answer</p>
     {%else %}

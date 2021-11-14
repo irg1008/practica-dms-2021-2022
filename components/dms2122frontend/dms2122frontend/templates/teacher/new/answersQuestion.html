@@ -5,8 +5,7 @@
 
 {% block content_heading %}
 {{breadcrumb([["Teacher Panel", "/teacher"], 
-              ["New Question", "/teacher/new"],
-							["Set Answers", "/teacher/new/answers"]] )}}
+							["Set Answers", "/teacher/answers"]] )}}
 {% endblock %}
 
 {% block content_subheading %}Set the answers{% endblock %}
@@ -16,7 +15,7 @@
 <div class="flex flex-col items-center w-full">
 	<form
 		class="w-full max-w-xl bg-yellow-50 border-yellow-400"
-		action="/teacher/new/preview"
+		action="/teacher/preview"
 		method="post"
 	>	
 			{%if n_answers > 0 %}
@@ -29,20 +28,20 @@
 						type="text"
 						placeholder="This is the correct answer"
 						required
-						minlength="3"
+						autofocus="autofocus"
+						minlength="2"
 					/>
 				</label>
 				
 				{% for i in range(1, n_answers) %}
 				<label class="label"
-					>Alternative Answer {{ i + 1 }}
+					>Incorrect Answer {{ i }}
 					<input
 						class="input is-danger"
 						name="answer{{ i + 1 }}"
 						type="text"
 						placeholder="Answer {{ i + 1 }}"
 						required
-						minlength="3"
 					/>
 				</label>
 				{% endfor %}

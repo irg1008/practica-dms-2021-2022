@@ -114,13 +114,16 @@ td {
 	transition: all 0.2s ease-in-out;
 }
 
-.button:hover:enabled{
-
+.button:hover:enabled {
 	transform: scale(1.05);
 }
 
 .button:active {
 	transform: scale(0.95);
+}
+
+.question {
+	min-width: 25em;
 }
 
 .question h2,
@@ -144,8 +147,8 @@ h3 {
 	object-fit: cover;
 }
 
-.min-50ch{
-	min-width: 50ch
+.min-50ch {
+	min-width: 50ch;
 }
 
 /* Clean this rubbish animation. Maybe JS? */

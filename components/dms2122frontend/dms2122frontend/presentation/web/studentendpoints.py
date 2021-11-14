@@ -78,7 +78,7 @@ class StudentEndpoints:
 
     @staticmethod
     def post_student_answers(auth_service: AuthService) -> Union[Response, Text]:
-        """ Handles the POST requests to /student/answer
+        """ Handles the POST requests to /student/answered
 
         Args:
             - auth_service (AuthService): The authentication service.

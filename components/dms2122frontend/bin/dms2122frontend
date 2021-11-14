@@ -39,8 +39,10 @@ backend_service: BackendService = BackendService(
 
 app = Flask(
     __name__,
-    static_folder=os.path.dirname(inspect.getfile(dms2122frontend)) + "/static",
-    template_folder=os.path.dirname(inspect.getfile(dms2122frontend)) + "/templates",
+    static_folder=os.path.dirname(
+        inspect.getfile(dms2122frontend)) + "/static",
+    template_folder=os.path.dirname(
+        inspect.getfile(dms2122frontend)) + "/templates",
 )
 app.secret_key = bytes(cfg.get_app_secret_key(), "ascii")
 
@@ -102,7 +104,7 @@ def post_student_iterator_submit():
 
 @app.route("/teacher", methods=["GET", "POST"])
 def get_teacher():
-    return TeacherEndpoints.get_teacher(auth_service)
+    return TeacherEndpoints.get_post_teacher(auth_service)
 
 
 @app.route("/teacher/new", methods=["GET", "POST"])
@@ -110,13 +112,19 @@ def get_post_new_question():
     return TeacherEndpoints.get_post_new_question(auth_service)
 
 
-@app.route("/teacher/new/answers", methods=["GET", "POST"])
+@app.route("/teacher/answers", methods=["GET", "POST"])
 def post_new_question_create():
     return TeacherEndpoints.get_post_answers_question(auth_service)
 
-@app.route("/teacher/new/preview", methods=["GET", "POST"])
+
+@app.route("/teacher/preview", methods=["GET", "POST"])
 def post_new_question_preview():
     return TeacherEndpoints.get_post_preview_question(auth_service)
+
+
+@app.route("/teacher/confirm", methods=["GET", "POST"])
+def post_new_question_confirm():
+    return TeacherEndpoints.get_post_confirm_question(auth_service)
 
 
 @app.route("/", methods=["GET"])
