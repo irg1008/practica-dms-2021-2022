@@ -77,7 +77,7 @@ def get_student_answered():
     return StudentEndpoints.get_student_answered(auth_service)
 
 
-@app.route("/student/answer", methods=["POST"])
+@app.route("/student/answered", methods=["POST"])
 def post_student_answers():
     return StudentEndpoints.post_student_answers(auth_service)
 
