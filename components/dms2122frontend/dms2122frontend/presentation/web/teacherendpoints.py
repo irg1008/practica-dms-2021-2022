@@ -10,6 +10,7 @@ from dms2122common.data import Role
 from dms2122frontend.data.rest.authservice import AuthService
 from .webauth import WebAuth
 from dms2122frontend.g import get_db
+from dms2122common.data.rest import ResponseData
 
 
 def create_question_from_form() -> Question:
@@ -156,5 +157,6 @@ class TeacherEndpoints:
         get_db().createQuestion(q)
         remove_session_question()
 
-        return redirect(url_for("get_teacher"))
+        ResponseData().add_message("Question created successfully")
 
+        return redirect(url_for("get_teacher"))

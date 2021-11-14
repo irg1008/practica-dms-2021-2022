@@ -32,6 +32,11 @@ hr {
 	border: 0.5px solid var(--main-gray);
 }
 
+.vl {
+	height: 100%;
+	border-left: 1px solid var(--main-gray);
+}
+
 /* Styles generated with Github Copilot */
 h1,
 h2,

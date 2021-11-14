@@ -1,39 +1,30 @@
-{% extends "base_logged_in.html" %}
-{% block title %}{% block subtitle%}{%endblock %}Teacher{% endblock %}
-{% from "macros/buttons.html" import link, submit_button, button with context %}
-{% from "macros/question.html" import question with context %}
-{% from "macros/breadcrumb.html" import breadcrumb with context %}
-
-{% block content_heading %}
-{{breadcrumb([["Teacher Panel", "/teacher"], 
-							["Preview Question", "/teacher/preview"]] )}}
-{% endblock %}
-
-{% block content_subheading %}Preview and confirm{% endblock %}
-
-{% block main_content %}
-{% block teacher_content %}
+{% extends "base_logged_in.html" %} {% block title %}{% block
+subtitle%}{%endblock %}Teacher{% endblock %} {% from "macros/buttons.html"
+import link, submit_button, button with context %} {% from
+"macros/question.html" import question with context %} {% from
+"macros/breadcrumb.html" import breadcrumb with context %} {% block
+content_heading %} {{breadcrumb([["Teacher Panel", "/teacher"], ["Preview
+Question", "/teacher/preview"]] )}} {% endblock %} {% block content_subheading
+%}Preview and confirm{% endblock %} {% block main_content %} {% block
+teacher_content %}
 <div class="flex flex-col items-center w-full">
-	<form
-		action="/teacher/confirm"
-		method="post"
-	>	
-			<div class="flex justify-between gap-6 flex-wrap max-w-4xl">
-				<div>
-					<h3>Student</h3>
-					{{question(q)}}
-				</div>
+	<form action="/teacher/confirm" method="post">
+		<div class="flex justify-between gap-6 flex-wrap max-w-4xl">
+			<div>
+				<h3>Student</h3>
+				{{question(q)}}
+			</div>
 
-				<div>
-					<h3>Teacher</h3>
-					{{question(q, showAnswer=True)}}
-				</div>
+			<div>
+				<h3>Teacher</h3>
+				{{question(q, showAnswer=True)}}
 			</div>
-			
-			<div class="flex flex-row justify-around">
-				<input type="submit" class="button is-success" value="Confirm" />
-			</div>
+		</div>
+
+		<hr />
+		<div class="flex flex-row justify-end">
+			<input type="submit" class="button is-success" value="Confirm" />
+		</div>
 	</form>
 </div>
-{% endblock %}
-{% endblock %}
+{% endblock %} {% endblock %}
