@@ -158,17 +158,5 @@
 		"penalty": 50,
 		"is_public": false,
 		"score": 1
-	},
-	{
-		"id": 12,
-		"title": "Seleccione",
-		"statment": "La respuesta correcta",
-		"correct_answer": "Esta no es",
-		"incorrect_answers": ["Esta no es", "Esta no es", "Esta no es", "Esta no es"],
-		"user_answers": [],
-		"image_url": "https://upload.wikimedia.org/wikipedia/commons/3/37/Theodore_Kaczynski.jpg",
-		"penalty": 100,
-		"is_public": false,
-		"score": 1
 	}
 ]
