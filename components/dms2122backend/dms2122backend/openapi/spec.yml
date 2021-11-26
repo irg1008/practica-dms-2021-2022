@@ -11,12 +11,12 @@ info:
   contact:
     name: Universidad de Burgos
 tags:
-  - name: session
-    description: Session-related operations (e.g., login)
-  - name: users
-    description: User-related operations (e.g., list, create, search)
-  - name: roles
-    description: Role-related operations (e.g., grant, revoke)
+  - name: questions
+    description: Question Related operations
+  - name: answers
+    description: Answer related operations
+  - name: user
+    description: User related operations 
   - name: server
     description: Operations about the server itself (e.g., server status querying)
 servers:
@@ -35,9 +35,119 @@ paths:
                 type: string
       tags:
         - server
-  /test:
+  /user/{username}/stats:
+    get:
+      summary: Gets a user stats 
+      operationId: dms2122backend.presentation.rest.test.test
+      responses:
+        '200':
+          description: A test message
+          content:
+            'text/plain':
+              schema:
+                type: string
+    update:
+      summary: Updates the user stats 
+      operationId: dms2122backend.presentation.rest.test.test
+      responses:
+        '200':
+          description: A test message
+          content:
+            'text/plain':
+              schema:
+                type: string
+
+  /user/{username}/questions/answer/{id}:
+    post:
+      summary:  Sets the question answer
+      operationId: dms2122backend.presentation.rest.test.test
+      responses:
+        '200':
+          description: A test message
+          content:
+            'text/plain':
+              schema:
+                type: string
+     get:
+      summary: Gets the question answer
+      operationId: dms2122backend.presentation.rest.test.test
+      responses:
+        '200':
+          description: A test message
+          content:
+            'text/plain':
+              schema:
+                type: string               
+  /user/{username}/questions/answered:
+    get:
+      summary: Gets a user stats 
+      operationId: dms2122backend.presentation.rest.test.test
+      responses:
+        '200':
+          description: A test message
+          content:
+            'text/plain':
+              schema:
+                type: string
+
+  /user/{username}/questions/unanswered:
+    get:
+      summary: Gets a user stats 
+      operationId: dms2122backend.presentation.rest.test.test
+      responses:
+        '200':
+          description: A test message
+          content:
+            'text/plain':
+              schema:
+                type: string
+
+  /question/new:
+    post:
+      summary: Authenticates a user
+      operationId: dms2122backend.presentation.rest.test.test
+      responses:
+        '200':
+          description: A test message
+          content:
+            'text/plain':
+              schema:
+                type: string
+
+  /question/{id}:
     get:
       summary: Authenticates a user
+      operationId: dms2122backend.presentation.rest.test.test
+      responses:
+        '200':
+          description: A test message
+          content:
+            'text/plain':
+              schema:
+                type: string
+    update:
+      summary: Authenticates a user
+      operationId: dms2122backend.presentation.rest.test.test
+      responses:
+        '200':
+          description: A test message
+          content:
+            'text/plain':
+              schema:
+                type: string
+    delete:
+      summary: Deletes an unanswered question from the DB. 
+      operationId: dms2122backend.presentation.rest.test.test
+      responses:
+        '200':
+          description: A test message
+          content:
+            'text/plain':
+              schema:
+                type: string
+  /question/all:
+    get:
+      summary: Retrieves all the answered and unanswered questions.
       operationId: dms2122backend.presentation.rest.test.test
       responses:
         '200':
