@@ -20,27 +20,23 @@ from flask import current_app
 from flask.logging import default_handler
 from itsdangerous import TimedJSONWebSignatureSerializer
 import dms2122backend
-from dms2122auth.data.config import AuthConfiguration
-from dms2122auth.data.db import Schema
+from dms2122backend.data.config.backendconfiguration import BackendConfiguration
+from dms2122backend.data.db.schema import Schema
 
 
-if __name__ == '__main__':
-    cfg: AuthConfiguration = AuthConfiguration()
+if __name__ == "__main__":
+    cfg: BackendConfiguration = BackendConfiguration()
     cfg.load_from_file(cfg.default_config_file())
     db: Schema = Schema(cfg)
     jws: TimedJSONWebSignatureSerializer = TimedJSONWebSignatureSerializer(
         cfg.get_jws_secret(), expires_in=cfg.get_jws_ttl()
     )
 
-    specification_dir = os.path.dirname(
-        inspect.getfile(dms2122backend)) + '/openapi'
+    specification_dir = os.path.dirname(inspect.getfile(dms2122backend)) + "/openapi"
     app = connexion.FlaskApp(
         __name__,
         specification_dir=specification_dir,
-        options={
-            "swagger_ui": True,
-            "serve_spec": True
-        }
+        options={"swagger_ui": True, "serve_spec": True},
     )
     app.add_api("spec.yml", strict_validation=True)
     flask_app = app.app
@@ -57,5 +53,5 @@ if __name__ == '__main__':
         host=cfg.get_service_host(),
         port=cfg.get_service_port(),
         debug=cfg.get_debug_flag(),
-        use_reloader=False
+        use_reloader=False,
     )
