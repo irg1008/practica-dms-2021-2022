@@ -21,7 +21,7 @@ from flask.logging import default_handler
 from itsdangerous import TimedJSONWebSignatureSerializer
 import dms2122backend
 from dms2122backend.data.config.backendconfiguration import BackendConfiguration
-from dms2122backend.data.db.schema import Schema
+from dms2122backend.data.db import Schema
 
 
 if __name__ == "__main__":
