@@ -33,7 +33,7 @@ if __name__ == '__main__':
     )
 
     specification_dir = os.path.dirname(
-        inspect.getfile(dms2122auth)) + '/openapi'
+        inspect.getfile(dms2122backend)) + '/openapi'
     app = connexion.FlaskApp(
         __name__,
         specification_dir=specification_dir,
