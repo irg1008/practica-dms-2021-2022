@@ -1,7 +1,7 @@
 from typing import List
 from dms2122frontend.data.questionMocks import getQuestionMocks
 import random
-from dms2122frontend.presentation.web.Question import Question, AnsweredQuestion
+from dms2122frontend.data.Question import Question, AnsweredQuestion
 
 class User:
     def __init__(self, name: str, roles: List[str],) -> None:

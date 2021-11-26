@@ -1,6 +1,6 @@
 from typing import List, Tuple, Union
 
-from dms2122frontend.presentation.web.Question import Question, AnsweredQuestion
+from dms2122frontend.data.Question import Question, AnsweredQuestion
 
 
 class DatabaseClient:

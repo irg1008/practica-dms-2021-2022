@@ -3,7 +3,7 @@ import json
 from typing import Dict, List
 import os
 import dms2122frontend
-from dms2122frontend.presentation.web.Question import Question
+from dms2122frontend.data.Question import Question
 
 
 def getQuestionMocks() -> Dict[int, Question]:

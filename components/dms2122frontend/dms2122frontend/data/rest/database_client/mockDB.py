@@ -2,7 +2,7 @@ import random
 from typing import Dict, List, Tuple, Union
 
 from dms2122frontend.data.rest.database_client.database_client import DatabaseClient
-from dms2122frontend.presentation.web.Question import AnsweredQuestion, Question
+from dms2122frontend.data.Question import AnsweredQuestion, Question
 from dms2122frontend.data.questionMocks import getQuestionMocks
 
 

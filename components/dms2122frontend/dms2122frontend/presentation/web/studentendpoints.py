@@ -12,7 +12,6 @@ from dms2122frontend.data.questionMocks import getQuestionMocks
 from dms2122common.data import Role
 from dms2122frontend.data.rest.authservice import AuthService
 import dms2122frontend
-from .Question import AnsweredQuestion, Question
 from .webauth import WebAuth
 from dms2122frontend.g import get_db
 

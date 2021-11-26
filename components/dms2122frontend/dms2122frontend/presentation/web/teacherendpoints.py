@@ -5,7 +5,7 @@ from typing import List, Text, Union
 from flask import redirect, url_for, session, render_template
 from flask.globals import request
 from werkzeug.wrappers import Response
-from dms2122frontend.presentation.web.Question import Question
+from dms2122frontend.data.Question import Question
 from dms2122common.data import Role
 from dms2122frontend.data.rest.authservice import AuthService
 from .webauth import WebAuth
