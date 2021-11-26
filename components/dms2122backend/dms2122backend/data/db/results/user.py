@@ -4,8 +4,8 @@
 from typing import Dict
 from sqlalchemy import Table, MetaData, Column, String  # type: ignore
 from sqlalchemy.orm import relationship  # type: ignore
-from dms2122auth.data.db.results.resultbase import ResultBase
-from dms2122auth.data.db.results.userrole import UserRole
+from dms2122backend.data.db.results.resultbase import ResultBase
+from dms2122backend.data.db.results.userrole import UserRole
 
 
 class User(ResultBase):
