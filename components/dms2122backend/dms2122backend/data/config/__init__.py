@@ -1,3 +1,3 @@
 """ Backend configuration classes.
 """
-from .authconfiguration import AuthConfiguration
+from .backendconfiguration import BackendConfiguration
