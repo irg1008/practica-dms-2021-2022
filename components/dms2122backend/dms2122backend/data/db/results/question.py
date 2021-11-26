@@ -1,5 +1,6 @@
-from sqlalchemy import Table, MetaData, Column, String, Integer, Float, Boolean  # type: ignore
+from sqlalchemy import Table, MetaData, Column, String  # type: ignore
 from sqlalchemy.orm import mapper, relationship  # type: ignore
+from .answeredQuestion import AnsweredQuestion
 
 
 class Question():
@@ -33,5 +34,8 @@ class Question():
                 Column('public', Boolean, default=True),
                 Column('ncorrect', Integer, default=0),
                 Column('nanswered', Integer, default=0)
-            )
+            ),
+            properties={
+                'sessions': relationship(AnsweredQuestion, backref='answeredQuestions')
+            }
         )
