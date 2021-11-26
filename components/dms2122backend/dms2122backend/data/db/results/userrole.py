@@ -3,7 +3,7 @@
 
 from sqlalchemy import Table, MetaData, Column, ForeignKey, String, Enum  # type: ignore
 from dms2122common.data import Role
-from dms2122auth.data.db.results.resultbase import ResultBase
+from dms2122backend.data.db.results.resultbase import ResultBase
 
 
 class UserRole(ResultBase):
