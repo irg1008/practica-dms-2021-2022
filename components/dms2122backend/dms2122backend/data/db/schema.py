@@ -6,7 +6,7 @@ from sqlalchemy.engine import Engine  # type: ignore
 from sqlalchemy.ext.declarative import declarative_base  # type: ignore
 from sqlalchemy.orm import sessionmaker, scoped_session  # type: ignore
 from sqlalchemy.orm.session import Session  # type: ignore
-from dms2122backend.data.config import AuthConfiguration
+from dms2122backend.data.config import BackendConfiguration
 from dms2122backend.data.db.results import User, UserRole
 
 
@@ -29,7 +29,7 @@ class Schema:
     """ Class responsible of the schema initialization and session generation.
     """
 
-    def __init__(self, config: AuthConfiguration):
+    def __init__(self, config: BackendConfiguration):
         """ Constructor method.
 
         Initializes the schema, deploying it if necessary.

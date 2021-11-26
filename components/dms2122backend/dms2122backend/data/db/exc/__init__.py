@@ -1,4 +1,4 @@
-""" Authentication database-related exceptions.
+""" Backend database-related exceptions.
 """
 
 from .userexistserror import UserExistsError

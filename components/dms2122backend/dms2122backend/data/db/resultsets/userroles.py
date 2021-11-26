@@ -6,8 +6,8 @@ from sqlalchemy.orm import Session  # type: ignore
 from sqlalchemy.exc import IntegrityError  # type: ignore
 from sqlalchemy.orm.exc import NoResultFound  # type: ignore
 from dms2122common.data import Role
-from dms2122auth.data.db.results import UserRole
-from dms2122auth.data.db.exc import UserNotFoundError
+from dms2122backend.data.db.results import UserRole
+from dms2122backend.data.db.exc import UserNotFoundError
 
 
 class UserRoles:

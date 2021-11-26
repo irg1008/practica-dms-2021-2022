@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: DMS authentication service REST API
+  title: DMS Backend service REST API
   version: '1.0'
   description: |
     REST API for the authentication service.

@@ -1,4 +1,4 @@
-""" Authentication ORM resultsets (i.e., tables).
+""" Backend ORM resultsets (i.e., tables).
 """
 
 from .users import Users

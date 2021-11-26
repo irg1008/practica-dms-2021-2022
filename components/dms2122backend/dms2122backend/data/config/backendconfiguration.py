@@ -1,4 +1,4 @@
-""" AuthConfiguration class module.
+""" BackendConfiguration class module.
 """
 
 from typing import Dict
@@ -16,7 +16,7 @@ class BackendConfiguration(ServiceConfiguration):
             - str: A string identifying the component which will categorize the configuration.
         """
 
-        return "dms2122auth"
+        return "dms2122backend"
 
     def __init__(self):
         """ Initialization/constructor method.
@@ -24,7 +24,7 @@ class BackendConfiguration(ServiceConfiguration):
 
         ServiceConfiguration.__init__(self)
 
-        self.set_db_connection_string("sqlite:////tmp/dms2122auth.sqlite3.db")
+        self.set_db_connection_string("sqlite:////tmp/dms2122backend.sqlite3.db")
         self.set_service_host("127.0.0.1")
         self.set_service_port(4000)
         self.set_debug_flag(True)

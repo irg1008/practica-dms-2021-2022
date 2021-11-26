@@ -1,2 +1,2 @@
-""" Authentication REST API modules.
+""" Backend REST API modules.
 """
