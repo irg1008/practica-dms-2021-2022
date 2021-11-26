@@ -24,7 +24,7 @@ class AnsweredQuestion(ResultBase):
         """
         self.idquestion: str = idquestion
         self.iduser: str = iduser
-        self.answer: int = answer
+        self.answer: str = answer
         self.score: float = 0
         self.date = datetime.now()
 
