@@ -5,7 +5,7 @@ from typing import Dict
 from dms2122common.data.config import ServiceConfiguration
 
 
-class AuthConfiguration(ServiceConfiguration):
+class BackendConfiguration(ServiceConfiguration):
     """ Class responsible of storing a specific authentication service configuration.
     """
 
