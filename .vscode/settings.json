@@ -4,5 +4,6 @@
     ],
     "python.analysis.extraPaths": [
         "${workspaceFolder}/components/dms2122common"
-    ]
+    ],
+    "python.pythonPath": "C:\\Users\\Ivan\\AppData\\Local\\Programs\\Python\\Python38\\python.exe"
 }
