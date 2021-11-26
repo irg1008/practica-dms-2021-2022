@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   auth:
     build:
@@ -26,7 +26,9 @@ services:
       dms2122:
         ipv4_address: 172.10.1.20
     ports:
-      - "5050:5050"
+      - "5000:5000"
+    environment:
+      FLASK_ENV: development
 
   frontend:
     build:
@@ -45,10 +47,9 @@ services:
     environment:
       FLASK_ENV: development
 
-
 networks:
   dms2122:
     ipam:
       driver: default
       config:
-        - subnet: '172.10.1.0/24'
+        - subnet: "172.10.1.0/24"
