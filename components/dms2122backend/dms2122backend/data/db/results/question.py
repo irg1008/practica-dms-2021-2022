@@ -1,4 +1,4 @@
-from sqlalchemy import Table, MetaData, Column, String  # type: ignore
+from sqlalchemy import Table, MetaData, Column, String, Integer, Float, Boolean  # type: ignore
 from sqlalchemy.orm import mapper, relationship  # type: ignore
 from .answeredQuestion import AnsweredQuestion
 
@@ -28,7 +28,7 @@ class Question():
                 Column('title', String(250), nullable=False),
                 Column('statement', String(250), nullable=False),
                 Column('correctOption', String(250), nullable=False),
-                #Column('incorrectOptions', json, nullable=False),
+                #Column('incorrectOptions', json, nullable=False), # TODO: hacer json
                 Column('score', Float, default=0),
                 Column('penalty', Float, default=0),
                 Column('public', Boolean, default=True),

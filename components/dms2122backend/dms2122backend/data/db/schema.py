@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker  # type: ignore
 from sqlalchemy.orm.session import Session
 
 from components.dms2122backend.dms2122backend.data.db.results.answeredQuestion import AnsweredQuestion  # type: ignore
-#from .results.user import User
+from .results.user import User
 from .results.question import Question
 from .results.answeredQuestion import AnsweredQuestion
 
@@ -15,7 +15,7 @@ class Schema():
         self.__create_engine = create_engine(db_connection_string)
         self.__session_maker = sessionmaker(bind=self.__create_engine)
 
-        #User.map(self.__declarative_base.metadata)
+        User.map(self.__declarative_base.metadata)
         Question.map(self.__declarative_base.metadata)
         AnsweredQuestion.map(self.__declarative_base.metadata)
         self.__declarative_base.metadata.create_all(self.__create_engine)
