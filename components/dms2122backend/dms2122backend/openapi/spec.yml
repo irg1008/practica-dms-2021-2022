@@ -25,7 +25,7 @@ paths:
   '/':
     head:
       summary: Health test for the service
-      operationId: dms2122auth.presentation.rest.server.health_test
+      operationId: dms2122backend.presentation.rest.server.health_test
       responses:
         '204':
           description: Success response (will not redirect)
@@ -35,235 +35,18 @@ paths:
                 type: string
       tags:
         - server
-  /auth:
-    post:
+  /test:
+    get:
       summary: Authenticates a user
-      operationId: dms2122auth.presentation.rest.server.login
+      operationId: dms2122backend.presentation.rest.test.test
       responses:
         '200':
-          description: JWS token
+          description: A test message
           content:
             'text/plain':
               schema:
                 type: string
-      tags:
-        - session
-      security:
-        - user_token: []
-          api_key: []
-        - user_credentials: []
-          api_key: []
-  /users:
-    get:
-      summary: Gets a listing of users.
-      operationId: dms2122auth.presentation.rest.user.list_users
-      responses:
-        '200':
-          description: A list of users.
-          content:
-            'application/json':
-              schema:
-                $ref: '#/components/schemas/UsersFullListModel'
-      tags:
-        - users
-      security:
-        - user_token: []
-          api_key: []
-  /user/new:
-    post:
-      summary: Creates a new user.
-      operationId: dms2122auth.presentation.rest.user.create_user
-      requestBody:
-        description: New user's data.
-        content:
-          'application/json':
-            schema:
-              $ref: '#/components/schemas/UserFullPasswordModel'
-      responses:
-        '200':
-          description: Data of the newly created user (password hash is not returned).
-          content:
-            'application/json':
-              schema:
-                $ref: '#/components/schemas/UserFullModel'
-        '400':
-          description: Errors in the request.
-          content:
-            'text/plain':
-              schema:
-                type: string
-        '403':
-          description: The requesting user has no permission to do this operation.
-          content:
-            'text/plain':
-              schema:
-                type: string
-        '409':
-          description: There is a conflict with some of the user's unique data.
-          content:
-            'text/plain':
-              schema:
-                type: string
-      tags:
-        - users
-      security:
-        - user_token: []
-          api_key: []
-  /user/{username}/roles:
-    get:
-      summary: Gets the roles of a certain user.
-      operationId: dms2122auth.presentation.rest.userrole.list_user_roles
-      parameters:
-        - name: username
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: The list of roles of the user
-          content:
-            'application/json':
-              schema:
-                type: array
-                items:
-                  type: string
-        '400':
-          description: A user was not provided.
-          content:
-            'text/plain':
-              schema:
-                type: string
-        '403':
-          description: The user does not have the privileges to view the given user's roles.
-          content:
-            'text/plain':
-              schema:
-                type: string
-      tags:
-        - users
-        - roles
-      security:
-        - user_token: []
-          api_key: []
-  /user/{username}/role/{rolename}:
-    get:
-      summary: Gets whether a user has a certain role or not.
-      operationId: dms2122auth.presentation.rest.userrole.user_has_role
-      parameters:
-        - name: username
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: rolename
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: The given user has the given role.
-          content:
-            'text/plain':
-              schema:
-                type: string
-        '404':
-          description: The given user does not have the given role, or either the user or the role does not exist.
-          content:
-            'text/plain':
-              schema:
-                type: string
-      tags:
-        - users
-        - roles
-      security:
-        - user_token: []
-          api_key: []
-    post:
-      summary: Grants a role to a user.
-      operationId: dms2122auth.presentation.rest.userrole.grant_role
-      parameters:
-        - name: username
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: rolename
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: The given user has been granted the role.
-          content:
-            'text/plain':
-              schema:
-                type: string
-        '400':
-          description: A mandatory parameter was not given.
-          content:
-            'text/plain':
-              schema:
-                type: string
-        '403':
-          description: The requestor has no privilege to grant a role.
-          content:
-            'text/plain':
-              schema:
-                type: string
-        '404':
-          description: The given user does not exist.
-          content:
-            'text/plain':
-              schema:
-                type: string
-      tags:
-        - users
-        - roles
-      security:
-        - user_token: []
-          api_key: []
-    delete:
-      summary: Revokes a role from a user.
-      operationId: dms2122auth.presentation.rest.userrole.revoke_role
-      parameters:
-        - name: username
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: rolename
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: The given user has been revoked the role.
-          content:
-            'text/plain':
-              schema:
-                type: string
-        '400':
-          description: A mandatory parameter was not given.
-          content:
-            'text/plain':
-              schema:
-                type: string
-        '403':
-          description: The requestor has no privilege to revoke the role from the given user.
-          content:
-            'text/plain':
-              schema:
-                type: string
-      tags:
-        - users
-        - roles
-      security:
-        - user_token: []
-          api_key: []
+
 components:
   schemas:
     UserFullModel:
