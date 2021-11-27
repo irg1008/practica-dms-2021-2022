@@ -69,6 +69,7 @@ paths:
       security:
         - user_token: []
           api_key: []
+          
   /user/new:
     post:
       summary: Creates a new user.
@@ -109,6 +110,7 @@ paths:
       security:
         - user_token: []
           api_key: []
+
   /user/{username}/roles:
     get:
       summary: Gets the roles of a certain user.

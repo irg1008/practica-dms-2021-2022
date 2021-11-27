@@ -16,7 +16,7 @@ tags:
   - name: answers
     description: Answer related operations
   - name: user
-    description: User related operations 
+    description: User related operations
   - name: server
     description: Operations about the server itself (e.g., server status querying)
 servers:
@@ -38,8 +38,8 @@ paths:
 
   /user/{username}/stats:
     get:
-      summary: Gets the user stats 
-      operationId: dms2122backend.presentation.rest.test.test
+      summary: Gets the user stats
+      operationId: dms2122backend.presentation.rest.stats.get_stats
       parameters:
         - name: username
           in: path
@@ -62,7 +62,7 @@ paths:
               schema:
                 type: string
         "403":
-          description: The user does not have the privileges to view the given user's roles.
+          description: The user does not have the privileges to view the given user's stats.
           content:
             "text/plain":
               schema:
@@ -73,8 +73,8 @@ paths:
       security:
         - user_token: []
           api_key: []
-    update:
-      summary: Updates the user stats 
+    post:
+      summary: Updates the user stats
       operationId: dms2122backend.presentation.rest.test.test
       responses:
         "200":
@@ -86,7 +86,7 @@ paths:
 
   /user/{username}/questions/answer/{id}:
     post:
-      summary:  Sets the question answer
+      summary: Sets the question answer
       operationId: dms2122backend.presentation.rest.test.test
       responses:
         "200":
@@ -95,7 +95,7 @@ paths:
             "text/plain":
               schema:
                 type: string
-     get:
+    get:
       summary: Gets the question answer
       operationId: dms2122backend.presentation.rest.test.test
       responses:
@@ -104,11 +104,11 @@ paths:
           content:
             "text/plain":
               schema:
-                type: string              
+                type: string
 
   /user/{username}/questions/answered:
     get:
-      summary: Gets a user stats 
+      summary: Gets a user stats
       operationId: dms2122backend.presentation.rest.test.test
       responses:
         "200":
@@ -120,7 +120,7 @@ paths:
 
   /user/{username}/questions/unanswered:
     get:
-      summary: Gets a user stats 
+      summary: Gets a user stats
       operationId: dms2122backend.presentation.rest.test.test
       responses:
         "200":
@@ -153,7 +153,7 @@ paths:
             "text/plain":
               schema:
                 type: string
-    update:
+    post:
       summary: Authenticates a user
       operationId: dms2122backend.presentation.rest.test.test
       responses:
@@ -164,7 +164,7 @@ paths:
               schema:
                 type: string
     delete:
-      summary: Deletes an unanswered question from the DB. 
+      summary: Deletes an unanswered question from the DB.
       operationId: dms2122backend.presentation.rest.test.test
       responses:
         "200":
