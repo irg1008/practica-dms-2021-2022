@@ -73,9 +73,16 @@ paths:
       security:
         - user_token: []
           api_key: []
-    post:
+
+    patch:
       summary: Updates the user stats
-      operationId: dms2122backend.presentation.rest.test.test
+      operationId: dms2122backend.presentation.rest.stats.post_stats
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: A test message
@@ -85,9 +92,20 @@ paths:
                 type: string
 
   /user/{username}/questions/answer/{id}:
-    post:
-      summary: Sets the question answer
+    get:
+      summary: Gets the question answer
       operationId: dms2122backend.presentation.rest.test.test
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: A test message
@@ -95,9 +113,20 @@ paths:
             "text/plain":
               schema:
                 type: string
-    get:
-      summary: Gets the question answer
+    patch:
+      summary: Sets the question answer
       operationId: dms2122backend.presentation.rest.test.test
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: A test message
@@ -110,6 +139,12 @@ paths:
     get:
       summary: Gets a user stats
       operationId: dms2122backend.presentation.rest.test.test
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: A test message
@@ -122,6 +157,12 @@ paths:
     get:
       summary: Gets a user stats
       operationId: dms2122backend.presentation.rest.test.test
+       parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: A test message
@@ -146,6 +187,12 @@ paths:
     get:
       summary: Authenticates a user
       operationId: dms2122backend.presentation.rest.test.test
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: A test message
@@ -153,9 +200,15 @@ paths:
             "text/plain":
               schema:
                 type: string
-    post:
+    patch:
       summary: Authenticates a user
       operationId: dms2122backend.presentation.rest.test.test
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: A test message
