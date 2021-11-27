@@ -91,153 +91,153 @@ paths:
               schema:
                 type: string
 
-  /user/{username}/questions/answer/{id}:
-    get:
-      summary: Gets the question answer
-      operationId: dms2122backend.presentation.rest.test.test
-      parameters:
-        - name: username
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: A test message
-          content:
-            "text/plain":
-              schema:
-                type: string
-    patch:
-      summary: Sets the question answer
-      operationId: dms2122backend.presentation.rest.test.test
-      parameters:
-        - name: username
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: A test message
-          content:
-            "text/plain":
-              schema:
-                type: string
+  # /user/{username}/questions/answer/{id}:
+  #   get:
+  #     summary: Gets the question answer
+  #     operationId: dms2122backend.presentation.rest.test.test
+  #     parameters:
+  #       - name: username
+  #         in: path
+  #         required: true
+  #         schema:
+  #           type: string
+  #       - name: id
+  #         in: path
+  #         required: true
+  #         schema:
+  #           type: string
+  #     responses:
+  #       "200":
+  #         description: A test message
+  #         content:
+  #           "text/plain":
+  #             schema:
+  #               type: string
+  #   patch:
+  #     summary: Sets the question answer
+  #     operationId: dms2122backend.presentation.rest.test.test
+  #     parameters:
+  #       - name: username
+  #         in: path
+  #         required: true
+  #         schema:
+  #           type: string
+  #       - name: id
+  #         in: path
+  #         required: true
+  #         schema:
+  #           type: string
+  #     responses:
+  #       "200":
+  #         description: A test message
+  #         content:
+  #           "text/plain":
+  #             schema:
+  #               type: string
 
-  /user/{username}/questions/answered:
-    get:
-      summary: Gets a user stats
-      operationId: dms2122backend.presentation.rest.test.test
-      parameters:
-        - name: username
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: A test message
-          content:
-            "text/plain":
-              schema:
-                type: string
+  # /user/{username}/questions/answered:
+  #   get:
+  #     summary: Gets a user stats
+  #     operationId: dms2122backend.presentation.rest.test.test
+  #     parameters:
+  #       - name: username
+  #         in: path
+  #         required: true
+  #         schema:
+  #           type: string
+  #     responses:
+  #       "200":
+  #         description: A test message
+  #         content:
+  #           "text/plain":
+  #             schema:
+  #               type: string
 
-  /user/{username}/questions/unanswered:
-    get:
-      summary: Gets a user stats
-      operationId: dms2122backend.presentation.rest.test.test
-       parameters:
-        - name: username
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: A test message
-          content:
-            "text/plain":
-              schema:
-                type: string
+  # /user/{username}/questions/unanswered:
+  #   get:
+  #     summary: Gets a user stats
+  #     operationId: dms2122backend.presentation.rest.test.test
+  #     parameters:
+  #       - name: username
+  #         in: path
+  #         required: true
+  #         schema:
+  #           type: string
+  #     responses:
+  #       "200":
+  #         description: A test message
+  #         content:
+  #           "text/plain":
+  #             schema:
+  #               type: string
 
-  /question/new:
-    post:
-      summary: Authenticates a user
-      operationId: dms2122backend.presentation.rest.test.test
-      responses:
-        "200":
-          description: A test message
-          content:
-            "text/plain":
-              schema:
-                type: string
+  # /question/new:
+  #   post:
+  #     summary: Authenticates a user
+  #     operationId: dms2122backend.presentation.rest.test.test
+  #     responses:
+  #       "200":
+  #         description: A test message
+  #         content:
+  #           "text/plain":
+  #             schema:
+  #               type: string
 
-  /question/{id}:
-    get:
-      summary: Authenticates a user
-      operationId: dms2122backend.presentation.rest.test.test
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: A test message
-          content:
-            "text/plain":
-              schema:
-                type: string
-    patch:
-      summary: Authenticates a user
-      operationId: dms2122backend.presentation.rest.test.test
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: A test message
-          content:
-            "text/plain":
-              schema:
-                type: string
-    delete:
-      summary: Deletes an unanswered question from the DB.
-      operationId: dms2122backend.presentation.rest.test.test
-      responses:
-        "200":
-          description: A test message
-          content:
-            "text/plain":
-              schema:
-                type: string
+  # /question/{id}:
+  #   get:
+  #     summary: Authenticates a user
+  #     operationId: dms2122backend.presentation.rest.test.test
+  #     parameters:
+  #       - name: id
+  #         in: path
+  #         required: true
+  #         schema:
+  #           type: string
+  #     responses:
+  #       "200":
+  #         description: A test message
+  #         content:
+  #           "text/plain":
+  #             schema:
+  #               type: string
+  #   patch:
+  #     summary: Authenticates a user
+  #     operationId: dms2122backend.presentation.rest.test.test
+  #     parameters:
+  #       - name: id
+  #         in: path
+  #         required: true
+  #         schema:
+  #           type: string
+  #     responses:
+  #       "200":
+  #         description: A test message
+  #         content:
+  #           "text/plain":
+  #             schema:
+  #               type: string
+  #   delete:
+  #     summary: Deletes an unanswered question from the DB.
+  #     operationId: dms2122backend.presentation.rest.test.test
+  #     responses:
+  #       "200":
+  #         description: A test message
+  #         content:
+  #           "text/plain":
+  #             schema:
+  #               type: string
 
-  /question/all:
-    get:
-      summary: Retrieves all the answered and unanswered questions.
-      operationId: dms2122backend.presentation.rest.test.test
-      responses:
-        "200":
-          description: A test message
-          content:
-            "text/plain":
-              schema:
-                type: string
+  # /question/all:
+  #   get:
+  #     summary: Retrieves all the answered and unanswered questions.
+  #     operationId: dms2122backend.presentation.rest.test.test
+  #     responses:
+  #       "200":
+  #         description: A test message
+  #         content:
+  #           "text/plain":
+  #             schema:
+  #               type: string
 
 components:
   schemas:
