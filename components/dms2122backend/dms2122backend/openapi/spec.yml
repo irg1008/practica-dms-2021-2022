@@ -1,9 +1,9 @@
 openapi: 3.0.0
 info:
   title: DMS Backend service REST API
-  version: '1.0'
+  version: "1.0"
   description: |
-    REST API for the authentication service.
+    REST API for the backend service.
 
     This is part of the mandatory exercise.
 
@@ -22,38 +22,65 @@ tags:
 servers:
   - url: /api/v1
 paths:
-  '/':
+  "/":
     head:
       summary: Health test for the service
       operationId: dms2122backend.presentation.rest.server.health_test
       responses:
-        '204':
+        "204":
           description: Success response (will not redirect)
           content:
-            'text/plain':
+            "text/plain":
               schema:
                 type: string
       tags:
         - server
+
   /user/{username}/stats:
     get:
-      summary: Gets a user stats 
+      summary: Gets the user stats 
       operationId: dms2122backend.presentation.rest.test.test
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
-        '200':
-          description: A test message
+        "200":
+          description: Success fetch of user stats.
           content:
-            'text/plain':
+            "application/json":
+              schema:
+                type: array
+                items:
+                  type: string
+        "400":
+          description: A user was not provided.
+          content:
+            "text/plain":
               schema:
                 type: string
+        "403":
+          description: The user does not have the privileges to view the given user's roles.
+          content:
+            "text/plain":
+              schema:
+                type: string
+      tags:
+        - users
+        - roles
+      security:
+        - user_token: []
+          api_key: []
     update:
       summary: Updates the user stats 
       operationId: dms2122backend.presentation.rest.test.test
       responses:
-        '200':
+        "200":
           description: A test message
           content:
-            'text/plain':
+            "text/plain":
               schema:
                 type: string
 
@@ -62,31 +89,32 @@ paths:
       summary:  Sets the question answer
       operationId: dms2122backend.presentation.rest.test.test
       responses:
-        '200':
+        "200":
           description: A test message
           content:
-            'text/plain':
+            "text/plain":
               schema:
                 type: string
      get:
       summary: Gets the question answer
       operationId: dms2122backend.presentation.rest.test.test
       responses:
-        '200':
+        "200":
           description: A test message
           content:
-            'text/plain':
+            "text/plain":
               schema:
-                type: string               
+                type: string              
+
   /user/{username}/questions/answered:
     get:
       summary: Gets a user stats 
       operationId: dms2122backend.presentation.rest.test.test
       responses:
-        '200':
+        "200":
           description: A test message
           content:
-            'text/plain':
+            "text/plain":
               schema:
                 type: string
 
@@ -95,10 +123,10 @@ paths:
       summary: Gets a user stats 
       operationId: dms2122backend.presentation.rest.test.test
       responses:
-        '200':
+        "200":
           description: A test message
           content:
-            'text/plain':
+            "text/plain":
               schema:
                 type: string
 
@@ -107,10 +135,10 @@ paths:
       summary: Authenticates a user
       operationId: dms2122backend.presentation.rest.test.test
       responses:
-        '200':
+        "200":
           description: A test message
           content:
-            'text/plain':
+            "text/plain":
               schema:
                 type: string
 
@@ -119,41 +147,42 @@ paths:
       summary: Authenticates a user
       operationId: dms2122backend.presentation.rest.test.test
       responses:
-        '200':
+        "200":
           description: A test message
           content:
-            'text/plain':
+            "text/plain":
               schema:
                 type: string
     update:
       summary: Authenticates a user
       operationId: dms2122backend.presentation.rest.test.test
       responses:
-        '200':
+        "200":
           description: A test message
           content:
-            'text/plain':
+            "text/plain":
               schema:
                 type: string
     delete:
       summary: Deletes an unanswered question from the DB. 
       operationId: dms2122backend.presentation.rest.test.test
       responses:
-        '200':
+        "200":
           description: A test message
           content:
-            'text/plain':
+            "text/plain":
               schema:
                 type: string
+
   /question/all:
     get:
       summary: Retrieves all the answered and unanswered questions.
       operationId: dms2122backend.presentation.rest.test.test
       responses:
-        '200':
+        "200":
           description: A test message
           content:
-            'text/plain':
+            "text/plain":
               schema:
                 type: string
 
@@ -168,7 +197,7 @@ components:
         - username
     UserFullPasswordModel:
       allOf:
-        - $ref: '#/components/schemas/UserFullModel'
+        - $ref: "#/components/schemas/UserFullModel"
         - type: object
           properties:
             password:
@@ -178,7 +207,7 @@ components:
     UsersFullListModel:
       type: array
       items:
-        $ref: '#/components/schemas/UserFullModel'
+        $ref: "#/components/schemas/UserFullModel"
   securitySchemes:
     user_credentials:
       type: http
