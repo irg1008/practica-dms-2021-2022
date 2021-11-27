@@ -2,7 +2,7 @@ from typing import Optional, Tuple, Dict, Union
 from http import HTTPStatus
 
 
-def get_stats() -> Tuple[str, Optional[int]]:
+def get_stats(username: str) -> Tuple[str, Optional[int]]:
     """Simple health test endpoint.
 
     Returns:
