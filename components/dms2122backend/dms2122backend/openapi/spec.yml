@@ -163,18 +163,39 @@ paths:
   #             schema:
   #               type: string
 
-  # /question/new:
-  #   post:
-  #     summary: Authenticates a user
-  #     operationId: dms2122backend.presentation.rest.test.test
-  #     responses:
-  #       "200":
-  #         description: A test message
-  #         content:
-  #           "text/plain":
-  #             schema:
-  #               type: string
-
+  /question/new:
+    post:
+      summary: Creates a new question
+      operationId: dms2122backend.presentation.rest.question.new
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Question"
+            example:
+              $ref: "#components/examples/Question"
+      responses:
+        "200":
+          description: OK Response, returns the question ID
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+        "403":
+          description: The requestor has no privilege to add a question.
+          content:
+            'text/plain':
+              schema:
+                type: string
+        '404':
+          description: There was an error while creating the question.
+          content:
+            'text/plain':
+              schema:
+                type: string
   # /question/{id}:
   #   get:
   #     summary: Authenticates a user
@@ -233,26 +254,44 @@ paths:
 
 components:
   schemas:
-    UserFullModel:
+    Question:
       type: object
       properties:
-        username:
+        title:
           type: string
-      required:
-        - username
-    UserFullPasswordModel:
-      allOf:
-        - $ref: "#/components/schemas/UserFullModel"
-        - type: object
-          properties:
-            password:
-              type: string
-          required:
-            - password
-    UsersFullListModel:
-      type: array
-      items:
-        $ref: "#/components/schemas/UserFullModel"
+        statement:
+          type: string
+        correctOption:
+          type: string
+        incorrectOptions:
+          type: array
+          items:
+            type: string
+        imageUrl:
+          type: string
+        score:
+          type: number
+          minimum: 0
+        penalty:
+          type: number
+          minimum: 0
+          maximum: 1
+        public:
+          type: boolean
+  examples:
+    Question:
+      summary: "Question Example"
+      value:
+        title: Titulo
+        statement: ¿Cuánto es 1 + 1?
+        correctOption: 2
+        incorrectOptions: [1,3]
+        imageUrl: ""
+        score: 1
+        penalty: 0.2
+        public: true
+
+    
   securitySchemes:
     user_credentials:
       type: http
