@@ -6,8 +6,8 @@ from dms2122backend.service.auth.protected_endpoint_dec import protected_endpoin
 from dms2122common.data.role import Role
 
 
-@protected_endpoint(roles=[Role.Teacher])
-def new(body: Dict, token_info: Dict = {}, **kwargs) -> Tuple[str, Optional[int]]:
+@protected_endpoint(roles=[Role.Student])
+def new(body: Dict, **kwargs) -> Tuple[str, Optional[int]]:
     """New question endpoint
 
     Roles: Teacher
@@ -15,8 +15,6 @@ def new(body: Dict, token_info: Dict = {}, **kwargs) -> Tuple[str, Optional[int]
     Returns:
         Tuple[str, Optional[int]]: Response message and status code
     """
-    print(body, flush=True)
-    print(token_info, flush=True)
 
     return ("", 200)
 

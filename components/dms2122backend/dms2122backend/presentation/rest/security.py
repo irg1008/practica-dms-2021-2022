@@ -21,12 +21,11 @@ def verify_api_key(token: str) -> Dict:
     Returns:
         - Dict: Information retrieved from the key to be passed to the endpoints.
     """
-    print("Verify Key " + token, flush=True)
+
     with current_app.app_context():
         cfg: BackendConfiguration = current_app.cfg
         if not token in cfg.get_authorized_api_keys():
             raise Unauthorized("Invalid API key")
-    print("Verify Key OK", flush=True)
 
     return {}
 

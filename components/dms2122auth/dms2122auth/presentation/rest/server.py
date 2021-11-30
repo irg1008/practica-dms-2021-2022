@@ -33,4 +33,5 @@ def login(token_info: Dict) -> Tuple[str, Optional[int]]:
         elif "user_credentials" in token_info:
             user = token_info["user_credentials"]["user"]
         token = jws.dumps({"user": user, "sub": user})
+        print(token, flush=True)
         return (token.decode("ascii"), HTTPStatus.OK.value)

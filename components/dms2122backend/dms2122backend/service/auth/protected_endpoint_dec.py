@@ -53,9 +53,18 @@ def protected_endpoint(
         raise Exception("This is a decorator, not a normal function!")
 
     def route_aux(*args, **kwargs) -> Tuple[Any, Optional[int]]:
-        user_token: Union[Dict, None] = kwargs.get("user_token")
 
-        if not user_token or not user_token.get("auth_token"):
+        if not "token_info" in kwargs:
+            return "No info was parsed from headers", None
+
+        headers: Union[Dict, None] = kwargs.get("token_info")
+
+        if not headers or not headers.get("user_token"):
+            return ("User Token is Invalid", 400)
+
+        user_token: Union[Dict, None] = headers.get("user_token")
+
+        if not user_token:
             return ("User Token is Invalid", 400)
 
         token = user_token.get("auth_token")
@@ -67,10 +76,6 @@ def protected_endpoint(
                 HTTPStatus.FORBIDDEN,
             )
 
-        print("args")
-        print(args, flush=True)
-        print("kargs")
-        print(kwargs, flush=True)
         return route_fun(*args, **kwargs)
 
     return route_aux
