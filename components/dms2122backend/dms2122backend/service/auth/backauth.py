@@ -44,6 +44,6 @@ class BackAuth:
         role_list = list(response.get_content())
 
         for role in roles:
-            if parse_role(role) in role_list:
+            if role.name in role_list:
                 return True
         return False

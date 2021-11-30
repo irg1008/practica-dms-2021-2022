@@ -6,7 +6,7 @@ from dms2122backend.service.auth.protected_endpoint_dec import protected_endpoin
 from dms2122common.data.role import Role
 
 
-@protected_endpoint(roles=[Role.Student])
+@protected_endpoint(roles=[Role.Teacher])
 def new(body: Dict, **kwargs) -> Tuple[str, Optional[int]]:
     """New question endpoint
 
