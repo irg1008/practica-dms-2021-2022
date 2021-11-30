@@ -3,9 +3,10 @@
 
 from typing import Dict, Optional
 from flask import current_app
-from itsdangerous import TimedJSONWebSignatureSerializer
 from connexion.exceptions import Unauthorized  # type: ignore
 from dms2122backend.data.config import BackendConfiguration
+from base64 import b64decode
+import json
 
 
 def verify_api_key(token: str) -> Dict:
@@ -30,28 +31,16 @@ def verify_api_key(token: str) -> Dict:
     return {}
 
 
-def verify_token(token: str) -> Dict:
-    """Callback testing a JWS user token.
+def parse_token(token: str) -> Dict:
+    """Callback that parses the JWS token.
 
     Args:
         - token (str): The JWS user token received.
 
-    Raises:
-        - Unauthorized: When the token is incorrect.
-
     Returns:
-        - Dict: A dictionary with the user name (key `user`) if the credentials are correct.
+        - Dict: A dictionary with the Token, Username and Sub 
     """
-    with current_app.app_context():
-        print("Verify Token " + token, flush=True)
+    split = token.split(".")
+    body = json.loads(b64decode(split[1]))
 
-        token_bytes: bytes = token.encode("ascii")
-        jws: TimedJSONWebSignatureSerializer = current_app.jws
-        try:
-            data = jws.loads(token_bytes)
-        except Exception as ex:
-            raise Unauthorized from ex
-        if "user" not in data:
-            return Unauthorized("Invalid token")
-        print("Verify Token OK", flush=True)
-        return {"sub": data["sub"], "user": data["user"]}
+    return {"auth_token": token, "sub": body.get("sub"), "user": body.get("user")}

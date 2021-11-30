@@ -1,35 +1,43 @@
 """ WebAuth class module.
 """
 
+from typing import List
 from flask import session
-from dms2122common.data.rest import ResponseData
-from dms2122backend.service.auth.authservice import AuthService
+from dms2122common.data.rest import ResponseData, responsedata
+from dms2122backend.service.auth._authservice import AuthService
 from dms2122common.data.role import Role
 
 
-class WebAuth:
+class BackAuth:
     """ Monostate class responsible of the authentication operation utilities.
     """
 
     @staticmethod
-    def test_token(auth_service: AuthService) -> bool:
-        """ Tests whether the session token is valid or not against the authentication service.
-
-        If the token is valid, the session token is updated/refreshed.
+    def has_role(
+        auth_service: AuthService, token: str, username: str, roles: List[Role]
+    ) -> bool:
+        """Checks if a user has any of the roles
 
         Args:
-            - auth_service (AuthService): The authentication service.
+            auth_service (AuthService): [description]
+            roles (Role[]): List of roles to check
 
         Returns:
-            - bool: Whether the token is valid (`True`) or not.
+            bool: [description]
         """
-        response: ResponseData = auth_service.auth(session.get("token"))
 
-        if not response.is_successful():
+        response = auth_service.get_user_roles(token, username)
+
+        if not response.is_successful:
             return False
 
-        return True
+        if response.get_content() is None or not isinstance(
+            response.get_content(), list
+        ):
+            return False
+        role_list = list(response.get_content())
 
-    @staticmethod
-    def has_role(auth_service: AuthService, rol: Role) -> bool:
+        for rol in roles:
+            if rol.value in role_list:
+                return True
         return False

@@ -14,6 +14,8 @@
 import os
 import inspect
 import logging
+from typing import Dict
+from dms2122backend.service.auth._authservice import AuthService
 import connexion
 from connexion.apps.flask_app import FlaskJSONEncoder
 from flask import current_app
@@ -31,6 +33,13 @@ if __name__ == "__main__":
     jws: TimedJSONWebSignatureSerializer = TimedJSONWebSignatureSerializer(
         cfg.get_jws_secret(), expires_in=cfg.get_jws_ttl()
     )
+    auth_service_cfg: Dict = cfg.get_auth_service()
+    auth_service = AuthService(
+        auth_service_cfg["host"],
+        auth_service_cfg["port"],
+        apikey_header="X-ApiKey-Auth",
+        apikey_secret=auth_service_cfg["apikey_secret"],
+    )
 
     specification_dir = os.path.dirname(inspect.getfile(dms2122backend)) + "/openapi"
     app = connexion.FlaskApp(
@@ -45,6 +54,7 @@ if __name__ == "__main__":
         current_app.db = db
         current_app.cfg = cfg
         current_app.jws = jws
+        current_app.auth_service = auth_service
 
     root_logger = logging.getLogger()
     root_logger.addHandler(default_handler)

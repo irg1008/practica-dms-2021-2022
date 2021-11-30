@@ -302,7 +302,7 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
-      x-bearerInfoFunc: dms2122backend.presentation.rest.security.verify_token
+      x-bearerInfoFunc: dms2122backend.presentation.rest.security.parse_token
     api_key:
       type: apiKey
       name: X-ApiKey-Auth
