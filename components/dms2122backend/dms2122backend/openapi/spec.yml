@@ -304,7 +304,7 @@ paths:
             schema:
               $ref: "#/components/schemas/Question"
             example:
-              $ref: "#components/examples/Question"
+              $ref: "#/components/examples/Question"
       responses:
         "200":
           description: OK Response, returns the question ID
@@ -389,7 +389,7 @@ paths:
             schema:
               $ref: "#/components/schemas/Question"
             example:
-              $ref: "#components/examples/Question"
+              $ref: "#/components/examples/Question"
 
       responses:
         "200":
@@ -408,6 +408,14 @@ components:
   schemas:
     Question:
       type: object
+      required:
+        - title
+        - statement
+        - correctOption
+        - incorrectOptions
+        - imageUrl
+        - score
+        - penalty
       properties:
         title:
           type: string
@@ -435,6 +443,9 @@ components:
       allOf:
         - $ref: "#/components/schemas/Question"
       type: object
+      required:
+        - id
+        - userAns
       properties:
         id:
           type: integer
@@ -450,6 +461,11 @@ components:
 
     UserStats:
       type: object
+      required:
+        - userId
+        - nAnswered
+        - nCorrect
+        - score
       properties:
         userId:
           type: integer
