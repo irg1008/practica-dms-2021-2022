@@ -7,7 +7,7 @@ from dms2122common.data.role import Role
 
 
 @protected_endpoint(roles=[Role.Teacher])
-def new(body: Dict, **kwargs) -> Tuple[str, Optional[int]]:
+def new(body: Dict, **kwargs) -> Tuple[int, Optional[int]]:
     """New question endpoint
 
     Roles: Teacher
@@ -16,16 +16,17 @@ def new(body: Dict, **kwargs) -> Tuple[str, Optional[int]]:
         Tuple[str, Optional[int]]: Response message and status code
     """
 
-    return ("", 200)
+    return (1, 200)
+
+@protected_endpoint(roles=[Role.Teacher, Role.Student])
+def getQ(id: int, **kwargs):
+    return ({"id": id}, 200)
+
+@protected_endpoint(roles=[Role.Teacher])
+def editQ(id: int, **kwargs):
+    return (id, 200)
 
 
-def getQ():
-    pass
 
-
-def editQ():
-    pass
-
-
-def getAll():
-    pass
+def getAll(**kwargs):
+    return ({}, 200)

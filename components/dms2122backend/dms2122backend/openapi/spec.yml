@@ -162,6 +162,29 @@ paths:
   #           "text/plain":
   #             schema:
   #               type: string
+  /question/all:
+    get:
+      summary: Retrieves every single stored questions (This should be paginated)
+      operationId: dms2122backend.presentation.rest.question.getAll
+      responses:
+        "200":
+          description: Question Lis
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  questions:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/QuestionResponse"
+                  count:
+                    type: integer
+      tags:
+        - questions
+      security:
+        - user_token: []
+          api_key: []
 
   /question/new:
     post:
@@ -275,17 +298,6 @@ paths:
         - user_token: []
           api_key: []
 
-  # /question/all:
-  #   get:
-  #     summary: Retrieves all the answered and unanswered questions.
-  #     operationId: dms2122backend.presentation.rest.test.test
-  #     responses:
-  #       "200":
-  #         description: A test message
-  #         content:
-  #           "text/plain":
-  #             schema:
-  #               type: string
 
 components:
   schemas:
