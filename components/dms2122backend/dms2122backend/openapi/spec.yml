@@ -168,6 +168,8 @@ paths:
       summary: Creates a new question
       operationId: dms2122backend.presentation.rest.question.new
       requestBody:
+        description: A question
+        required: true
         content:
           application/json:
             schema:
@@ -190,7 +192,7 @@ paths:
             'text/plain':
               schema:
                 type: string
-        '404':
+        '400':
           description: There was an error while creating the question.
           content:
             'text/plain':
@@ -201,49 +203,77 @@ paths:
       security:
         - user_token: []
           api_key: []
-  # /question/{id}:
-  #   get:
-  #     summary: Authenticates a user
-  #     operationId: dms2122backend.presentation.rest.test.test
-  #     parameters:
-  #       - name: id
-  #         in: path
-  #         required: true
-  #         schema:
-  #           type: string
-  #     responses:
-  #       "200":
-  #         description: A test message
-  #         content:
-  #           "text/plain":
-  #             schema:
-  #               type: string
-  #   patch:
-  #     summary: Authenticates a user
-  #     operationId: dms2122backend.presentation.rest.test.test
-  #     parameters:
-  #       - name: id
-  #         in: path
-  #         required: true
-  #         schema:
-  #           type: string
-  #     responses:
-  #       "200":
-  #         description: A test message
-  #         content:
-  #           "text/plain":
-  #             schema:
-  #               type: string
-  #   delete:
-  #     summary: Deletes an unanswered question from the DB.
-  #     operationId: dms2122backend.presentation.rest.test.test
-  #     responses:
-  #       "200":
-  #         description: A test message
-  #         content:
-  #           "text/plain":
-  #             schema:
-  #               type: string
+
+
+  /question/{id}:
+    get:
+      summary: Gets a question by ID
+      operationId: dms2122backend.presentation.rest.question.getQ
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK Response, returns the question ID
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+        "403":
+          description: The requestor has no privilege to add a question.
+          content:
+            'text/plain':
+              schema:
+                type: string
+        '400':
+          description: There was an error while creating the question.
+          content:
+            'text/plain':
+              schema:
+                type: string
+      tags:
+        - questions
+      security:
+        - user_token: []
+          api_key: []
+    patch:
+      summary: Updates a question by ID
+      operationId: dms2122backend.presentation.rest.question.editQ
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+
+      requestBody:
+        description: The question to update
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Question"
+            example:
+              $ref: "#components/examples/Question"
+
+      responses:
+        "200":
+          description: A test message
+          content:
+            "text/plain":
+              schema:
+                type: string
+      tags:
+        - questions
+      security:
+        - user_token: []
+          api_key: []
 
   # /question/all:
   #   get:
@@ -283,6 +313,27 @@ components:
           maximum: 1
         public:
           type: boolean
+
+
+    QuestionResponse:
+      allOf: 
+        - $ref: "#/components/schemas/Question"
+      type: object
+      properties:
+        id:
+          type: integer
+        userAns:
+          type: array
+          items:
+            type: object
+            properties:
+              answer:
+                type: string
+              resCount:
+                type: integer
+
+        
+        
   examples:
     Question:
       summary: "Question Example"
@@ -295,6 +346,21 @@ components:
         score: 1
         penalty: 0.2
         public: true
+      
+      
+    QuestionResponse:
+      summary: "Question Example"
+      value:
+        id: 1
+        title: Titulo
+        statement: ¿Cuánto es 1 + 1?
+        correctOption: "2"
+        incorrectOptions: ["1","3"]
+        imageUrl: ""
+        score: 1
+        penalty: 0.2
+        public: true
+        userAns: [{"1": 0}, {"3": 5}, {"2": 250} ]      
 
     
   securitySchemes:
