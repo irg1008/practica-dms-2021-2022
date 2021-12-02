@@ -1,5 +1,6 @@
 """ Authentication ORM results (i.e., records)
 """
 
-from .user import User
-from .userrole import UserRole
+from .answeredQuestion import AnsweredQuestion
+from .question import Question
+from .userStats import UserStats

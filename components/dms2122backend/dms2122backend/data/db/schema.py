@@ -7,7 +7,7 @@ from sqlalchemy.ext.declarative import declarative_base  # type: ignore
 from sqlalchemy.orm import sessionmaker, scoped_session  # type: ignore
 from sqlalchemy.orm.session import Session  # type: ignore
 from dms2122backend.data.config import BackendConfiguration
-from dms2122backend.data.db.results import User, UserRole
+from dms2122backend.data.db.results import UserStats, Question, AnsweredQuestion
 
 
 # Required for SQLite to enforce FK integrity when supported
@@ -49,8 +49,9 @@ class Schema:
         self.__create_engine = create_engine(db_connection_string)
         self.__session_maker = scoped_session(sessionmaker(bind=self.__create_engine))
 
-        User.map(self.__declarative_base.metadata)
-        UserRole.map(self.__declarative_base.metadata)
+        UserStats.map(self.__declarative_base.metadata)
+        Question.map(self.__declarative_base.metadata)
+        AnsweredQuestion.map(self.__declarative_base.metadata)
         self.__declarative_base.metadata.create_all(self.__create_engine)
 
     def new_session(self) -> Session:
