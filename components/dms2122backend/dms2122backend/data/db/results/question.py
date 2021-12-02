@@ -56,9 +56,9 @@ class Question(ResultBase):
             - Table: A `Table` object with the table definition.
         """
         return Table(
-            "Questions",
+            "questions",
             metadata,
-            Column("idquestion", Integer, primary_key=True),
+            Column("id", Integer, primary_key=True),
             Column("title", String(250), nullable=False),
             Column("statement", String(250), nullable=False),
             Column("imageUrl", String(250), nullable=True),
