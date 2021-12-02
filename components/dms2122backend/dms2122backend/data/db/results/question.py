@@ -6,7 +6,7 @@ from sqlalchemy import Table, MetaData, Column, String, Integer, Float, Boolean 
 from sqlalchemy.orm import relationship  # type: ignore
 from dms2122backend.data.db.results.resultbase import ResultBase
 from dms2122backend.data.db.results.answeredQuestion import AnsweredQuestion
-
+import json
 
 class Question(ResultBase):
     """ Definition and storage of user ORM records.
@@ -41,8 +41,15 @@ class Question(ResultBase):
         self.score: float = score
         self.penalty: float = penalty
         self.public: bool = public
+
+        # Create dictionary for answer stats.
         statsKeys = incorrectOptions + [correctOption]
-        self.answerStats = dict.fromkeys(statsKeys, 0)
+        ansStats = dict.fromkeys(statsKeys, 0)
+        
+        # Transform dictionary to JSON string.
+        ansStatsJson = json.dumps(ansStats)
+        
+        self.answerStats: str = ansStatsJson
 
     @staticmethod
     def _table_definition(metadata: MetaData) -> Table:
