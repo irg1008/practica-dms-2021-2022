@@ -49,10 +49,9 @@ def protected_endpoint(
     # auth_service: AuthService = current_app.auth_servic
     auth_service = get_auth_service()
 
-    if route_fun is None:
-        raise Exception("This is a decorator, not a normal function!")
-
     def route_aux(*args, **kwargs) -> Tuple[Any, Optional[int]]:
+        if route_fun is None:
+            raise Exception("This is a decorator, not a normal function!")
 
         if not "token_info" in kwargs:
             return "No info was parsed from headers", None
@@ -76,9 +75,7 @@ def protected_endpoint(
                 HTTPStatus.FORBIDDEN,
             )
 
-        # Absurd double check to avoi typing errors.
-        if route_fun is not None:
-            return route_fun(*args, **kwargs)
+        return route_fun(*args, **kwargs)
 
     return route_aux
 
