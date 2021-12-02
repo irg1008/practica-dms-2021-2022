@@ -27,7 +27,7 @@ def parametrized(dec):
 
 @parametrized
 def protected_endpoint(
-    route_fun: Callable[..., Tuple[Any, Optional[int]]], roles: List[Role] = []
+    route_fun: Callable[..., Tuple[Any, Optional[int]]] = None, roles: List[Role] = []
 ) -> Callable[..., Tuple[Any, Optional[int]]]:
     """Decorator that validates a Token and asserts that the user has any of the roles.
 
@@ -49,7 +49,7 @@ def protected_endpoint(
     # auth_service: AuthService = current_app.auth_servic
     auth_service = get_auth_service()
 
-    if not route_fun:
+    if route_fun is None:
         raise Exception("This is a decorator, not a normal function!")
 
     def route_aux(*args, **kwargs) -> Tuple[Any, Optional[int]]:
