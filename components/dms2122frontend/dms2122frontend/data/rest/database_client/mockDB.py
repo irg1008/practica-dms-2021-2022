@@ -22,10 +22,10 @@ class mockDB(DatabaseClient):
 
         self.id = len(self.questions)
 
-    def getAnsweredQuestions(self, username: str) -> List[AnsweredQuestion]:
+    def getAnsweredQuestions(self, username: str, token="") -> List[AnsweredQuestion]:
         return list(self.answered.values())
 
-    def _mock_answer_questions(self, questions: List[Question]):
+    def _mock_answer_questions(self, questions: List[Question], token=""):
         ans: Dict[int, AnsweredQuestion] = {}
         for q in questions:
             if random.random() > 0.5:
@@ -36,10 +36,10 @@ class mockDB(DatabaseClient):
 
         return ans
 
-    def getUnasweredQuestions(self, username: str) -> List[Question]:
+    def getUnasweredQuestions(self, username: str, token="") -> List[Question]:
         return list(self.not_answered.values())
 
-    def answerQuestion(self, username: str, question_id: int, answer: str) -> bool:
+    def answerQuestion(self, username: str, question_id: int, answer: str, token="") -> bool:
         try:
             del self.not_answered[question_id]
             self.answered[question_id] = AnsweredQuestion(
@@ -49,27 +49,27 @@ class mockDB(DatabaseClient):
         except:
             return False
 
-    def getQuestion(self, question_id: int) -> Union[Question, None]:
+    def getQuestion(self, question_id: int, token="") -> Union[Question, None]:
         return self.questions.get(question_id)
 
     def getAnsweredQuestion(
-        self, username: str, question_id: int
+        self, username: str, question_id: int, token=""
     ) -> Union[AnsweredQuestion, None]:
         return self.answered.get(question_id)
 
-    def getCurrentQuestionId(self) -> int:
+    def getCurrentQuestionId(self, token="") -> int:
         return self.id
 
-    def createQuestion(self, question: Question) -> Tuple[Question, int]:
+    def createQuestion(self, question: Question, token="") -> Tuple[Question, int]:
         self.questions[self.id] = question
         self.not_answered[self.id] = question
         self.id += 1
         return question, self.id
 
-    def updateQuestion(self, question: Question) -> None:
+    def updateQuestion(self, question: Question, token="") -> None:
         self.questions[question.id] = question
 
-    def getAllQuestions(self) -> List[Question]:
+    def getAllQuestions(self, token="") -> List[Question]:
         questions = list(self.questions.values())
         questions.sort(key=lambda q: q.number_of_questions_answered)
 
