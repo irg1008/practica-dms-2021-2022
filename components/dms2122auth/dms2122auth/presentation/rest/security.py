@@ -60,6 +60,8 @@ def verify_token(token: str) -> Dict:
     Returns:
         - Dict: A dictionary with the user name (key `user`) if the credentials are correct.
     """
+    print(token)
+    
     with current_app.app_context():
         token_bytes: bytes = token.encode("ascii")
         jws: TimedJSONWebSignatureSerializer = current_app.jws
@@ -68,5 +70,5 @@ def verify_token(token: str) -> Dict:
         except Exception as ex:
             raise Unauthorized from ex
         if "user" not in data:
-            return Unauthorized("Invalid token")
+            raise Unauthorized("Invalid token")
         return {"sub": data["sub"], "user": data["user"]}

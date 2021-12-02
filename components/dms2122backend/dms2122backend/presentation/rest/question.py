@@ -18,9 +18,11 @@ def new(body: Dict, **kwargs) -> Tuple[int, Optional[int]]:
 
     return (1, HTTPStatus.OK)
 
+
 @protected_endpoint(roles=[Role.Teacher, Role.Student])
 def getQ(id: int, **kwargs):
     return ({"id": id}, 200)
+
 
 @protected_endpoint(roles=[Role.Teacher])
 def editQ(id: int, **kwargs):
@@ -29,4 +31,4 @@ def editQ(id: int, **kwargs):
 
 @protected_endpoint(roles=[Role.Teacher])
 def getAll(**kwargs):
-    return ({}, 200)
+    return ({"hola": "hola"}, 200)

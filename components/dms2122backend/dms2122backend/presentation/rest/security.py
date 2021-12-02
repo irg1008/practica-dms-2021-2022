@@ -40,6 +40,9 @@ def parse_token(token: str) -> Dict:
         - Dict: A dictionary with the Token, Username and Sub 
     """
     split = token.split(".")
+    if len(split) != 3:
+        raise Unauthorized("Invalid token")
+
     body = json.loads(b64decode(split[1]))
 
     return {"auth_token": token, "sub": body.get("sub"), "user": body.get("user")}

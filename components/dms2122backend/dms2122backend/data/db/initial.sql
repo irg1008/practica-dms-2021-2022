@@ -34,4 +34,6 @@ CREATE TABLE UserStats(
     score float
 );
 
+-- INSERT EXAMPLES HERE
+
 COMMIT;

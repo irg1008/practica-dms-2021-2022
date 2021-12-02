@@ -22,6 +22,7 @@ tags:
 servers:
   - url: /api/v1
 paths:
+
   '/':
     head:
       summary: Health test for the service
@@ -35,6 +36,7 @@ paths:
                 type: string
       tags:
         - server
+        
   /auth:
     post:
       summary: Authenticates a user
@@ -53,6 +55,7 @@ paths:
           api_key: []
         - user_credentials: []
           api_key: []
+
   /users:
     get:
       summary: Gets a listing of users.

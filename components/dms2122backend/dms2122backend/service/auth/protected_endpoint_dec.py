@@ -2,7 +2,6 @@ from typing import Any, Callable, Dict, List, Optional, Tuple, TypeVar, Union
 from http import HTTPStatus
 from flask.globals import current_app
 from dms2122common.data.role import Role
-from dms2122backend.service.auth._authservice import AuthService
 from dms2122backend.service.auth.backauth import BackAuth
 from dms2122backend.g import get_auth_service
 
@@ -49,10 +48,9 @@ def protected_endpoint(
     # auth_service: AuthService = current_app.auth_servic
     auth_service = get_auth_service()
 
-    if not route_fun:
-        raise Exception("This is a decorator, not a normal function!")
-
     def route_aux(*args, **kwargs) -> Tuple[Any, Optional[int]]:
+        if route_fun is None:
+            raise Exception("This is a decorator, not a normal function!")
 
         if not "token_info" in kwargs:
             return "No info was parsed from headers", None
