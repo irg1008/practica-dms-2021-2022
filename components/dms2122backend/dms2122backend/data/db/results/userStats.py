@@ -3,7 +3,8 @@
 
 from typing import Dict, List
 from sqlalchemy import Table, MetaData, Column, String, Integer, Float, Boolean  # type: ignore
-from sqlalchemy.orm import relationship  # type: ignore
+from sqlalchemy.orm import relationship
+from sqlalchemy.sql.schema import ForeignKey  # type: ignore
 from dms2122backend.data.db.results.resultbase import ResultBase
 from dms2122backend.data.db.results.answeredQuestion import AnsweredQuestion
 
@@ -14,33 +15,22 @@ class UserStats(ResultBase):
 
     def __init__(
         self,
-        title: str,
-        statement: str,
-        correctOption: str,
-        incorrectOptions: List[str],
-        imageUrl: str = "",
-        score: float = 0,
-        penalty: float = 0,
-        public: bool = True,
+        iduser: str
     ):
         """ Constructor method.
 
         Initializes a user record.
 
         Args:
-            - username (str): A string with the user name.
-            - password (str): A string with the password hash.
+            - iduser (str): A string with the user name.
+            - naswered (int): number of answered questions.
+            - ncorrect (int): number of correct answered questions.
+            - score (float): score of the user
         """
-        self.title: str = title
-        self.statement: str = statement
-        self.correctOption: str = correctOption
-        self.incorrectOptions: List[str] = incorrectOptions
-        self.imageUrl: str = imageUrl
-        self.score: float = score
-        self.penalty: float = penalty
-        self.public: bool = public
-        self.ncorrect: int = 0
+        self.iduser: str = iduser
         self.nanswered: int = 0
+        self.ncorrect: int = 0
+        self.score: float = 0
 
     @staticmethod
     def _table_definition(metadata: MetaData) -> Table:
@@ -54,20 +44,10 @@ class UserStats(ResultBase):
             - Table: A `Table` object with the table definition.
         """
         return Table(
-            "UserStats",
+            "userStats",
             metadata,
-            Column("title", String(250), primary_key=True),
-            Column("statement", String(250), nullable=False),
-            Column("imageUrl", String(250), nullable=True),
+            Column("iduser", String(32), ForeignKey('users.name'), primary_key=True),
+            Column("naswered", Integer, default=0),
+            Column("ncorrect", Integer, default=0),
+            Column("score", Float, default=0)
         )
-
-    @staticmethod
-    def _mapping_properties() -> Dict:
-        """ Gets the mapping properties dictionary.
-
-        Returns:
-            - Dict: A dictionary with the mapping properties.
-        """
-        return {
-            "answereds": relationship(AnsweredQuestion, backref="answeredQuestions")
-        }

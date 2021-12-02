@@ -2,7 +2,7 @@
 """ AnsweredQuestion class module.
 """
 
-from sqlalchemy import Table, MetaData, Column, ForeignKey, String, DateTime  # type: ignore
+from sqlalchemy import Table, MetaData, Column, ForeignKey, String, DateTime, Integer  # type: ignore
 from dms2122backend.data.db.results.resultbase import ResultBase
 from datetime import datetime
 
@@ -10,7 +10,7 @@ class AnsweredQuestion(ResultBase):
     """ Definition and storage of the answered questions.
     """
 
-    def __init__(self, idquestion: str, iduser: str, answer: str):
+    def __init__(self, idquestion: str, iduser: str, answer: int):
         """ Constructor method.
 
         Initializes a answeredQuestion role record.
@@ -24,7 +24,7 @@ class AnsweredQuestion(ResultBase):
         """
         self.idquestion: str = idquestion
         self.iduser: str = iduser
-        self.answer: str = answer
+        self.answer: int = answer
         self.score: float = 0
         self.date = datetime.now()
 
@@ -42,7 +42,7 @@ class AnsweredQuestion(ResultBase):
         return Table(
                 'answeredQuestions',
                 metadata,
-                Column('idquestion', String(250), ForeignKey('questions.id'), 
+                Column('idquestion', Integer, ForeignKey('questions.id'), 
                        primary_key=True),
                 Column('iduser', String(32), ForeignKey('users.id'),
                        primary_key=True),
