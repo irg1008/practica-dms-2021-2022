@@ -54,18 +54,11 @@ class UserStats(ResultBase):
             - Table: A `Table` object with the table definition.
         """
         return Table(
-            "questions",
+            "UserStats",
             metadata,
             Column("title", String(250), primary_key=True),
             Column("statement", String(250), nullable=False),
             Column("imageUrl", String(250), nullable=True),
-            Column("correctOption", String(250), nullable=False),
-            Column("incorrectOptions", String(), nullable=False),
-            Column("score", Float, default=0),
-            Column("penalty", Float, default=0),
-            Column("public", Boolean, default=True),
-            Column("ncorrect", Integer, default=0),
-            Column("nanswered", Integer, default=0),
         )
 
     @staticmethod
