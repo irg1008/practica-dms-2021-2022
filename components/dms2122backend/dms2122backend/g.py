@@ -1,6 +1,6 @@
 from typing import Dict
 from dms2122backend.data.config.backendconfiguration import BackendConfiguration
-from dms2122backend.service.auth._authservice import AuthService
+from dms2122backend.service.auth.authservice import AuthService
 
 __auth_service = None
 

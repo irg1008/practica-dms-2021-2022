@@ -15,7 +15,7 @@ import os
 import inspect
 import logging
 from typing import Dict
-from dms2122backend.service.auth._authservice import AuthService
+from dms2122backend.service.auth.authservice import AuthService
 import connexion
 from connexion.apps.flask_app import FlaskJSONEncoder
 from flask import current_app

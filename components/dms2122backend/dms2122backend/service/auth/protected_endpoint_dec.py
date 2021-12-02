@@ -2,7 +2,6 @@ from typing import Any, Callable, Dict, List, Optional, Tuple, TypeVar, Union
 from http import HTTPStatus
 from flask.globals import current_app
 from dms2122common.data.role import Role
-from dms2122backend.service.auth._authservice import AuthService
 from dms2122backend.service.auth.backauth import BackAuth
 from dms2122backend.g import get_auth_service
 

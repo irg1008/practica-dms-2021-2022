@@ -60,6 +60,8 @@ def verify_token(token: str) -> Dict:
     Returns:
         - Dict: A dictionary with the user name (key `user`) if the credentials are correct.
     """
+    print(token)
+    
     with current_app.app_context():
         token_bytes: bytes = token.encode("ascii")
         jws: TimedJSONWebSignatureSerializer = current_app.jws

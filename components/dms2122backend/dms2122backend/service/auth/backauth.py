@@ -4,7 +4,7 @@
 from typing import List
 from flask import session
 from dms2122common.data.rest import ResponseData, responsedata
-from dms2122backend.service.auth._authservice import AuthService
+from dms2122backend.service.auth.authservice import AuthService
 from dms2122common.data.role import Role, parse_role
 
 
