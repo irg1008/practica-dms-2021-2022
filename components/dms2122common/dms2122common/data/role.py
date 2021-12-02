@@ -7,7 +7,6 @@ from enum import Enum
 class Role(Enum):
     """ Enumeration with the roles.
     """
-
     Admin = 1
     Teacher = 2
     Student = 3
@@ -21,4 +20,6 @@ def parse_role(rol: Role) -> str:
         return "Student"
     elif rol == Role.Teacher:
         return "Teacher"
+    
+    return ""
 
