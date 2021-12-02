@@ -6,6 +6,7 @@ from sqlalchemy import Table, MetaData, Column, ForeignKey, String, DateTime, In
 from dms2122backend.data.db.results.resultbase import ResultBase
 from datetime import datetime
 
+
 class AnsweredQuestion(ResultBase):
     """ Definition and storage of the answered questions.
     """
@@ -40,12 +41,11 @@ class AnsweredQuestion(ResultBase):
             - Table: A `Table` object with the table definition.
         """
         return Table(
-                'answered_questions',
-                metadata,
-                Column('idquestion', Integer, ForeignKey('questions.id'), 
-                       primary_key=True),
-                Column('iduser', String(32), ForeignKey('Users.username'),
-                       primary_key=True),
-                Column('answer', String(250), nullable=False),
-                Column('date', DateTime, nullable=False)
-            )
+            'answered_questions',
+            metadata,
+            Column('idquestion', Integer, ForeignKey('questions.id'),
+                   primary_key=True),
+            Column('iduser', String(32), primary_key=True), # ForeignKey('Users.username'),
+            Column('answer', String(250), nullable=False),
+            Column('date', DateTime, nullable=False)
+        )

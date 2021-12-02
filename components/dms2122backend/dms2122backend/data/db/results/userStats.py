@@ -46,7 +46,7 @@ class UserStats(ResultBase):
         return Table(
             "user_stats",
             metadata,
-            Column("iduser", String(32), ForeignKey('users.name'), primary_key=True),
+            Column("iduser", String(32), primary_key=True), # ForeignKey('users.name'),
             Column("naswered", Integer, default=0),
             Column("ncorrect", Integer, default=0),
             Column("score", Float, default=0)
