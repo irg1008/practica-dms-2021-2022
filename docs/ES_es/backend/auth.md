@@ -53,7 +53,7 @@ Una vez creada la pregunta, DMS2122Frontend envía una petición a DMS2122Backen
 
 Cuando el endpoint reciba la petición, decodificara los datos del JWS y validará que la clave secreta sea válida, si todo es correcto, le pasará un objeto con los siguientes elementos 
 
-```json
+```javascript
 user_token = {
 	auth_token: "very.long.token",
 	sub: "admin", 
@@ -62,7 +62,7 @@ user_token = {
 ```
 
 Y esta información se guardará con el resto de los datos de la cabecera en 
-```json
+```javascript
 token_info = {
 	user_token: user_token,
 	...
@@ -75,7 +75,7 @@ Además, OpenAPI nos añadirá los parámetros con información relevante a los 
 Por último, para limitar el acceso a un endpoint a usuarios que no tengan un rol específico y comprobar que el token es válido, hemos de añadir algún sistema que nos permita comprobar estos elementos con el contenedor DMS2122Auth. 
 
 Para facilitarnos esta tarea y mejorar la mantenibilidad de la aplicación hemos utilizado el **patrón decorador** sobre cada uno de los endpoints. 
-![enter image description here](https://res.cloudinary.com/practicaldev/image/fetch/s--EZKxegnb--/c_limit,f_auto,fl_progressive,q_auto,w_880/https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Decorator_UML_class_diagram.svg/400px-Decorator_UML_class_diagram.svg.png)
+![Decorator Pattern](https://res.cloudinary.com/practicaldev/image/fetch/s--EZKxegnb--/c_limit,f_auto,fl_progressive,q_auto,w_880/https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Decorator_UML_class_diagram.svg/400px-Decorator_UML_class_diagram.svg.png)
 
 Si bien el patrón que hemos utilizado no sigue la estructura del diagrama anterior (al no utilizar clases), hemos aplicado los mismo conceptos en un paradigma funcional.
 
@@ -85,6 +85,7 @@ El decorador @protected_endpoint tiene dos argumentos:
  - Lista de Roles a comprobar
 
 ![Decorador](https://i.imgur.com/1SQE1RJ.png)
+
 Python le pasa automáticamente la función new al decorador, mientras que nosotros debemos indicarle los roles que pueden tener acceso mediante el argumento roles=
 
 Si no le pasamos ningún rol al decorador, o la lista está vacía, el decorador únicamente comprobará que el token sea válido.
