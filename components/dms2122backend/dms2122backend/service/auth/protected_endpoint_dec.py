@@ -27,7 +27,8 @@ def parametrized(dec):
 
 @parametrized
 def protected_endpoint(
-    route_fun: Callable[..., Tuple[Any, Optional[int]]] = None, roles: List[Role] = []
+    route_fun: Union[Callable[..., Tuple[Any, Optional[int]]], None] = None,
+    roles: List[Role] = [],
 ) -> Callable[..., Tuple[Any, Optional[int]]]:
     """Decorator that validates a Token and asserts that the user has any of the roles.
 

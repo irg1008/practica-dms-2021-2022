@@ -13,19 +13,21 @@ def new(body: Dict, **kwargs) -> Tuple[int, Optional[int]]:
     Roles: Teacher
 
     Returns:
-        Tuple[str, Optional[int]]: Response message and status code
+        Tuple[int, Optional[int]]: if 200 - Question ID and status code
     """
 
+    body
     return (1, 200)
+
 
 @protected_endpoint(roles=[Role.Teacher, Role.Student])
 def getQ(id: int, **kwargs):
     return ({"id": id}, 200)
 
+
 @protected_endpoint(roles=[Role.Teacher])
 def editQ(id: int, **kwargs):
     return (id, 200)
-
 
 
 def getAll(**kwargs):
