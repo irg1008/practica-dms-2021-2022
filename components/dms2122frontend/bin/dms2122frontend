@@ -11,7 +11,7 @@ from werkzeug.utils import redirect
 import dms2122frontend
 from dms2122frontend.data.config import FrontendConfiguration
 from dms2122frontend.data.rest import AuthService, BackendService
-
+from dms2122frontend import g
 from dms2122frontend.presentation.web import (
     AdminEndpoints,
     CommonEndpoints,
@@ -37,12 +37,12 @@ backend_service: BackendService = BackendService(
     apikey_secret=backend_service_cfg["apikey_secret"],
 )
 
+g.set_backend_service(backend_service)
+
 app = Flask(
     __name__,
-    static_folder=os.path.dirname(
-        inspect.getfile(dms2122frontend)) + "/static",
-    template_folder=os.path.dirname(
-        inspect.getfile(dms2122frontend)) + "/templates",
+    static_folder=os.path.dirname(inspect.getfile(dms2122frontend)) + "/static",
+    template_folder=os.path.dirname(inspect.getfile(dms2122frontend)) + "/templates",
 )
 app.secret_key = bytes(cfg.get_app_secret_key(), "ascii")
 
@@ -126,13 +126,16 @@ def post_new_question_preview():
 def post_new_question_confirm():
     return TeacherEndpoints.get_post_confirm_question(auth_service)
 
+
 @app.route("/teacher/edit", methods=["GET"])
 def get_edit_question():
     return TeacherEndpoints.get_edit_question(auth_service)
 
+
 @app.route("/teacher/edit", methods=["POST"])
 def post_edit_question():
     return TeacherEndpoints.post_edit_question(auth_service)
+
 
 @app.route("/", methods=["GET"])
 def index():

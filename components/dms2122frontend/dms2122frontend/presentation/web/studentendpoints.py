@@ -39,7 +39,8 @@ class StudentEndpoints:
         questions = getQuestionMocks()
         db = g.get_db()
         return render_template(
-            "student/student.html", questions=db.getUnasweredQuestions(name),
+            "student/student.html",
+            questions=db.getUnasweredQuestions(name, token=session.get("token")),
         )
 
     @staticmethod
@@ -59,7 +60,7 @@ class StudentEndpoints:
         name = session["user"]
 
         db = g.get_db()
-        ans = db.getAnsweredQuestions(name)
+        ans = db.getAnsweredQuestions(name, token=session.get("token"))
         ans.sort(key=lambda x: x.date, reverse=True)
 
         total_questions = len(ans)
@@ -94,7 +95,9 @@ class StudentEndpoints:
         db = g.get_db()
 
         for q_id, ans in request.form.items():
-            res = db.answerQuestion(username, int(q_id), ans)
+            res = db.answerQuestion(
+                username, int(q_id), ans, token=session.get("token")
+            )
 
         return redirect(url_for("get_student_answered"))
 
@@ -133,7 +136,7 @@ class StudentEndpoints:
         if q_pos < 0 or q_pos >= len(questions):
             return "Bad Position"
         db = get_db()
-        question = db.getQuestion(int(questions[q_pos]))
+        question = db.getQuestion(int(questions[q_pos]), token=session.get("token"))
 
         if not question:
             return "No question"
@@ -166,7 +169,12 @@ class StudentEndpoints:
             return redirect(url_for("get_home"))
         username = session["user"]
         session["answered"] = request.form.to_dict()
-        session["toanswer"] = [q.id for q in get_db().getUnasweredQuestions(username)]
+        session["toanswer"] = [
+            q.id
+            for q in get_db().getUnasweredQuestions(
+                username, token=session.get("token")
+            )
+        ]
         return redirect(url_for("post_student_iterator_value", it=0))
 
     @staticmethod
@@ -199,7 +207,9 @@ class StudentEndpoints:
         for q_id, user_ans in ans.items():
 
             try:
-                db.answerQuestion(username, int(q_id), user_ans)
+                db.answerQuestion(
+                    username, int(q_id), user_ans, token=session.get("token")
+                )
             except:
                 print(f"Error while casting to int {q_id}", flush=True)
 
