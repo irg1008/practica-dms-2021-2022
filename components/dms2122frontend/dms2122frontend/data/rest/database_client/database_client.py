@@ -3,6 +3,7 @@ from typing import List, Tuple, Union
 from dms2122frontend.data.Question import Question, AnsweredQuestion
 from abc import ABC, abstractmethod
 
+
 class DatabaseClient(ABC):
     """
     Databse Adapter Interface
@@ -15,15 +16,17 @@ class DatabaseClient(ABC):
     @abstractmethod
     def getUnasweredQuestions(self, username: str, token="") -> List[Question]:
         raise Exception("Not Implemented")
-        return []
+
     @abstractmethod
-    def answerQuestion(self, username: str, question_id: int, answer: str, token="") -> bool:
+    def answerQuestion(
+        self, username: str, question_id: int, answer: str, token=""
+    ) -> bool:
         raise Exception("Not Implemented")
-    
+
     @abstractmethod
     def getQuestion(self, question_id: int, token="") -> Union[Question, None]:
         raise Exception("Not Implemented")
-        
+
     @abstractmethod
     def getCurrentQuestionId(self, token="") -> int:
         raise Exception("Not Implemented")

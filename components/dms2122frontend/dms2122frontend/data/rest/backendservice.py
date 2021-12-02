@@ -38,5 +38,26 @@ class BackendService:
     def __base_url(self) -> str:
         return f"http://{self.__host}:{self.__port}{self.__api_base_path}"
 
-    # TODO: Implement
-    # Here all petitions to backend api
+    def get_base_url(self) -> str:
+        """Gets the formated base url
+
+        Returns:
+            str: formated base url
+        """
+        return self.__base_url()
+
+    def get_apikey_header(self) -> str:
+        """ Gets backend the api key header
+
+        Returns:
+            str: api key header
+        """
+        return self.__apikey_header
+
+    def get_apikey_secret(self) -> str:
+        """Gets the backend api key secret
+
+        Returns:
+            str: api key secret
+        """
+        return self.__apikey_secret
