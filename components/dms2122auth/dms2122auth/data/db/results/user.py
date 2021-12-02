@@ -3,7 +3,7 @@
 
 from typing import Dict
 from sqlalchemy import Table, MetaData, Column, String  # type: ignore
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship # type: ignore
 from components.dms2122backend.dms2122backend.data.db.results.userStats import UserStats  # type: ignore
 from dms2122auth.data.db.results.resultbase import ResultBase
 from dms2122auth.data.db.results.userrole import UserRole

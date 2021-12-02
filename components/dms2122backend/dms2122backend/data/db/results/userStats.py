@@ -3,7 +3,7 @@
 
 from typing import Dict, List
 from sqlalchemy import Table, MetaData, Column, String, Integer, Float, Boolean  # type: ignore
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship # type: ignore
 from sqlalchemy.sql.schema import ForeignKey  # type: ignore
 from dms2122backend.data.db.results.resultbase import ResultBase
 from dms2122backend.data.db.results.answeredQuestion import AnsweredQuestion
