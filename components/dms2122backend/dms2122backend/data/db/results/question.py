@@ -14,6 +14,7 @@ class Question(ResultBase):
 
     def __init__(
         self,
+        idquestion: int,
         title: str,
         statement: str,
         correctOption: str,
@@ -31,6 +32,7 @@ class Question(ResultBase):
             - username (str): A string with the user name.
             - password (str): A string with the password hash.
         """
+        self.idquestion: int = idquestion
         self.title: str = title
         self.statement: str = statement
         self.correctOption: str = correctOption
@@ -54,9 +56,10 @@ class Question(ResultBase):
             - Table: A `Table` object with the table definition.
         """
         return Table(
-            "questions",
+            "Questions",
             metadata,
-            Column("title", String(250), primary_key=True),
+            Column("idquestion", Integer, primary_key=True),
+            Column("title", String(250), nullable=False),
             Column("statement", String(250), nullable=False),
             Column("imageUrl", String(250), nullable=True),
             Column("correctOption", String(250), nullable=False),
@@ -76,5 +79,5 @@ class Question(ResultBase):
             - Dict: A dictionary with the mapping properties.
         """
         return {
-            "answereds": relationship(AnsweredQuestion, backref="answeredQuestions")
+            "answers": relationship(AnsweredQuestion, backref="answeredQuestions")
         }

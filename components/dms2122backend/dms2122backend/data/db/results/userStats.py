@@ -44,7 +44,7 @@ class UserStats(ResultBase):
             - Table: A `Table` object with the table definition.
         """
         return Table(
-            "userStats",
+            "user_stats",
             metadata,
             Column("iduser", String(32), ForeignKey('users.name'), primary_key=True),
             Column("naswered", Integer, default=0),

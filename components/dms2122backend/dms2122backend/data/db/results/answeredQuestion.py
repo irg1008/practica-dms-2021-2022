@@ -40,11 +40,11 @@ class AnsweredQuestion(ResultBase):
             - Table: A `Table` object with the table definition.
         """
         return Table(
-                'answeredQuestions',
+                'answered_questions',
                 metadata,
                 Column('idquestion', Integer, ForeignKey('questions.id'), 
                        primary_key=True),
-                Column('iduser', String(32), ForeignKey('users.id'),
+                Column('iduser', String(32), ForeignKey('Users.username'),
                        primary_key=True),
                 Column('answer', String(250), nullable=False),
                 Column('date', DateTime, nullable=False)
