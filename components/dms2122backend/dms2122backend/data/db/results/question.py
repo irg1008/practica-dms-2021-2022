@@ -62,7 +62,7 @@ class Question(ResultBase):
         return Table(
             "questions",
             metadata,
-            Column("id", Integer, primary_key=True, autoincrement=True),
+            Column("id", Integer, primary_key=True),
             Column("title", String(250), nullable=False),
             Column("statement", String(250), nullable=False),
             Column("imageUrl", String(250), nullable=True),
