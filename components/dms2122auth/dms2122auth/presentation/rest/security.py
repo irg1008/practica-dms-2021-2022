@@ -70,5 +70,5 @@ def verify_token(token: str) -> Dict:
         except Exception as ex:
             raise Unauthorized from ex
         if "user" not in data:
-            return Unauthorized("Invalid token")
+            raise Unauthorized("Invalid token")
         return {"sub": data["sub"], "user": data["user"]}

@@ -18,15 +18,16 @@ def new(body: Dict, **kwargs) -> Tuple[int, Optional[int]]:
 
     return (1, 200)
 
+
 @protected_endpoint(roles=[Role.Teacher, Role.Student])
 def getQ(id: int, **kwargs):
     return ({"id": id}, 200)
+
 
 @protected_endpoint(roles=[Role.Teacher])
 def editQ(id: int, **kwargs):
     return (id, 200)
 
 
-
 def getAll(**kwargs):
-    return ({}, 200)
+    return ({"hola": "hola"}, 200)

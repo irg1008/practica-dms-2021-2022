@@ -41,7 +41,7 @@ def parse_token(token: str) -> Dict:
     """
     split = token.split(".")
     if len(split) != 3:
-        return Unauthorized("Invalid token")
+        raise Unauthorized("Invalid token")
 
     body = json.loads(b64decode(split[1]))
 
