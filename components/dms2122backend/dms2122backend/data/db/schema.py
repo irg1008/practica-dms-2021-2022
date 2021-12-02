@@ -47,7 +47,8 @@ class Schema:
             )
         db_connection_string: str = config.get_db_connection_string() or ""
         self.__create_engine = create_engine(db_connection_string)
-        self.__session_maker = scoped_session(sessionmaker(bind=self.__create_engine))
+        self.__session_maker = scoped_session(
+            sessionmaker(bind=self.__create_engine))
 
         UserStats.map(self.__declarative_base.metadata)
         Question.map(self.__declarative_base.metadata)
