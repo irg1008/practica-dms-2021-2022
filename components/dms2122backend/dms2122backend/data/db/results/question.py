@@ -6,7 +6,7 @@ from sqlalchemy import Table, MetaData, Column, String, Integer, Float, Boolean 
 from sqlalchemy.orm import relationship  # type: ignore
 from dms2122backend.data.db.results.resultbase import ResultBase
 from dms2122backend.data.db.results.userrole import UserRole
-from answeredQuestion import AnsweredQuestion
+from dms2122backend.data.db.results.answeredQuestion import AnsweredQuestion
 
 
 class Question(ResultBase):
