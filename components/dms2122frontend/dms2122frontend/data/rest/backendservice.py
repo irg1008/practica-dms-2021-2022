@@ -39,3 +39,4 @@ class BackendService:
         return f"http://{self.__host}:{self.__port}{self.__api_base_path}"
 
     # TODO: Implement
+    # Here all petitions to backend api
