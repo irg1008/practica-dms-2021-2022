@@ -41,8 +41,12 @@ class Question(ResultBase):
         self.score: float = score
         self.penalty: float = penalty
         self.public: bool = public
-        self.ncorrect: int = 0
-        self.nanswered: int = 0
+
+        ansStats = {correctOption: 0}
+        for inc in incorrectOptions:
+            ansStats[inc] = 0
+
+        self.answerStats = ansStats
 
     @staticmethod
     def _table_definition(metadata: MetaData) -> Table:
@@ -56,9 +60,9 @@ class Question(ResultBase):
             - Table: A `Table` object with the table definition.
         """
         return Table(
-            "Questions",
+            "questions",
             metadata,
-            Column("idquestion", Integer, primary_key=True),
+            Column("id", Integer, primary_key=True, autoincrement=True),
             Column("title", String(250), nullable=False),
             Column("statement", String(250), nullable=False),
             Column("imageUrl", String(250), nullable=True),
@@ -67,8 +71,7 @@ class Question(ResultBase):
             Column("score", Float, default=0),
             Column("penalty", Float, default=0),
             Column("public", Boolean, default=True),
-            Column("ncorrect", Integer, default=0),
-            Column("nanswered", Integer, default=0),
+            Column("answerStats", String(), nullable=False),
         )
 
     @staticmethod
@@ -78,6 +81,4 @@ class Question(ResultBase):
         Returns:
             - Dict: A dictionary with the mapping properties.
         """
-        return {
-            "answers": relationship(AnsweredQuestion, backref="answeredQuestions")
-        }
+        return {"answers": relationship(AnsweredQuestion, backref="answeredQuestions")}
