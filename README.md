@@ -11,6 +11,9 @@ The goal of this project is to implement a basic online evaluation appliance dep
 - [Manual](docs/ES_es/Manual.md)
 - Frontend
     * [Design](docs/ES_es/frontend/Design.md)
+- Backend
+    * [Endpoints](docs/ES_es/backend/endpoints.md)
+    * [Auth Process](docs/ES_es/backend/auth.md)
 
 ## Developers:
 - [Jorge Ruiz Gómez](https://github.com/JorgeRuizDev)
