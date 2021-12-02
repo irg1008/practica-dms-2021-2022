@@ -22,6 +22,7 @@ tags:
 servers:
   - url: /api/v1
 paths:
+
   "/":
     head:
       summary: Health test for the service

@@ -76,7 +76,9 @@ def protected_endpoint(
                 HTTPStatus.FORBIDDEN,
             )
 
-        return route_fun(*args, **kwargs)
+        # Absurd double check to avoi typing errors.
+        if route_fun is not None:
+            return route_fun(*args, **kwargs)
 
     return route_aux
 
