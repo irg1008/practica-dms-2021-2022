@@ -1,9 +1,9 @@
 <!-- vscode-markdown-toc -->
 ## Tabla de Contenidos
-1. [Introducción](#Introduccion)
+1. [Introducción](#Introducción)
 2. [Cabecera](#Cabecera)
-3. [Comunicación](#Comunicacion)
-4. [Validación del Token y Rol](#ValidaciondelTokenyRol)
+3. [Comunicación](#Comunicación)
+4. [Validación del Token y Rol](#Validación-del-Token-y-Rol)
 
 <!-- vscode-markdown-toc-config
 	numbering=true
