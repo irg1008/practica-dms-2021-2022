@@ -7,7 +7,7 @@ from dms2122common.data.role import Role
 
 
 @protected_endpoint(roles=[Role.Teacher, Role.Student])
-def get_unanswered_questions(body: Dict, **kwargs) -> Tuple[int, Optional[int]]:
+def get_unanswered_questions(username: str, **kwargs) -> Tuple[int, Optional[int]]:
     """Get user unanswered questions.
 
     Roles: Teacher and Specific Student
@@ -18,8 +18,9 @@ def get_unanswered_questions(body: Dict, **kwargs) -> Tuple[int, Optional[int]]:
 
     return (1, 200)
 
+
 @protected_endpoint(roles=[Role.Teacher, Role.Student])
-def get_answered_questions(body: Dict, **kwargs) -> Tuple[int, Optional[int]]:
+def get_answered_questions(username: str, **kwargs) -> Tuple[int, Optional[int]]:
     """Get user answered questions.
 
     Roles: Teacher and Specific Student
@@ -29,9 +30,10 @@ def get_answered_questions(body: Dict, **kwargs) -> Tuple[int, Optional[int]]:
     """
 
     return (1, 200)
-  
+
+
 @protected_endpoint(roles=[Role.Teacher, Role.Student])
-def get_question_answer(body: Dict, **kwargs) -> Tuple[int, Optional[int]]:
+def get_question_answer(username: str, question_id_: str, **kwargs) -> Tuple[int, Optional[int]]:
     """Get the answer for a user on an especific question.
 
     Roles: Teacher and Specific Student
@@ -41,6 +43,7 @@ def get_question_answer(body: Dict, **kwargs) -> Tuple[int, Optional[int]]:
     """
 
     return (1, 200)
+
 
 @protected_endpoint(roles=[Role.Student])
 def post_question_answer(body: Dict, **kwargs) -> Tuple[int, Optional[int]]:
