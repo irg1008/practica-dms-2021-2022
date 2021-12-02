@@ -41,12 +41,8 @@ class Question(ResultBase):
         self.score: float = score
         self.penalty: float = penalty
         self.public: bool = public
-
-        ansStats = {correctOption: 0}
-        for inc in incorrectOptions:
-            ansStats[inc] = 0
-
-        self.answerStats = ansStats
+        statsKeys = incorrectOptions + [correctOption]
+        self.answerStats = dict.fromkeys(statsKeys, 0)
 
     @staticmethod
     def _table_definition(metadata: MetaData) -> Table:
