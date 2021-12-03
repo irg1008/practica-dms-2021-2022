@@ -3,8 +3,9 @@
 
 from typing import Dict
 from sqlalchemy import Table, MetaData, Column, String  # type: ignore
-from sqlalchemy.orm import relationship # type: ignore
-from components.dms2122backend.dms2122backend.data.db.results.userStats import UserStats  # type: ignore
+from sqlalchemy.orm import relationship  # type: ignore
+
+# from dms2122backend.data.db.results.userStats import UserStats  # type: ignore
 from dms2122auth.data.db.results.resultbase import ResultBase
 from dms2122auth.data.db.results.userrole import UserRole
 
@@ -50,5 +51,7 @@ class User(ResultBase):
         Returns:
             - Dict: A dictionary with the mapping properties.
         """
-        return {"rights": relationship(UserRole, backref="user"),
-                "stats": relationship(UserStats, backref="user")}
+        return {
+            "rights": relationship(UserRole, backref="user"),
+            # "stats": relationship(UserStats, backref="user"),
+        }
