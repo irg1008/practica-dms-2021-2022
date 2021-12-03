@@ -50,18 +50,6 @@ class Question:
         self.is_public = True
         self.user_answers = user_answers
 
-    # Adds random user data for display only.
-    def __mock_answers(self):
-        ans = {}
-
-        if random.random() > 0.8:
-            ans[self.correct_answer] = random.randint(0, 11)
-
-            for incorrect_ans in self.incorrect_answers:
-                ans[incorrect_ans] = random.randint(0, 10)
-
-        return ans
-
     def is_editable(self):
         return self.number_of_questions_answered == 0
 
@@ -159,3 +147,4 @@ class AnsweredQuestion:
 
     def is_correct_answer(self):
         return self.answer == self.question.correct_answer
+

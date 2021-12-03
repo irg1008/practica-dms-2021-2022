@@ -40,8 +40,17 @@ class RestDB(mockDB):
     # ) -> bool:
     #     raise Exception("Not Implemented")
     #
-    # def getQuestion(self, question_id: int, token: str = "") -> Union[Question, None]:
-    #     raise Exception("Not Implemented")
+    def getQuestion(self, question_id: int, token: str = "") -> Union[Question, None]:
+        self.__check_token(token)
+        res = requests.get(
+            f"{self.__base_url}/question/{question_id}",
+            headers=self.__get_headers(token),
+        )
+
+        if not res.ok:
+            return None
+        return Question.From_Json(res.json())
+
     #
     # def getCurrentQuestionId(self, token="") -> int:
     #     raise Exception("Not Implemented")
@@ -62,13 +71,10 @@ class RestDB(mockDB):
     def getAllQuestions(self, token: str = "") -> List[Question]:
 
         self.__check_token(token)
-        print(self.__get_headers(token), flush=True)
+
         res = requests.get(
             f"{self.__base_url}/question/all", headers=self.__get_headers(token)
         )
-
-        print(res.json(), flush=True)
-        print(type(res.json()), flush=True)
 
         if not res.ok:
             return []
