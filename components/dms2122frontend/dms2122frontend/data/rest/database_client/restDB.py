@@ -49,6 +49,8 @@ class RestDB(mockDB):
 
         if not res.ok:
             return None
+
+        print(res.json(), flush=True)
         return Question.From_Json(res.json())
 
     #
