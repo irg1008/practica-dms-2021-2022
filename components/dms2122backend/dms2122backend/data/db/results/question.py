@@ -32,10 +32,11 @@ class Question(ResultBase):
             - username (str): A string with the user name.
             - password (str): A string with the password hash.
         """
+        self.id: int
         self.title: str = title
         self.statement: str = statement
         self.correctOption: str = correctOption
-        self.incorrectOptions: List[str] = incorrectOptions
+        self.incorrectOptions: str = json.dumps(incorrectOptions)
         self.imageUrl: str = imageUrl
         self.score: float = score
         self.penalty: float = penalty
@@ -63,7 +64,7 @@ class Question(ResultBase):
         return Table(
             "questions",
             metadata,
-            Column("id", Integer, primary_key=True, autoincrement=True),
+            Column("id", Integer, primary_key=True, autoincrement="auto"),
             Column("title", String(250), nullable=False),
             Column("statement", String(250), nullable=False),
             Column("imageUrl", String(250), nullable=True),
@@ -83,3 +84,9 @@ class Question(ResultBase):
             - Dict: A dictionary with the mapping properties.
         """
         return {"answers": relationship(AnsweredQuestion, backref="answeredQuestions")}
+
+    def __str__(self):
+        return f"{self.id}, {self.statement}, {self.answerStats}"
+
+    def __repr__(self) -> str:
+        return self.__str__()

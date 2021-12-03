@@ -1,3 +1,4 @@
+import traceback
 import json
 
 import os
@@ -35,13 +36,14 @@ def populate(db: Schema):
             session.add(question)
             session.commit()
 
-        except Exception:
+        except Exception as e:
             session.rollback()
-            print(Exception, flush=True)
+            print(traceback.format_exc(), flush=True)
 
     session = db.new_session()
 
     res = session.query(Question)
-    print([q for q in res], flush=True)
+    for q in res:
+        print(q, flush=True)
     session.commit()
 
