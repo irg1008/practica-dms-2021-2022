@@ -20,7 +20,7 @@ class RestDB(mockDB):
         if len(token) == 0 or len(token.split(".")) != 3:
             raise Exception("Invalid Token Format")
 
-    def __get_header(self, token: str) -> Dict:
+    def __get_headers(self, token: str) -> Dict:
         return {
             "Authorization": f"Bearer {token}",
             self.__api_back_header: self.__api_back_secret,
@@ -62,13 +62,16 @@ class RestDB(mockDB):
     def getAllQuestions(self, token: str = "") -> List[Question]:
 
         self.__check_token(token)
-
-        res = requests.get(f"{self.__base_url}/question/all", self.__get_header(token))
+        print(self.__get_headers(token), flush=True)
+        res = requests.get(
+            f"{self.__base_url}/question/all", headers=self.__get_headers(token)
+        )
 
         print(res.json(), flush=True)
+        print(type(res.json()), flush=True)
 
         if not res.ok:
             return []
 
-        return []
+        return [Question.From_Json(q) for q in res.json()]
 

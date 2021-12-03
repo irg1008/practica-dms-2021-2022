@@ -32,6 +32,7 @@ class Question:
         image_url: str,
         score: float,
         penalty: float,
+        user_answers: Dict[str, int] = {},
     ):
         self.id = id
         self.title = title
@@ -42,16 +43,12 @@ class Question:
         self.penalty = penalty
         self.image_url = image_url
 
-        self.number_of_correct_answers = 0
-        self.number_of_questions_answered = 0
+        self.number_of_correct_answers = user_answers.get(correct_answer) or 0
+        self.number_of_questions_answered = sum(
+            [user_answers.get(ans) or 0 for ans in incorrect_answers]
+        )
         self.is_public = True
-        self.user_answers = self.__mock_answers()
-
-        for answer, times in self.user_answers.items():
-            if answer == correct_answer:
-                self.number_of_correct_answers += times
-
-            self.number_of_questions_answered += times
+        self.user_answers = user_answers
 
     # Adds random user data for display only.
     def __mock_answers(self):
@@ -119,12 +116,18 @@ class Question:
             "image_url": self.image_url,
             "score": str(self.score),
             "penalty": str(self.penalty),
+            "user_answer": json.dumps(self.user_answers),
         }
         return json.dumps(d)
 
     @staticmethod
-    def From_Json(json_str: str) -> "Question":
-        d = json.loads(json_str)
+    def From_Json(json_q: Union[str, Dict]) -> "Question":
+
+        if isinstance(json_q, str):
+            d = json.loads(json_q)
+        else:
+            d = json_q
+
         return Question(
             id=int(d["id"]),
             title=d["title"],
@@ -134,6 +137,7 @@ class Question:
             image_url=d["image_url"],
             score=float(d["score"]),
             penalty=float(d["penalty"]),
+            user_answers=d["user_answers"],
         )
 
 

@@ -19,7 +19,11 @@ def get_db() -> DatabaseClient:
 
     if __db is None:
         service = get_backend_service()
-        __db = RestDB(service.get_base_url(), service.get_apikey_header(), service.get_apikey_secret())
+        __db = RestDB(
+            service.get_base_url(),
+            service.get_apikey_secret(),
+            service.get_apikey_header(),
+        )
 
     return __db
 

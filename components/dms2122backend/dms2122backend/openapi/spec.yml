@@ -412,9 +412,9 @@ components:
       required:
         - title
         - statement
-        - correctOption
-        - incorrectOptions
-        - imageUrl
+        - correct_answer
+        - incorrect_answers
+        - image_url
         - score
         - penalty
       properties:
@@ -422,13 +422,13 @@ components:
           type: string
         statement:
           type: string
-        correctOption:
+        correct_answer:
           type: string
-        incorrectOptions:
+        incorrect_answers:
           type: array
           items:
             type: string
-        imageUrl:
+        image_url:
           type: string
         score:
           type: number
@@ -436,7 +436,7 @@ components:
         penalty:
           type: number
           minimum: 0
-          maximum: 1
+          maximum: 100
         public:
           type: boolean
 
@@ -446,34 +446,28 @@ components:
       type: object
       required:
         - id
-        - userAns
+        - user_ans
       properties:
         id:
           type: integer
-        userAns:
-          type: array
-          items:
+        user_ans:
             type: object
-            properties:
-              answer:
-                type: string
-              resCount:
-                type: integer
+
 
     UserStats:
       type: object
       required:
-        - userId
-        - nAnswered
-        - nCorrect
+        - user_id
+        - n_answered
+        - n_correct
         - score
       properties:
-        userId:
+        user_id:
           type: integer
-        nAnswered:
+        n_answered:
           type: integer
           minimum: 0
-        nCorrect:
+        n_correct:
           type: integer
           minimum: 0
         score:
@@ -485,9 +479,9 @@ components:
       value:
         title: Titulo
         statement: ¿Cuánto es 1 + 1?
-        correctOption: "2"
-        incorrectOptions: ["1","3"]
-        imageUrl: ""
+        correct_answer: "2"
+        incorrect_answers: ["1","3"]
+        image_url: ""
         score: 1
         penalty: 0.2
         public: true
@@ -498,20 +492,20 @@ components:
         id: 1
         title: Titulo
         statement: ¿Cuánto es 1 + 1?
-        correctOption: "2"
-        incorrectOptions: ["1", "3"]
-        imageUrl: ""
+        correct_answer: "2"
+        incorrect_answers: ["1", "3"]
+        image_url: ""
         score: 1
         penalty: 0.2
         public: true
-        userAns: [{ "1": 0 }, { "3": 5 }, { "2": 250 }]
+        user_ans: {"1": 2, "2": 50, "3",20}
 
     UserStats:
       summary: "User Stats Example"
       value:
-        userId: 1
-        nAnswered: 3
-        nCorrect: 2
+        user_id: 1
+        n_answered: 3
+        n_correct: 2
         score: 0.6
 
   securitySchemes:
@@ -522,6 +516,6 @@ components:
       x-bearerInfoFunc: dms2122backend.presentation.rest.security.parse_token
     api_key:
       type: apiKey
-      name: X-ApiKey-Auth
+      name: X-ApiKey-Backend
       in: header
       x-apikeyInfoFunc: dms2122backend.presentation.rest.security.verify_api_key
