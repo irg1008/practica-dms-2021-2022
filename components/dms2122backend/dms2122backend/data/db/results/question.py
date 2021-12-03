@@ -8,13 +8,13 @@ from dms2122backend.data.db.results.resultbase import ResultBase
 from dms2122backend.data.db.results.answeredQuestion import AnsweredQuestion
 import json
 
+
 class Question(ResultBase):
     """ Definition and storage of user ORM records.
     """
 
     def __init__(
         self,
-        idquestion: int,
         title: str,
         statement: str,
         correctOption: str,
@@ -32,7 +32,6 @@ class Question(ResultBase):
             - username (str): A string with the user name.
             - password (str): A string with the password hash.
         """
-        self.idquestion: int = idquestion
         self.title: str = title
         self.statement: str = statement
         self.correctOption: str = correctOption
@@ -45,7 +44,7 @@ class Question(ResultBase):
         # Create dictionary for answer stats.
         statsKeys = incorrectOptions + [correctOption]
         ansStats = dict.fromkeys(statsKeys, 0)
-                
+
         # Transform dictionary to JSON string.
         ansStatsJson = json.dumps(ansStats)
         self.answerStats: str = ansStatsJson
@@ -64,7 +63,7 @@ class Question(ResultBase):
         return Table(
             "questions",
             metadata,
-            Column("id", Integer, primary_key=True),
+            Column("id", Integer, primary_key=True, autoincrement=True),
             Column("title", String(250), nullable=False),
             Column("statement", String(250), nullable=False),
             Column("imageUrl", String(250), nullable=True),

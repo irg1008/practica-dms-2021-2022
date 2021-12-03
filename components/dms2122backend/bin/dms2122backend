@@ -4,6 +4,7 @@ import os
 import inspect
 import logging
 from typing import Dict
+from dms2122backend.data.db.populate import populate
 from dms2122backend.service.auth.authservice import AuthService
 import connexion
 from connexion.apps.flask_app import FlaskJSONEncoder
@@ -47,6 +48,8 @@ if __name__ == "__main__":
 
     root_logger = logging.getLogger()
     root_logger.addHandler(default_handler)
+
+    populate(db)
 
     app.run(
         host=cfg.get_service_host(),
