@@ -21,6 +21,7 @@ class RestDB(mockDB):
             raise Exception("Invalid Token Format")
 
     def __get_headers(self, token: str) -> Dict:
+        self.__check_token(token)
         return {
             "Authorization": f"Bearer {token}",
             self.__api_back_header: self.__api_back_secret,
@@ -41,7 +42,6 @@ class RestDB(mockDB):
     #     raise Exception("Not Implemented")
     #
     def getQuestion(self, question_id: int, token: str = "") -> Union[Question, None]:
-        self.__check_token(token)
         res = requests.get(
             f"{self.__base_url}/question/{question_id}",
             headers=self.__get_headers(token),
@@ -69,9 +69,6 @@ class RestDB(mockDB):
     #     raise Exception("Not Implemented")
 
     def getAllQuestions(self, token: str = "") -> List[Question]:
-
-        self.__check_token(token)
-
         res = requests.get(
             f"{self.__base_url}/question/all", headers=self.__get_headers(token)
         )
