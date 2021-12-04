@@ -37,6 +37,14 @@ paths:
       tags:
         - server
 
+  /test:
+    post:
+      summary: Tests the DATABASE
+      operationId: dms2122backend.presentation.rest.test.test
+      responses:
+        "200":
+          description: Successful Test
+
   /user/{username}/stats:
     get:
       summary: Gets the user stats
