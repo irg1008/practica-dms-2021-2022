@@ -1,3 +1,4 @@
+from random import randint
 import traceback
 import json
 
@@ -38,6 +39,7 @@ def populate(db: Schema):
                 q["image_url"],
                 float(q["score"]),
                 float(q["penalty"]),
+                mock_stats=not randint(0, 1),
             )
         )
 

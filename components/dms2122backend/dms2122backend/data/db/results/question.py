@@ -1,6 +1,7 @@
 """ Question class module.
 """
 
+from random import randint
 from typing import Dict, List
 from sqlalchemy import Table, MetaData, Column, String, Integer, Float, Boolean  # type: ignore
 from sqlalchemy.orm import relationship  # type: ignore
@@ -23,6 +24,7 @@ class Question(ResultBase):
         score: float = 0,
         penalty: float = 0,
         public: bool = True,
+        mock_stats: bool = False,
     ):
         """ Constructor method.
 
@@ -44,7 +46,7 @@ class Question(ResultBase):
 
         # Create dictionary for answer stats.
         statsKeys = incorrectOptions + [correctOption]
-        ansStats = dict.fromkeys(statsKeys, 0)
+        ansStats = dict.fromkeys(statsKeys, randint(0, 50) if mock_stats else 0)
 
         # Transform dictionary to JSON string.
         ansStatsJson = json.dumps(ansStats)
