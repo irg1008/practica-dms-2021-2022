@@ -85,6 +85,20 @@ class Question(ResultBase):
         """
         return {"answers": relationship(AnsweredQuestion, backref="answeredQuestions")}
 
+    def to_JSON(self) -> str:
+        d = {
+            "id": str(self.id),
+            "title": self.title,
+            "statement": self.statement,
+            "correct_answer": self.correctOption,
+            "incorrect_answers": json.loads(self.incorrectOptions),
+            "image_url": self.imageUrl,
+            "score": str(self.score),
+            "penalty": str(self.penalty),
+            "user_answers": json.loads(self.answerStats),
+        }
+        return json.dumps(d)
+
     def __str__(self):
         return f"{self.id}, {self.statement}, {self.answerStats}"
 

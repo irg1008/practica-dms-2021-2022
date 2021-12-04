@@ -34,6 +34,17 @@ class Question:
         penalty: float,
         user_answers: Dict[str, int] = {},
     ):
+
+        if not isinstance(incorrect_answers, list):
+            raise Exception(
+                f"Incorrect Answers is not a list, , is a {type(incorrect_answers)} - {incorrect_answers}"
+            )
+
+        if not isinstance(user_answers, dict):
+            raise Exception(
+                f"User Answers is not a dict, is a {type(user_answers)} - {user_answers}"
+            )
+
         self.id = id
         self.title = title
         self.statement = statement
@@ -42,7 +53,6 @@ class Question:
         self.score = score
         self.penalty = penalty
         self.image_url = image_url
-
         self.number_of_correct_answers = user_answers.get(correct_answer) or 0
         self.number_of_questions_answered = sum(
             [user_answers.get(ans) or 0 for ans in incorrect_answers]
@@ -104,7 +114,7 @@ class Question:
             "image_url": self.image_url,
             "score": str(self.score),
             "penalty": str(self.penalty),
-            "user_answer": json.dumps(self.user_answers),
+            "user_answers": json.dumps(self.user_answers),
         }
         return json.dumps(d)
 
@@ -115,7 +125,6 @@ class Question:
             d = json.loads(json_q)
         else:
             d = json_q
-
         return Question(
             id=int(d["id"]),
             title=d["title"],
