@@ -211,9 +211,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/QuestionResponse"
+                $ref: "#/components/schemas/AnsweredQuestionResponse"
               example:
-                $ref: "#/components/examples/QuestionResponse"
+                $ref: "#/components/examples/AnsweredQuestionResponse"
         "403":
           description: The requestor has no privilege to get the questions.
           content:
@@ -453,6 +453,20 @@ components:
         user_ans:
             type: object
 
+    AnsweredQuestionResponse:
+      allOf:
+        - $ref: "#/components/schemas/Question"
+      type: object
+      required:
+        - answer
+        - date
+      properties:
+        answer:
+          type: string
+        date:
+            description: UTC Unix Timestamp
+            type: integer
+
 
     UserStats:
       type: object
@@ -499,6 +513,20 @@ components:
         penalty: 0.2
         public: true
         user_ans: {"1": 2, "2": 50, "3",20}
+    
+    AnsweredQuestionResponse:
+      summary: "Question Example"
+      value:
+        title: Titulo
+        statement: ¿Cuánto es 1 + 1?
+        correct_answer: "2"
+        incorrect_answers: ["1","3"]
+        image_url: ""
+        score: 1
+        penalty: 0.2
+        public: true
+        answer: "2"
+        date: 0
 
     UserStats:
       summary: "User Stats Example"
