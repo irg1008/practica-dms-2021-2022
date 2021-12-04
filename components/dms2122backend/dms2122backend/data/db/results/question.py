@@ -2,7 +2,7 @@
 """
 
 from random import randint
-from typing import Dict, List
+from typing import Dict, List, Union
 from sqlalchemy import Table, MetaData, Column, String, Integer, Float, Boolean  # type: ignore
 from sqlalchemy.orm import relationship  # type: ignore
 from dms2122backend.data.db.results.resultbase import ResultBase
@@ -100,6 +100,24 @@ class Question(ResultBase):
             "user_answers": json.loads(self.answerStats),
         }
         return json.dumps(d)
+
+    @staticmethod
+    def From_Json(json_q: Union[str, Dict]) -> "Question":
+
+        if isinstance(json_q, str):
+            d = json.loads(json_q)
+        else:
+            d = json_q
+
+        return Question(
+            title=d["title"],
+            statement=d["statement"],
+            correctOption=d["correct_answer"],
+            incorrectOptions=d["incorrect_answers"],
+            imageUrl=d["image_url"],
+            score=float(d["score"]),
+            penalty=float(d["penalty"]),
+        )
 
     def __str__(self):
         return f"{self.id}, {self.statement}, {self.answerStats}"
