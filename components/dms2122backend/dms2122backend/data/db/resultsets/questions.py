@@ -34,6 +34,21 @@ class Questions:
             return True
 
     @staticmethod
+    def _get_answered_questions(session: Session, iduser: str) -> List[Question]:
+        a_q: List[AnsweredQuestion] = DBManager.select_by(
+            AnsweredQuestion, session, iduser=iduser)
+
+        a_q_ids = [a.idquestion for a in a_q]
+
+        questions: List[Question] = []
+
+        for id in a_q_ids:
+            q = DBManager.first(Question, session, id=id)
+            questions.append(q)
+
+        return questions
+
+    @staticmethod
     def get_answered(session: Session, iduser: str) -> List[Question]:
         """Retrieves the user answered questions
 
@@ -48,21 +63,14 @@ class Questions:
         """
         session.begin()
         try:
-            a_q: List[AnsweredQuestion] = DBManager.select_by(
-                AnsweredQuestion, session, iduser=iduser)
-            a_q_ids = [a.idquestion for a in a_q]
-
-            questions: List[Question] = []
-
-            for id in a_q_ids:
-                q = DBManager.first(Question, session, id=id)
-                questions.append(q)
+            answered_questions = Questions._get_answered_questions(
+                session, iduser)
         except:
             session.rollback()
             return []
         else:
             session.commit()
-            return questions
+            return answered_questions
 
     @staticmethod
     def get_unanswered(session: Session, iduser: str) -> List[Question]:
@@ -81,10 +89,9 @@ class Questions:
         try:
             all_questions: List[Question] = DBManager.list_all(
                 session, Question)
-            
-            print(all_questions)
 
-            answered_questions = Questions.get_answered(session, iduser)
+            answered_questions = Questions._get_answered_questions(
+                session, iduser)
             unanswered_questions: List[Question] = [
                 q for q in all_questions if q not in answered_questions]
         except:
