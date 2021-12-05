@@ -1,6 +1,10 @@
+from typing import List
 from sqlalchemy.orm.session import Session  # type: ignore
-from dms2122backend.data.db.results.question import Question
-from dms2122backend.data.db.results.userStats import UserStats
+from dms2122backend.data.db.results.question import Question  # type: ignore
+from dms2122backend.data.db.results.answeredQuestion import AnsweredQuestion  # type: ignore
+from dms2122backend.data.db.results.userStats import UserStats  # type: ignore
+from dbmanager import DBManager
+from dbmanager import DBManager
 import json
 
 
@@ -35,7 +39,7 @@ class Questions:
         session.begin()
         try:
             # Aumentamos las veces que ha sido usada esa respuesta
-            question = session.query(Question).filter_by(id=idquestion).first()
+            question = DBManager.first(Question, session, id=idquestion)
 
             if not question:
                 session.rollback()
@@ -47,18 +51,18 @@ class Questions:
             session.flush()
 
             # Modificamos los stats del usuario que responde
-            ## Aumentamos el numero de respuestas
+            # Aumentamos el numero de respuestas
 
-            userStat = session.query(UserStats).filter_by(id=iduser).first()
+            userStat: UserStats = DBManager.first(UserStats, session, iduser=iduser)
 
-            if not userStat:
+            if userStat is None:
                 session.rollback()
                 return False
 
             userStat.nanswered = userStat.nanswered + 1
             session.flush()
 
-            ## Añadimos la puntuación obtenida
+            # Añadimos la puntuación obtenida
             if answer == question.correctOption:
                 userStat.score = userStat.score + question.score
                 session.flush()
@@ -73,3 +77,84 @@ class Questions:
         else:
             session.commit()
             return True
+
+    @staticmethod
+    def get_aswered(session: Session, iduser: str) -> List[Question]:
+        """Retrieves the user answered questions
+
+        Args:
+            session (Session): Current Working Session
+            userniduserame (str): User ID
+
+        Raises:
+
+        Returns:
+            List[Question]: User's Answered Questions
+        """
+        session.begin()
+        try:
+            a_q: List[AnsweredQuestion] = DBManager.select_by(
+                AnsweredQuestion, session, iduser=iduser)
+
+            answered_questions: List[Question] = session.query(
+                Question).join(a_q).all()
+
+        except:
+            session.rollback()
+            return []
+        else:
+            session.commit()
+            return answered_questions
+
+    @staticmethod
+    def get_unaswered(session: Session, iduser: str) -> List[Question]:
+        """Retrieves the user unanswered questions
+
+        Args:
+            session (Session): Current Working Session
+            iduser (str): User ID
+
+        Raises:
+
+        Returns:
+            List[Question]: User's Unanswered Questions
+        """
+        session.begin()
+        try:
+            all_questions: List[Question] = DBManager.list_all(
+                session, Question)
+
+            answered_questions = Questions.get_aswered(session, iduser)
+            unanswered_questions: List[Question] = [
+                q for q in all_questions if q not in answered_questions]
+        except:
+            session.rollback()
+            return []
+        else:
+            session.commit()
+            return unanswered_questions
+
+    @staticmethod
+    def get_user_question_answer(session: Session, iduser: str, idquestion: int):
+        """Retrieves the user answer to a certain question
+
+        Args:
+            session (Session): Current Working Session
+            iduser (str): User ID
+            idquestion (str): Question ID
+
+        Raises:
+
+        Returns:
+            AnsweredQuestion: User's answer to a certain question
+        """
+        session.begin()
+        try:
+            a_q: AnsweredQuestion = DBManager.first(
+                AnsweredQuestion, session, iduser=iduser, idquestion=idquestion)
+        except:
+            session.rollback()
+            return None
+        else:
+            session.commit()
+            return a_q

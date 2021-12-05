@@ -13,12 +13,3 @@ def get_stats(username: str, **kwargs) -> Tuple[str, Optional[int]]:
     """
 
     return (f"Getting stats for user {username}", HTTPStatus.ACCEPTED.value)
-
-
-def update_stats(body: Dict, token_info: Dict) -> Tuple[Union[Dict, str], Optional[int]]:
-    """Update the stats for the user.
-
-    Returns:
-        - Tuple[None, Optional[int]]: A tuple of no content and code 204 No Content.
-    """
-    return ("Getting stats", HTTPStatus.OK.value)

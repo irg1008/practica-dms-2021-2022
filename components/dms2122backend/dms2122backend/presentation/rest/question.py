@@ -44,7 +44,7 @@ def getQ(id: int, **kwargs):
 
             res: List[Question] = DBManager.select_by(Question, session, id=id)
             return res[0].to_JSON(), HTTPStatus.ACCEPTED
-    except:
+    except Exception:
         return "The question does not exist", HTTPStatus.BAD_REQUEST
 
 
