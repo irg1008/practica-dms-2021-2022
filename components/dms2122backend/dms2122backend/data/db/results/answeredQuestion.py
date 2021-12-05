@@ -3,7 +3,7 @@
 """
 from typing import Dict
 from sqlalchemy import Table, MetaData, Column, ForeignKey, String, DateTime, Integer
-from dms2122backend.dms2122backend.data.db.results.question import Question  # type: ignore
+from dms2122backend.data.db.results.question import Question  # type: ignore
 from dms2122backend.data.db.results.resultbase import ResultBase
 from datetime import datetime
 
