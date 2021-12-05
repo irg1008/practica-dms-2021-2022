@@ -12,7 +12,7 @@ from dms2122common.data.role import Role
 
 
 @protected_endpoint(roles=[Role.Teacher])
-def new(body: Dict, **kwargs) -> Tuple[Union[str, int], Optional[int]]:
+def new(body: Dict, **kwargs) -> Tuple[Union[str, int], int]:
     """New question endpoint
 
     Roles: Teacher
@@ -36,7 +36,7 @@ def new(body: Dict, **kwargs) -> Tuple[Union[str, int], Optional[int]]:
 
 
 @protected_endpoint(roles=[Role.Teacher, Role.Student])
-def getQ(id: int, **kwargs):
+def getQ(id: int, **kwargs) -> Tuple[Union[str, Dict], int]:
     try:
         with current_app.app_context():
             db: Schema = current_app.db
@@ -49,7 +49,7 @@ def getQ(id: int, **kwargs):
 
 
 @protected_endpoint(roles=[Role.Teacher])
-def editQ(id: int, body: Dict, **kwargs):
+def editQ(id: int, body: Dict, **kwargs) -> Tuple[str, int]:
     with current_app.app_context():
         db: Schema = current_app.db
         question = Question.From_Json(body)
@@ -62,11 +62,9 @@ def editQ(id: int, body: Dict, **kwargs):
 
 
 @protected_endpoint(roles=[Role.Teacher])
-def getAll(**kwargs):
-
+def getAll(**kwargs) -> Tuple[List[Dict], int]:
     with current_app.app_context():
         db: Schema = current_app.db
         s = db.new_session()
         res: List[Question] = DBManager.list_all(s, Question)
         return [q.to_JSON() for q in res], HTTPStatus.OK
-

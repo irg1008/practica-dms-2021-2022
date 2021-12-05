@@ -9,7 +9,7 @@ from dms2122backend.data.db.schema import Schema  # type: ignore
 
 
 @protected_endpoint(roles=[Role.Teacher, Role.Student])
-def get_stats(username: str, **kwargs) -> Tuple[str, Optional[int]]:
+def get_stats(username: str, **kwargs) -> Tuple[Union[str, Dict], Optional[int]]:
     """Get the stats for a specific user.
 
     Returns:
@@ -19,9 +19,10 @@ def get_stats(username: str, **kwargs) -> Tuple[str, Optional[int]]:
         db: Schema = current_app.db
         session = db.new_session()
 
-        stats: Union[UserStats, None] = UserStatsManager.get_stats(session, username)
-        
+        stats: Union[UserStats, None] = UserStatsManager.get_stats(
+            session, username)
+
         if stats is None:
-            return "", HTTPStatus.NO_CONTENT
-        
-        return stats.to_json(), HTTPStatus.OK
+            return "No stats for this user", HTTPStatus.NO_CONTENT
+
+        return stats.to_JSON(), HTTPStatus.OK
