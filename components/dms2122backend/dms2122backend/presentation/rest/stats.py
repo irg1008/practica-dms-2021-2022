@@ -1,6 +1,6 @@
 from typing import Optional, Tuple, Dict, Union, List
-from dms2122backend.dms2122backend.data.db.results.userStats import UserStats
-from dms2122backend.dms2122backend.data.db.resultsets.userStats import UserStats as UserStatsManager
+from dms2122backend.data.db.results.userStats import UserStats
+from dms2122backend.data.db.resultsets.userStats import UserStats as UserStatsManager
 from dms2122backend.service.auth.protected_endpoint_dec import protected_endpoint
 from http import HTTPStatus
 from dms2122common.data.role import Role
