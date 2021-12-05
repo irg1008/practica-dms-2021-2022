@@ -45,7 +45,7 @@ class UserStats(ResultBase):
             metadata,
             # ForeignKey('users.name'),
             Column("iduser", String(32), primary_key=True),
-            Column("naswered", Integer, default=0),
+            Column("nanswered", Integer, default=0),
             Column("ncorrect", Integer, default=0),
             Column("score", Float, default=0),
         )
