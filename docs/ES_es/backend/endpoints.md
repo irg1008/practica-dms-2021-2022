@@ -1,5 +1,5 @@
-
 # DMS Backend service REST API
+REST API for the backend service.
 
 Diseño y Mantenimiento del Software. Grado en Ingeniería Informática, Universidad de Burgos, 2021-2022.
 
@@ -40,33 +40,6 @@ Gets the user stats
 
 ### /user/{username}/questions/answer/{id}
 
-#### GET
-##### Summary
-
-Gets the question answer
-
-##### Parameters
-
-| Name | Located in | Description | Required | Schema |
-| ---- | ---------- | ----------- | -------- | ---- |
-| username | path |  | Yes | string |
-| id | path |  | Yes | string |
-
-##### Responses
-
-| Code | Description |
-| ---- | ----------- |
-| 200 | Success fetch of user answer for specific question. |
-| 400 | There was an error while getting the answer. |
-| 403 | The requestor has no privilege to get the answer |
-
-##### Security
-
-| Security Schema | Scopes |
-| --- | --- |
-| user_token | |
-| api_key | |
-
 #### POST
 ##### Summary
 
@@ -77,7 +50,7 @@ Sets the question answer
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ---- |
 | username | path |  | Yes | string |
-| id | path |  | Yes | string |
+| id | path |  | Yes | number |
 
 ##### Responses
 
@@ -250,34 +223,34 @@ Updates a question by ID
 
 | Name | Type | Description | Required |
 | ---- | ---- | ----------- | -------- |
-| title | string | Question title | Yes |
-| statement | string | Question answer | Yes |
-| correct_answer | string | Statement correct answer | Yes |
-| incorrect_answers | [ string ] | String for the json with the incorrect answers | Yes |
-| image_url | string | Question image | No |
-| score | number | Correct answer score | Yes |
-| penalty | number | Incorrect answers penalty | Yes |
-| public | boolean | Question privacity status | No |
+| title | string |  | Yes |
+| statement | string |  | Yes |
+| correct_answer | string |  | Yes |
+| incorrect_answers | [ string ] |  | Yes |
+| image_url | string |  | Yes |
+| score | number |  | Yes |
+| penalty | number |  | Yes |
+| public | boolean |  | No |
 
 #### QuestionResponse
 
 | Name | Type | Description | Required |
 | ---- | ---- | ----------- | -------- |
-| id | integer | Question id | Yes |
-| user_ans | object | User answer | Yes |
+| id | integer |  | Yes |
+| user_ans | object |  | Yes |
 
 #### AnsweredQuestionResponse
 
 | Name | Type | Description | Required |
 | ---- | ---- | ----------- | -------- |
-| answer | string | User answer | Yes |
+| answer | string |  | Yes |
 | date | integer | UTC Unix Timestamp | Yes |
 
 #### UserStats
 
 | Name | Type | Description | Required |
 | ---- | ---- | ----------- | -------- |
-| user_id | integer | User id | Yes |
-| n_answered | integer | Number of answered questions | Yes |
-| n_correct | integer | Number of correct answered questions | Yes |
-| score | number | Total score of answered questions | Yes |
+| user_id | integer |  | Yes |
+| n_answered | integer |  | Yes |
+| n_correct | integer |  | Yes |
+| score | number |  | Yes |
