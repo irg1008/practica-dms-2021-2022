@@ -1,35 +1,38 @@
-from typing import Dict, Optional, Tuple
-
+from typing import Dict, Optional, Tuple, Union, List
+from http import HTTPStatus
+from dms2122backend.data.db.schema import Schema  # type: ignore
 from flask.globals import current_app
-
+from dms2122backend.data.db.resultsets.questions import Questions
 from dms2122backend.service.auth.protected_endpoint_dec import protected_endpoint
 from dms2122common.data.role import Role
 
 
 @protected_endpoint(roles=[Role.Teacher, Role.Student])
-def get_unanswered_questions(username: str, **kwargs) -> Tuple[int, Optional[int]]:
-    """Get user unanswered questions.
+def get_unanswered_questions(idUser: str, **kwargs) -> Tuple[Union[List[Dict], str], int]:
+    with current_app.app_context():
+        db: Schema = current_app.db
+        s = db.new_session()
 
-    Roles: Teacher and Specific Student
+        uns_ques = Questions.get_unanswered(s, idUser)
 
-    Returns:
-        Tuple[str, Optional[int]]: Response message and status code
-    """
+        if len(uns_ques) == 0:
+            return "No unanswered questions", HTTPStatus.NOT_FOUND
 
-    return (1, 200)
+        return [q.to_JSON() for q in uns_ques], HTTPStatus.OK
 
 
 @protected_endpoint(roles=[Role.Teacher, Role.Student])
-def get_answered_questions(username: str, **kwargs) -> Tuple[int, Optional[int]]:
-    """Get user answered questions.
+def get_answered_questions(idUser: str, **kwargs) -> Tuple[Union[List[Dict], str], int]:
+    with current_app.app_context():
+        db: Schema = current_app.db
+        s = db.new_session()
 
-    Roles: Teacher and Specific Student
+        ans_ques = Questions.get_answered(s, idUser)
 
-    Returns:
-        Tuple[str, Optional[int]]: Response message and status code
-    """
+        if len(ans_ques) == 0:
+            return "No answered questions", HTTPStatus.NOT_FOUND
 
-    return (1, 200)
+        return [q.to_JSON() for q in ans_ques], HTTPStatus.OK
 
 
 @protected_endpoint(roles=[Role.Teacher, Role.Student])

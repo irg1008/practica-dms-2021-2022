@@ -68,30 +68,3 @@ def getAll(**kwargs) -> Tuple[List[Dict], int]:
         s = db.new_session()
         res: List[Question] = DBManager.list_all(s, Question)
         return [q.to_JSON() for q in res], HTTPStatus.OK
-
-
-@protected_endpoint(roles=[Role.Teacher, Role.Student])
-def getUnanswered(idUser: str, **kwargs) -> Tuple[Union[List[Dict], str], int]:
-    with current_app.app_context():
-        db: Schema = current_app.db
-        s = db.new_session()
-
-        uns_ques = Questions.get_unanswered(s, idUser)
-
-        if len(uns_ques) == 0:
-            return "No unanswered questions", HTTPStatus.NOT_FOUND
-
-        return [q.to_JSON() for q in uns_ques], HTTPStatus.OK
-
-@protected_endpoint(roles=[Role.Teacher, Role.Student])
-def getAnswered(idUser: str, **kwargs) -> Tuple[Union[List[Dict], str], int]:
-    with current_app.app_context():
-        db: Schema = current_app.db
-        s = db.new_session()
-
-        ans_ques = Questions.get_answered(s, idUser)
-
-        if len(ans_ques) == 0:
-            return "No answered questions", HTTPStatus.NOT_FOUND
-
-        return [q.to_JSON() for q in ans_ques], HTTPStatus.OK
