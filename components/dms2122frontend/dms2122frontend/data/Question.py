@@ -53,9 +53,9 @@ class Question:
         self.score = score
         self.penalty = penalty
         self.image_url = image_url
-        self.number_of_correct_answers = user_answers.get(correct_answer) or 0
+        self.number_of_correct_answers = int(user_answers.get(correct_answer) or 0)
         self.number_of_questions_answered = sum(
-            [user_answers.get(ans) or 0 for ans in incorrect_answers]
+            [int(user_answers.get(ans) or 0) for ans in incorrect_answers]
         )
         self.is_public = True
         self.user_answers = user_answers

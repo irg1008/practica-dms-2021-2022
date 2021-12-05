@@ -1,7 +1,7 @@
 """ Question class module.
 """
 
-from random import randint
+from random import choices, randint
 from typing import Dict, List, Union
 from sqlalchemy import Table, MetaData, Column, String, Integer, Float, Boolean  # type: ignore
 from sqlalchemy.orm import relationship  # type: ignore
@@ -45,8 +45,9 @@ class Question(ResultBase):
         self.public: bool = public
 
         # Create dictionary for answer stats.
-        statsKeys = incorrectOptions + [correctOption]
-        ansStats = dict.fromkeys(statsKeys, randint(0, 50) if mock_stats else 0)
+        ansStats: Dict[str, int] = {}
+        for k in incorrectOptions + [correctOption]:
+            ansStats[k] = randint(0, 50) if mock_stats else 0
 
         # Transform dictionary to JSON string.
         ansStatsJson = json.dumps(ansStats)
@@ -88,6 +89,7 @@ class Question(ResultBase):
         return {"answers": relationship(AnsweredQuestion, backref="answeredQuestions")}
 
     def to_JSON(self) -> str:
+
         d = {
             "id": str(self.id),
             "title": self.title,
