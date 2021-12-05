@@ -21,8 +21,10 @@ def get_stats(username: str, **kwargs) -> Tuple[Union[str, Dict], Optional[int]]
 
         stats: Union[UserStats, None] = UserStatsManager.get_stats(
             session, username)
+        
+        print(stats)
 
         if stats is None:
-            return "No stats for this user", HTTPStatus.NO_CONTENT
+            return "No stats for this user", HTTPStatus.NOT_FOUND
 
         return stats.to_JSON(), HTTPStatus.OK
