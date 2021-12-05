@@ -37,6 +37,16 @@ class ResultBase(ABC):
         Returns:
             - Table: A `Table` object with the table definition.
         """
+        
+    @abstractmethod
+    def to_JSON(self) -> Dict:
+        """ Converts the object to a JSON representation.
+
+        Returns:
+            - Dict: A dictionary with the object's data.
+        """
+        
+    
 
     @staticmethod
     def _mapping_properties() -> Dict:

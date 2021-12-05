@@ -1,7 +1,7 @@
 
 """ AnsweredQuestion class module.
 """
-
+from typing import Dict
 from sqlalchemy import Table, MetaData, Column, ForeignKey, String, DateTime, Integer  # type: ignore
 from dms2122backend.data.db.results.resultbase import ResultBase
 from datetime import datetime
@@ -45,7 +45,18 @@ class AnsweredQuestion(ResultBase):
             metadata,
             Column('idquestion', Integer, ForeignKey('questions.id'),
                    primary_key=True),
-            Column('iduser', String(32), primary_key=True), # ForeignKey('Users.username'),
+            # ForeignKey('Users.username'),
+            Column('iduser', String(32), primary_key=True),
             Column('answer', String(250), nullable=False),
             Column('date', DateTime, nullable=False)
         )
+
+    def to_JSON(self) -> Dict:
+        d = {
+            "idquestion": str(self.idquestion),
+            "iduser": self.iduser,
+            "answer": self.answer,
+            "score": self.score,
+            "date": self.date,
+        }
+        return d

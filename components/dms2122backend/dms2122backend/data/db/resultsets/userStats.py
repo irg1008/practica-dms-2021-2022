@@ -1,6 +1,6 @@
 from components.dms2122auth.dms2122auth.data.db.results.user import User
 from dms2122backend.data.db.results.question import Question  # type: ignore
-from dms2122backend.data.db.results.userStats import UserStats  # type: ignore
+from dms2122backend.data.db.results.userStats import UserStats as UserResults  # type: ignore
 from sqlalchemy.orm.session import Session  # type: ignore
 from dms2122backend.data.db.resultsets.dbmanager import DBManager
 
@@ -22,8 +22,8 @@ class UserStats:
         """
         session.begin()
         try:
-            stats: UserStats = DBManager.first(
-                UserStats, session, iduser=iduser)
+            stats: UserResults = DBManager.first(
+                UserResults, session, iduser=iduser)
         except:
             session.rollback()
             return None

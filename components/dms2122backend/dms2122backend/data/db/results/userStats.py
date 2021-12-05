@@ -3,7 +3,7 @@
 
 from typing import Dict, List
 from sqlalchemy import Table, MetaData, Column, String, Integer, Float, Boolean  # type: ignore
-from sqlalchemy.orm import relationship # type: ignore
+from sqlalchemy.orm import relationship  # type: ignore
 from sqlalchemy.sql.schema import ForeignKey  # type: ignore
 from dms2122backend.data.db.results.resultbase import ResultBase
 from dms2122backend.data.db.results.answeredQuestion import AnsweredQuestion
@@ -46,8 +46,18 @@ class UserStats(ResultBase):
         return Table(
             "user_stats",
             metadata,
-            Column("iduser", String(32), primary_key=True), # ForeignKey('users.name'),
+            # ForeignKey('users.name'),
+            Column("iduser", String(32), primary_key=True),
             Column("naswered", Integer, default=0),
             Column("ncorrect", Integer, default=0),
             Column("score", Float, default=0)
         )
+
+    def to_JSON(self) -> Dict:
+        d = {
+            "iduser": str(self.iduser),
+            "nanswered": self.nanswered,
+            "score": self.score,
+            "ncorrect": self.ncorrect,
+        }
+        return d

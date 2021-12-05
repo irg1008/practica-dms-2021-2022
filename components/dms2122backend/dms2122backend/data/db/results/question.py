@@ -2,7 +2,7 @@
 """
 
 from random import randint
-from typing import Dict, List, Union
+from typing import Any, Dict, List, Union
 from sqlalchemy import Table, MetaData, Column, String, Integer, Float, Boolean  # type: ignore
 from sqlalchemy.orm import relationship, Session
 from sqlalchemy.sql.sqltypes import JSON  # type: ignore
@@ -89,7 +89,7 @@ class Question(ResultBase):
         """
         return {"answers": relationship(AnsweredQuestion, backref="answeredQuestions")}
 
-    def to_JSON(self) -> JSON:
+    def to_JSON(self) -> Dict:
         d = {
             "id": str(self.id),
             "title": self.title,
@@ -101,7 +101,7 @@ class Question(ResultBase):
             "penalty": self.penalty,
             "user_answers": json.loads(self.answerStats),
         }
-        return json.dumps(d)
+        return d
 
     def get_answer_stats(self) -> Dict[str, int]:
         return json.loads(self.answerStats)
