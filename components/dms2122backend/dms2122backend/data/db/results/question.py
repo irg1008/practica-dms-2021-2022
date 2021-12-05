@@ -34,7 +34,6 @@ class Question(ResultBase):
             - username (str): A string with the user name.
             - password (str): A string with the password hash.
         """
-        self.id: int
         self.title: str = title
         self.statement: str = statement
         self.correctOption: str = correctOption
@@ -86,17 +85,6 @@ class Question(ResultBase):
             - Dict: A dictionary with the mapping properties.
         """
         return {"answers": relationship(AnsweredQuestion, backref="answeredQuestions")}
-
-    def update_db(self, session: Session, id, **atributes):
-        session.begin()
-        try:
-            self.update().where(self.c.id==id).values(atributes)
-        except:
-            session.rollback()
-            return False
-        else:
-            session.commit()
-            return True
     
     def to_JSON(self) -> str:
         d = {
@@ -111,6 +99,9 @@ class Question(ResultBase):
             "user_answers": json.loads(self.answerStats),
         }
         return json.dumps(d)
+
+    def get_answer_stats(self) -> Dict[str,int]:
+        return json.loads(self.answerStats)
 
     @staticmethod
     def From_Json(json_q: Union[str, Dict]) -> "Question":
