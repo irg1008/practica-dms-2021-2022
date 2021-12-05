@@ -61,7 +61,7 @@ def editQ(id: int, body: Dict, **kwargs) -> Tuple[str, int]:
             return "The question could not be edited", HTTPStatus.BAD_REQUEST
 
 
-@protected_endpoint(roles=[Role.Teacher])
+@protected_endpoint(roles=[Role.Teacher, Role.Student])
 def getAll(**kwargs) -> Tuple[List[Dict], int]:
     with current_app.app_context():
         db: Schema = current_app.db
@@ -70,7 +70,7 @@ def getAll(**kwargs) -> Tuple[List[Dict], int]:
         return [q.to_JSON() for q in res], HTTPStatus.OK
 
 
-@protected_endpoint(roles=[Role.Teacher])
+@protected_endpoint(roles=[Role.Teacher, Role.Student])
 def getUnanswered(idUser: str, **kwargs) -> Tuple[Union[List[Dict], str], int]:
     with current_app.app_context():
         db: Schema = current_app.db
@@ -83,7 +83,7 @@ def getUnanswered(idUser: str, **kwargs) -> Tuple[Union[List[Dict], str], int]:
 
         return [q.to_JSON() for q in uns_ques], HTTPStatus.OK
 
-@protected_endpoint(roles=[Role.Teacher])
+@protected_endpoint(roles=[Role.Teacher, Role.Student])
 def getAnswered(idUser: str, **kwargs) -> Tuple[Union[List[Dict], str], int]:
     with current_app.app_context():
         db: Schema = current_app.db
