@@ -90,10 +90,11 @@ class Questions:
             all_questions: List[Question] = DBManager.list_all(
                 session, Question)
 
-            answered_questions = Questions._get_answered_questions(
+            questions, _ = Questions._get_answered_questions(
                 session, iduser)
+
             unanswered_questions: List[Question] = [
-                q for q in all_questions if q not in answered_questions]
+                q for q in all_questions if q not in questions]
         except:
             session.rollback()
             return []
