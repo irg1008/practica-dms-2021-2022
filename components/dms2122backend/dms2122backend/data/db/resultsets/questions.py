@@ -1,4 +1,4 @@
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Tuple
 from sqlalchemy.orm.session import Session  # type: ignore
 from dms2122backend.data.db.results.question import Question  # type: ignore
 from dms2122backend.data.db.results.answeredQuestion import AnsweredQuestion  # type: ignore
@@ -135,7 +135,8 @@ class Questions:
     ):
 
         if not isinstance(answer, str):
-            print(f"The answers is not a string, is a {type(answer)}", flush=True)
+            print(
+                f"The answers is not a string, is a {type(answer)}", flush=True)
             return False
 
         session.begin()
@@ -162,31 +163,35 @@ class Questions:
             print(aux, flush=True)
             aux[str(answer)] += 1
             question.answerStats = json.dumps(aux)
-            # session.flush()
+            session.flush()
 
             # Modificamos los stats del usuario que responde
             # Aumentamos el numero de respuestas
 
-            userStat: UserStats = DBManager.first(UserStats, session, iduser=iduser)
+            userStat: UserStats = DBManager.first(
+                UserStats, session, iduser=iduser)
 
             if userStat is None:
                 userStat = UserStats(iduser)
                 session.add(userStat)
 
             userStat.nanswered = userStat.nanswered + 1
-            # session.flush()
+            session.flush()
 
             # Añadimos la puntuación obtenida
             if answer == question.correctOption:
                 userStat.score = userStat.score + question.score
                 session.flush()
                 userStat.ncorrect = userStat.ncorrect + 1
-                # session.flush()
             else:
-                userStat.score = (
-                    userStat.score - userStat.score * question.penalty / 100
-                )
-                # session.flush()
+                userStat.score = userStat.score - userStat.score * question.penalty / 100
+                
+            session.flush()    
+            
+            # Create answered question entry.
+            
+            ans_question = AnsweredQuestion(idquestion, iduser, answer)
+            session.add(ans_question)
         except:
             session.rollback()
             print(

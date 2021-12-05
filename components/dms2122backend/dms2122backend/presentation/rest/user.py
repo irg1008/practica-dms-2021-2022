@@ -42,6 +42,8 @@ def get_answered_questions(
         for q, a in zip(question, ans_ques):
             a_dict = a.to_JSON()
             a_dict["question"] = q.to_JSON()
+            
+        print(ans_dict_list)
 
         return ans_dict_list, HTTPStatus.OK
 

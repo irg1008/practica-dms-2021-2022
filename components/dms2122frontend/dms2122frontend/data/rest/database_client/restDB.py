@@ -38,7 +38,7 @@ class RestDB(DatabaseClient):
         if not res.ok:
             return []
 
-        print(res.json()[0], flush=True)
+        print(res.json(), flush=True)
 
         return [AnsweredQuestion.From_Json(q) for q in res.json()]
 
