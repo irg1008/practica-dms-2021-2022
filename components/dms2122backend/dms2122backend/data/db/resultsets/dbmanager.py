@@ -48,20 +48,24 @@ class DBManager(Generic[T]):
     def list_all(session: Session, table: T) -> List:
         return session.query(table).all()
 
+    @staticmethod
+    def row_exists(table, session: Session, **attributes) -> bool:
+        """ Determines if exists any row with the attributes given
 
-def row_exists(table, session: Session, **attributes) -> bool:
-    """ Determines if exists any row with the attributes given
+            Args:
+                - session (Session): The session object.
+                - **attributes: attributes for the filter
 
-        Args:
-            - session (Session): The session object.
-            - **attributes: attributes for the filter
+            Returns:
+                - bool: `True` if exists.
+            """
+        try:
+            query = session.query(table).filter_by(**attributes)
+            query.one()
+        except:
+            return False
+        return True
 
-        Returns:
-            - bool: `True` if exists.
-        """
-    try:
-        query = session.query(table).filter_by(**attributes)
-        query.one()
-    except:
-        return False
-    return True
+    @staticmethod
+    def select_by(table, session: Session, **attributes) -> List:
+        return session.query(table).filter_by(**attributes).all()
