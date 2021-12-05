@@ -28,10 +28,6 @@ class DatabaseClient(ABC):
         raise Exception("Not Implemented")
 
     @abstractmethod
-    def getCurrentQuestionId(self, token="") -> int:
-        raise Exception("Not Implemented")
-
-    @abstractmethod
     def createQuestion(self, question: Question, token="") -> Tuple[Question, int]:
         raise Exception("Not Implemented")
 
