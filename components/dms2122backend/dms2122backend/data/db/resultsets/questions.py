@@ -1,6 +1,9 @@
+from typing import List
 from sqlalchemy.orm.session import Session  # type: ignore
-from dms2122backend.data.db.results.question import Question
-from dms2122backend.data.db.results.userStats import UserStats
+from dms2122backend.data.db.results.question import Question  # type: ignore
+from dms2122backend.data.db.results.answeredQuestion import AnsweredQuestion  # type: ignore
+from dms2122backend.data.db.results.userStats import UserStats  # type: ignore
+from dbmanager import DBManager
 import json
 
 
@@ -47,7 +50,7 @@ class Questions:
             session.flush()
 
             # Modificamos los stats del usuario que responde
-            ## Aumentamos el numero de respuestas
+            # Aumentamos el numero de respuestas
 
             userStat = session.query(UserStats).filter_by(id=iduser).first()
 
@@ -58,7 +61,7 @@ class Questions:
             userStat.nanswered = userStat.nanswered + 1
             session.flush()
 
-            ## Añadimos la puntuación obtenida
+            # Añadimos la puntuación obtenida
             if answer == question.correctOption:
                 userStat.score = userStat.score + question.score
                 session.flush()
@@ -73,3 +76,59 @@ class Questions:
         else:
             session.commit()
             return True
+
+    @staticmethod
+    def get_aswered(session: Session, username: str) -> List[Question]:
+        """Retrieves the user answered questions
+
+        Args:
+            session (Session): Current Working Session
+            username (str): User ID
+
+        Raises:
+
+        Returns:
+            List[Question]: User's Answered Questions
+        """
+        session.begin()
+        try:
+            a_q: List[AnsweredQuestion] = DBManager.select_by(
+                AnsweredQuestion, session, iduser=username)
+
+            answered_questions: List[Question] = session.query(
+                Question).join(a_q).all()
+
+        except:
+            session.rollback()
+            return []
+        else:
+            session.commit()
+            return answered_questions
+
+    @staticmethod
+    def get_unaswered(session: Session, username: str) -> List[Question]:
+        """Retrieves the user unanswered questions
+
+        Args:
+            session (Session): Current Working Session
+            username (str): User ID
+
+        Raises:
+
+        Returns:
+            List[Question]: User's Unanswered Questions
+        """
+        session.begin()
+        try:
+            all_questions: List[Question] = DBManager.list_all(
+                session, Question)
+
+            answered_questions = Questions.get_aswered(session, username)
+            unanswered_questions: List[Question] = [
+                q for q in all_questions if q not in answered_questions]
+        except:
+            session.rollback()
+            return []
+        else:
+            session.commit()
+            return unanswered_questions
