@@ -20,7 +20,7 @@ def new(body: Dict, **kwargs) -> Tuple[Union[str, int], Optional[int]]:
     Returns:
         Tuple[str, Optional[int]]: Response message and status code
     """
-
+    print(body, flush=True)
     with current_app.app_context():
         db: Schema = current_app.db
         question = Question.From_Json(body)

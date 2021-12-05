@@ -1,6 +1,9 @@
+from http import HTTPStatus
+import json
 from typing import Dict, List, Tuple, Union
 
 import requests
+from requests import status_codes
 from dms2122frontend.data.Question import Question
 from dms2122frontend.data.Question import AnsweredQuestion
 from dms2122frontend.data.rest.database_client.database_client import DatabaseClient
@@ -41,30 +44,58 @@ class RestDB(mockDB):
     # ) -> bool:
     #     raise Exception("Not Implemented")
     #
-    def getQuestion(self, question_id: int, token: str = "") -> Union[Question, None]:
+    def getQuestion(self, question_id: int, token: str = "") -> Question:
         res = requests.get(
             f"{self.__base_url}/question/{question_id}",
             headers=self.__get_headers(token),
         )
 
         if not res.ok:
-            return None
+            return Question.From_error("There was an error", res.status_code)
 
-        print(res.json(), flush=True)
         return Question.From_Json(res.json())
 
     #
     # def getCurrentQuestionId(self, token="") -> int:
     #     raise Exception("Not Implemented")
     #
-    # def createQuestion(
-    #     self, question: Question, token: str = ""
-    # ) -> Tuple[Question, int]:
-    #     raise Exception("Not Implemented")
-    #
-    # def updateQuestion(self, Question: Question, token: str = "") -> None:
-    #     raise Exception("Not Implemented")
-    #
+    def createQuestion(
+        self, question: Question, token: str = ""
+    ) -> Tuple[Question, int]:
+
+        res = requests.post(
+            f"{self.__base_url}/question/new",
+            headers=self.__get_headers(token),
+            json=question.to_JSON_dict(),
+        )
+
+        if not res.ok:
+            print(
+                f"There was an error while creating the question - {res.content}",
+                flush=True,
+            )
+            return (
+                Question.From_error(
+                    "There was an error while creating the question", res.status_code
+                ),
+                -res.status_code,
+            )
+
+        return question, int(res.content)
+
+    def updateQuestion(self, question: Question, token: str = "") -> None:
+        res = requests.patch(
+            f"{self.__base_url}/question/{question.id}",
+            headers=self.__get_headers(token),
+            json=question.to_JSON_dict(),
+        )
+
+        if not res.ok:
+            print(
+                f"There was an error while creating the question - {res.content}",
+                flush=True,
+            )
+
     # def getAnsweredQuestion(
     #     self, username: str, question_id: int, token: str = ""
     # ) -> Union[AnsweredQuestion, None]:
