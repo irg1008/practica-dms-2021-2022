@@ -13,10 +13,7 @@ class UserStats(ResultBase):
     """ Definition and storage of user ORM records.
     """
 
-    def __init__(
-        self,
-        iduser: str
-    ):
+    def __init__(self, iduser: str):
         """ Constructor method.
 
         Initializes a user record.
@@ -50,7 +47,7 @@ class UserStats(ResultBase):
             Column("iduser", String(32), primary_key=True),
             Column("naswered", Integer, default=0),
             Column("ncorrect", Integer, default=0),
-            Column("score", Float, default=0)
+            Column("score", Float, default=0),
         )
 
     def to_JSON(self) -> Dict:
