@@ -37,7 +37,7 @@ class RestDB(DatabaseClient):
         )
         if not res.ok:
             return []
-        
+
         print(res.json()[0], flush=True)
 
         return [AnsweredQuestion.From_Json(q) for q in res.json()]
@@ -47,8 +47,13 @@ class RestDB(DatabaseClient):
             f"{self.__base_url}/user/{username}/questions/unanswered",
             headers=self.__get_headers(token),
         )
+
         if not res.ok:
-            return []
+            return [
+                Question.From_error(
+                    f"An error has ocurred - {res.content}", res.status_code
+                )
+            ]
 
         return [Question.From_Json(q) for q in res.json()]
 
@@ -58,7 +63,7 @@ class RestDB(DatabaseClient):
         res = requests.post(
             f"{self.__base_url}/user/{username}/questions/answer/{question_id}",
             headers=self.__get_headers(token),
-            data=answer,
+            json={"answer": answer},
         )
 
         if not res.ok:

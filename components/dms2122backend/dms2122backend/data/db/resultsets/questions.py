@@ -1,10 +1,15 @@
+<<<<<<< HEAD
+from typing import Any, Dict, List
+=======
 from typing import List, Tuple
+>>>>>>> f9b94dc5ba078245fa1803488d8aa6b195f70d41
 from sqlalchemy.orm.session import Session  # type: ignore
 from dms2122backend.data.db.results.question import Question  # type: ignore
 from dms2122backend.data.db.results.answeredQuestion import AnsweredQuestion  # type: ignore
 from dms2122backend.data.db.results.userStats import UserStats  # type: ignore
 from dms2122backend.data.db.resultsets.dbmanager import DBManager
 import json
+import traceback
 
 
 class Questions:
@@ -119,7 +124,8 @@ class Questions:
         session.begin()
         try:
             a_q: AnsweredQuestion = DBManager.first(
-                AnsweredQuestion, session, iduser=iduser, idquestion=idquestion)
+                AnsweredQuestion, session, iduser=iduser, idquestion=idquestion
+            )
         except:
             session.rollback()
             return None
@@ -128,45 +134,70 @@ class Questions:
             return a_q
 
     @staticmethod
-    def set_user_question_answer(session: Session, idquestion: int, iduser: str, answer: str):
+    def set_user_question_answer(
+        session: Session, idquestion: int, iduser: str, answer: str
+    ):
+
+        if not isinstance(answer, str):
+            print(f"The answers is not a string, is a {type(answer)}", flush=True)
+            return False
+
         session.begin()
         try:
+
+            ans = DBManager.first(
+                AnsweredQuestion, session, idquestion=idquestion, iduser=iduser
+            )
+
+            if ans is not None:
+                print("The question already exists", flush=True)
+                session.rollback()
+                return False
+
             # Aumentamos las veces que ha sido usada esa respuesta
             question = DBManager.first(Question, session, id=idquestion)
 
             if not question:
+                print(f"The question {idquestion} was not found", flush=True)
                 session.rollback()
                 return False
 
-            aux = question.get_answer_stats()
-            aux[answer] += 1
+            aux: Dict[str, Any] = question.get_answer_stats()
+            print(aux, flush=True)
+            aux[str(answer)] += 1
             question.answerStats = json.dumps(aux)
-            session.flush()
+            # session.flush()
 
             # Modificamos los stats del usuario que responde
             # Aumentamos el numero de respuestas
 
-            userStat: UserStats = DBManager.first(
-                UserStats, session, iduser=iduser)
+            userStat: UserStats = DBManager.first(UserStats, session, iduser=iduser)
 
             if userStat is None:
-                session.rollback()
-                return False
+                userStat = UserStats(iduser)
+                session.add(userStat)
 
             userStat.nanswered = userStat.nanswered + 1
-            session.flush()
+            # session.flush()
 
             # Añadimos la puntuación obtenida
             if answer == question.correctOption:
                 userStat.score = userStat.score + question.score
                 session.flush()
                 userStat.ncorrect = userStat.ncorrect + 1
-                session.flush()
+                # session.flush()
             else:
-                userStat.score = userStat.score + question.penalty
-                session.flush()
+                userStat.score = (
+                    userStat.score - userStat.score * question.penalty / 100
+                )
+                # session.flush()
         except:
             session.rollback()
+            print(
+                "There was an error while answering a question "
+                + traceback.format_exc(),
+                flush=True,
+            )
             return False
         else:
             session.commit()
