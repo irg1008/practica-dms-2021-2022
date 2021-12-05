@@ -4,7 +4,7 @@
 from random import choices, randint
 from typing import Dict, List, Union
 from sqlalchemy import Table, MetaData, Column, String, Integer, Float, Boolean  # type: ignore
-from sqlalchemy.orm import relationship  # type: ignore
+from sqlalchemy.orm import relationship, Session  # type: ignore
 from dms2122backend.data.db.results.resultbase import ResultBase
 from dms2122backend.data.db.results.answeredQuestion import AnsweredQuestion
 import json
@@ -88,6 +88,17 @@ class Question(ResultBase):
         """
         return {"answers": relationship(AnsweredQuestion, backref="answeredQuestions")}
 
+    def update_db(self, session: Session, id, **atributes):
+        session.begin()
+        try:
+            self.update().where(self.c.id==id).values(atributes)
+        except:
+            session.rollback()
+            return False
+        else:
+            session.commit()
+            return True
+    
     def to_JSON(self) -> str:
 
         d = {

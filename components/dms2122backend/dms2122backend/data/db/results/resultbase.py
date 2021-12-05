@@ -4,8 +4,7 @@
 from abc import ABC, abstractmethod
 from typing import Dict
 from sqlalchemy import Table, MetaData  # type: ignore
-from sqlalchemy.orm import mapper  # type: ignore
-
+from sqlalchemy.orm import mapper, Session  # type: ignore
 
 class ResultBase(ABC):
     """ Base class for all the database record classes.
