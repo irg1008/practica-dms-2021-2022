@@ -1,6 +1,6 @@
 # Import the datetime
 import datetime
-from typing import Dict, List, Union
+from typing import Any, Dict, List, Union
 import random
 import json
 
@@ -41,9 +41,12 @@ class Question:
             )
 
         if not isinstance(user_answers, dict):
-            raise Exception(
-                f"User Answers is not a dict, is a {type(user_answers)} - {user_answers}"
-            )
+            if isinstance(user_answers, str):
+                user_answers = json.loads(user_answers)
+            else:
+                raise Exception(
+                    f"User Answers is not a dict, is a {type(user_answers)} - {user_answers}"
+                )
 
         self.id = id
         self.title = title
@@ -105,18 +108,20 @@ class Question:
         self.is_public = True
 
     def to_JSON(self) -> str:
-        d = {
+        return json.dumps(self.to_JSON_dict())
+
+    def to_JSON_dict(self) -> Dict[str, Any]:
+        return {
             "id": str(self.id),
             "title": self.title,
             "statement": self.statement,
             "correct_answer": self.correct_answer,
             "incorrect_answers": self.incorrect_answers,
             "image_url": self.image_url,
-            "score": str(self.score),
-            "penalty": str(self.penalty),
-            "user_answers": json.dumps(self.user_answers),
+            "score": self.score,
+            "penalty": self.penalty,
+            "user_answers": self.user_answers,
         }
-        return json.dumps(d)
 
     @staticmethod
     def From_Json(json_q: Union[str, Dict]) -> "Question":
@@ -135,6 +140,19 @@ class Question:
             score=float(d["score"]),
             penalty=float(d["penalty"]),
             user_answers=d["user_answers"],
+        )
+
+    @staticmethod
+    def From_error(error: str, status: int):
+        return Question(
+            id=-status,
+            title="An error has ocurred",
+            statement=error,
+            correct_answer=error,
+            penalty=0,
+            image_url="",
+            incorrect_answers=[],
+            score=status,
         )
 
 

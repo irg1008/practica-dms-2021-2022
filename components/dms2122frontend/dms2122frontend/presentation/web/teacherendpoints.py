@@ -199,7 +199,7 @@ class TeacherEndpoints:
         q = get_db().getQuestion(int(q_id), token=session.get("token"))
 
         # Make sure questions has no answers.
-        if q is None or len(q.user_answers) > 0:
+        if q is None or q.number_of_questions_answered > 0:
             return redirect(url_for("get_teacher"))
 
         return render_template("teacher/edit/editQuestion.html", q=q)
