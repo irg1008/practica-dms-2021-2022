@@ -7,17 +7,15 @@ from requests import status_codes
 from dms2122frontend.data.Question import Question
 from dms2122frontend.data.Question import AnsweredQuestion
 from dms2122frontend.data.rest.database_client.database_client import DatabaseClient
-from dms2122frontend.data.rest.database_client.mockDB import mockDB
 
 
-class RestDB(mockDB):
+class RestDB(DatabaseClient):
     def __init__(
         self, base_url: str, api_back_secret: str, api_back_header: str
     ) -> None:
         self.__base_url: str = base_url
         self.__api_back_secret: str = api_back_secret
         self.__api_back_header: str = api_back_header
-        mockDB.__init__(self)
 
     def __check_token(self, token: str):
         if len(token) == 0 or len(token.split(".")) != 3:
@@ -38,14 +36,9 @@ class RestDB(mockDB):
             headers=self.__get_headers(token),
         )
         if not res.ok:
-            return [
-                AnsweredQuestion(
-                    Question.From_error(
-                        f"An error has ocurred - {res.content}", res.status_code
-                    ),
-                    "",
-                )
-            ]
+            return []
+
+        print(res.json()[0], flush=True)
 
         return [AnsweredQuestion.From_Json(q) for q in res.json()]
 
@@ -135,4 +128,3 @@ class RestDB(mockDB):
             return []
 
         return [Question.From_Json(q) for q in res.json()]
-

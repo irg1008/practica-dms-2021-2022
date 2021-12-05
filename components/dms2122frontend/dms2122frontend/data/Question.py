@@ -72,7 +72,8 @@ class Question(SerializableQuestion):
         self.score = score
         self.penalty = penalty
         self.image_url = image_url
-        self.number_of_correct_answers = int(user_answers.get(correct_answer) or 0)
+        self.number_of_correct_answers = int(
+            user_answers.get(correct_answer) or 0)
         self.number_of_questions_answered = sum(
             [int(user_answers.get(ans) or 0) for ans in incorrect_answers]
         )
@@ -141,7 +142,6 @@ class Question(SerializableQuestion):
 
     @staticmethod
     def From_Json(json_q: Union[str, Dict]) -> "Question":
-
         if isinstance(json_q, str):
             d = json.loads(json_q)
         else:
@@ -192,10 +192,14 @@ class AnsweredQuestion(SerializableQuestion):
         return self.answer == self.question.correct_answer
 
     @staticmethod
-    def From_Json(json_q: str):
-        parsed = json.loads(json_q)
+    def From_Json(json_q: Union[str, Dict]):
+        if isinstance(json_q, str):
+            d = json.loads(json_q)
+        else:
+            d = json_q
+
         return AnsweredQuestion(
-            Question.From_Json(json_q), parsed("answer"), int(parsed.get("date"))
+            Question.From_Json(json_q), d["answer"], int(d["date"])
         )
 
     def to_JSON(self) -> str:
@@ -207,4 +211,3 @@ class AnsweredQuestion(SerializableQuestion):
             "answer": self.answer,
             "date": datetime.timestamp(self.date),
         }
-

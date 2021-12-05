@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 from typing import Any, Dict, List
+=======
+from typing import List, Tuple
+>>>>>>> f9b94dc5ba078245fa1803488d8aa6b195f70d41
 from sqlalchemy.orm.session import Session  # type: ignore
 from dms2122backend.data.db.results.question import Question  # type: ignore
 from dms2122backend.data.db.results.answeredQuestion import AnsweredQuestion  # type: ignore
@@ -35,7 +39,22 @@ class Questions:
             return True
 
     @staticmethod
-    def get_answered(session: Session, iduser: str) -> List[Question]:
+    def _get_answered_questions(session: Session, iduser: str) -> Tuple[List[Question], List[AnsweredQuestion]]:
+        a_q: List[AnsweredQuestion] = DBManager.select_by(
+            AnsweredQuestion, session, iduser=iduser)
+
+        a_q_ids = [a.idquestion for a in a_q]
+
+        questions: List[Question] = []
+
+        for id in a_q_ids:
+            q = DBManager.first(Question, session, id=id)
+            questions.append(q)
+
+        return questions, a_q
+
+    @staticmethod
+    def get_answered(session: Session, iduser: str) -> Tuple[List[Question], List[AnsweredQuestion]]:
         """Retrieves the user answered questions
 
         Args:
@@ -49,22 +68,14 @@ class Questions:
         """
         session.begin()
         try:
-            a_q: List[AnsweredQuestion] = DBManager.select_by(
-                AnsweredQuestion, session, iduser=iduser
-            )
-            a_q_ids = [a.idquestion for a in a_q]
-
-            questions: List[Question] = []
-
-            for id in a_q_ids:
-                q = DBManager.first(Question, session, id=id)
-                questions.append(q)
+            answered_questions = Questions._get_answered_questions(
+                session, iduser)
         except:
             session.rollback()
-            return []
+            return ([], [])
         else:
             session.commit()
-            return questions
+            return answered_questions
 
     @staticmethod
     def get_unanswered(session: Session, iduser: str) -> List[Question]:
@@ -81,14 +92,14 @@ class Questions:
         """
         session.begin()
         try:
-            all_questions: List[Question] = DBManager.list_all(session, Question)
+            all_questions: List[Question] = DBManager.list_all(
+                session, Question)
 
-            print(all_questions)
+            questions, _ = Questions._get_answered_questions(
+                session, iduser)
 
-            answered_questions = Questions.get_answered(session, iduser)
             unanswered_questions: List[Question] = [
-                q for q in all_questions if q not in answered_questions
-            ]
+                q for q in all_questions if q not in questions]
         except:
             session.rollback()
             return []

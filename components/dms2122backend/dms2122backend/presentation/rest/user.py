@@ -32,12 +32,12 @@ def get_answered_questions(
         db: Schema = current_app.db
         s = db.new_session()
 
-        ans_ques = Questions.get_answered(s, username)
+        question, ans_ques = Questions.get_answered(s, username)
 
         if len(ans_ques) == 0:
             return "No answered questions", HTTPStatus.NOT_FOUND
 
-        return [q.to_JSON() for q in ans_ques], HTTPStatus.OK
+        return [a.to_JSON(q) for q, a in zip(question, ans_ques)], HTTPStatus.OK
 
 
 # @protected_endpoint(roles=[Role.Student])
