@@ -1,10 +1,11 @@
 """ Question class module.
 """
 
-from random import choices, randint
+from random import randint
 from typing import Dict, List, Union
 from sqlalchemy import Table, MetaData, Column, String, Integer, Float, Boolean  # type: ignore
-from sqlalchemy.orm import relationship, Session  # type: ignore
+from sqlalchemy.orm import relationship, Session
+from sqlalchemy.sql.sqltypes import JSON  # type: ignore
 from dms2122backend.data.db.results.resultbase import ResultBase
 from dms2122backend.data.db.results.answeredQuestion import AnsweredQuestion
 import json
@@ -88,8 +89,7 @@ class Question(ResultBase):
         """
         return {"answers": relationship(AnsweredQuestion, backref="answeredQuestions")}
 
-    def to_JSON(self) -> str:
-
+    def to_JSON(self) -> JSON:
         d = {
             "id": str(self.id),
             "title": self.title,
@@ -97,8 +97,8 @@ class Question(ResultBase):
             "correct_answer": self.correctOption,
             "incorrect_answers": json.loads(self.incorrectOptions),
             "image_url": self.imageUrl,
-            "score": str(self.score),
-            "penalty": str(self.penalty),
+            "score": self.score,
+            "penalty": self.penalty,
             "user_answers": json.loads(self.answerStats),
         }
         return json.dumps(d)

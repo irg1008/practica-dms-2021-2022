@@ -3,8 +3,7 @@ from sqlalchemy.orm.session import Session  # type: ignore
 from dms2122backend.data.db.results.question import Question  # type: ignore
 from dms2122backend.data.db.results.answeredQuestion import AnsweredQuestion  # type: ignore
 from dms2122backend.data.db.results.userStats import UserStats  # type: ignore
-from dbmanager import DBManager
-from dbmanager import DBManager
+from dms2122backend.data.db.resultsets.dbmanager import DBManager
 import json
 
 
