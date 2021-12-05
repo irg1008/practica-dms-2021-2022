@@ -62,7 +62,7 @@ class Questions:
             return answered_questions
 
     @staticmethod
-    def get_unaswered(session: Session, iduser: str) -> List[Question]:
+    def get_unanswered(session: Session, iduser: str) -> List[Question]:
         """Retrieves the user unanswered questions
 
         Args:
