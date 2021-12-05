@@ -128,3 +128,14 @@ class RestDB(DatabaseClient):
             return []
 
         return [Question.From_Json(q) for q in res.json()]
+
+    def getUserStats(self, username: str, token: str = ""):
+        res = requests.get(
+            f"{self.__base_url}/user/{username}/stats",
+            headers=self.__get_headers(token),
+        )
+
+        if not res.ok:
+            return {"idUser": -1, "nanswered": -1, "ncorrect": -1, "score": -1}
+
+        return res.json()
