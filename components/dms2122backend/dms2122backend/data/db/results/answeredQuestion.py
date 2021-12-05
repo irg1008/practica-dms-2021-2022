@@ -3,7 +3,6 @@
 """
 from typing import Dict
 from sqlalchemy import Table, MetaData, Column, ForeignKey, String, DateTime, Integer
-from dms2122backend.data.db.results.question import Question  # type: ignore
 from dms2122backend.data.db.results.resultbase import ResultBase
 from datetime import datetime
 
@@ -52,9 +51,8 @@ class AnsweredQuestion(ResultBase):
             Column('date', DateTime, nullable=False)
         )
 
-    def to_JSON(self, question: Question) -> Dict:
+    def to_JSON(self,) -> Dict:
         d = {
-            "question": question.to_JSON(),
             "answer": self.answer,
             "score": self.score,
             "date": self.date.timestamp(),

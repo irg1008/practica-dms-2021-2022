@@ -1,3 +1,4 @@
+
 # DMS Backend service REST API
 
 Diseño y Mantenimiento del Software. Grado en Ingeniería Informática, Universidad de Burgos, 2021-2022.
@@ -249,34 +250,34 @@ Updates a question by ID
 
 | Name | Type | Description | Required |
 | ---- | ---- | ----------- | -------- |
-| title | string |  | Yes |
-| statement | string |  | Yes |
-| correct_answer | string |  | Yes |
-| incorrect_answers | [ string ] |  | Yes |
-| image_url | string |  | Yes |
-| score | number |  | Yes |
-| penalty | number |  | Yes |
-| public | boolean |  | No |
+| title | string | Question title | Yes |
+| statement | string | Question answer | Yes |
+| correct_answer | string | Statement correct answer | Yes |
+| incorrect_answers | [ string ] | String for the json with the incorrect answers | Yes |
+| image_url | string | Question image | No |
+| score | number | Correct answer score | Yes |
+| penalty | number | Incorrect answers penalty | Yes |
+| public | boolean | Question privacity status | No |
 
 #### QuestionResponse
 
 | Name | Type | Description | Required |
 | ---- | ---- | ----------- | -------- |
-| id | integer |  | Yes |
-| user_ans | object |  | Yes |
+| id | integer | Question id | Yes |
+| user_ans | object | User answer | Yes |
 
 #### AnsweredQuestionResponse
 
 | Name | Type | Description | Required |
 | ---- | ---- | ----------- | -------- |
-| answer | string |  | Yes |
+| answer | string | User answer | Yes |
 | date | integer | UTC Unix Timestamp | Yes |
 
 #### UserStats
 
 | Name | Type | Description | Required |
 | ---- | ---- | ----------- | -------- |
-| user_id | integer |  | Yes |
-| n_answered | integer |  | Yes |
-| n_correct | integer |  | Yes |
-| score | number |  | Yes |
+| user_id | integer | User id | Yes |
+| n_answered | integer | Number of answered questions | Yes |
+| n_correct | integer | Number of correct answered questions | Yes |
+| score | number | Total score of answered questions | Yes |
