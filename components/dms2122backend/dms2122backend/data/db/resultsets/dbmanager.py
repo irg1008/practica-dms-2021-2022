@@ -49,6 +49,10 @@ class DBManager(Generic[T]):
         return session.query(table).all()
 
     @staticmethod
+    def first(table: T, session: Session, **attributes) -> Any:
+        return session.query(table).filter_by(**attributes).first()
+
+    @staticmethod
     def row_exists(table: T, session: Session, **attributes) -> bool:
         """ Determines if exists any row with the attributes given
 

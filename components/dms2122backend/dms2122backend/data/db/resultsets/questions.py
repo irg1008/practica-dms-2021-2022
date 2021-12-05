@@ -78,12 +78,12 @@ class Questions:
             return True
 
     @staticmethod
-    def get_aswered(session: Session, username: str) -> List[Question]:
+    def get_aswered(session: Session, iduser: str) -> List[Question]:
         """Retrieves the user answered questions
 
         Args:
             session (Session): Current Working Session
-            username (str): User ID
+            userniduserame (str): User ID
 
         Raises:
 
@@ -93,7 +93,7 @@ class Questions:
         session.begin()
         try:
             a_q: List[AnsweredQuestion] = DBManager.select_by(
-                AnsweredQuestion, session, iduser=username)
+                AnsweredQuestion, session, iduser=iduser)
 
             answered_questions: List[Question] = session.query(
                 Question).join(a_q).all()
@@ -106,12 +106,12 @@ class Questions:
             return answered_questions
 
     @staticmethod
-    def get_unaswered(session: Session, username: str) -> List[Question]:
+    def get_unaswered(session: Session, iduser: str) -> List[Question]:
         """Retrieves the user unanswered questions
 
         Args:
             session (Session): Current Working Session
-            username (str): User ID
+            iduser (str): User ID
 
         Raises:
 
@@ -123,7 +123,7 @@ class Questions:
             all_questions: List[Question] = DBManager.list_all(
                 session, Question)
 
-            answered_questions = Questions.get_aswered(session, username)
+            answered_questions = Questions.get_aswered(session, iduser)
             unanswered_questions: List[Question] = [
                 q for q in all_questions if q not in answered_questions]
         except:
@@ -132,3 +132,28 @@ class Questions:
         else:
             session.commit()
             return unanswered_questions
+
+    @staticmethod
+    def get_user_question_answer(session: Session, iduser: str, idquestion: str):
+        """Retrieves the user answer to a certain question
+
+        Args:
+            session (Session): Current Working Session
+            iduser (str): User ID
+            idquestion (str): Question ID
+
+        Raises:
+
+        Returns:
+            AnsweredQuestion: User's answer to a certain question
+        """
+        session.begin()
+        try:
+            a_q: AnsweredQuestion = DBManager.first(
+                AnsweredQuestion, session, iduser=iduser, idquestion=idquestion)
+        except:
+            session.rollback()
+            return None
+        else:
+            session.commit()
+            return a_q
