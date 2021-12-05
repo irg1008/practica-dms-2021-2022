@@ -57,6 +57,6 @@ class AnsweredQuestion(ResultBase):
             "iduser": self.iduser,
             "answer": self.answer,
             "score": self.score,
-            "date": self.date,
+            "date": self.date.timestamp(),
         }
         return d
