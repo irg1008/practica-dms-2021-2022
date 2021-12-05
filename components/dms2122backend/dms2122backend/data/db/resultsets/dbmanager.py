@@ -1,4 +1,4 @@
-from typing import Any, Generic, List, TypeVar
+from typing import Any, Generic, List, TypeVar, Union
 
 from sqlalchemy.orm.session import Session  # type: ignore
 from sqlalchemy.sql.schema import Table  # type: ignore
@@ -10,7 +10,7 @@ T = TypeVar("T")
 
 class DBManager(Generic[T]):
     @staticmethod
-    def create(session: Session, row) -> bool:
+    def create(session: Session, row: T) -> Union[T, None]:
         """ Adds a new row to his table
 
         Args:
@@ -21,17 +21,19 @@ class DBManager(Generic[T]):
             bool: True if added successfully
         """
         session.begin()
+
         try:
             session.add(row)
+
         except:
             session.rollback()
-            return False
+            return None
         else:
             session.commit()
-            return True
+            return row
 
     @staticmethod
-    def remove(session: Session, row) -> bool:
+    def remove(session: Session, row: T) -> bool:
         session.begin()
         try:
             session.delete(row)
@@ -43,10 +45,23 @@ class DBManager(Generic[T]):
             return True
 
     @staticmethod
-    def list_all(session: Session, table) -> List:
+    def list_all(session: Session, table: T) -> List:
         return session.query(table).all()
 
-    @staticmethod
-    def select_by(table, session: Session, **attributes) -> List:
-        return session.query(table).filter_by(**attributes).all()
 
+def row_exists(table, session: Session, **attributes) -> bool:
+    """ Determines if exists any row with the attributes given
+
+        Args:
+            - session (Session): The session object.
+            - **attributes: attributes for the filter
+
+        Returns:
+            - bool: `True` if exists.
+        """
+    try:
+        query = session.query(table).filter_by(**attributes)
+        query.one()
+    except:
+        return False
+    return True

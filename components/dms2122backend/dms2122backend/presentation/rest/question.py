@@ -1,6 +1,7 @@
 from typing import Dict, Optional, Tuple
 from http import HTTPStatus
 from flask.globals import current_app
+from dms2122backend.data.db.resultsets.questions import Questions
 from dms2122backend.data.db.results.question import Question
 from dms2122backend.data.db.resultsets.dbmanager import DBManager
 from dms2122backend.data.db.schema import Schema  # type: ignore
@@ -20,7 +21,12 @@ def new(body: Dict, **kwargs) -> Tuple[int, Optional[int]]:
         Tuple[str, Optional[int]]: Response message and status code
     """
 
-    return (1, HTTPStatus.OK)
+    with current_app.app_context():
+        db: Schema = current_app.db
+        question = Question.From_Json(body)
+        res = DBManager.create(db.new_session(), question)
+
+        return 1, HTTPStatus.ACCEPTED
 
 
 @protected_endpoint(roles=[Role.Teacher, Role.Student])
@@ -43,8 +49,16 @@ def getQ(id: int, **kwargs):
 
 
 @protected_endpoint(roles=[Role.Teacher])
-def editQ(id: int, **kwargs):
-    return (id, HTTPStatus.OK)
+def editQ(id: int, body: Dict, **kwargs):
+    with current_app.app_context():
+        db: Schema = current_app.db
+        question = Question.From_Json(body)
+        res = Questions.editQuestion(db.new_session(), id, question)
+
+        if res:
+            return "Question Edited", HTTPStatus.OK
+        else:
+            return "The question could not be edited", HTTPStatus.BAD_REQUEST
 
 
 @protected_endpoint(roles=[Role.Teacher])

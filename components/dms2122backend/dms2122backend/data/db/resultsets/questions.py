@@ -1,7 +1,6 @@
 from sqlalchemy.orm.session import Session  # type: ignore
 from dms2122backend.data.db.results.question import Question
 from dms2122backend.data.db.results.userStats import UserStats
-from dbmanager import DBManager
 import json
 
 
@@ -11,7 +10,6 @@ class Questions:
         session.begin()
         try:
             res = session.query(Question).filter_by(id=id)
-            f = res.first()
 
             res.update(
                 {
