@@ -2,7 +2,7 @@ from components.dms2122auth.dms2122auth.data.db.results.user import User
 from dms2122backend.data.db.results.question import Question  # type: ignore
 from dms2122backend.data.db.results.userStats import UserStats  # type: ignore
 from sqlalchemy.orm.session import Session  # type: ignore
-from dbmanager import DBManager
+from dms2122backend.data.db.resultsets.dbmanager import DBManager
 
 
 class UserStats:
