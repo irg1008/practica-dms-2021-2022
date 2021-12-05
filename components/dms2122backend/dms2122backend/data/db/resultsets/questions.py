@@ -174,8 +174,6 @@ class Questions:
             userStat: UserStats = DBManager.first(
                 UserStats, session, iduser=iduser)
             
-            print(userStat.to_JSON(), flush=True)
-
             if userStat is None:
                 userStat = UserStats(iduser)
                 session.add(userStat)
