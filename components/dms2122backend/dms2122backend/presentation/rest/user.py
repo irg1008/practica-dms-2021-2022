@@ -8,12 +8,12 @@ from dms2122common.data.role import Role
 
 
 @protected_endpoint(roles=[Role.Teacher, Role.Student])
-def get_unanswered_questions(idUser: str, **kwargs) -> Tuple[Union[List[Dict], str], int]:
+def get_unanswered_questions(username: str, **kwargs) -> Tuple[Union[List[Dict], str], int]:
     with current_app.app_context():
         db: Schema = current_app.db
         s = db.new_session()
 
-        uns_ques = Questions.get_unanswered(s, idUser)
+        uns_ques = Questions.get_unanswered(s, username)
 
         if len(uns_ques) == 0:
             return "No unanswered questions", HTTPStatus.NOT_FOUND
@@ -22,12 +22,12 @@ def get_unanswered_questions(idUser: str, **kwargs) -> Tuple[Union[List[Dict], s
 
 
 @protected_endpoint(roles=[Role.Teacher, Role.Student])
-def get_answered_questions(idUser: str, **kwargs) -> Tuple[Union[List[Dict], str], int]:
+def get_answered_questions(username: str, **kwargs) -> Tuple[Union[List[Dict], str], int]:
     with current_app.app_context():
         db: Schema = current_app.db
         s = db.new_session()
 
-        ans_ques = Questions.get_answered(s, idUser)
+        ans_ques = Questions.get_answered(s, username)
 
         if len(ans_ques) == 0:
             return "No answered questions", HTTPStatus.NOT_FOUND
