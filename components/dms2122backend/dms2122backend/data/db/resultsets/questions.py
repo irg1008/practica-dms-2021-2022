@@ -50,16 +50,19 @@ class Questions:
         try:
             a_q: List[AnsweredQuestion] = DBManager.select_by(
                 AnsweredQuestion, session, iduser=iduser)
+            a_q_ids = [a.idquestion for a in a_q]
 
-            answered_questions: List[Question] = session.query(
-                Question).join(a_q).all()
+            questions: List[Question] = []
 
+            for id in a_q_ids:
+                q = DBManager.first(Question, session, id=id)
+                questions.append(q)
         except:
             session.rollback()
             return []
         else:
             session.commit()
-            return answered_questions
+            return questions
 
     @staticmethod
     def get_unanswered(session: Session, iduser: str) -> List[Question]:
@@ -78,6 +81,8 @@ class Questions:
         try:
             all_questions: List[Question] = DBManager.list_all(
                 session, Question)
+            
+            print(all_questions)
 
             answered_questions = Questions.get_answered(session, iduser)
             unanswered_questions: List[Question] = [

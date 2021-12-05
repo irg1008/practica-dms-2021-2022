@@ -75,46 +75,6 @@ paths:
           api_key: []
 
   /user/{username}/questions/answer/{id}:
-    get:
-      summary: Gets the question answer
-      operationId: dms2122backend.presentation.rest.user.get_question_answer
-      parameters:
-        - name: username
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      
-      responses:
-        "200":
-          description: Success fetch of user answer for specific question.
-          content:
-            "text/plain":
-              schema:
-                type: string
-        "403":
-          description: The requestor has no privilege to get the answer
-          content:
-            "text/plain":
-              schema:
-                type: string
-        "400":
-          description: There was an error while getting the answer.
-          content:
-            "text/plain":
-              schema:
-                type: string
-      tags:
-        - answers
-      security:
-        - user_token: []
-          api_key: []
-
     post:
       summary: Sets the question answer
       operationId: dms2122backend.presentation.rest.user.post_question_answer
