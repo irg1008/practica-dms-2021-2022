@@ -34,7 +34,6 @@ class Question(ResultBase):
             - username (str): A string with the user name.
             - password (str): A string with the password hash.
         """
-        self.__table__: Table
         self.id: int
         self.title: str = title
         self.statement: str = statement
