@@ -31,15 +31,16 @@ class mockDB(DatabaseClient):
             if random.random() > 0.5:
                 ans[q.id] = AnsweredQuestion(q, q.correct_answer)
             else:
-                ans[q.id] = AnsweredQuestion(
-                    q, random.choice(q.incorrect_answers))
+                ans[q.id] = AnsweredQuestion(q, random.choice(q.incorrect_answers))
 
         return ans
 
     def getUnasweredQuestions(self, username: str, token="") -> List[Question]:
         return list(self.not_answered.values())
 
-    def answerQuestion(self, username: str, question_id: int, answer: str, token="") -> bool:
+    def answerQuestion(
+        self, username: str, question_id: int, answer: str, token=""
+    ) -> bool:
         try:
             del self.not_answered[question_id]
             self.answered[question_id] = AnsweredQuestion(
@@ -51,12 +52,6 @@ class mockDB(DatabaseClient):
 
     def getQuestion(self, question_id: int, token="") -> Union[Question, None]:
         return self.questions.get(question_id)
-
-    def getAnsweredQuestion(
-        self, username: str, question_id: int, token=""
-    ) -> Union[AnsweredQuestion, None]:
-        return self.answered.get(question_id)
-
 
     def createQuestion(self, question: Question, token="") -> Tuple[Question, int]:
         self.questions[self.id] = question

@@ -36,11 +36,5 @@ class DatabaseClient(ABC):
         raise Exception("Not Implemented")
 
     @abstractmethod
-    def getAnsweredQuestion(
-        self, username: str, question_id: int, token=""
-    ) -> Union[AnsweredQuestion, None]:
-        raise Exception("Not Implemented")
-
-    @abstractmethod
     def getAllQuestions(self, token="") -> List[Question]:
         raise Exception("Not Implemented")
