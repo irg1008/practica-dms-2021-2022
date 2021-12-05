@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Tuple
 from sqlalchemy.orm.session import Session  # type: ignore
 from dms2122backend.data.db.results.question import Question  # type: ignore
 from dms2122backend.data.db.results.answeredQuestion import AnsweredQuestion  # type: ignore
@@ -34,7 +34,7 @@ class Questions:
             return True
 
     @staticmethod
-    def _get_answered_questions(session: Session, iduser: str) -> List[Question]:
+    def _get_answered_questions(session: Session, iduser: str) -> Tuple[List[Question], List[AnsweredQuestion]]:
         a_q: List[AnsweredQuestion] = DBManager.select_by(
             AnsweredQuestion, session, iduser=iduser)
 
@@ -46,10 +46,10 @@ class Questions:
             q = DBManager.first(Question, session, id=id)
             questions.append(q)
 
-        return questions
+        return questions, a_q
 
     @staticmethod
-    def get_answered(session: Session, iduser: str) -> List[Question]:
+    def get_answered(session: Session, iduser: str) -> Tuple[List[Question], List[AnsweredQuestion]]:
         """Retrieves the user answered questions
 
         Args:
@@ -67,7 +67,7 @@ class Questions:
                 session, iduser)
         except:
             session.rollback()
-            return []
+            return ([], [])
         else:
             session.commit()
             return answered_questions
