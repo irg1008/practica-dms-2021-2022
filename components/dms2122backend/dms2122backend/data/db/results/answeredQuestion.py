@@ -52,9 +52,8 @@ class AnsweredQuestion(ResultBase):
             Column('date', DateTime, nullable=False)
         )
 
-    def to_JSON(self, question: Question) -> Dict:
+    def to_JSON(self,) -> Dict:
         d = {
-            "question": question.to_JSON(),
             "answer": self.answer,
             "score": self.score,
             "date": self.date.timestamp(),

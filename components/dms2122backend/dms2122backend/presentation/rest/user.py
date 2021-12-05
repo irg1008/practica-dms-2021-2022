@@ -32,7 +32,13 @@ def get_answered_questions(username: str, **kwargs) -> Tuple[Union[List[Dict], s
         if len(ans_ques) == 0:
             return "No answered questions", HTTPStatus.NOT_FOUND
 
-        return [a.to_JSON(q) for q, a in zip(question, ans_ques)], HTTPStatus.OK
+        # Add question json to answered question.
+        ans_dict_list = []
+        for q, a in zip(question, ans_ques):
+            a_dict = a.to_JSON()
+            a_dict["question"] = q.to_JSON()
+
+        return ans_dict_list, HTTPStatus.OK
 
 
 @protected_endpoint(roles=[Role.Teacher, Role.Student])
