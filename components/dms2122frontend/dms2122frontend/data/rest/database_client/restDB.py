@@ -32,7 +32,7 @@ class RestDB(DatabaseClient):
         self, username: str, token: str = ""
     ) -> List[AnsweredQuestion]:
         res = requests.get(
-            f"{self.__base_url}/user/{username}/questions/unanswered",
+            f"{self.__base_url}/user/{username}/questions/answered",
             headers=self.__get_headers(token),
         )
         if not res.ok or len(res.json()) == 0:
