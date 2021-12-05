@@ -92,9 +92,12 @@ paths:
         description: A question answer
         required: true
         content:
-          "text/plain":
-            schema:
-              type: string
+            application/json:
+              schema:
+                type: object
+                properties:
+                  answer:
+                    type: string
       responses:
         "200":
           description: Success set of user answer.
