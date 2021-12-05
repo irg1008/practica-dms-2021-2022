@@ -1,8 +1,10 @@
 from typing import Dict, Optional, Tuple
 from http import HTTPStatus
 from flask.globals import current_app
+from dms2122backend.data.db.results.question import Question
+from dms2122backend.data.db.resultsets.dbmanager import DBManager
 from dms2122backend.data.db.schema import Schema  # type: ignore
-from dms2122backend.data.db.resultsets.questions import Questions
+
 
 from dms2122backend.service.auth.protected_endpoint_dec import protected_endpoint
 from dms2122common.data.role import Role
@@ -51,5 +53,5 @@ def getAll(**kwargs):
     with current_app.app_context():
         db: Schema = current_app.db
         s = db.new_session()
-        return [q.to_JSON() for q in Questions.list_all(s)], HTTPStatus.OK
+        return [q.to_JSON() for q in DBManager.list_all(s, Question)], HTTPStatus.OK
 

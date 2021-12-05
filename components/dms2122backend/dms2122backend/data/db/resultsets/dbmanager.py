@@ -1,8 +1,14 @@
-from typing import List
+from typing import Any, Generic, List, TypeVar
 
 from sqlalchemy.orm.session import Session  # type: ignore
+from sqlalchemy.sql.schema import Table  # type: ignore
+from dms2122backend.data.db.results.resultbase import ResultBase
 
-class DBManager:
+
+T = TypeVar("T")
+
+
+class DBManager(Generic[T]):
     @staticmethod
     def create(session: Session, row) -> bool:
         """ Adds a new row to his table
