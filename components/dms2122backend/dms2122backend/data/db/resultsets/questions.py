@@ -34,51 +34,7 @@ class Questions:
             return True
 
     @staticmethod
-    def updateUserAnswer(session: Session, idquestion: int, iduser: str, answer: str):
-        session.begin()
-        try:
-            # Aumentamos las veces que ha sido usada esa respuesta
-            question = DBManager.first(Question, session, id=idquestion)
-
-            if not question:
-                session.rollback()
-                return False
-
-            aux = question.get_answer_stats()
-            aux[answer] += 1
-            question.answerStats = json.dumps(aux)
-            session.flush()
-
-            # Modificamos los stats del usuario que responde
-            # Aumentamos el numero de respuestas
-
-            userStat: UserStats = DBManager.first(UserStats, session, iduser=iduser)
-
-            if userStat is None:
-                session.rollback()
-                return False
-
-            userStat.nanswered = userStat.nanswered + 1
-            session.flush()
-
-            # Añadimos la puntuación obtenida
-            if answer == question.correctOption:
-                userStat.score = userStat.score + question.score
-                session.flush()
-                userStat.ncorrect = userStat.ncorrect + 1
-                session.flush()
-            else:
-                userStat.score = userStat.score + question.penalty
-                session.flush()
-        except:
-            session.rollback()
-            return False
-        else:
-            session.commit()
-            return True
-
-    @staticmethod
-    def get_aswered(session: Session, iduser: str) -> List[Question]:
+    def get_answered(session: Session, iduser: str) -> List[Question]:
         """Retrieves the user answered questions
 
         Args:
@@ -123,7 +79,7 @@ class Questions:
             all_questions: List[Question] = DBManager.list_all(
                 session, Question)
 
-            answered_questions = Questions.get_aswered(session, iduser)
+            answered_questions = Questions.get_answered(session, iduser)
             unanswered_questions: List[Question] = [
                 q for q in all_questions if q not in answered_questions]
         except:
@@ -157,3 +113,48 @@ class Questions:
         else:
             session.commit()
             return a_q
+
+    @staticmethod
+    def set_user_question_answer(session: Session, idquestion: int, iduser: str, answer: str):
+        session.begin()
+        try:
+            # Aumentamos las veces que ha sido usada esa respuesta
+            question = DBManager.first(Question, session, id=idquestion)
+
+            if not question:
+                session.rollback()
+                return False
+
+            aux = question.get_answer_stats()
+            aux[answer] += 1
+            question.answerStats = json.dumps(aux)
+            session.flush()
+
+            # Modificamos los stats del usuario que responde
+            # Aumentamos el numero de respuestas
+
+            userStat: UserStats = DBManager.first(
+                UserStats, session, iduser=iduser)
+
+            if userStat is None:
+                session.rollback()
+                return False
+
+            userStat.nanswered = userStat.nanswered + 1
+            session.flush()
+
+            # Añadimos la puntuación obtenida
+            if answer == question.correctOption:
+                userStat.score = userStat.score + question.score
+                session.flush()
+                userStat.ncorrect = userStat.ncorrect + 1
+                session.flush()
+            else:
+                userStat.score = userStat.score + question.penalty
+                session.flush()
+        except:
+            session.rollback()
+            return False
+        else:
+            session.commit()
+            return True
