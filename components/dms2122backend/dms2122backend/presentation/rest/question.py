@@ -1,4 +1,4 @@
-from typing import Dict, Optional, Tuple
+from typing import Dict, List, Optional, Tuple, Union
 from http import HTTPStatus
 from flask.globals import current_app
 from dms2122backend.data.db.resultsets.questions import Questions
@@ -12,7 +12,7 @@ from dms2122common.data.role import Role
 
 
 @protected_endpoint(roles=[Role.Teacher])
-def new(body: Dict, **kwargs) -> Tuple[int, Optional[int]]:
+def new(body: Dict, **kwargs) -> Tuple[Union[str, int], Optional[int]]:
     """New question endpoint
 
     Roles: Teacher
@@ -26,26 +26,26 @@ def new(body: Dict, **kwargs) -> Tuple[int, Optional[int]]:
         question = Question.From_Json(body)
         res = DBManager.create(db.new_session(), question)
 
-        return 1, HTTPStatus.ACCEPTED
+        if not res:
+            return (
+                "There was an error while creating the question",
+                HTTPStatus.BAD_REQUEST,
+            )
+
+        return res.id, HTTPStatus.ACCEPTED
 
 
 @protected_endpoint(roles=[Role.Teacher, Role.Student])
 def getQ(id: int, **kwargs):
-    return (
-        {
-            "id": 1,
-            "statement": 2,
-            "title": "Hehehehe",
-            "correct_answer": "HOla",
-            "incorrect_answers": ["Ha", "He", "Hi"],
-            "score": 10,
-            "penalty": 50,
-            "image_url": "https://pbs.twimg.com/media/FFpEinEXEAIh76B?format=jpg&name=medium",
-            "public": True,
-            "user_answers": {"Ha": 5, "He": 5, "Hi": 0, "HOla": 200},
-        },
-        200,
-    )
+    try:
+        with current_app.app_context():
+            db: Schema = current_app.db
+            session = db.new_session()
+
+            res: List[Question] = DBManager.select_by(Question, session, id=id)
+            return res[0].to_JSON(), HTTPStatus.ACCEPTED
+    except:
+        return "The question does not exist", HTTPStatus.BAD_REQUEST
 
 
 @protected_endpoint(roles=[Role.Teacher])
@@ -67,5 +67,6 @@ def getAll(**kwargs):
     with current_app.app_context():
         db: Schema = current_app.db
         s = db.new_session()
-        return [q.to_JSON() for q in DBManager.list_all(s, Question)], HTTPStatus.OK
+        res: List[Question] = DBManager.list_all(s, Question)
+        return [q.to_JSON() for q in res], HTTPStatus.OK
 

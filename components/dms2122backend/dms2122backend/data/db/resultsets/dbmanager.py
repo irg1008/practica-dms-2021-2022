@@ -45,11 +45,11 @@ class DBManager(Generic[T]):
             return True
 
     @staticmethod
-    def list_all(session: Session, table: T) -> List[T]:
+    def list_all(session: Session, table: T) -> List[Any]:
         return session.query(table).all()
 
     @staticmethod
-    def row_exists(table, session: Session, **attributes) -> bool:
+    def row_exists(table: T, session: Session, **attributes) -> bool:
         """ Determines if exists any row with the attributes given
 
             Args:
@@ -67,5 +67,5 @@ class DBManager(Generic[T]):
         return True
 
     @staticmethod
-    def select_by(table: T, session: Session, **attributes) -> List[T]:
+    def select_by(table: T, session: Session, **attributes) -> List[Any]:
         return session.query(table).filter_by(**attributes).all()
