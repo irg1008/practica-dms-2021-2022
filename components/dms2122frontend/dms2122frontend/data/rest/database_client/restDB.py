@@ -35,7 +35,7 @@ class RestDB(DatabaseClient):
             f"{self.__base_url}/user/{username}/questions/unanswered",
             headers=self.__get_headers(token),
         )
-        if not res.ok:
+        if not res.ok or len(res.json()) == 0:
             return []
 
         print(res.json(), flush=True)

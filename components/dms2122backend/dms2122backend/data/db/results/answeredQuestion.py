@@ -20,13 +20,11 @@ class AnsweredQuestion(ResultBase):
             - idquestion (str): Title of the referenced question.
             - iduser (str): Name of the user owner
             - answer (str): String of the answer
-            - score (float): Score
             - date (datetime): Date if the creation 
         """
         self.idquestion: int = idquestion
         self.iduser: str = iduser
         self.answer: str = answer
-        self.score: float = 0
         self.date = datetime.now()
 
     @staticmethod
@@ -54,7 +52,6 @@ class AnsweredQuestion(ResultBase):
     def to_JSON(self,) -> Dict:
         d = {
             "answer": self.answer,
-            "score": self.score,
             "date": self.date.timestamp(),
         }
         return d
