@@ -11,7 +11,7 @@ class AnsweredQuestion(ResultBase):
     """ Definition and storage of the answered questions.
     """
 
-    def __init__(self, idquestion: str, iduser: str, answer: int):
+    def __init__(self, idquestion: int, iduser: str, answer: int):
         """ Constructor method.
 
         Initializes a answeredQuestion role record.
@@ -23,7 +23,7 @@ class AnsweredQuestion(ResultBase):
             - score (float): Score
             - date (datetime): Date if the creation 
         """
-        self.idquestion: str = idquestion
+        self.idquestion: int = idquestion
         self.iduser: str = iduser
         self.answer: int = answer
         self.score: float = 0

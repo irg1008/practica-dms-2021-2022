@@ -4,6 +4,7 @@ from dms2122backend.data.db.results.question import Question  # type: ignore
 from dms2122backend.data.db.results.answeredQuestion import AnsweredQuestion  # type: ignore
 from dms2122backend.data.db.results.userStats import UserStats  # type: ignore
 from dbmanager import DBManager
+from dbmanager import DBManager
 import json
 
 
@@ -38,7 +39,7 @@ class Questions:
         session.begin()
         try:
             # Aumentamos las veces que ha sido usada esa respuesta
-            question = session.query(Question).filter_by(id=idquestion).first()
+            question = DBManager.first(Question, session, id=idquestion)
 
             if not question:
                 session.rollback()
@@ -52,9 +53,9 @@ class Questions:
             # Modificamos los stats del usuario que responde
             # Aumentamos el numero de respuestas
 
-            userStat = session.query(UserStats).filter_by(id=iduser).first()
+            userStat: UserStats = DBManager.first(UserStats, session, iduser=iduser)
 
-            if not userStat:
+            if userStat is None:
                 session.rollback()
                 return False
 
@@ -134,7 +135,7 @@ class Questions:
             return unanswered_questions
 
     @staticmethod
-    def get_user_question_answer(session: Session, iduser: str, idquestion: str):
+    def get_user_question_answer(session: Session, iduser: str, idquestion: int):
         """Retrieves the user answer to a certain question
 
         Args:

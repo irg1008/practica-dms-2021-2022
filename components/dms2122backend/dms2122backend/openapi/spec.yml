@@ -81,48 +81,6 @@ paths:
       security:
         - user_token: []
           api_key: []
-    patch:
-      summary: Updates the user stats.
-      operationId: dms2122backend.presentation.rest.stats.update_stats
-      parameters:
-        - name: username
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        description: Stats to update
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UserStats"
-            example:
-              $ref: "#/components/examples/UserStats"
-      responses:
-        "200":
-          description: Success update of user stats.
-          content:
-            "text/plain":
-              schema:
-                type: string
-        "403":
-          description: The requestor has no privilege to update user stats.
-          content:
-            "text/plain":
-              schema:
-                type: string
-        "400":
-          description: There was an error while updating user stats.
-          content:
-            "text/plain":
-              schema:
-                type: string
-      tags:
-        - stats
-      security:
-        - user_token: []
-          api_key: []
 
   /user/{username}/questions/answer/{id}:
     get:
