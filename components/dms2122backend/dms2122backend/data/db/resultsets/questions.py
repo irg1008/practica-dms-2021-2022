@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 from typing import Any, Dict, List
-=======
-from typing import List, Tuple
->>>>>>> f9b94dc5ba078245fa1803488d8aa6b195f70d41
 from sqlalchemy.orm.session import Session  # type: ignore
 from dms2122backend.data.db.results.question import Question  # type: ignore
 from dms2122backend.data.db.results.answeredQuestion import AnsweredQuestion  # type: ignore
