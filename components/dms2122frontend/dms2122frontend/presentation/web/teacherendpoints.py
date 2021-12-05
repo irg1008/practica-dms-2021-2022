@@ -20,11 +20,7 @@ def get_id_from_params() -> int:
 
 def create_question_from_form(id_from_param: bool = False) -> Question:
     # Create quesiton.
-    id = (
-        get_id_from_params()
-        if id_from_param
-        else get_db().getCurrentQuestionId(token=session.get("token"))
-    )
+    id = get_id_from_params() if id_from_param else -1
     title = request.form.get("title") or ""
     statement = request.form.get("statement") or ""
 

@@ -33,7 +33,11 @@ class RestDB(mockDB):
     # def getAnsweredQuestions(
     #     self, username: str, token: str = ""
     # ) -> List[AnsweredQuestion]:
-    #     raise Exception("Not Implemented")
+    #     res = requests.get(
+    #         f"{self.__base_url}/question/{question_id}",
+    #         headers=self.__get_headers(token),
+    #     )
+
     #
     # def getUnasweredQuestions(self, username: str, token: str = "") -> List[Question]:
     #     raise Exception("Not Implemented")
@@ -55,10 +59,6 @@ class RestDB(mockDB):
 
         return Question.From_Json(res.json())
 
-    #
-    # def getCurrentQuestionId(self, token="") -> int:
-    #     raise Exception("Not Implemented")
-    #
     def createQuestion(
         self, question: Question, token: str = ""
     ) -> Tuple[Question, int]:
