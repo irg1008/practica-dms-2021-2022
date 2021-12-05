@@ -82,3 +82,16 @@ def getUnanswered(idUser: str, **kwargs) -> Tuple[Union[List[Dict], str], int]:
             return "No unanswered questions", HTTPStatus.NOT_FOUND
 
         return [q.to_JSON() for q in uns_ques], HTTPStatus.OK
+
+@protected_endpoint(roles=[Role.Teacher])
+def getAnswered(idUser: str, **kwargs) -> Tuple[Union[List[Dict], str], int]:
+    with current_app.app_context():
+        db: Schema = current_app.db
+        s = db.new_session()
+
+        ans_ques = Questions.get_answered(s, idUser)
+
+        if len(ans_ques) == 0:
+            return "No answered questions", HTTPStatus.NOT_FOUND
+
+        return [q.to_JSON() for q in ans_ques], HTTPStatus.OK
