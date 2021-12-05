@@ -89,6 +89,7 @@ paths:
           required: true
           schema:
             type: string
+      
       responses:
         "200":
           description: Success fetch of user answer for specific question.

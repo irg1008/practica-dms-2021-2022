@@ -30,24 +30,42 @@ class RestDB(mockDB):
             self.__api_back_header: self.__api_back_secret,
         }
 
-    # def getAnsweredQuestions(
-    #     self, username: str, token: str = ""
-    # ) -> List[AnsweredQuestion]:
-    #     res = requests.get(
-    #         f"{self.__base_url}/question/{question_id}",
-    #         headers=self.__get_headers(token),
-    #     )
+    def getAnsweredQuestions(
+        self, username: str, token: str = ""
+    ) -> List[AnsweredQuestion]:
+        res = requests.get(
+            f"{self.__base_url}/user/{username}/questions/unanswered",
+            headers=self.__get_headers(token),
+        )
+        if not res.ok:
+            return []
 
-    #
-    # def getUnasweredQuestions(self, username: str, token: str = "") -> List[Question]:
-    #     raise Exception("Not Implemented")
-    #     return []
-    #
-    # def answerQuestion(
-    #     self, username: str, question_id: int, answer: str, token: str = ""
-    # ) -> bool:
-    #     raise Exception("Not Implemented")
-    #
+        return [AnsweredQuestion.From_Json(q) for q in res.json()]
+
+    def getUnasweredQuestions(self, username: str, token: str = "") -> List[Question]:
+        res = requests.get(
+            f"{self.__base_url}/user/{username}/questions/unanswered",
+            headers=self.__get_headers(token),
+        )
+        if not res.ok:
+            return []
+
+        return [Question.From_Json(q) for q in res.json()]
+
+    def answerQuestion(
+        self, username: str, question_id: int, answer: str, token: str = ""
+    ) -> bool:
+        res = requests.post(
+            f"{self.__base_url}/user/{username}/questions/answer/{question_id}",
+            headers=self.__get_headers(token),
+            data=answer,
+        )
+
+        if not res.ok:
+            return False
+
+        return True
+
     def getQuestion(self, question_id: int, token: str = "") -> Question:
         res = requests.get(
             f"{self.__base_url}/question/{question_id}",
@@ -95,11 +113,6 @@ class RestDB(mockDB):
                 f"There was an error while creating the question - {res.content}",
                 flush=True,
             )
-
-    # def getAnsweredQuestion(
-    #     self, username: str, question_id: int, token: str = ""
-    # ) -> Union[AnsweredQuestion, None]:
-    #     raise Exception("Not Implemented")
 
     def getAllQuestions(self, token: str = "") -> List[Question]:
         res = requests.get(

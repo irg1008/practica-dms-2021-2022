@@ -1,5 +1,6 @@
 # Import the datetime
-import datetime
+from abc import abstractclassmethod
+from datetime import datetime
 from typing import Any, Dict, List, Union
 import random
 import json
@@ -21,7 +22,22 @@ import json
 # - A function that receives an answer and returns score or penalty. This function also increments number of correct answers and number of questions answered.
 
 
-class Question:
+class SerializableQuestion:
+    @staticmethod
+    @abstractclassmethod
+    def From_JSON(json_q: Union[str, Dict]) -> Any:
+        raise NotImplemented
+
+    @abstractclassmethod
+    def to_JSON(self) -> str:
+        raise NotImplemented
+
+    @abstractclassmethod
+    def to_JSON_dict(self) -> Dict[str, Any]:
+        raise NotImplemented
+
+
+class Question(SerializableQuestion):
     def __init__(
         self,
         id: int,
@@ -163,15 +179,32 @@ class Question:
 # - A date. This should be added automatically when an answer is provided.
 # This class has the next functions:
 # - Answer. This function receives an answer and check if is correct with the question variable and recieveAnswer method.
-class AnsweredQuestion:
-    def __init__(self, question: Question, answer: str):
+class AnsweredQuestion(SerializableQuestion):
+    def __init__(self, question: Question, answer: str, date: int = None):
         self.question = question
         self.answer = answer
         self.score = self.question.receive_answer(answer)
-        self.date = datetime.datetime.now()
+        self.date = datetime.fromtimestamp(date) if date else datetime.now()
 
         # A function that check answer is correct with the question variable and receive_answer method.
 
     def is_correct_answer(self):
         return self.answer == self.question.correct_answer
+
+    @staticmethod
+    def From_Json(json_q: str):
+        parsed = json.loads(json_q)
+        return AnsweredQuestion(
+            Question.From_Json(json_q), parsed("answer"), int(parsed.get("date"))
+        )
+
+    def to_JSON(self) -> str:
+        return json.dumps(self.to_JSON_dict())
+
+    def to_JSON_dict(self) -> Dict[str, Any]:
+        return {
+            "question": self.question.to_JSON_dict(),
+            "answer": self.answer,
+            "date": datetime.timestamp(self.date),
+        }
 
