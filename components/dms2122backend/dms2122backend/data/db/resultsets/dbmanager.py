@@ -1,8 +1,14 @@
-from typing import List
+from typing import Any, Generic, List, TypeVar
 
 from sqlalchemy.orm.session import Session  # type: ignore
+from sqlalchemy.sql.schema import Table  # type: ignore
+from dms2122backend.data.db.results.resultbase import ResultBase
 
-class DBManager:
+
+T = TypeVar("T")
+
+
+class DBManager(Generic[T]):
     @staticmethod
     def create(session: Session, row) -> bool:
         """ Adds a new row to his table
@@ -25,15 +31,15 @@ class DBManager:
             return True
 
     @staticmethod
-    def list_all(session: Session, table) -> List:
+    def list_all(session: Session, table: Any) -> List[Any]:
         return session.query(table).all()
 
     @staticmethod
-    def select_by(self, session: Session, **attributes) -> List:
-        return session.query(self).filter_by(attributes).all()
+    def select_by(table: Any, session: Session, **attributes) -> List:
+        return session.query(table).filter_by(**attributes).all()
 
     @staticmethod
-    def edit(session: Session, id: int, updated: Question) -> int:
+    def edit(session: Session, id: int, updated: Any) -> int:
         """Edits an existing question, throws an exception if the question does not exist.
 
         Args:

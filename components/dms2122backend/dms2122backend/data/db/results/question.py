@@ -88,17 +88,17 @@ class Question(ResultBase):
         """
         return {"answers": relationship(AnsweredQuestion, backref="answeredQuestions")}
 
-    def update_db(self, session: Session, id, **atributes):
-        session.begin()
-        try:
-            self.update().where(self.c.id==id).values(atributes)
-        except:
-            session.rollback()
-            return False
-        else:
-            session.commit()
-            return True
-    
+    # def update_db(self, session: Session, id, **atributes):
+    #    session.begin()
+    #    try:
+    #        self.update().where(self.c.id==id).values(atributes)
+    #    except:
+    #        session.rollback()
+    #        return False
+    #    else:
+    #        session.commit()
+    #        return True
+
     def to_JSON(self) -> str:
 
         d = {
