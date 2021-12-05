@@ -1,4 +1,4 @@
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Tuple
 from sqlalchemy.orm.session import Session  # type: ignore
 from dms2122backend.data.db.results.question import Question  # type: ignore
 from dms2122backend.data.db.results.answeredQuestion import AnsweredQuestion  # type: ignore
