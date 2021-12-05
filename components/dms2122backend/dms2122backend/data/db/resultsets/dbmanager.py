@@ -45,7 +45,7 @@ class DBManager(Generic[T]):
             return True
 
     @staticmethod
-    def list_all(session: Session, table: T) -> List:
+    def list_all(session: Session, table: T) -> List[T]:
         return session.query(table).all()
 
     @staticmethod
@@ -67,5 +67,5 @@ class DBManager(Generic[T]):
         return True
 
     @staticmethod
-    def select_by(table, session: Session, **attributes) -> List:
+    def select_by(table: T, session: Session, **attributes) -> List[T]:
         return session.query(table).filter_by(**attributes).all()
