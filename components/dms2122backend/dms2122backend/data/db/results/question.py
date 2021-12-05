@@ -34,6 +34,8 @@ class Question(ResultBase):
             - username (str): A string with the user name.
             - password (str): A string with the password hash.
         """
+        self.__table__: Table
+        self.id: int
         self.title: str = title
         self.statement: str = statement
         self.correctOption: str = correctOption
@@ -86,7 +88,7 @@ class Question(ResultBase):
             - Dict: A dictionary with the mapping properties.
         """
         return {"answers": relationship(AnsweredQuestion, backref="answeredQuestions")}
-    
+
     def to_JSON(self) -> str:
 
         d = {
@@ -102,7 +104,7 @@ class Question(ResultBase):
         }
         return json.dumps(d)
 
-    def get_answer_stats(self) -> Dict[str,int]:
+    def get_answer_stats(self) -> Dict[str, int]:
         return json.loads(self.answerStats)
 
     @staticmethod
