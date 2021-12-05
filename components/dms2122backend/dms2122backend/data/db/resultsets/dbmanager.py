@@ -41,12 +41,12 @@ class DBManager(Generic[T]):
         else:
             session.commit()
             return True
-    
+
     @staticmethod
     def list_all(session: Session, table) -> List:
         return session.query(table).all()
 
     @staticmethod
     def select_by(table, session: Session, **attributes) -> List:
-        return session.query(table).filter_by(attributes).all()
+        return session.query(table).filter_by(**attributes).all()
 
