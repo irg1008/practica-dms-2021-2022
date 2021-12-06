@@ -49,11 +49,7 @@ class RestDB(DatabaseClient):
         )
 
         if not res.ok:
-            return [
-                Question.From_error(
-                    f"An error has ocurred {res.content}", res.status_code
-                )
-            ]
+            return [Question.From_error(f"An error has ocurred", res.status_code)]
 
         return [Question.From_Json(q) for q in res.json()]
 
@@ -94,8 +90,7 @@ class RestDB(DatabaseClient):
 
         if not res.ok:
             print(
-                f"There was an error while creating the question {res.content}",
-                flush=True,
+                f"There was an error while creating the question", flush=True,
             )
             return (
                 Question.From_error(
@@ -115,8 +110,7 @@ class RestDB(DatabaseClient):
 
         if not res.ok:
             print(
-                f"There was an error while creating the question {res.content}",
-                flush=True,
+                f"There was an error while creating the question", flush=True,
             )
 
     def getAllQuestions(self, token: str = "") -> List[Question]:
