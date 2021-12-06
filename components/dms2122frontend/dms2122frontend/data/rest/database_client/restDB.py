@@ -51,7 +51,7 @@ class RestDB(DatabaseClient):
         if not res.ok:
             return [
                 Question.From_error(
-                    f"An error has ocurred - {res.content}", res.status_code
+                    f"An error has ocurred {res.content}", res.status_code
                 )
             ]
 
@@ -94,7 +94,7 @@ class RestDB(DatabaseClient):
 
         if not res.ok:
             print(
-                f"There was an error while creating the question - {res.content}",
+                f"There was an error while creating the question {res.content}",
                 flush=True,
             )
             return (
@@ -115,7 +115,7 @@ class RestDB(DatabaseClient):
 
         if not res.ok:
             print(
-                f"There was an error while creating the question - {res.content}",
+                f"There was an error while creating the question {res.content}",
                 flush=True,
             )
 
