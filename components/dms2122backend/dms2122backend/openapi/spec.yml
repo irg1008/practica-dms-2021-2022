@@ -399,8 +399,8 @@ components:
       type: object
       required:
         - user_id
-        - n_answered
-        - n_correct
+        - nanswered
+        - ncorrect
         - score
       properties:
         user_id:
