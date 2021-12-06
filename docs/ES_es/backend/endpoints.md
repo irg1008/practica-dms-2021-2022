@@ -250,7 +250,7 @@ Updates a question by ID
 
 | Name | Type | Description | Required |
 | ---- | ---- | ----------- | -------- |
-| user_id | integer |  | Yes |
-| n_answered | integer |  | Yes |
-| n_correct | integer |  | Yes |
+| userid | integer |  | Yes |
+| nanswered | integer |  | Yes |
+| ncorrect | integer |  | Yes |
 | score | number |  | Yes |
