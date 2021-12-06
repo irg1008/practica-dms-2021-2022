@@ -1,5 +1,5 @@
 ![pylint score](https://github.com/irg1008/practica-dms-2021-2022/workflows/pylint%20score/badge.svg)
-![mypy typechecking](https://github.com/irg1008/practica-dms-2021-2022/workflows/mypy%20typechecking/badge.svg)
+![mypy typechecking](https://github.com/irg1008/practica-dms-2021-2022/workflows/mypy%20typechecking/badge.svg) 
 
 # DMS course project codebase, academic year 2021-2022
 
