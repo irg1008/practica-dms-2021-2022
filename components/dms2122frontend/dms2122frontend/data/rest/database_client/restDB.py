@@ -51,7 +51,7 @@ class RestDB(DatabaseClient):
         if not res.ok:
             return [
                 Question.From_error(
-                    f"An error has ocurred - {res.content}", res.status_code
+                    f"An error has ocurred {res.content}", res.status_code
                 )
             ]
 
@@ -94,7 +94,7 @@ class RestDB(DatabaseClient):
 
         if not res.ok:
             print(
-                f"There was an error while creating the question - {res.content}",
+                f"There was an error while creating the question {res.content}",
                 flush=True,
             )
             return (
@@ -115,7 +115,7 @@ class RestDB(DatabaseClient):
 
         if not res.ok:
             print(
-                f"There was an error while creating the question - {res.content}",
+                f"There was an error while creating the question {res.content}",
                 flush=True,
             )
 
@@ -128,3 +128,14 @@ class RestDB(DatabaseClient):
             return []
 
         return [Question.From_Json(q) for q in res.json()]
+
+    def getUserStats(self, username: str, token: str = ""):
+        res = requests.get(
+            f"{self.__base_url}/user/{username}/stats",
+            headers=self.__get_headers(token),
+        )
+
+        if not res.ok:
+            return {"idUser": -1, "nanswered": -1, "ncorrect": -1, "score": -1}
+
+        return res.json()

@@ -60,6 +60,7 @@ class StudentEndpoints:
         name = session["user"]
 
         db = g.get_db()
+        stats = db.getUserStats(session["user"], session["token"])
         ans = db.getAnsweredQuestions(name, token=session.get("token"))
         ans.sort(key=lambda x: x.date, reverse=True)
 
@@ -71,9 +72,9 @@ class StudentEndpoints:
             "student/answered/answered.html",
             roles=session["roles"],
             questions=ans,
-            total_score=total_score,
-            total_correct=total_correct,
-            total_questions=total_questions,
+            total_score=stats.get("score") or 0,
+            total_correct=stats.get("ncorrect") or 0,
+            total_questions=stats.get("nanswered") or 0,
         )
 
     @staticmethod

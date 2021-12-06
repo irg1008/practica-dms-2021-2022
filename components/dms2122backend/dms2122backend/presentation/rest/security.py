@@ -43,6 +43,8 @@ def parse_token(token: str) -> Dict:
     if len(split) != 3:
         raise Unauthorized("Invalid token")
 
-    body = json.loads(b64decode(split[1]))
+    code = split[1]
+    code_with_padding = f"{code}{'=' * (len(code) % 4)}"
+    body = json.loads(b64decode(code_with_padding))
 
     return {"auth_token": token, "sub": body.get("sub"), "user": body.get("user")}
