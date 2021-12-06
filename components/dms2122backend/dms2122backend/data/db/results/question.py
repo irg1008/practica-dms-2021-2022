@@ -4,7 +4,7 @@
 from random import randint
 from typing import Any, Dict, List, Union
 from sqlalchemy import Table, MetaData, Column, String, Integer, Float, Boolean  # type: ignore
-from sqlalchemy.orm import relationship, Session
+from sqlalchemy.orm import relationship, Session # type: ignore
 from sqlalchemy.sql.sqltypes import JSON  # type: ignore
 from dms2122backend.data.db.results.resultbase import ResultBase
 from dms2122backend.data.db.results.answeredQuestion import AnsweredQuestion
