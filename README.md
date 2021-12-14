@@ -3,6 +3,8 @@
 
 # DMS course project codebase, academic year 2021-2022
 
+<img src="https://github.com/irg1008/practica-dms-2021-2022/blob/main/components/dms2122frontend/dms2122frontend/static/svg/logo.svg" width="200" />
+
 The goal of this project is to implement a basic online evaluation appliance deployed across several interconnected services.
 
 ## Documentation
