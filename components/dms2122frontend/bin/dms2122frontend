@@ -107,10 +107,13 @@ def get_teacher():
     return TeacherEndpoints.get_post_teacher(auth_service)
 
 
-@app.route("/teacher/new", methods=["GET", "POST"])
+@app.route("/teacher/stats", methods=["GET", "POST"])
+def get_users_stats():
+    return TeacherEndpoints.get_user_stats(auth_service)
+
+@app.route("/teacher/new", methods=["GET, POST"])
 def get_post_new_question():
     return TeacherEndpoints.get_post_new_question(auth_service)
-
 
 @app.route("/teacher/answers", methods=["GET", "POST"])
 def post_new_question_create():
@@ -145,6 +148,7 @@ def index():
 @app.route("/admin", methods=["GET"])
 def get_admin():
     return AdminEndpoints.get_admin(auth_service)
+
 
 
 @app.route("/admin/users", methods=["GET"])
