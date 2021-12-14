@@ -94,13 +94,14 @@ td {
 	padding: 10px;
 }
 
-#links a {
+#links a:not(.logo) {
 	color: var(--main-white);
 	text-decoration: none;
 	border-bottom: 1px solid transparent;
+	transition: all 0.2s ease-in-out;
 }
 
-#links a:hover {
+#links a:not(.logo):hover {
 	border-bottom: 1px solid var(--main-white);
 	transition: all 0.2s ease-in-out;
 }
