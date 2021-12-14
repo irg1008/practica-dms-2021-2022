@@ -94,9 +94,12 @@ td {
 	padding: 10px;
 }
 
-#links a:not(.logo):not(.nav-active) {
+#links a {
 	color: var(--main-white);
 	text-decoration: none;
+}
+
+#links a:not(.logo):not(.nav-active) {
 	border-bottom: 1px solid transparent;
 	transition: all 0.2s ease-in-out;
 }
