@@ -1,3 +1,7 @@
+{% macro nav_link(href, endpoint, text) %}
+<a href="{{href}}" {% if request.endpoint == endpoint %}class="active"{% endif%}>{{text}}</a>
+{% endmacro %}
+
 {% macro navbar(roles, name) %}
 {% from "macros/buttons.html" import link with context%}
 
@@ -8,16 +12,16 @@
             <img src="/static/svg/logo-inverse.svg" alt="Logo" class="h-12 w-12" />
         </a>
 
-        {%- if 'Student' in roles -%}
-        <a href="/student">Student</a>
+        {%- if "Student" in roles -%}
+        {{nav_link("/student", "get_student", "Student")}}
         {%- endif -%}
 
-        {%- if 'Teacher' in roles -%}
-        <a href="/teacher">Teacher</a>
+        {%- if "Teacher" in roles -%}
+        {{nav_link("/teacher", "get_teacher", "Teacher")}}
         {%- endif -%}
 
-        {%- if 'Admin' in roles -%}
-        <a href="/admin">Admin</a>
+        {%- if "Admin" in roles -%}
+        {{nav_link("/admin", "get_admin", "Admin")}}
         {%- endif -%}
     </div>
     <div class="flex items-center gap-4">

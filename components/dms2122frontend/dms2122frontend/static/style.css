@@ -101,7 +101,7 @@ td {
 	transition: all 0.2s ease-in-out;
 }
 
-#links a:not(.logo):hover {
+#links a:not(.logo):hover, .active {
 	border-bottom: 1px solid var(--main-white);
 	transition: all 0.2s ease-in-out;
 }
