@@ -1,25 +1,44 @@
 <!DOCTYPE html>
 <html lang="es">
+	<head>
+		<link
+			href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+			rel="stylesheet"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+			integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
+		<link rel="stylesheet" href="/static/style.css" />
+		<link rel="icon" href="/static/favicon.ico" type="image/x-icon" />
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{% block title %}{% endblock %} - DMS 21/22</title>
+	</head>
 
-<head>
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="/static/style.css" />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}{% endblock %} - DMS 21/22</title>
-</head>
+	<body class="flex flex-col justify-between min-h-screen">
+		<div class="flex flex-col flex-1">
+			{% block page_content %}{% endblock %}
+		</div>
+		<footer class="w-screen px-4 py-2 text-sm text-white bg-gray-800 shadow-md">
+			{% block footer %}{% endblock %}
 
-<body class="flex flex-col justify-between min-h-screen">
-    <div class="flex flex-col flex-1">{% block page_content %}{% endblock %}</div>
-    <footer class="w-screen px-4 py-2 text-sm text-white bg-gray-800 shadow-md">
-        {% block footer %}{% endblock %}
-
-        <p>Authors: {{ authors }}</p>
-        <p>Universidad de Burgos - Dise&ntilde;o y Mantenimiento del Software, year 2021-2022.</p>
-    </footer>
-</body>
-
+			<p>Authors: {{ authors }}</p>
+			<p>
+				Universidad de Burgos - Dise&ntilde;o y Mantenimiento del Software, year
+				2021-2022.
+			</p>
+		</footer>
+	</body>
 </html>
