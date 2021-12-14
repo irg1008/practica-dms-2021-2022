@@ -1,0 +1,31 @@
+{% extends "base_logged_in.html" %}
+{% block title %}{% block subtitle%}{%endblock %}Preview Question{% endblock %}
+{% from "macros/buttons.html" import link, submit_button, button with context %}
+{% from "macros/question.html" import question with context %}
+{% from "macros/breadcrumb.html" import breadcrumb with context %}
+
+{% block content_heading %}
+{{ breadcrumb([["Teacher Panel", "/teacher"], ["Preview
+Question", "/teacher/preview"]] )}}
+{% endblock %}
+
+{% block content_subheading %}Student Preview{% endblock %}
+
+{% block main_content %} {% block
+teacher_content %}
+<div class="flex flex-col items-center w-full">
+	<form action="/teacher" method="post" class="w-full max-w-4xl">
+		<div class="flex flex-col justify-between w-full">
+			<div>
+				<h3>Student</h3>
+				{{question(q)}}
+			</div>
+		</div>
+		<hr />
+		<div class="flex flex-row justify-end">
+			<input type="submit" class="button is-success" value="Go Back" />
+		</div>
+	</form>
+</div>
+{% endblock %}
+{% endblock %}

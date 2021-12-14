@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from flask import Flask, g
+from flask import Flask, g, request
 import inspect
 import os
 from typing import Dict
@@ -43,10 +43,8 @@ g.set_backend_service(backend_service)
 
 app = Flask(
     __name__,
-    static_folder=os.path.dirname(
-        inspect.getfile(dms2122frontend)) + "/static",
-    template_folder=os.path.dirname(
-        inspect.getfile(dms2122frontend)) + "/templates",
+    static_folder=os.path.dirname(inspect.getfile(dms2122frontend)) + "/static",
+    template_folder=os.path.dirname(inspect.getfile(dms2122frontend)) + "/templates",
 )
 app.secret_key = bytes(cfg.get_app_secret_key(), "ascii")
 
@@ -120,9 +118,11 @@ def get_teacher():
 def get_users_stats():
     return TeacherEndpoints.get_user_stats(auth_service)
 
+
 @app.route("/teacher/new", methods=["GET, POST"])
 def get_post_new_question():
     return TeacherEndpoints.get_post_new_question(auth_service)
+
 
 @app.route("/teacher/answers", methods=["GET", "POST"])
 def post_new_question_create():
@@ -132,6 +132,12 @@ def post_new_question_create():
 @app.route("/teacher/preview", methods=["GET", "POST"])
 def post_new_question_preview():
     return TeacherEndpoints.get_post_preview_question(auth_service)
+
+
+@app.route("/teacher/question/preview", methods=["GET"])
+def get_question_student_preview():
+    q_id = request.args.get("id", default=0, type=int)
+    return TeacherEndpoints.get_preview_student_question(auth_service, q_id)
 
 
 @app.route("/teacher/confirm", methods=["GET", "POST"])
@@ -157,7 +163,6 @@ def index():
 @app.route("/admin", methods=["GET"])
 def get_admin():
     return AdminEndpoints.get_admin(auth_service)
-
 
 
 @app.route("/admin/users", methods=["GET"])

@@ -210,6 +210,10 @@ class TeacherEndpoints:
         Returns:
             - Union[Response,Text]: The generated response to the request.
         """
+        if not WebAuth.test_token(auth_service):
+            return redirect(url_for("get_login"))
+        if Role.Teacher.name not in session["roles"]:
+            return redirect(url_for("get_home"))
 
         q_id: int = get_id_from_params()
         q = get_db().getQuestion(int(q_id), token=session.get("token"))
@@ -230,6 +234,11 @@ class TeacherEndpoints:
         Returns:
             - Union[Response,Text]: The generated response to the request.
         """
+        if not WebAuth.test_token(auth_service):
+            return redirect(url_for("get_login"))
+        if Role.Teacher.name not in session["roles"]:
+            return redirect(url_for("get_home"))
+
         q = create_question_from_form(id_from_param=True)
         ori_q = get_db().getQuestion(q.id, token=session.get("token"))
 
@@ -247,3 +256,23 @@ class TeacherEndpoints:
         get_db().updateQuestion(q, token=session.get("token"))
 
         return redirect(url_for("get_teacher"))
+
+    @staticmethod
+    def get_preview_student_question(auth_service: AuthService, question_id: int) -> Union[Response, Text]:
+        """ Handles the GET requests to the teacher root endpoint.
+
+        Args:
+            - auth_service (AuthService): The authentication service.
+
+        Returns:
+            - Union[Response,Text]: The generated response to the request.
+        """
+
+        if not WebAuth.test_token(auth_service):
+            return redirect(url_for("get_login"))
+        if Role.Teacher.name not in session["roles"]:
+            return redirect(url_for("get_home"))
+        
+        question = get_db().getQuestion(question_id, session["token"])
+
+        return render_template("teacher/preview/preview.html", q=question)

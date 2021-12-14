@@ -60,13 +60,10 @@ date=None, showTimesAnswered=False, userScore=None) %}
 				{{ link("is-warning",
 				"/teacher/edit?q=" + question.id|string,
 				"Edit", disabled=not question.is_editable()) }}
-				<input
-				class="button is-danger"
-				type="submit"
-				formaction="/question/preview?id={{question.id}}"
-				value="Preview"
-				>
-				</input>
+
+				{{ link("is-danger",
+				"/teacher/question/preview?id=" + question.id|string,
+				"Preview") }}			
 			</div>
 
 		{% endif %}
