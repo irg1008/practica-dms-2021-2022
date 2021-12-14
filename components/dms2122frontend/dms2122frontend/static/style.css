@@ -94,7 +94,7 @@ td {
 	padding: 10px;
 }
 
-#links a:not(.logo):not(.active) {
+#links a:not(.logo):not(.nav-active) {
 	color: var(--main-white);
 	text-decoration: none;
 	border-bottom: 1px solid transparent;
@@ -102,7 +102,7 @@ td {
 }
 
 #links a:not(.logo):hover,
-.active {
+.nav-active {
 	border-bottom: 1px solid var(--main-white);
 	transition: all 0.2s ease-in-out;
 }

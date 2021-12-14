@@ -1,5 +1,5 @@
 {% macro nav_link(href, endpoint, text) %}
-<a href="{{href}}" {% if request.endpoint == endpoint %}class="active"{% endif%}>{{text}}</a>
+<a href="{{href}}" {% if request.endpoint == endpoint %}class="nav-active"{% endif%}>{{text}}</a>
 {% endmacro %}
 
 {% macro navbar(roles, name) %}
