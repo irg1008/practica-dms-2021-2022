@@ -6,6 +6,8 @@ import os
 from typing import Dict
 from flask.globals import session
 from flask.helpers import url_for
+from flask.templating import render_template
+from flask.wrappers import Request
 
 from werkzeug.utils import redirect
 import dms2122frontend
@@ -41,10 +43,18 @@ g.set_backend_service(backend_service)
 
 app = Flask(
     __name__,
-    static_folder=os.path.dirname(inspect.getfile(dms2122frontend)) + "/static",
-    template_folder=os.path.dirname(inspect.getfile(dms2122frontend)) + "/templates",
+    static_folder=os.path.dirname(
+        inspect.getfile(dms2122frontend)) + "/static",
+    template_folder=os.path.dirname(
+        inspect.getfile(dms2122frontend)) + "/templates",
 )
 app.secret_key = bytes(cfg.get_app_secret_key(), "ascii")
+
+
+@app.errorhandler(404)
+def error404(error):
+    print(error)
+    return render_template("404.html"), 404
 
 
 @app.route("/login", methods=["GET"])
@@ -89,7 +99,6 @@ def post_student_iterator():
 
 @app.route("/student/iterator/<it>", methods=["GET", "POST"])
 def post_student_iterator_value(it: str):
-
     try:
         return StudentEndpoints.get_student_iterator(auth_service, int(it))
     except ValueError:
