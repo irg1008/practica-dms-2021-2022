@@ -13,6 +13,7 @@ The goal of this project is to implement a basic online evaluation appliance dep
 - [Manual](docs/ES_es/Manual.md)
 - Frontend
     * [Design](docs/ES_es/frontend/Design.md)
+    * [Error Handling](docs/ES_es/frontend/Error_Handling.md)
 - Backend
     * [Data](docs/ES_es/backend/data.md)
     * [Endpoints](docs/ES_es/backend/endpoints.md)
