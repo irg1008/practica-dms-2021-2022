@@ -112,6 +112,26 @@ class TeacherEndpoints:
         q = create_question_from_form()
 
         return render_template("teacher/new/newQuestion.html", q=q)
+    @staticmethod
+    def get_user_stats(auth_service: AuthService) -> Union[Response, Text]:
+        """ Handles the GET a user list to show the stats
+
+        Args:
+            - auth_service (AuthService): The authentication service.
+
+        Returns:
+            - Union[Response,Text]: The generated response to the request.
+        """
+        if not WebAuth.test_token(auth_service):
+            return redirect(url_for("get_login"))
+        if Role.Teacher.name not in session["roles"]:
+            return redirect(url_for("get_home"))
+
+        
+
+        return render_template("teacher/stats/stats.html")
+
+
 
     @staticmethod
     def get_post_answers_question(auth_service: AuthService) -> Union[Response, Text]:

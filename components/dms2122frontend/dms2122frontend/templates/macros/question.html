@@ -53,11 +53,22 @@ date=None, showTimesAnswered=False, userScore=None) %}
 			Clear
 		</button>
 		{% endif %}
+
 					
 		{%if isTeacher %}
-		{{ link("is-warning",
-					 "/teacher/edit?q=" + question.id|string,
-					 "Edit", disabled=not question.is_editable()) }}
+			<div class="flex flex-row space-x-4">
+				{{ link("is-warning",
+				"/teacher/edit?q=" + question.id|string,
+				"Edit", disabled=not question.is_editable()) }}
+				<input
+				class="button is-danger"
+				type="submit"
+				formaction="/question/preview?id={{question.id}}"
+				value="Preview"
+				>
+				</input>
+			</div>
+
 		{% endif %}
 
 		{% if date %}
