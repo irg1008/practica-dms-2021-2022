@@ -12,42 +12,13 @@
 {% block main_content %}
 {% block teacher_content %}
 <div>
-	<section class="flex flex-col items-center-w-full mb-10">
-		<form
-			action="/teacher/new"
-			method="post"
-			class="bg-yellow-50 border-yellow-400"
-		>
-			<h3 class="mb-2">
-				Create a new question
-			</h3>
-			<label class="label">
-				<input
-					type="text"
-					class="input is-dark"
-					name="title"
-					autofocus="autofocus"
-					placeholder="Question Title"
-					required="required"
-				/>
-			</label>
+	<ul>
+	{% for s in stats%}
+			<li><b>{{s.id}}<b/> has a score of <b>{{s.score}}<b/>, has answered correctly <b>{{s.n_correct}}<b/> out of <b>{{s.n_answered}}<b/> <b>({{s.ok_percent}}%)<b/></li>
+	{% endfor %}
+	</ul>
 
-			<div class="flex justify-end flex-row space-x-4">
-				<input
-					type="submit"
-					class="button is-warning"
-					value="Next"
-				/>
-				<input
-					type="submit"
-					class="button is-info"
-					formaction="/teacher/stats"
-					value="Question Stats"
-					formnovalidate="formnovalidate"
-				/>
-			</div>
-		</form>
-	</section>
+
 </div>
 {% endblock %}
 {% endblock %}

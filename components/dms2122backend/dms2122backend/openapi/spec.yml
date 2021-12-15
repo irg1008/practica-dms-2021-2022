@@ -74,7 +74,7 @@ paths:
           api_key: []
 
   /user/teacher/students/stats:
-    post:
+    get:
       summary: Gets each student answered stats
       operationId: dms2122backend.presentation.rest.stats.get_all_user_stats
       responses:

@@ -45,5 +45,5 @@ class DatabaseClient(ABC):
         raise NotImplemented
 
     @abstractmethod
-    def getAllUsersStats(self, username: str, token: str = "") -> List[UserStats]:
+    def getAllUsersStats(self, token: str = "") -> List[UserStats]:
         raise NotImplemented

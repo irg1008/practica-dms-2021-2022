@@ -139,5 +139,20 @@ class RestDB(DatabaseClient):
             stats["id_user"], stats["n_answered"], stats["n_correct"], stats["score"]
         )
 
-    def getAllUsersStats(self, username: str, token: str = "") -> List[UserStats]:
-        return super().getAllUsersStats(username, token=token)
+    def getAllUsersStats(self, token: str = "") -> List[UserStats]:
+        res = requests.get(
+            f"{self.__base_url}/user/teacher/students/stats",
+            headers=self.__get_headers(token),
+        )
+
+        print(res.json(), flush=True)
+        print(res.status_code, flush=True)
+        if not res.ok:
+            return []
+
+        stats = res.json()
+        print(stats, flush=True)
+        return [
+            UserStats(s["id_user"], s["n_answered"], s["n_correct"], s["score"])
+            for s in stats
+        ]

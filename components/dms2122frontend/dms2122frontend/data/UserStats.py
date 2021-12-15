@@ -4,3 +4,5 @@ class UserStats:
         self.n_ans = n_ans
         self.n_correct = n_correct
         self.score = score
+        self.ok_percent = n_correct / n_ans * 100
+
