@@ -73,6 +73,39 @@ paths:
         - user_token: []
           api_key: []
 
+  /user/teacher/students/stats:
+    post:
+      summary: Gets each student answered stats
+      operationId: dms2122backend.presentation.rest.stats.get_all_user_stats
+      responses:
+        "200":
+          description: Success set of user answer.
+          content:
+            "text/plain":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UserStats"
+        "403":
+          description: The requestor has no privilege to set the answer.
+          content:
+            "text/plain":
+              schema:
+                type: string
+        "400":
+          description: There was an error while setting the answer.
+          content:
+            "text/plain":
+              schema:
+                type: string
+      tags:
+        - answers
+      security:
+        - user_token: []
+          api_key: []
+
+
+
   /user/{username}/questions/answer/{id}:
     post:
       summary: Sets the question answer
@@ -458,7 +491,7 @@ components:
     UserStats:
       summary: "User Stats Example"
       value:
-        user_id: 1
+        user_id: "pedro"
         n_answered: 3
         n_correct: 2
         score: 0.6

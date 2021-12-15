@@ -52,9 +52,9 @@ class UserStats(ResultBase):
 
     def to_JSON(self) -> Dict:
         d = {
-            "iduser": str(self.iduser),
-            "nanswered": self.nanswered,
+            "id_user": str(self.iduser),
+            "n_answered": self.nanswered,
             "score": self.score,
-            "ncorrect": self.ncorrect,
+            "n_correct": self.ncorrect,
         }
         return d

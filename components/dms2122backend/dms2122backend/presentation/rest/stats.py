@@ -26,3 +26,18 @@ def get_stats(username: str, **kwargs) -> Tuple[Union[str, Dict], Optional[int]]
             return "No stats for this user", HTTPStatus.NOT_FOUND
 
         return stats.to_JSON(), HTTPStatus.OK
+
+
+@protected_endpoint(roles=[Role.Teacher])
+def get_all_user_stats(**kwargs) -> Tuple[Union[str, Dict], Optional[int]]:
+    with current_app.app_context():
+        db: Schema = current_app.db
+        session = db.new_session()
+
+        stats: Union[UserStats, None] = UserStatsManager.get_stats(
+            session, "")
+                
+        if stats is None:
+            return "No stats for this user", HTTPStatus.NOT_FOUND
+
+        return stats.to_JSON(), HTTPStatus.OK

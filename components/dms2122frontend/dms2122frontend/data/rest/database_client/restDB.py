@@ -4,6 +4,7 @@ from typing import Dict, List, Tuple, Union
 
 import requests
 from requests import status_codes
+from dms2122frontend.data.UserStats import UserStats
 from dms2122frontend.data.Question import Question
 from dms2122frontend.data.Question import AnsweredQuestion
 from dms2122frontend.data.rest.database_client.database_client import DatabaseClient
@@ -123,13 +124,20 @@ class RestDB(DatabaseClient):
 
         return [Question.From_Json(q) for q in res.json()]
 
-    def getUserStats(self, username: str, token: str = ""):
+    def getUserStats(self, username: str, token: str = "") -> UserStats:
         res = requests.get(
             f"{self.__base_url}/user/{username}/stats",
             headers=self.__get_headers(token),
         )
 
         if not res.ok:
-            return {"idUser": -1, "nanswered": -1, "ncorrect": -1, "score": -1}
+            return UserStats("", -1, -1, -1)
 
-        return res.json()
+        stats = res.json()
+        print(stats, flush=True)
+        return UserStats(
+            stats["id_user"], stats["n_answered"], stats["n_correct"], stats["score"]
+        )
+
+    def getAllUsersStats(self, username: str, token: str = "") -> List[UserStats]:
+        return super().getAllUsersStats(username, token=token)

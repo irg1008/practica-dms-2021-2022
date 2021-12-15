@@ -1,4 +1,5 @@
 from typing import Any, Dict, List, Tuple, Union
+from dms2122frontend.data.UserStats import UserStats
 
 from dms2122frontend.data.Question import Question, AnsweredQuestion
 from abc import ABC, abstractmethod
@@ -40,5 +41,9 @@ class DatabaseClient(ABC):
         raise Exception("Not Implemented")
 
     @abstractmethod
-    def getUserStats(self, username: str, token: str = "") -> Dict[str, Any]:
+    def getUserStats(self, username: str, token: str = "") -> UserStats:
+        raise NotImplemented
+
+    @abstractmethod
+    def getAllUsersStats(self, username: str, token: str = "") -> List[UserStats]:
         raise NotImplemented

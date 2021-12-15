@@ -72,9 +72,9 @@ class StudentEndpoints:
             "student/answered/answered.html",
             roles=session["roles"],
             questions=ans,
-            total_score=stats.get("score") or 0,
-            total_correct=stats.get("ncorrect") or 0,
-            total_questions=stats.get("nanswered") or 0,
+            total_score=stats.score or 0,
+            total_correct=stats.n_correct or 0,
+            total_questions=stats.n_ans or 0,
         )
 
     @staticmethod
