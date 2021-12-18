@@ -27,7 +27,7 @@ The goal of this project is to implement a basic online evaluation appliance dep
 - [Jesús Alonso Abad](https://github.com/Kencho)
 ## Components
 
-The source code of the components is available under the `components` direcotry.
+The source code of the components is available under the `components` directory.
 
 ### Services
 
