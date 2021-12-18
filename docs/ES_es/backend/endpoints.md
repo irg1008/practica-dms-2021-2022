@@ -1,7 +1,10 @@
 # DMS Backend service REST API
 REST API for the backend service.
 
+This is part of the mandatory exercise.
+
 Diseño y Mantenimiento del Software. Grado en Ingeniería Informática, Universidad de Burgos, 2021-2022.
+
 
 ## Version: 1.0
 
@@ -13,7 +16,7 @@ Universidad de Burgos
 ### /user/{username}/stats
 
 #### GET
-##### Summary
+##### Summary:
 
 Gets the user stats
 
@@ -38,10 +41,32 @@ Gets the user stats
 | user_token | |
 | api_key | |
 
+### /user/teacher/students/stats
+
+#### GET
+##### Summary:
+
+Gets each student answered stats
+
+##### Responses
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | Success set of user answer. |
+| 400 | There was an error while setting the answer. |
+| 403 | The requestor has no privilege to set the answer. |
+
+##### Security
+
+| Security Schema | Scopes |
+| --- | --- |
+| user_token | |
+| api_key | |
+
 ### /user/{username}/questions/answer/{id}
 
 #### POST
-##### Summary
+##### Summary:
 
 Sets the question answer
 
@@ -70,7 +95,7 @@ Sets the question answer
 ### /user/{username}/questions/answered
 
 #### GET
-##### Summary
+##### Summary:
 
 Gets user answered questions
 
@@ -98,7 +123,7 @@ Gets user answered questions
 ### /user/{username}/questions/unanswered
 
 #### GET
-##### Summary
+##### Summary:
 
 Gets user unanswered questions
 
@@ -126,7 +151,7 @@ Gets user unanswered questions
 ### /question/all
 
 #### GET
-##### Summary
+##### Summary:
 
 Retrieves every single stored questions (This should be paginated)
 
@@ -146,7 +171,7 @@ Retrieves every single stored questions (This should be paginated)
 ### /question/new
 
 #### POST
-##### Summary
+##### Summary:
 
 Creates a new question
 
@@ -168,7 +193,7 @@ Creates a new question
 ### /question/{id}
 
 #### GET
-##### Summary
+##### Summary:
 
 Gets a question by ID
 
@@ -194,7 +219,7 @@ Gets a question by ID
 | api_key | |
 
 #### PATCH
-##### Summary
+##### Summary:
 
 Updates a question by ID
 
@@ -218,6 +243,7 @@ Updates a question by ID
 | api_key | |
 
 ### Models
+
 
 #### Question
 
@@ -250,7 +276,7 @@ Updates a question by ID
 
 | Name | Type | Description | Required |
 | ---- | ---- | ----------- | -------- |
-| userid | integer |  | Yes |
-| nanswered | integer |  | Yes |
-| ncorrect | integer |  | Yes |
+| user_id | integer |  | Yes |
+| n_answered | integer |  | Yes |
+| n_correct | integer |  | Yes |
 | score | number |  | Yes |
