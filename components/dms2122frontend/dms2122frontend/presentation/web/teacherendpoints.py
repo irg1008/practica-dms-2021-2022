@@ -128,9 +128,7 @@ class TeacherEndpoints:
             return redirect(url_for("get_home"))
 
         stats = get_db().getAllUsersStats(session["token"])
-        
-        print(stats)
-        
+                
         return render_template("teacher/stats/stats.html", stats=stats)
 
 
