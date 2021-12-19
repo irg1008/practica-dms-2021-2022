@@ -60,6 +60,13 @@ Desde la entrega 3 el profesor puede visualizar como un estudiante ve las pregun
 ![image](https://user-images.githubusercontent.com/10118909/146674628-248e58d9-4fef-4193-abee-2a287ddf385e.png)
 ![image](https://user-images.githubusercontent.com/10118909/146674653-d9307511-35b2-4427-b33e-a2bbe2958e67.png)
 
+### Estadísticas de Usuario
+
+Por último, el profesor puede conocer las estadísticas de todos los usuarios para conocer el progreso individual de cada alumno. 
+Las estadísticas únicamente aparecen si el usuario ha respondido alguna pregunta. 
+![image](https://user-images.githubusercontent.com/10118909/146675401-a121f5b9-040c-47c8-8a58-6aaaa051b09a.png)
+
+
 
 ## Alumno
 A continuación veremos el punto de vista del alumno.
