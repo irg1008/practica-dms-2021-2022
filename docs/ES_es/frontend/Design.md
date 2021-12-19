@@ -1,7 +1,7 @@
 # Frontend design
 En este caso hemos aplicado un modelo de tres capas, separando la lógica, los datos y la vista.
 
-Hemos intentado cumplir en la mayor medida posible los principios SOLID, como por ejemplo en la clase dbmanager, que hemos creado para intentar crear la mayor cantidad posible de funciones útiles de la base de datos, para cumplir con el Open/Close, en vez de hacerlo en diferentes clases como habíamos pensado en un principio.
+Hemos intentado cumplir en la mayor medida posible los principios **SOLID**, como por ejemplo en la clase dbmanager, que hemos creado para intentar crear la mayor cantidad posible de funciones útiles de la base de datos, para cumplir con el Open/Close, en vez de hacerlo en diferentes clases como habíamos pensado en un principio.
 
 ## Patrones de diseño empleados
 En aquellos apartados a los que hemos añadido un asterisco (\*title) significa que lo hemos tenido como consideración, no que ha sido implementado.
@@ -35,9 +35,8 @@ Sin embargo, pensamos que usarlo en este caso sería desviarse un poco del funci
 
 Este patrón se ha aplicado para cumplir con el requisito de permitir responder las preguntas no contestadas de uno en uno.
 
-#### Command
-#### Strategy
-#### State
-#### Observer
-#### Mediator
-#### Template
+#### \*State
+
+Habría sido interesante añadir un State para la impresión de roles, así dejaríamos abierta la posibilidad de añadir nuevos roles (cumplir el Open/Closed) y mejorar el mantenimiento.
+
+Teníamos la idea de visualizar directamente todas las preguntas, pero al final decidimos hacerlo de forma individual, por lo que la implementación de este patrón sería un tanto innecesaria.
