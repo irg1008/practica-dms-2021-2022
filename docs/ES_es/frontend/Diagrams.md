@@ -1,6 +1,5 @@
-Hemos aplicado un modelo de tres capas como arquitectura.
 
-La conexión con la capa de datos que hemos pensado es la siguiente:
+## Adaptador Cliente Rest BACKEND
 ![](https://images-ext-2.discordapp.net/external/myQSW49sI8WiByEtbxRb5XRsgJ6WY6OvkuErQT_kCI8/https/i.imgur.com/hhLKy7V.png?width=557&height=473)
 
 ## Diagrama relacional

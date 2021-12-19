@@ -1,5 +1,5 @@
 # Frontend design
-Para el diseño del backend solamente contamos con dos capas, la capa de presentación y la capa de datos, por lo que podríamos considerarlo un modelo de dos capas.
+En este caso hemos aplicado un modelo de tres capas, separando la lógica, los datos y la vista.
 
 Hemos intentado cumplir en la mayor medida posible los principios SOLID, como por ejemplo en la clase dbmanager, que hemos creado para intentar crear la mayor cantidad posible de funciones útiles de la base de datos, para cumplir con el Open/Close, en vez de hacerlo en diferentes clases como habíamos pensado en un principio.
 
@@ -16,14 +16,25 @@ Con esto aplicamos el mismo comportamiento, asegurando que solamente exista una 
 
 
 ### Patrones Estructurales
+
 #### Adapter
-#### Composite
-#### Decorator
-#### Facade
-#### Proxy
+
+Para la conexión con la capa de datos hemos aplicado el siguiente adaptador:
+![](https://images-ext-2.discordapp.net/external/myQSW49sI8WiByEtbxRb5XRsgJ6WY6OvkuErQT_kCI8/https/i.imgur.com/hhLKy7V.png?width=557&height=473)
+
+#### \*Proxy
+
+Se sonsideró el aplicar este patrón a la hora de responder las preguntas, para comprobar si estas han sido respondidas correctamente.
+
+Sin embargo, pensamos que usarlo en este caso sería desviarse un poco del funcionamiento de este patrón, por lo que simplemente realizamos este trámite en una función directamente, para no matar moscas a cañonazos.
+
 
 ### Patrones Comportamiento
+
 #### Iterator
+
+Este patrón se ha aplicado para cumplir con el requisito de permitir responder las preguntas no contestadas de uno en uno.
+
 #### Command
 #### Strategy
 #### State

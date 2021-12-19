@@ -1,3 +1,14 @@
+- [Manual de Usuario](#manual-de-usuario)
+  - [Profesor](#profesor)
+    - [Creación de preguntas](#creación-de-preguntas)
+    - [Edición de preguntas](#edición-de-preguntas)
+    - [Previsualización de Preguntas](#previsualización-de-preguntas)
+    - [Estadísticas de Usuario](#estadísticas-de-usuario)
+  - [Alumno](#alumno)
+    - [Respuestas respondidas](#respuestas-respondidas)
+    - [Iterador de preguntas](#iterador-de-preguntas)
+  - [Creación de nuevos usuarios](#creación-de-nuevos-usuarios)
+
 # Manual de Usuario
 En esta primera versión haremos una ruta de las funcionalidades de la página desde el punto de vista del administrador.
 
@@ -65,6 +76,7 @@ Desde la entrega 3 el profesor puede visualizar como un estudiante ve las pregun
 Por último, el profesor puede conocer las estadísticas de todos los usuarios para conocer el progreso individual de cada alumno. 
 Las estadísticas únicamente aparecen si el usuario ha respondido alguna pregunta. 
 ![image](https://user-images.githubusercontent.com/10118909/146675401-a121f5b9-040c-47c8-8a58-6aaaa051b09a.png)
+![image](https://user-images.githubusercontent.com/10118909/146675503-4dc648d3-f7f2-441d-bac6-6258dc5fa4ce.png)
 
 
 
