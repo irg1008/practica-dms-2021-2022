@@ -39,8 +39,6 @@ class RestDB(DatabaseClient):
         if not res.ok or len(res.json()) == 0:
             return []
 
-
-
         return [AnsweredQuestion.From_Json(q) for q in res.json()]
 
     def getUnasweredQuestions(self, username: str, token: str = "") -> List[Question]:
@@ -50,6 +48,10 @@ class RestDB(DatabaseClient):
         )
 
         if not res.ok:
+
+            if res.status_code == 404:
+                return []
+
             return [Question.From_error(f"An error has ocurred", res.status_code)]
 
         return [Question.From_Json(q) for q in res.json()]
