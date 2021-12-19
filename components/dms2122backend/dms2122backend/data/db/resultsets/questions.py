@@ -165,7 +165,7 @@ class Questions:
                 return False
 
             aux: Dict[str, Any] = question.get_answer_stats()
-            print(aux, flush=True)
+
             aux[str(answer)] += 1
             question.answerStats = json.dumps(aux)
             session.flush()

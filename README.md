@@ -7,6 +7,26 @@
 
 The goal of this project is to implement a basic online evaluation appliance deployed across several interconnected services.
 
+# Table of Contents
+- [DMS course project codebase, academic year 2021-2022](#dms-course-project-codebase-academic-year-2021-2022)
+  - [Documentation](#documentation)
+    - [Spanish](#spanish)
+  - [Changelog](#changelog)
+    - [E3:](#e3)
+  - [Developers:](#developers)
+  - [Components](#components)
+    - [Services](#services)
+      - [`dms2122auth`](#dms2122auth)
+      - [`dms2122backend`](#dms2122backend)
+      - [`dms2122frontend`](#dms2122frontend)
+    - [Libraries](#libraries)
+      - [`dms2122core`](#dms2122core)
+  - [Docker](#docker)
+  - [Helper scripts](#helper-scripts)
+  - [GitHub workflows and badges](#github-workflows-and-badges)
+
+
+
 ## Documentation
 ### Spanish
 - [Deployment](docs/ES_es/Deployment.md)
@@ -20,6 +40,14 @@ The goal of this project is to implement a basic online evaluation appliance dep
     * [Endpoints](docs/ES_es/backend/endpoints.md)
     * [Auth Process](docs/ES_es/backend/auth.md)
     * [Design](docs/ES_es/backend/Design.md)
+
+## Changelog
+### E3: 
+- Updated Manuals
+- Updated Frontend Design Readmes
+- Added a new endpoint to fetch all the user stats
+- Updated User Stats
+- Teacher Role users can see the current stats of any student.
 
 ## Developers:
 - [Jorge Ruiz Gómez](https://github.com/JorgeRuizDev)
