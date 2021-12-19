@@ -78,6 +78,13 @@ table {
 	margin: 10px 0;
 }
 
+// Put blue bg in table header
+th {
+	background-color: var(--medium-blue);
+	color: var(--main-white);
+	padding: 0.5em;
+}
+
 tr {
 	border: 1px solid var(--main-gray);
 }
