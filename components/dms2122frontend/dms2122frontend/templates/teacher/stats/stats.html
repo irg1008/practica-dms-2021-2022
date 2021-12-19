@@ -11,25 +11,29 @@
 
 {% block main_content %}
 {% block teacher_content %}
-<div>
-	<table class="w-full">
-		<tr>
-			<th>Username</th>
-			<th>Score</th>
-			<th>Correct Answers</th>
-			<th>Total answered</th>
-			<th>%</th>
-		</tr>
-		{% for s in stats%}
-		<tr>
-			<td>{{s.id}}</td>
-			<td>{{s.score}}</td>
-			<td>{{s.n_correct}}</td>
-			<td>{{s.n_answered}}</td>
-			<td>{{s.ok_percent}}</td>
-		</tr>
-		{% endfor %}
-	</table>
-</div>
+	{% if not questions %}
+		<form>
+				<p>There are no use stats</p>
+		</form>
+		{% else %}
+		<table class="w-full">
+			<tr>
+				<th>Username</th>
+				<th>Score</th>
+				<th>Correct Answers</th>
+				<th>Total answered</th>
+				<th>%</th>
+			</tr>
+			{% for s in stats%}
+			<tr>
+				<td>{{s.id}}</td>
+				<td>{{s.score}}</td>
+				<td>{{s.n_correct}}</td>
+				<td>{{s.n_ans}}</td>
+				<td>{{s.ok_percent}}</td>
+			</tr>
+			{% endfor %}
+		</table>
+	{% endif %}
 {% endblock %}
 {% endblock %}
