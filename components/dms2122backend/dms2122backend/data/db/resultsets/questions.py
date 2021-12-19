@@ -69,7 +69,8 @@ class Questions:
         """
         session.begin()
         try:
-            answered_questions = Questions._get_answered_questions(session, iduser)
+            answered_questions = Questions._get_answered_questions(
+                session, iduser)
         except:
             session.rollback()
             return ([], [])
@@ -92,7 +93,8 @@ class Questions:
         """
         session.begin()
         try:
-            all_questions: List[Question] = DBManager.list_all(session, Question)
+            all_questions: List[Question] = DBManager.list_all(
+                session, Question)
 
             questions, _ = Questions._get_answered_questions(session, iduser)
 
@@ -173,7 +175,7 @@ class Questions:
 
             userStat: UserStats = DBManager.first(
                 UserStats, session, iduser=iduser)
-            
+
             if userStat is None:
                 userStat = UserStats(iduser)
                 session.add(userStat)
@@ -187,12 +189,13 @@ class Questions:
                 session.flush()
                 userStat.ncorrect = userStat.ncorrect + 1
             else:
-                userStat.score = userStat.score - userStat.score * question.penalty / 100
-                
-            session.flush()    
-            
+                userStat.score = userStat.score - \
+                    question.score * (question.penalty / 100)
+
+            session.flush()
+
             # Create answered question entry.
-            
+
             ans_question = AnsweredQuestion(idquestion, iduser, answer)
             session.add(ans_question)
         except:
