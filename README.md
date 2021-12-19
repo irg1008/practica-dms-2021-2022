@@ -1,7 +1,13 @@
 ![pylint score](https://github.com/irg1008/practica-dms-2021-2022/workflows/pylint%20score/badge.svg)
 ![mypy typechecking](https://github.com/irg1008/practica-dms-2021-2022/workflows/mypy%20typechecking/badge.svg) 
 
+# DMS course project codebase, academic year 2021-2022
 
+<img src="https://github.com/irg1008/practica-dms-2021-2022/blob/main/components/dms2122frontend/dms2122frontend/static/svg/logo.svg" width="200" />
+
+The goal of this project is to implement a basic online evaluation appliance deployed across several interconnected services.
+
+# Table of Contents
 - [DMS course project codebase, academic year 2021-2022](#dms-course-project-codebase-academic-year-2021-2022)
   - [Documentation](#documentation)
     - [Spanish](#spanish)
@@ -19,11 +25,7 @@
   - [Helper scripts](#helper-scripts)
   - [GitHub workflows and badges](#github-workflows-and-badges)
 
-# DMS course project codebase, academic year 2021-2022
 
-<img src="https://github.com/irg1008/practica-dms-2021-2022/blob/main/components/dms2122frontend/dms2122frontend/static/svg/logo.svg" width="200" />
-
-The goal of this project is to implement a basic online evaluation appliance deployed across several interconnected services.
 
 ## Documentation
 ### Spanish
