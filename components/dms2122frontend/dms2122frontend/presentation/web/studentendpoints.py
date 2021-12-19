@@ -64,10 +64,6 @@ class StudentEndpoints:
         ans = db.getAnsweredQuestions(name, token=session.get("token"))
         ans.sort(key=lambda x: x.date, reverse=True)
 
-        total_questions = len(ans)
-        total_correct = len(list(filter(lambda a: a.is_correct_answer(), ans)))
-        total_score = sum([a.score for a in ans])
-
         return render_template(
             "student/answered/answered.html",
             roles=session["roles"],
