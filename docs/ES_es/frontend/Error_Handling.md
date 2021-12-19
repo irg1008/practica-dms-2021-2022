@@ -1,3 +1,5 @@
+
+
 # Manejo de Errores
 
 Si el cliente rest que se comunica con el backend tiene un error, la pregunta a mostrar es reemplazada por un proxy que muestre el contenido del error, así como el código de respuesta HTTP (1).

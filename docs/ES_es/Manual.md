@@ -1,3 +1,14 @@
+- [Manual de Usuario](#manual-de-usuario)
+  - [Profesor](#profesor)
+    - [Creación de preguntas](#creación-de-preguntas)
+    - [Edición de preguntas](#edición-de-preguntas)
+    - [Previsualización de Preguntas](#previsualización-de-preguntas)
+    - [Estadísticas de Usuario](#estadísticas-de-usuario)
+  - [Alumno](#alumno)
+    - [Respuestas respondidas](#respuestas-respondidas)
+    - [Iterador de preguntas](#iterador-de-preguntas)
+  - [Creación de nuevos usuarios](#creación-de-nuevos-usuarios)
+
 # Manual de Usuario
 En esta primera versión haremos una ruta de las funcionalidades de la página desde el punto de vista del administrador.
 
