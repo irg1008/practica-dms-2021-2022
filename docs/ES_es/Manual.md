@@ -54,6 +54,13 @@ Como podemos ver, los campos a rellenar son muy parecidos a los de crear, en est
 Este es el resultado.
 ![image](https://user-images.githubusercontent.com/64038800/141702603-7560aa93-b8c7-46d2-bd0d-8e676ec62f97.png)
 
+### Previsualización de Preguntas
+
+Desde la entrega 3 el profesor puede visualizar como un estudiante ve las preguntas (1).
+![image](https://user-images.githubusercontent.com/10118909/146674628-248e58d9-4fef-4193-abee-2a287ddf385e.png)
+![image](https://user-images.githubusercontent.com/10118909/146674653-d9307511-35b2-4427-b33e-a2bbe2958e67.png)
+
+
 ## Alumno
 A continuación veremos el punto de vista del alumno.
 ![image](https://user-images.githubusercontent.com/64038800/141702351-19b9b71b-0e95-4974-aedc-39629260ff48.png)
