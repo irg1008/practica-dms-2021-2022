@@ -1,6 +1,24 @@
 ![pylint score](https://github.com/irg1008/practica-dms-2021-2022/workflows/pylint%20score/badge.svg)
 ![mypy typechecking](https://github.com/irg1008/practica-dms-2021-2022/workflows/mypy%20typechecking/badge.svg) 
 
+
+- [DMS course project codebase, academic year 2021-2022](#dms-course-project-codebase-academic-year-2021-2022)
+  - [Documentation](#documentation)
+    - [Spanish](#spanish)
+  - [Changelog](#changelog)
+    - [E3:](#e3)
+  - [Developers:](#developers)
+  - [Components](#components)
+    - [Services](#services)
+      - [`dms2122auth`](#dms2122auth)
+      - [`dms2122backend`](#dms2122backend)
+      - [`dms2122frontend`](#dms2122frontend)
+    - [Libraries](#libraries)
+      - [`dms2122core`](#dms2122core)
+  - [Docker](#docker)
+  - [Helper scripts](#helper-scripts)
+  - [GitHub workflows and badges](#github-workflows-and-badges)
+
 # DMS course project codebase, academic year 2021-2022
 
 <img src="https://github.com/irg1008/practica-dms-2021-2022/blob/main/components/dms2122frontend/dms2122frontend/static/svg/logo.svg" width="200" />
@@ -20,6 +38,14 @@ The goal of this project is to implement a basic online evaluation appliance dep
     * [Endpoints](docs/ES_es/backend/endpoints.md)
     * [Auth Process](docs/ES_es/backend/auth.md)
     * [Design](docs/ES_es/backend/Design.md)
+
+## Changelog
+### E3: 
+- Updated Manuals
+- Updated Frontend Design Readmes
+- Added a new endpoint to fetch all the user stats
+- Updated User Stats
+- Teacher Role users can see the current stats of any student.
 
 ## Developers:
 - [Jorge Ruiz Gómez](https://github.com/JorgeRuizDev)
