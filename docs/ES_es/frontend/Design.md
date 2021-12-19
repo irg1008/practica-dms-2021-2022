@@ -1,3 +1,14 @@
+- [Frontend design](#frontend-design)
+  - [Patrones de diseño empleados](#patrones-de-diseño-empleados)
+    - [Patrones Creacionales](#patrones-creacionales)
+      - [\*Singleton](#singleton)
+    - [Patrones Estructurales](#patrones-estructurales)
+      - [Adapter](#adapter)
+      - [\*Proxy](#proxy)
+    - [Patrones Comportamiento](#patrones-comportamiento)
+      - [Iterator](#iterator)
+      - [\*State](#state)
+
 # Frontend design
 En este caso hemos aplicado un modelo de tres capas, separando la lógica, los datos y la vista.
 
