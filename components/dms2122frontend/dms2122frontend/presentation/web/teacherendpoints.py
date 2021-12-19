@@ -129,6 +129,8 @@ class TeacherEndpoints:
 
         stats = get_db().getAllUsersStats(session["token"])
         
+        print(stats)
+        
         return render_template("teacher/stats/stats.html", stats=stats)
 
 

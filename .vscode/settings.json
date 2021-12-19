@@ -5,7 +5,7 @@
     "python.analysis.extraPaths": [
         "${workspaceFolder}/components/dms2122common"
     ],
-    "python.pythonPath": "C:\\Program Files\\Python39\\python.exe",
+    "python.pythonPath": "C:\\Users\\Ivan\\AppData\\Local\\Programs\\Python\\Python38\\python.exe",
     "sqltools.connections": [
         {
             "previewLimit": 50,

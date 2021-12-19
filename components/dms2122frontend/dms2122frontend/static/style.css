@@ -5,6 +5,7 @@
 	--main-radius: 0.8em;
 	--light-blue: #eff6ff;
 	--medium-blue: #3b82f6;
+	--dark-blue: #60A5FA;
 }
 
 body {
@@ -78,12 +79,6 @@ table {
 	margin: 10px 0;
 }
 
-// Put blue bg in table header
-th {
-	background-color: var(--medium-blue);
-	color: var(--main-white);
-	padding: 0.5em;
-}
 
 tr {
 	border: 1px solid var(--main-gray);
@@ -99,6 +94,11 @@ td {
 	text-align: left !important;
 	vertical-align: middle !important;
 	padding: 10px;
+}
+
+th {
+	background-color: var(--dark-blue) !important;
+	color: var(--main-white) !important;
 }
 
 #links a {
