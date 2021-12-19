@@ -1,16 +1,29 @@
-Hemos aplicado un modelo de tres capas como arquitectura.
+# Frontend design
+Para el diseño del backend solamente contamos con dos capas, la capa de presentación y la capa de datos, por lo que podríamos considerarlo un modelo de dos capas.
 
-La conexión con la capa de datos que hemos pensado es la siguiente:
-![](https://images-ext-2.discordapp.net/external/myQSW49sI8WiByEtbxRb5XRsgJ6WY6OvkuErQT_kCI8/https/i.imgur.com/hhLKy7V.png?width=557&height=473)
+Hemos intentado cumplir en la mayor medida posible los principios SOLID, como por ejemplo en la clase dbmanager, que hemos creado para intentar crear la mayor cantidad posible de funciones útiles de la base de datos, para cumplir con el Open/Close, en vez de hacerlo en diferentes clases como habíamos pensado en un principio.
 
-## Diagrama relacional
+## Patrones de diseño empleados
 
-![Diagrama Relacional](https://i.imgur.com/IDCgUj7.png)
+### Patrones Creacionales
+#### Factoty Method
+#### Abstract Factory
+#### Builder
+#### Prototype
+#### Singleton
 
-## Diagrama de clases
+### Patrones Estructurales
+#### Adapter
+#### Composite
+#### Decorator
+#### Facade
+#### Proxy
 
-![Diagrama de clases](https://i.imgur.com/bNaFATI.png)
-
-## Casos de Uso
-
-![Casos de uso](https://i.imgur.com/xJnEcnQ.png)
+### Patrones Comportamiento
+#### Iterator
+#### Command
+#### Strategy
+#### State
+#### Observer
+#### Mediator
+#### Template
