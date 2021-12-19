@@ -413,8 +413,6 @@ components:
           type: integer
         user_ans:
           type: object
-        score:
-          type: number
 
     AnsweredQuestionResponse:
       allOf:
