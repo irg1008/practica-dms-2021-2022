@@ -7,6 +7,9 @@
 
 The goal of this project is to implement a basic online evaluation appliance deployed across several interconnected services.
 
+### Demo
+![GIF](https://i.imgur.com/fNtsuQD.gif)
+
 # Table of Contents
 - [DMS course project codebase, academic year 2021-2022](#dms-course-project-codebase-academic-year-2021-2022)
   - [Documentation](#documentation)
